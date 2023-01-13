@@ -1,2 +1,2 @@
-# sakha-nith-frontend
-This repo contains the code of frontend of Sakha-NITH, which is the placement portal of NITH.
+# College Placement Portal - NITH
+This repo contains the code of frontend of placement portal of NITH.
