@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+
+  .label {
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+}
