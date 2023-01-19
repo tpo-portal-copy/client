@@ -3,16 +3,8 @@
   flex-direction: row;
   padding: 2px;
 
-  .label{
+  .label {
     font-weight: 600;
+    flex-shrink: 0;
   }
-
-  .label, .value {
-    padding :2px;
-  }
-  
 }
-
-
-
-

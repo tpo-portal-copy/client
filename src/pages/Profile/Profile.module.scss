@@ -1,44 +1,37 @@
-.profile_container{
+.profile_container {
   background-color: #fffefe;
   height: 100%;
-  
+
   .user_profile_info {
     display: flex;
     flex-direction: row;
     width: 80%;
     padding: 10px;
     border-radius: 10px;
+    max-width: 900px;
     box-shadow: 0px 7px 29px hsla(240, 5%, 41%, 0.2);
-  
+
     .img {
       width: 200px;
       height: 200px;
       border-radius: 10px;
     }
-  
+
     .info_container {
       padding: 10px 0 0 40px;
-    
+
       .name {
         font-size: 40px;
+        padding-bottom: 12px;
       }
-    
+
       .sub_info_container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, auto);
         justify-content: flex-start;
-        gap: 12px;
+        row-gap: 10px;
+        column-gap: 12px;
       }
     }
   }
 }
-
-
-
-
-
-
-
-
-
-

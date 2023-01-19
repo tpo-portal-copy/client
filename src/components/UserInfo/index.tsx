@@ -4,8 +4,8 @@ import { UserInfoProps } from '../../utils/types'
 export default function UserInfo({ label, value }: UserInfoProps) {
   return (
     <div className={styles.container}>
-      <text className={styles.label}>{label} :</text>
-      <text className={styles.value}>{value}</text>
+      <p className={styles.label}>{`${label} :`}</p>
+      <p className={styles.value}>{value}</p>
     </div>
   )
 }
