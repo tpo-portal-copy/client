@@ -1,3 +1,7 @@
 .app {
-  height: 100vh;
+  .pages {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: auto;
+    padding: 1rem;
+  }
 }

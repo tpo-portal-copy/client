@@ -12,28 +12,23 @@ const navItems = [
   },
   {
     id: 3,
-    name: 'Resources',
-    url: '/resources',
-  },
-  {
-    id: 4,
     name: 'Interview History',
     url: '/interviewhistory',
   },
   {
-    id: 5,
+    id: 4,
     name: 'Statistics',
     url: '/statistics',
   },
   {
-    id: 6,
-    name: 'Profile',
-    url: '/results',
+    id: 5,
+    name: 'Resources',
+    url: '/resources',
   },
   {
-    id: 7,
-    name: 'Results',
-    url: '/results',
+    id: 6,
+    name: 'Profile',
+    url: '/profile',
   },
 ]
 export default navItems

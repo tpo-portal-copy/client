@@ -1,20 +1,22 @@
 .sidebar {
   position: fixed;
+  left: 0;
+  top: 56px;
   height: 100vh;
-  width: 220px;
+  width: var(--sidebar-width);
   background-color: #fff;
   display: flex;
   flex-direction: column;
   gap: 5px;
   align-items: flex-start;
   padding: 0 0.7rem;
-  padding-top: 3rem;
+  padding-top: 1.5rem;
   border-right: 1px solid rgb(218, 216, 216);
   border-top: 1px solid rgb(218, 216, 216);
 
   .nav_item {
     height: 50px;
-    width: 90%;
+    width: 93%;
     font-size: 18px;
     font-weight: 500;
     display: flex;
@@ -23,13 +25,12 @@
     color: #111;
     letter-spacing: -0.02em;
     padding: 0 0.7rem;
-    border-radius: 10px;
+    border-radius: 7px;
 
     &:hover {
-      background: #ad5389;
-      background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);
-      box-shadow: 0px 1px 8px #24c64f;
-      color: white;
+      background-color: rgb(16, 61, 16);
+      color: #fff;
+      box-shadow: 0px 1px 8px #cbd3cd;
     }
   }
 }

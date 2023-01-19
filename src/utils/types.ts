@@ -3,3 +3,8 @@ export type Route = {
   name: string
   url: string
 }
+
+export interface UserInfoProps {
+  label: string
+  value: string | number
+}
