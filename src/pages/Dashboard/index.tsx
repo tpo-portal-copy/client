@@ -1,5 +1,7 @@
+import { Sidebar } from '../../components'
+
 function Dashboard() {
-  return <h1>Dashboard</h1>
+  return <Sidebar />
 }
 
 export default Dashboard

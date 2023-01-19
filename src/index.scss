@@ -11,8 +11,53 @@
   --radial-gradient-2: radial-gradient(#dd4e6d 0.85px, #fff 0);
 }
 
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display_regular.woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* (C) 2015 Apple Inc. All rights reserved. */
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display_bold.woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  /* (C) 2015 Apple Inc. All rights reserved. */
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display_medium.woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  /* (C) 2015 Apple Inc. All rights reserved. */
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('/fonts/sf-pro-text_regular.woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* (C) 2015 Apple Inc. All rights reserved. */
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('/fonts/sf-pro-text_medium.woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  /* (C) 2015 Apple Inc. All rights reserved. */
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #f5f6ec;
   background-color: #fff;
   background-attachment: fixed;
