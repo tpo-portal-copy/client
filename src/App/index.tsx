@@ -1,14 +1,19 @@
 import { Routes, Route } from 'react-router-dom'
+import { Header, Sidebar } from '../components'
 import { Dashboard, Profile } from '../pages'
 import styles from './App.module.scss'
 
 function App() {
   return (
     <div className={styles.app}>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+      <Header />
+      <Sidebar />
+      <div className={styles.pages}>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
     </div>
   )
 }

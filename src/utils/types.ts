@@ -1,8 +1,7 @@
-// example type of user
-export type User = {
-  name: string | null
-  email: string | null
-  imageUrl: string | null
+export type Route = {
+  id: number
+  name: string
+  url: string
 }
 
 export interface UserInfoProps {
