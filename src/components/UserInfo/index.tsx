@@ -1,19 +1,11 @@
 import styles from './UserInfo.module.scss'
+import { UserInfoProps } from '../../utils/types'
 
-
-
-interface UserInfoProps{
-    label:string,
-    value:string | number
-}
-
-export default function UserInfo({label,value}:UserInfoProps) {
-    return <div className={styles.container}>
-        <text className={styles.label}>
-            {label} : 
-        </text>
-        <text className={styles.value}>
-            {value}
-        </text>
+export default function UserInfo({ label, value }: UserInfoProps) {
+  return (
+    <div className={styles.container}>
+      <text className={styles.label}>{label} :</text>
+      <text className={styles.value}>{value}</text>
     </div>
+  )
 }

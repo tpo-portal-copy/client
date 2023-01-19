@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-.container{
-    display: flex;
-    flex-direction: row;
-    // justify-content: center;
-    padding: 2px;
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+
+  .label{
+    font-weight: 600;
+  }
+
+  .label, .value {
+    padding :2px;
+  }
+  
 }
 
-.label{
-padding: 2px;
-font-family: "poppins";
-font-weight: 600;
-}
 
-.value{
-    padding: 2px;
-    font-family: "poppins";
-}
+
+
