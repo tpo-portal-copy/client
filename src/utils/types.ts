@@ -9,3 +9,7 @@ export interface UserInfoProps {
   label: string
   value: string | number
 }
+
+export interface ButtonProps {
+  title: string
+}

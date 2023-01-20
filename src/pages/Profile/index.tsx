@@ -1,5 +1,6 @@
 import styles from './Profile.module.scss'
 import UserInfo from '../../components/UserInfo'
+import Button from '../../components/Button'
 import profileData from '../../utils/Data/profileData'
 
 function Profile() {
@@ -16,6 +17,7 @@ function Profile() {
               )),
             )}
           </div>
+          <Button title="Edit Profile" />
         </div>
       </div>
     </div>
