@@ -1,11 +1,15 @@
+import { ButtonProps } from '../../utils/types'
 import styles from './Button.module.scss'
 
-export default function Button({ title }) {
+function Button({ varient, onclick, children }: ButtonProps) {
   return (
-    <div>
-      <button type="button" className={styles.button}>
-        {title}
-      </button>
-    </div>
+    <button
+      onClick={onclick}
+      className={`${styles.button} ${varient === 'primary' ? styles.primary : styles.secondary}`}
+    >
+      {children}
+    </button>
   )
 }
+
+export default Button

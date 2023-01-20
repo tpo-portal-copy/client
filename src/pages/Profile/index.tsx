@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+
 import styles from './Profile.module.scss'
 import FieldInfo from '../../components/FieldInfo'
 import Button from '../../components/Button'
@@ -23,11 +25,11 @@ function Profile() {
                 )),
               )}
             </div>
-            <Button title="Edit Profile" />
+            <Button varient="primary" children="Edit Profile" />
           </div>
         </div>
         <div className={styles.upload_container}>
-          <Button title="Upload Resume" />
+          <Button varient="primary" children="Upload Resume" />
           <p className={styles.file_name}>Resume_RollNo._Name.pdf</p>
         </div>
       </div>
