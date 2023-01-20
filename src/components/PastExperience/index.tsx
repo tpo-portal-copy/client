@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import styles from './PastExperience.module.scss'
 import PastExperienceData from '../../utils/PastExperienceData'
+import { Fragment } from 'react'
 
 function PastExperience() {
   return (
-    <div className={styles.item_contained}>
+    <Fragment>
       <ul>
         {PastExperienceData.map((val) => {
           return (
@@ -17,7 +18,7 @@ function PastExperience() {
                     <FontAwesomeIcon icon={faUser} color="grey" size="lg" fixedWidth />
                   </div>
                   <div>
-                    <div className={styles.student_name}> {val.studentName}</div>
+                    <div className={styles.student_name}>{val.studentName}</div>
                     <div className={styles.student_date}>{val.date}</div>
                   </div>
                 </div>
@@ -26,7 +27,7 @@ function PastExperience() {
           )
         })}
       </ul>
-    </div>
+    </Fragment>
   )
 }
 

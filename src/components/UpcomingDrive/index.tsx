@@ -3,10 +3,11 @@ import { faApple } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import UpcomingDriveData from '../../utils/UpcomingDriveData'
 import styles from './UpcomingDrive.module.scss'
+import { Fragment } from 'react'
 
 function UpcomingDrive() {
   return (
-    <div>
+    <Fragment>
       <ul>
         {UpcomingDriveData.map((val) => {
           return (
@@ -26,7 +27,7 @@ function UpcomingDrive() {
           )
         })}
       </ul>
-    </div>
+    </Fragment>
   )
 }
 
