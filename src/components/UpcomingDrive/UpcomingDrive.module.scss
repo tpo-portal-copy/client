@@ -1,0 +1,37 @@
+.list_item {
+  list-style-type: none;
+
+  .company_url {
+    text-decoration: none;
+    color: black;
+
+    .company_data {
+      display: flex;
+      flex-direction: row;
+      padding: 18px 0 0 10px;
+
+      .company_logo {
+        padding: 12px 12px 12px 12px;
+        margin: 10px 17px 10px 1px;
+        align-items: center;
+        background-color: rgb(245, 245, 245);
+        border-radius: 6px;
+        justify-content: center;
+      }
+
+      .company_info {
+        padding-top: 10px;
+
+        .company_name {
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        .company_date {
+          font-size: 0.91em;
+          color: rgb(181, 181, 181);
+        }
+      }
+    }
+  }
+}
