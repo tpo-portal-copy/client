@@ -1,34 +1,22 @@
 .button {
-    background-color: #fff;
-    border: 1px solid #68B984;
-    padding: 5px;
-    position: relative;
-    width: 7.2em;
-    height: 2em;
-    transition: 0.5s;
-    font-size: 17px;
-    border-radius: 0.4em;
-  }
-  
-  .button p {
-    position: absolute;
-    top: 0.4em;
-    left: 1.2em;
-    margin: 0;
-    padding: 0;
-    transition: .5s;
-    color: #68B984;
-  }
-  
-  
-  .button:hover p {
-    color: #fff
-  }
-  
-  .button:hover {
-    background-color: #68B984;
-  }
+  background-color: #fff;
+  border: 1px solid #68b984;
+  padding: 5px;
+  position: relative;
+  width: 100px;
+  height: 50px;
+  transition: 0.5s;
+  font-size: 17px;
+  border-radius: 0.4em;
+}
 
-  div{
-    padding: 10px;
-  }
+
+
+
+.button:hover {
+  background-color: #68b984;
+}
+
+div {
+  padding: 10px;
+}
