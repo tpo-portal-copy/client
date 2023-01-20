@@ -8,4 +8,3 @@ export interface FieldInfoProps {
   label: string
   value: string | number
 }
-
