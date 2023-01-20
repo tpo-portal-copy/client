@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-children-prop */
 
 import styles from './Profile.module.scss'
@@ -32,11 +33,19 @@ function Profile() {
                 )),
               )}
             </div>
-            <Button varient="primary" children="Edit Profile" />
+            <Button
+              onclick={() => console.log('clicked')}
+              varient="primary"
+              children="Edit Profile"
+            />
           </div>
         </div>
         <div className={styles.upload_container}>
-          <Button varient="primary" children="Upload Resume" />
+          <Button
+            onclick={() => console.log('clicked')}
+            varient="primary"
+            children="Upload Resume"
+          />
           <p className={styles.file_name}>Resume_RollNo._Name.pdf</p>
         </div>
       </div>
