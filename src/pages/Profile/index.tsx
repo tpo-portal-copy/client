@@ -1,8 +1,10 @@
 import styles from './Profile.module.scss'
-import UserInfo from '../../components/UserInfo'
+import FieldInfo from '../../components/FieldInfo'
 import Button from '../../components/Button'
 
 import profileData from '../../utils/Data/profileData'
+
+
 
 function Profile() {
   return (
@@ -15,7 +17,7 @@ function Profile() {
             <div className={styles.sub_info_container}>
               {profileData.map((user) =>
                 user.fields.map((user_field) => (
-                  <UserInfo key={user_field.id} label={user_field.label} value={user_field.value} />
+                  <FieldInfo key={user_field.id} label={user_field.label} value={user_field.value} />
                 )),
               )}
             </div>
@@ -23,8 +25,36 @@ function Profile() {
           </div>
         </div>
         <div className={styles.upload_container}>
-          <Button title="Upload Resume" />
+          <Button title="Upload Resume"  />
+          <p className={styles.file_name}>Resume_RollNo._Name.pdf</p>
         </div>
+      </div>
+      <div className={styles.bottom_container}>
+        <div className={styles.education}>
+          <p className={styles.education_title}>Education Details</p>
+          <label className={styles.label}>10th</label>
+          <hr className={styles.separator}/>
+          <div className={styles.fields}>
+            <FieldInfo label="Passing Year" value="2015"/>
+            <FieldInfo label ="School" value = "DAV Kangoo"/>
+            <FieldInfo label="Board" value = "CBSE"/>
+            <FieldInfo label = "Percentage" value = "91%" />
+          </div>
+          <div className={styles.spacer}></div>
+
+          <label className={styles.label}>12th</label>
+          <hr className={styles.separator}/>
+          <div className={styles.fields}>
+            <FieldInfo label="Passing Year" value="2019"/>
+            <FieldInfo label ="School" value = "DAV Kangoo"/>
+            <FieldInfo label="Board" value = "CBSE"/>
+            <FieldInfo label = "Percentage" value = "91%" />
+          </div>
+        </div>
+        <div className={styles.student_info}></div>
+        <div className={styles.user_stats}></div>
+        <div className={styles.cluster}></div>
+
       </div>
     </div>
   )

@@ -1,0 +1,41 @@
+.header {
+  width: 100%;
+  height: 56px;
+  background-color: #fff;
+  color: #000;
+  box-shadow: var(--nav-shadow);
+
+  .content {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1860px;
+    margin: 0 auto;
+
+    .logo {
+      padding-left: 1rem;
+    }
+
+    .nav_items {
+      display: flex;
+      gap: 2rem;
+      margin-right: 3rem;
+
+      .nav_item {
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+
+    .menu {
+      padding-right: 1rem;
+
+      img {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+      }
+    }
+  }
+}

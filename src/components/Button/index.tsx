@@ -1,7 +1,6 @@
 import styles from './Button.module.scss'
-import { ButtonProps } from '../../utils/types'
 
-export default function Button({ title }: ButtonProps) {
+export default function Button({ title }) {
   return (
     <div>
       <button type="button" className={styles.button}>
