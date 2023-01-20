@@ -6,7 +6,7 @@ export type RouteProps = {
   url: string
 }
 
-export interface UserInfoProps {
+export interface FieldInfoProps {
   label: string
   value: string | number
 }
@@ -15,4 +15,9 @@ export type ButtonProps = {
   varient: 'primary' | 'secondary'
   onclick: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
+}
+
+export interface ClusterCardProps {
+  title: string
+  range: string
 }
