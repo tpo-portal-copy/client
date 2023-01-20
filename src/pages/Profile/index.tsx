@@ -3,8 +3,15 @@
 import styles from './Profile.module.scss'
 import FieldInfo from '../../components/FieldInfo'
 import Button from '../../components/Button'
+import ClusterCard from '../../components/Cards/ClusterCard'
 
-import profileData from '../../utils/Data/profileData'
+import {
+  profileData,
+  educationData,
+  moreInfoData,
+  studentStatData,
+  clusterData,
+} from '../../utils/Data/profileData'
 
 function Profile() {
   return (
@@ -36,28 +43,49 @@ function Profile() {
       <div className={styles.bottom_container}>
         <div className={styles.education}>
           <p className={styles.education_title}>Education Details</p>
-          <span className={styles.label}>10th</span>
-          <hr className={styles.separator} />
-          <div className={styles.fields}>
-            <FieldInfo label="Passing Year" value="2015" />
-            <FieldInfo label="School" value="DAV Kangoo" />
-            <FieldInfo label="Board" value="CBSE" />
-            <FieldInfo label="Percentage" value="91%" />
-          </div>
-          <div className={styles.spacer} />
 
-          <span className={styles.label}>12th</span>
-          <hr className={styles.separator} />
-          <div className={styles.fields}>
-            <FieldInfo label="Passing Year" value="2019" />
-            <FieldInfo label="School" value="DAV Kangoo" />
-            <FieldInfo label="Board" value="CBSE" />
-            <FieldInfo label="Percentage" value="91%" />
+          {educationData.map((education) => {
+            return (
+              <div key={education.id}>
+                <span className={styles.label}>{education.class}</span>
+                <hr className={styles.separator} />
+                <div>
+                  {education.fields.map((fields) => (
+                    <FieldInfo key={fields.id} label={fields.label} value={fields.value} />
+                  ))}
+                </div>
+                <div className={styles.spacer} />
+              </div>
+            )
+          })}
+        </div>
+        <div className={styles.more_info}>
+          <p className={styles.more_info_title}>More About You</p>
+          <div className={styles.info_fields_container}>
+            {moreInfoData.map((info) => (
+              <FieldInfo key={info.id} label={info.label} value={info.value} />
+            ))}
           </div>
         </div>
-        <div className={styles.student_info} />
-        <div className={styles.user_stats} />
-        <div className={styles.cluster} />
+        <div className={styles.user_stats}>
+          <p className={styles.user_stats_title}>Student&#39;s Stats</p>
+          <div className={styles.user_stats_fields_container}>
+            {studentStatData.map((info) => (
+              <FieldInfo key={info.id} label={info.label} value={info.value} />
+            ))}
+          </div>
+          <div className={styles.profile}>
+            <span className={styles.profile_link}>LinkedIn profile</span>
+          </div>
+        </div>
+        <div className={styles.cluster}>
+          <p className={styles.cluster_title}>Chosen Clusters</p>
+          <div>
+            {clusterData.map((data) => (
+              <ClusterCard key={data.id} title={data.cluster_title} range={data.range} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

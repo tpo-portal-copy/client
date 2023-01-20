@@ -16,3 +16,8 @@ export type ButtonProps = {
   onclick: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
 }
+
+export interface ClusterCardProps {
+  title: string
+  range: string
+}
