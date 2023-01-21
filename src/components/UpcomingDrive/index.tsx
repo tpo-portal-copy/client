@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { faApple } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Fragment } from 'react'
 import UpcomingDriveData from '../../utils/UpcomingDriveData'
 import styles from './UpcomingDrive.module.scss'
 

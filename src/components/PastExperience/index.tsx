@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { Fragment } from 'react'
 import styles from './PastExperience.module.scss'
 import PastExperienceData from '../../utils/PastExperienceData'
 

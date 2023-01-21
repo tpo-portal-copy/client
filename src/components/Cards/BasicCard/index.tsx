@@ -30,7 +30,7 @@ function BasicCard({
               <span>{selStatus}</span>
             </div>
             <div className={styles.lower_fields}>
-              <span>{userName}</span>
+              <span>{userName.split(' ')[0]}</span>
             </div>
             <div className={styles.lower_fields}>
               <span>{jobType}</span>

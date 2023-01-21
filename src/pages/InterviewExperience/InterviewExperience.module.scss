@@ -1,63 +1,52 @@
 .display {
-    display: flex;
-    font-family: 'poppins';
-
-    &::-webkit-scrollbar {
+  display: flex;
+  font-family: 'poppins';
+  &::-webkit-scrollbar {
     display: none;
-    }
+  }
 
-    .left {
-    width: 300px;
-    margin-right: 30px; 
-    }
-
-    .middle_left {
+  .middle_left {
     width: 80%;
 
-        .mlbody {
-        margin: 15px 15px 15px 15px;
+    .mlbody {
+      margin: 15px 15px 15px 15px;
 
-            .card_margins {
-            margin: 35px 15px 35px 15px;
-            padding: 2px 2px 2px 2px;
-            }
-        }
+      .card_margins {
+        margin: 35px 15px 35px 15px;
+        padding: 2px 2px 2px 2px;
+      }
     }
+  }
 
-    .middle_right {
-        width: 20%;
-        background-color: beige;
-        
+  .middle_right {
+    width: 20%;
+    background-color: beige;
 
-        .mrbody {
-        margin: 15px 15px 15px 15px;
+    .mrbody {
+      margin: 15px 15px 15px 15px;
 
-            .Filters{
-
-                .company {
-                margin-top: 10px;
-                }
-            }
-
-            
+      .Filters {
+        .company {
+          margin-top: 10px;
         }
+      }
     }
+  }
 
-    .right {
+  .right {
     width: 10%;
-    }
+  }
 }
 
 .head {
-    height: 60px;
-    margin: 15px 15px 15px 15px;
+  height: 60px;
+  margin: 15px 15px 15px 15px;
 }
 
 .seperator {
   border-bottom: 3px solid #cfd2cf;
   border-radius: 30px;
 }
-
 
 @media only screen and (max-width: 786px) {
   .middle_right {

@@ -3,7 +3,7 @@ import styles from './InterviewExperience.module.scss'
 import userIntExp from '../../utils/Data/IntExpData'
 import { BasicCardProps } from '../../utils/types'
 
-function IntExp(): JSX.Element {
+function InterviewExperience(): JSX.Element {
   return (
     <div>
       <div className={styles.display}>
@@ -14,18 +14,7 @@ function IntExp(): JSX.Element {
           <div className={styles.mlbody}>
             {userIntExp.map((user: BasicCardProps) => (
               <div key={user.id} className={styles.card_margins}>
-                <BasicCard
-                  id={user.id}
-                  imgUrl={user.imgUrl}
-                  title={user.title}
-                  description={user.description}
-                  selStatus={user.selStatus}
-                  userName={user.userName.split(' ')[0]}
-                  jobType={user.jobType}
-                  difficulty={user.difficulty}
-                  role={user.role}
-                  postedOn={user.postedOn}
-                />
+                <BasicCard {...user} />
               </div>
             ))}
           </div>
@@ -68,4 +57,4 @@ function IntExp(): JSX.Element {
   )
 }
 
-export default IntExp
+export default InterviewExperience
