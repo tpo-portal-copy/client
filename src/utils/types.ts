@@ -21,3 +21,16 @@ export interface ClusterCardProps {
   title: string
   range: string
 }
+
+export interface BasicCardProps {
+  id: number
+  title: string
+  description: string
+  imgUrl: string
+  jobType: string
+  selStatus: string
+  userName: string
+  difficulty: string
+  role: string
+  postedOn: number
+}
