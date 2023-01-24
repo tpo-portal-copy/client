@@ -2,6 +2,10 @@
   .pages {
     width: calc(100% - var(--sidebar-width));
     margin-left: auto;
-    padding: 1rem;
+
+    @media screen and (max-width: 1350px) {
+      width: 100%;
+      margin: 0;
+    }
   }
 }
