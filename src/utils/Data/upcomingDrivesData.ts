@@ -23,5 +23,11 @@ const UpcomingDriveData = [
     date: '10-8-2022',
     link: '/Amazon',
   },
+  {
+    companyName: 'Amazon',
+    id: 3,
+    date: '10-8-2022',
+    link: '/Amazon',
+  },
 ]
 export default UpcomingDriveData
