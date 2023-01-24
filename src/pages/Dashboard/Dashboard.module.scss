@@ -2,28 +2,36 @@
   font-size: 40px;
   font-weight: 600;
   color: var(--text-color-primary);
-  padding: 2rem;
-  padding-top: calc(2rem + var(--nav-height));
+  padding: calc(3rem + var(--nav-height)) 2.5rem 1.5rem 2.5rem;
+
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 32px;
+    padding: calc(2rem + var(--nav-height)) 1rem 0.5rem 1rem;
+  }
 }
 
 .content {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.5rem;
-
-  .posts_container {
-    margin: 0 2rem;
-  }
+  padding: 1rem 2.5rem;
+  gap: 1.5rem;
 
   .side_panel {
     width: 330px;
     position: sticky;
     top: calc(var(--nav-height) + 2rem);
+    overflow-y: auto;
+    max-height: calc((100vh - var(--nav-height) - 4rem));
+    flex-shrink: 0.2;
 
     .sidepanel_card {
       background-color: rgb(254, 254, 254);
-      padding: 1.25rem 1.25rem;
+      padding: 1.25rem;
       border-radius: 10px;
 
       &:last-child {
@@ -68,5 +76,18 @@
         }
       }
     }
+
+    @media screen and (max-width: 1080px) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    padding: 1.25rem;
   }
 }
