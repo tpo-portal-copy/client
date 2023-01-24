@@ -1,7 +1,7 @@
 import BasicCard from '../../components/Cards/BasicCard'
 import styles from './InterviewExperience.module.scss'
-import userIntExp from '../../utils/Data/IntExpData'
 import { BasicCardProps } from '../../utils/types'
+import userIntExp from '../../utils/Data/interviewExperienceData'
 
 function InterviewExperience(): JSX.Element {
   return (

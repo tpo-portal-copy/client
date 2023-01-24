@@ -34,3 +34,25 @@ export interface BasicCardProps {
   role: string
   postedOn: number
 }
+
+export interface Post {
+  id: number
+  title: string
+  description: string
+  imageUrl: string
+  postedOn: string
+}
+
+export interface Drive {
+  companyName: string
+  id: number
+  date: string
+  link: string
+}
+
+export interface PastExperienceSummary {
+  studentName: string
+  id: number
+  date: string
+  link: string
+}
