@@ -22,7 +22,7 @@ export interface ClusterCardProps {
   range: string
 }
 
-export interface BasicCardProps {
+export interface ExperienceCardProps {
   id: number
   title: string
   description: string
@@ -33,6 +33,22 @@ export interface BasicCardProps {
   difficulty: string
   role: string
   postedOn: number
+}
+
+export interface CheckListItemProps {
+  label: string | number
+  year: number
+  id: number
+}
+
+export interface ModalProps {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  title: string
+}
+
+export interface CompanyListProps {
+  id: number
+  name: string
 }
 
 export interface Post {

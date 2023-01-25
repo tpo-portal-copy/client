@@ -1,7 +1,7 @@
-import { BasicCardProps } from '../../../utils/types'
-import styles from './BasicCard.module.scss'
+import { ExperienceCardProps } from '../../../utils/types'
+import styles from './ExperienceCard.module.scss'
 
-function BasicCard({
+function ExperienceCard({
   title,
   description,
   imgUrl,
@@ -11,7 +11,7 @@ function BasicCard({
   userName,
   difficulty,
   postedOn,
-}: BasicCardProps) {
+}: ExperienceCardProps) {
   return (
     <div>
       <div className={styles.card}>
@@ -46,4 +46,4 @@ function BasicCard({
   )
 }
 
-export default BasicCard
+export default ExperienceCard
