@@ -1,7 +1,9 @@
-import { TransitionModalProps } from '../../utils/types'
+import CompanyList from '../../utils/Data/CompanyListData'
+import { CompanyListProps, ModalProps } from '../../utils/types'
+import CheckListItem from '../Lists/CheckListItem'
 import styles from './Modal.module.scss'
 
-export default function Modal({ title, setIsModalOpen }: TransitionModalProps) {
+export default function Modal({ title, setIsModalOpen }: ModalProps) {
   return (
     <div>
       <div className={styles.modalbg}>
@@ -14,17 +16,14 @@ export default function Modal({ title, setIsModalOpen }: TransitionModalProps) {
             <h1>{title}</h1>
           </div>
           <div className={styles.seperator} />
-          <div className={styles.body} />
-          <div className={styles.footer}>
-            {/* <div className={styles.button}>
-              <button>Clear</button>
+          <div className={styles.body}>
+            <div className={styles.grid_container}>
+              {CompanyList.map((company: CompanyListProps) => (
+                <div key={company.id} className={styles.grid_item}>
+                  <CheckListItem id={company.id} label={company.name} year={0} />
+                </div>
+              ))}
             </div>
-            <div className={styles.button}>
-              <button>Apply</button>
-            </div>
-            <div className={styles.button}>
-              <button onClick={() => setIsModalOpen(false)}>Close</button>
-            </div> */}
           </div>
         </div>
       </div>

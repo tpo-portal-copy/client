@@ -1,27 +1,27 @@
 const CompanyList = [
   {
     id: 0,
-    name: 'Apple',
+    name: 'Apple0',
   },
   {
     id: 1,
-    name: 'Apple',
+    name: 'Apple1',
   },
   {
     id: 2,
-    name: 'Apple',
+    name: 'Apple2',
   },
   {
     id: 3,
-    name: 'Apple',
+    name: 'Apple3',
   },
   {
     id: 4,
-    name: 'Apple',
+    name: 'Apple4',
   },
   {
     id: 5,
-    name: 'Apple',
+    name: 'Apple5',
   },
   {
     id: 6,
@@ -73,6 +73,14 @@ const CompanyList = [
   },
   {
     id: 18,
+    name: 'Apple',
+  },
+  {
+    id: 19,
+    name: 'Apple',
+  },
+  {
+    id: 20,
     name: 'Apple',
   },
 ]

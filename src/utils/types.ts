@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, ReactNode } from 'react'
+import { MouseEventHandler, ReactNode } from 'react'
 
 export type RouteProps = {
   id: number
@@ -22,7 +22,7 @@ export interface ClusterCardProps {
   range: string
 }
 
-export interface BasicCardProps {
+export interface ExperienceCardProps {
   id: number
   title: string
   description: string
@@ -38,9 +38,10 @@ export interface BasicCardProps {
 export interface CheckListItemProps {
   label: string | number
   year: number
+  id:number
 }
 
-export interface TransitionModalProps {
+export interface ModalProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   title: string
 }

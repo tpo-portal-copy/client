@@ -1,19 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './InterviewExperience.module.scss'
 import userIntExp from '../../utils/Data/IntExpData'
-import { BasicCardProps } from '../../utils/types'
-import { BasicCard, Modal } from '../../components'
-import CheckListItem from '../../components/Lists/CheckListItem'
+import { ExperienceCardProps } from '../../utils/types'
+import { CheckListItem, ExperienceCard, Modal } from '../../components'
 
-function InterviewExperience(): JSX.Element {
+function InterviewExperience() {
   const [open, setOpen] = useState(false)
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'scroll'
-    }
-  }, [open])
 
   return (
     <div>
@@ -22,9 +14,9 @@ function InterviewExperience(): JSX.Element {
           <div className={styles.head} />
           <div className={styles.mlbody}>
             <h1>Interview Experiences</h1>
-            {userIntExp.map((user: BasicCardProps) => (
+            {userIntExp.map((user: ExperienceCardProps) => (
               <div key={user.id} className={styles.card_margins}>
-                <BasicCard {...user} />
+                <ExperienceCard {...user} />
               </div>
             ))}
           </div>

@@ -1,6 +1,5 @@
 .display {
   display: flex;
-  font-family: 'poppins';
   &::-webkit-scrollbar {
     display: none;
   }
@@ -31,23 +30,20 @@
         flex-direction: column;
 
         .company {
-          
-          .chead{
+          .chead {
             display: flex;
-            
 
-            .tag{
+            .tag {
               width: 60%;
             }
 
-            .modal{
+            .modal {
               width: 40%;
               font-size: x-small;
               padding-right: 5px;
-              
-              .button{
+
+              .button {
                 float: right;
-                font-family: 'poppins';
               }
             }
           }
