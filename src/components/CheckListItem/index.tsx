@@ -1,7 +1,7 @@
-import { CheckListItemProps } from '../../../utils/types'
+import { CheckListItemProps } from '../../utils/types'
 import styles from './CheckListItem.module.scss'
 
-function CheckListItem({ label,id }: CheckListItemProps) {
+function CheckListItem({ label, id }: CheckListItemProps) {
   return (
     <div className={styles.content}>
       <div className={styles.box}>

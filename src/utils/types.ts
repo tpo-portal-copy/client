@@ -38,7 +38,7 @@ export interface ExperienceCardProps {
 export interface CheckListItemProps {
   label: string | number
   year: number
-  id:number
+  id: number
 }
 
 export interface ModalProps {

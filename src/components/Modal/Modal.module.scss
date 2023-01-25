@@ -52,13 +52,12 @@
 
       .grid_container {
         display: grid;
-        grid-template-columns: repeat(4,25%) ;
+        grid-template-columns: repeat(4, 25%);
 
-        .grid_item{
+        .grid_item {
           font-size: medium;
         }
       }
     }
-
   }
 }

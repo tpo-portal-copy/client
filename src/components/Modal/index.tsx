@@ -1,6 +1,6 @@
-import CompanyList from '../../utils/Data/CompanyListData'
+import { companyList } from '../../utils/Data/IntExpData'
 import { CompanyListProps, ModalProps } from '../../utils/types'
-import CheckListItem from '../Lists/CheckListItem'
+import CheckListItem from '../CheckListItem'
 import styles from './Modal.module.scss'
 
 export default function Modal({ title, setIsModalOpen }: ModalProps) {
@@ -18,7 +18,7 @@ export default function Modal({ title, setIsModalOpen }: ModalProps) {
           <div className={styles.seperator} />
           <div className={styles.body}>
             <div className={styles.grid_container}>
-              {CompanyList.map((company: CompanyListProps) => (
+              {companyList.map((company: CompanyListProps) => (
                 <div key={company.id} className={styles.grid_item}>
                   <CheckListItem id={company.id} label={company.name} year={0} />
                 </div>
