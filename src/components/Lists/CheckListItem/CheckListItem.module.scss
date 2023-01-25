@@ -1,0 +1,15 @@
+.content{
+    display: flex;
+    margin: 10px 0px 10px 0px;
+
+    .box{
+        width: 20%;
+        padding: 2px 2px 2px 2px;
+    }
+
+    .label{
+        width: auto;
+        float: right;
+        text-align: center;
+    }
+}
