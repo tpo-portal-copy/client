@@ -23,5 +23,11 @@ const PastExperienceData = [
     date: '1-1-2023',
     link: '/Aditya',
   },
+  {
+    studentName: 'Aditya',
+    id: 3,
+    date: '1-1-2023',
+    link: '/Aditya',
+  },
 ]
 export default PastExperienceData

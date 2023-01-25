@@ -1,4 +1,4 @@
-export const userIntExp = [
+export const interviewExperienceInfoList = [
   {
     id: 0,
     imgUrl: 'https://picsum.photos/200',

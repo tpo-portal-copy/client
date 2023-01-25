@@ -1,24 +1,93 @@
-.container {
-  height: 100%;
-  width: 300px;
-  left: 80%;
-  top: 0;
-  background-color: rgb(255, 255, 255);
-  border: solid 2.3px rgb(209, 209, 209);
-  border-radius: 0 15px 15px 0;
-  position: fixed;
-  font-size: 13px;
-  padding: 7px 0 0 10px;
-  cursor: pointer;
+.page_name {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  padding: calc(3rem + var(--nav-height)) 2.5rem 1.5rem 2.5rem;
 
-  .item_contained {
-    padding-bottom: 20px;
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 32px;
+    padding: calc(2rem + var(--nav-height)) 1rem 0.5rem 1rem;
   }
 }
 
-.horizontal_line {
-  height: 2px;
-  width: 275px;
-  border: 1px solid rgb(209, 209, 209);
-  margin-bottom: 15px;
+.content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1rem 2.5rem;
+  gap: 1.5rem;
+
+  .side_panel {
+    width: 330px;
+    position: sticky;
+    top: calc(var(--nav-height) + 2rem);
+    overflow-y: auto;
+    max-height: calc((100vh - var(--nav-height) - 4rem));
+    flex-shrink: 0.2;
+
+    .sidepanel_card {
+      background-color: rgb(254, 254, 254);
+      padding: 1.25rem;
+      border-radius: 10px;
+
+      &:last-child {
+        margin-top: 1.5rem;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 600;
+        color: rgb(40, 40, 40);
+      }
+
+      .list_container {
+        padding-top: 0.25rem;
+
+        .list_item {
+          text-decoration: none;
+          display: flex;
+          margin-top: 1.25rem;
+
+          .pic {
+            padding: 12px 12px;
+            margin-right: 20px;
+            align-items: center;
+            background-color: rgb(245, 245, 245);
+            border-radius: 6px;
+            justify-content: center;
+          }
+
+          .info {
+            .name {
+              font-size: 16px;
+              color: var(--text-color-primary);
+              font-weight: 600;
+            }
+
+            .date {
+              font-size: 0.91em;
+              color: rgb(181, 181, 181);
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 1080px) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    padding: 1.25rem;
+  }
 }

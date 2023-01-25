@@ -23,10 +23,12 @@
     .mrbody {
       margin: 15px 0px 15px 15px;
 
-      .Filters {
+      .filters {
         margin-top: 10px;
         display: flex;
         flex-direction: column;
+        background-color: var(--custom-white-v1);
+        padding: 1rem;
 
         .company {
           .chead {

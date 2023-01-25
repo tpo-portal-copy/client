@@ -7,14 +7,16 @@
 }
 
 :root {
-  --bg-color: #fffefe;
+  --bg-color: rgb(244, 244, 244);
+  --nav-height: 64px;
   --nav-shadow: hsla(240, 5%, 41%, 0.2) 0px 7px 29px 0px;
-  --sidebar-width: 220px;
+  --sidebar-width: 270px;
   --card-shadow: 0px 7px 29px hsla(240, 5%, 41%, 0.2);
+  --custom-white-v1: rgb(252, 252, 252);
+  --text-color-primary: rgb(40, 40, 40);
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
-  background-color: var(--col-bg-body);
 }

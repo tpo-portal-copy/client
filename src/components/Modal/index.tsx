@@ -1,4 +1,4 @@
-import { companyList } from '../../utils/Data/IntExpData'
+import { companyList } from '../../utils/Data/interviewExperienceData'
 import { CompanyListProps, ModalProps } from '../../utils/types'
 import CheckListItem from '../CheckListItem'
 import styles from './Modal.module.scss'

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './InterviewExperience.module.scss'
 import { ExperienceCardProps } from '../../utils/types'
 import { CheckListItem, ExperienceCard, Modal } from '../../components'
-import { userIntExp } from '../../utils/Data/IntExpData'
+import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 
 function InterviewExperience() {
   const [open, setOpen] = useState(false)
@@ -14,7 +14,7 @@ function InterviewExperience() {
           <div className={styles.head} />
           <div className={styles.mlbody}>
             <h1>Interview Experiences</h1>
-            {userIntExp.map((user: ExperienceCardProps) => (
+            {interviewExperienceInfoList.map((user: ExperienceCardProps) => (
               <div key={user.id} className={styles.card_margins}>
                 <ExperienceCard {...user} />
               </div>
@@ -24,7 +24,7 @@ function InterviewExperience() {
         <div className={styles.middle_right}>
           <div className={styles.head} />
           <div className={styles.mrbody}>
-            <div className={styles.Filters}>
+            <div className={styles.filters}>
               <h2>Filters</h2>
               <div className={styles.seperator} />
               <div className={styles.company}>
