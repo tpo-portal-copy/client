@@ -1,49 +1,48 @@
-.container{
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  background-color: #eee;
+  border-radius: 10px;
+  width: 400px;
+  align-items: center;
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    background-color: #e9e9e9;
+  }
+
+  .cluster_info {
     display: flex;
-    flex-direction: row;
-    padding: 10px;
-    background-color: #eee;
-    border-radius: 10px;
-    width: 400px;
-    align-items: center;
+    flex-direction: column;
+    padding-left: 20px;
+    justify-content: center;
 
-    .checkbox{
-        width: 20px;
-        height: 20px;
-        background-color:#e9e9e9;
+    .cluster_name {
+      font-size: 20px;
     }
-
-    .cluster_info{
-        display: flex;
-        flex-direction: column;
-        padding-left: 20px;
-        justify-content: center;
-
-        .cluster_name{
-            font-size: 20px;
-        }
-        .cluster_range{
-            font-size: 12px;
-
-        }
+    .cluster_range {
+      font-size: 12px;
     }
+  }
 }
 
-@media only screen and (max-width:1185px){
-    .container{
-        width: 300px;
-    }
+@media only screen and (max-width: 1185px) {
+  .container {
+    width: 300px;
+  }
 }
 
-@media only screen and (max-width:965px){
-    .container{
-        .cluster_info{
-            .cluster_name{
-                font-size: 17px;
-            }
-            .cluster_range{
-                font-size: 10px;
-            }
-        }
+@media only screen and (max-width: 965px) {
+  .container {
+    .cluster_info {
+      .cluster_name {
+        font-size: 17px;
+      }
+      .cluster_range {
+        font-size: 10px;
+      }
     }
+  }
 }

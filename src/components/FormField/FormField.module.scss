@@ -1,47 +1,42 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    .label{
-        font-size: 12px;
-        padding-bottom: 4px;
-        color: #B2B2B2;
+  .label {
+    font-size: 12px;
+    padding-bottom: 4px;
+    color: #b2b2b2;
+  }
+
+  .field {
+    width: 400px;
+    border: none;
+    outline: none;
+    font-family: 'poppins';
+    font-size: 16px;
+    padding: 6px;
+    transition: ease 0.2s;
+    border: 2px solid;
+    border-color: #eee;
+    border-radius: 10px;
+
+    &:focus,
+    &:active {
+      border-radius: 10px;
+      box-shadow: inset 0px 0px 0px 1px #0081c9;
+      border: 3px solid;
+      border-color: #5bc1f86a;
     }
-
-    .field{
-        width: 400px;
-        border: none;
-        outline: none;
-        font-family: "poppins";
-        font-size: 16px;
-        padding: 6px;
-        transition: ease 0.2s;
-        border: 2px solid;
-        border-color: #eee;
-        border-radius: 10px;
-
-        &:focus,&:active{
-            border-radius: 10px;
-            box-shadow: inset 0px 0px 0px 1px #0081C9;
-            border: 3px solid;
-            border-color: #5bc1f86a;
-            
-            
-        }
-    }   
-
-    
+  }
 }
 
-
-@media only screen and (max-width:1185px){
-    .container{
-        .field{
-            width: 300px;
-            font-size: 14px;
-            padding: 6px;
-
-        }
+@media only screen and (max-width: 1185px) {
+  .container {
+    .field {
+      width: 300px;
+      font-size: 14px;
+      padding: 6px;
     }
+  }
 }

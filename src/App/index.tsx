@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header, Sidebar } from '../components'
-import { Dashboard, Profile, InterviewExperience,Form } from '../pages'
+import { Dashboard, Profile, InterviewExperience, Form } from '../pages'
 import styles from './App.module.scss'
 
 function App() {
