@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import FormField from '../../components/FormField'
-import styles from './Form.module.scss'
-import { BasicInfo, EducationInfo, CollegeInfo, ClusterData } from '../../utils/Data/FormUIData'
-import ClusterList from '../../components/ClusterList'
+import Input from '../../components/Input'
+import styles from './StudentDetailsForm.module.scss'
+import { basicInfo, educationInfo, collegeInfo, clusterData } from '../../utils/Data/FormUIData'
+import ClusterCard from '../../components/Cards/ClusterCard'
 
 export default function Form() {
   return (
@@ -11,12 +11,12 @@ export default function Form() {
       <div className={styles.info_container}>
         <span className={styles.heading}>Basic Info</span>
         <div className={styles.info}>
-          {BasicInfo.map((info) => (
-            <FormField
+          {basicInfo.map((info) => (
+            <Input
               key={info.id}
               label={info.label}
-              role={info.role}
-              data={info.role === 'list' ? info.data : [{ id: 1, value: '1' }]}
+              type={info.type}
+              options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
             />
           ))}
           <div className={styles.img_upload_container}>
@@ -28,25 +28,20 @@ export default function Form() {
       <div className={styles.info_container}>
         <span className={styles.heading}>Education</span>
         <div className={styles.info}>
-          {EducationInfo.map((info) => (
-            <FormField
-              key={info.id}
-              label={info.label}
-              role={info.role}
-              data={info.role === 'list' ? info.data : [{ id: 1, value: '1' }]}
-            />
+          {educationInfo.map((info) => (
+            <Input key={info.id} label={info.label} type={info.type} />
           ))}
         </div>
       </div>
       <div className={styles.info_container}>
         <span className={styles.heading}>College</span>
         <div className={styles.info}>
-          {CollegeInfo.map((info) => (
-            <FormField
+          {collegeInfo.map((info) => (
+            <Input
               key={info.id}
               label={info.label}
-              role={info.role}
-              data={info.role === 'list' ? info.data : [{ id: 1, value: '1' }]}
+              type={info.type}
+              options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
             />
           ))}
         </div>
@@ -54,11 +49,12 @@ export default function Form() {
       <div className={styles.info_container}>
         <span className={styles.heading}>Choose Clusters</span>
         <div className={styles.info}>
-          {ClusterData.map((data) => (
-            <ClusterList
+          {clusterData.map((data) => (
+            <ClusterCard
+              type="checkbox"
               key={data.id}
-              clusterName={data.clusterName}
-              clusterRange={data.clusterRange}
+              title={data.clusterName}
+              range={data.clusterRange}
             />
           ))}
         </div>

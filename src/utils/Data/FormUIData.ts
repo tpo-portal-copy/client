@@ -1,39 +1,39 @@
-export const BasicInfo = [
+export const basicInfo = [
   {
     id: 1,
     label: 'First Name',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 2,
     label: 'Middle Name',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 3,
     label: 'Last Name',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 4,
     label: 'Date Of Birth',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 5,
     label: 'Personal Email',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 6,
     label: 'Contact Number',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 7,
     label: 'Gender',
-    role: 'list',
-    data: [
+    type: 'list',
+    options: [
       {
         id: 8,
         value: 'Male',
@@ -51,8 +51,8 @@ export const BasicInfo = [
   {
     id: 11,
     label: 'Category',
-    role: 'list',
-    data: [
+    type: 'list',
+    options: [
       {
         id: 12,
         value: 'General',
@@ -77,56 +77,56 @@ export const BasicInfo = [
   },
 ]
 
-export const EducationInfo = [
-  { id: 1, label: '10th School', role: 'field' },
+export const educationInfo = [
+  { id: 1, label: '10th School', type: 'field' },
   {
     id: 2,
     label: '10th Board',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 3,
     label: '10th Year',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 4,
     label: '10th Percentage',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 5,
     label: '12th School',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 6,
     label: '12th Board',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 7,
     label: '12th Year',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 8,
     label: '12th Percentage',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 9,
     label: 'JEE(Main) Rank',
-    role: 'field',
+    type: 'field',
   },
 ]
 
-export const CollegeInfo = [
+export const collegeInfo = [
   {
     id: 11,
     label: 'Course',
-    role: 'list',
-    data: [
+    type: 'list',
+    options: [
       {
         id: 12,
         value: 'B.Tech',
@@ -148,8 +148,8 @@ export const CollegeInfo = [
   {
     id: 1,
     label: 'Branch',
-    role: 'list',
-    data: [
+    type: 'list',
+    options: [
       {
         id: 2,
         value: 'Computer Science and Engg.',
@@ -191,31 +191,31 @@ export const CollegeInfo = [
   {
     id: 16,
     label: 'CGPI',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 17,
     label: 'Active Backlogs',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 18,
     label: 'Total Backlogs',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 19,
     label: 'GATE Score',
-    role: 'field',
+    type: 'field',
   },
   {
     id: 20,
     label: 'CAT Score',
-    role: 'field',
+    type: 'field',
   },
 ]
 
-export const ClusterData = [
+export const clusterData = [
   { id: 1, clusterName: 'Cluster 1', clusterRange: '0-3.5 Lakhs' },
   { id: 2, clusterName: 'Cluster 2', clusterRange: '4-8 Lakhs' },
   { id: 3, clusterName: 'Cluster 3', clusterRange: '8-12 Lakhs' },

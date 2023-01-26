@@ -20,6 +20,7 @@ export type ButtonProps = {
 export interface ClusterCardProps {
   title: string
   range: string
+  type: 'checkbox' | 'mark'
 }
 
 export interface ExperienceCardProps {
@@ -35,13 +36,13 @@ export interface ExperienceCardProps {
   postedOn: number
 }
 
-export type FormFieldProps = {
+export type InputProps = {
   label: string
-  role: 'field' | 'list'
-  data: Array<ObjectType>
+  type: 'field' | 'list' | 'checkbox'
+  options: Array<OptionsType>
 }
 
-type ObjectType = {
+type OptionsType = {
   id: number
   value: string
 }

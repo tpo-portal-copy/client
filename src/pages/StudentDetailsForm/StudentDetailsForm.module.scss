@@ -3,6 +3,8 @@
   grid-template-columns: repeat(1, auto);
   place-items: center;
   row-gap: 20px;
+  height: 100vh;
+  padding-top: calc(var(--nav-height) + 1rem);
   .info {
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -16,7 +18,7 @@
       flex-direction: row;
       align-items: center;
       padding: 40px;
-      border: 2px dashed #b2b2b2;
+      border: 2px dashed #eee;
       border-radius: 10px;
       transition: ease 0.2s;
       cursor: pointer;
@@ -33,20 +35,12 @@
   }
 
   .info_container {
-    flex-direction: row;
     background-color: #fff;
     box-shadow: var(--card-shadow);
     width: min-content;
     border-radius: 15px;
     transition: ease 0.2s;
     padding: 25px 35px;
-
-    &:focus-within {
-      border-radius: 10px;
-      box-shadow: inset 0px 0px 0px 1px #54b435;
-      border: 3px solid;
-      border-color: #55b43565;
-    }
 
     .heading {
       font-size: 40px;
