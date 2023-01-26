@@ -29,8 +29,7 @@
   }
 }
 
-
-@media only screen and (max-width:1225px){
+@media only screen and (max-width: 1225px) {
   .button {
     padding: 6px 8px;
     font-size: 15px;
@@ -38,10 +37,9 @@
     border-radius: 6px;
     outline: none;
   }
-
 }
 
-@media only screen and (max-width:1034px){
+@media only screen and (max-width: 1034px) {
   .button {
     padding: 6px 8px;
     font-size: 15px;
@@ -50,5 +48,4 @@
     outline: none;
     width: 100%;
   }
-
 }
