@@ -34,3 +34,19 @@ export interface BasicCardProps {
   role: string
   postedOn: number
 }
+
+export type FormFieldProps = {
+  label: string
+  role: 'field' | 'list'
+  data: Array<ObjectType>
+}
+
+type ObjectType = {
+  id: number
+  value: string
+}
+
+export interface ClusterListProps {
+  clusterName: string
+  clusterRange: string
+}
