@@ -1,19 +1,21 @@
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import styles from './InterviewExperience.module.scss'
 import { ExperienceCardProps } from '../../utils/types'
 import { CheckListItem, ExperienceCard, Modal } from '../../components'
 import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 
 function InterviewExperience() {
-  const [open, setOpen] = useState(false)
+  const [openCompany, setOpenCompany] = useState(false)
+  const [openRole, setOpenRole] = useState(false)
 
   return (
     <div>
+      <h1 className={styles.head}>Interview Experiences</h1>
       <div className={styles.display}>
         <div className={styles.middle_left}>
-          <div className={styles.head} />
           <div className={styles.mlbody}>
-            <h1>Interview Experiences</h1>
             {interviewExperienceInfoList.map((user: ExperienceCardProps) => (
               <div key={user.id} className={styles.card_margins}>
                 <ExperienceCard {...user} />
@@ -22,13 +24,12 @@ function InterviewExperience() {
           </div>
         </div>
         <div className={styles.middle_right}>
-          <div className={styles.head} />
           <div className={styles.mrbody}>
             <div className={styles.filters}>
               <h2>Filters</h2>
               <div className={styles.seperator} />
-              <div className={styles.company}>
-                <div className={styles.chead}>
+              <div>
+                <div className={styles.filter_head}>
                   <div className={styles.tag}>
                     <h4>Companies</h4>
                   </div>
@@ -36,12 +37,12 @@ function InterviewExperience() {
                     <button
                       className={styles.button}
                       onClick={() => {
-                        setOpen(true)
+                        setOpenCompany(true)
                       }}
                     >
                       View All
                     </button>
-                    {open && <Modal title="Company List" setIsModalOpen={setOpen} />}
+                    {openCompany && <Modal title="Company" setIsModalOpen={setOpenCompany} />}
                   </div>
                 </div>
                 <div>
@@ -53,7 +54,22 @@ function InterviewExperience() {
               </div>
               <div className={styles.seperator} />
               <div>
-                <h4>Role</h4>
+                <div className={styles.filter_head}>
+                  <div className={styles.tag}>
+                    <h4>Roles</h4>
+                  </div>
+                  <div className={styles.modal}>
+                    <button
+                      className={styles.button}
+                      onClick={() => {
+                        setOpenRole(true)
+                      }}
+                    >
+                      View All
+                    </button>
+                    {openRole && <Modal title="Role" setIsModalOpen={setOpenRole} />}
+                  </div>
+                </div>
                 <div>
                   <CheckListItem label="IT" year={0} id={4} />
                   <CheckListItem label="ECE Core" year={0} id={5} />
@@ -98,7 +114,9 @@ function InterviewExperience() {
             </div>
           </div>
         </div>
-        <div className={styles.right} />
+        <div className={styles.right}>
+          <FontAwesomeIcon icon={faFilter} size="2x" />
+        </div>
       </div>
     </div>
   )

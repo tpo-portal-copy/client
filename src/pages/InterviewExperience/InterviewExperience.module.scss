@@ -1,27 +1,31 @@
 .display {
   display: flex;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 
   .middle_left {
     width: 80%;
 
     .mlbody {
       margin: 15px 15px 15px 15px;
+      justify-content: flex-start;
 
       .card_margins {
-        margin: 35px 15px 35px 15px;
+        margin: 25px 15px 25px 15px;
         padding: 2px 2px 2px 2px;
       }
+    }
+
+    @media screen and (max-width: 1080px) {
+      width: 100%;
     }
   }
 
   .middle_right {
-    width: 20%;
+    width: 25%;
 
     .mrbody {
-      margin: 15px 0px 15px 15px;
+      margin: 15px 0px 15px 0px;
+      justify-content: flex-start;
+      margin-top: 25px;
 
       .filters {
         margin-top: 10px;
@@ -29,50 +33,87 @@
         flex-direction: column;
         background-color: var(--custom-white-v1);
         padding: 1rem;
+        border-radius: 10px;
 
-        .company {
-          .chead {
-            display: flex;
+        .filter_head {
+          display: flex;
 
-            .tag {
-              width: 60%;
-            }
+          .tag {
+            width: 60%;
+          }
 
-            .modal {
-              width: 40%;
-              font-size: x-small;
-              padding-right: 5px;
+          .modal {
+            width: 40%;
+            font-size: x-small;
+            padding-right: 5px;
 
-              .button {
-                float: right;
-              }
+            .button {
+              float: right;
             }
           }
         }
+
+        @media screen and (max-width: 1080px) {
+          display: none;
+        }
       }
+    }
+
+    @media screen and (max-width: 1080px) {
+      width: 0px;
     }
   }
 
   .right {
-    width: 10%;
+    width: 5%;
+    display: none;
+    float: right;
+
+    @media screen and (max-width: 1080px) {
+      display: flex;
+      float: right;
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+      justify-content: center;
+      bottom: 0;
+      right: 0;
+      margin-bottom: 20px;
+      background-color: var(--custom-white-v1);
+      padding-top: 15px;
+    }
+  }
+
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    padding: 1.25rem;
   }
 }
 
 .head {
-  height: 60px;
-  margin: 15px 15px 15px 15px;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  padding: calc(3rem + var(--nav-height)) 2.5rem 1rem 2.5rem;
+
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 32px;
+    padding: calc(2rem + var(--nav-height)) 1rem 0.5rem 1rem;
+  }
 }
 
 .seperator {
-  border-bottom: 3px solid #cfd2cf;
-  border-radius: 30px;
-}
-
-@media only screen and (max-width: 786px) {
-  .middle_right {
-    width: 80%;
-  }
-  .middle_left {
-    display: none;
-  }
+  height: 1px;
+  background-color: #cfd2cf;
+  border-radius: 5px;
+  margin-top: 1rem;
 }

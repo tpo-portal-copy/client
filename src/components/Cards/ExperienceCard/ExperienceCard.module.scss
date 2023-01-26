@@ -59,10 +59,10 @@
   }
 
   .separator {
-    border-top: 3px solid #cfd2cf;
-    position: relative;
-    top: 25%;
-    border-radius: 40px;
+    height: 1px;
+    background-color: #cfd2cf;
+    border-radius: 5px;
+    margin-top: 1rem;
   }
 
   .lower {
@@ -73,14 +73,23 @@
       width: auto;
       display: flex;
 
-      .lower_fields {
+      .lower_left_div {
         width: auto;
-        margin: 10px 2px 0px 2px;
-        padding: 2px 15px 0px 15px;
-        border-radius: 20px;
-        align-content: center;
-        background-color: lightblue;
-        text-align: center;
+        display: flex;
+
+        .lower_fields {
+          width: auto;
+          margin: 10px 2px 0px 2px;
+          padding: 2px 15px 0px 15px;
+          border-radius: 20px;
+          align-content: center;
+          background-color: lightblue;
+          text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+          display: inline;
+        }
       }
     }
 
@@ -88,6 +97,7 @@
       width: auto;
       text-align: right;
       margin-top: 10px;
+      align-self: center;
     }
   }
 }

@@ -51,6 +51,11 @@ export interface CompanyListProps {
   name: string
 }
 
+export interface RoleListProps {
+  id: number
+  name: string
+}
+
 export interface Post {
   id: number
   title: string

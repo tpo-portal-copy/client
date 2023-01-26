@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Header, Sidebar } from '../components'
+import { Footer, Header, Sidebar } from '../components'
 import { Dashboard, Profile, InterviewExperience } from '../pages'
 import styles from './App.module.scss'
 
@@ -8,6 +8,7 @@ function App() {
     <div className={styles.app}>
       <Header />
       <Sidebar />
+      <Footer />
       <div className={styles.pages}>
         <Routes>
           <Route path="/" element={<Dashboard />} />

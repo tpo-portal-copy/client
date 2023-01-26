@@ -1,7 +1,7 @@
 .modalbg {
   display: flex;
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 10; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%;
@@ -41,8 +41,10 @@
     }
 
     .seperator {
-      border-bottom: 3px solid #cfd2cf;
-      border-radius: 30px;
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+      margin-top: 1rem;
     }
 
     .body {
@@ -56,6 +58,10 @@
 
         .grid_item {
           font-size: medium;
+        }
+
+        @media screen and (max-width: 600px) {
+          grid-template-columns: 100%;
         }
       }
     }
