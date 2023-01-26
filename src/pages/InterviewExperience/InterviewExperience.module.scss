@@ -11,16 +11,23 @@
       .card_margins {
         margin: 25px 15px 25px 15px;
         padding: 2px 2px 2px 2px;
-      }
-    }
 
-    @media screen and (max-width: 1080px) {
-      width: 100%;
+        @media screen and (max-width: 1350px) {
+          margin: 25px 0px 25px 0px;
+          padding-left: 0px;
+        }
+      }
+
+      @media screen and (max-width: 1350px) {
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+      }
     }
   }
 
   .middle_right {
     width: 25%;
+    padding-right: 25px;
 
     .mrbody {
       margin: 15px 0px 15px 0px;
@@ -53,14 +60,15 @@
           }
         }
 
-        @media screen and (max-width: 1080px) {
+        @media screen and (max-width: 1350px) {
           display: none;
         }
       }
     }
 
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 1350px) {
       width: 0px;
+      padding-right: 0px;
     }
   }
 
@@ -69,7 +77,7 @@
     display: none;
     float: right;
 
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 1350px) {
       display: flex;
       float: right;
       position: fixed;
@@ -91,7 +99,7 @@
   }
 
   @media screen and (max-width: 520px) {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 }
 
