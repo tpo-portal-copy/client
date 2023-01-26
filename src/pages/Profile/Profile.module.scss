@@ -1,5 +1,6 @@
 .profile_container {
   height: 100vh;
+  padding-top: calc(var(--nav-height) + 1rem);
 
   .top_container {
     display: grid;

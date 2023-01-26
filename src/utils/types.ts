@@ -22,7 +22,7 @@ export interface ClusterCardProps {
   range: string
 }
 
-export interface BasicCardProps {
+export interface ExperienceCardProps {
   id: number
   title: string
   description: string
@@ -49,4 +49,41 @@ type ObjectType = {
 export interface ClusterListProps {
   clusterName: string
   clusterRange: string
+}
+export interface CheckListItemProps {
+  label: string | number
+  year: number
+  id: number
+}
+
+export interface ModalProps {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  title: string
+}
+
+export interface CompanyListProps {
+  id: number
+  name: string
+}
+
+export interface Post {
+  id: number
+  title: string
+  description: string
+  imageUrl: string
+  postedOn: string
+}
+
+export interface Drive {
+  companyName: string
+  id: number
+  date: string
+  link: string
+}
+
+export interface PastExperienceSummary {
+  studentName: string
+  id: number
+  date: string
+  link: string
 }

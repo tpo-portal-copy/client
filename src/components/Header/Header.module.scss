@@ -1,9 +1,13 @@
 .header {
   width: 100%;
-  height: 56px;
-  background-color: #fff;
+  height: var(--nav-height);
+  background-color: var(--custom-white-v1);
   color: #000;
-  box-shadow: var(--nav-shadow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 
   .content {
     height: 100%;

@@ -1,6 +1,5 @@
 .display {
   display: flex;
-  font-family: 'poppins';
   &::-webkit-scrollbar {
     display: none;
   }
@@ -20,14 +19,35 @@
 
   .middle_right {
     width: 20%;
-    background-color: beige;
 
     .mrbody {
-      margin: 15px 15px 15px 15px;
+      margin: 15px 0px 15px 15px;
 
-      .Filters {
+      .filters {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--custom-white-v1);
+        padding: 1rem;
+
         .company {
-          margin-top: 10px;
+          .chead {
+            display: flex;
+
+            .tag {
+              width: 60%;
+            }
+
+            .modal {
+              width: 40%;
+              font-size: x-small;
+              padding-right: 5px;
+
+              .button {
+                float: right;
+              }
+            }
+          }
         }
       }
     }
