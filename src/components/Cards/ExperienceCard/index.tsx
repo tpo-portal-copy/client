@@ -25,23 +25,21 @@ function ExperienceCard({
         </div>
         <div className={styles.separator} />
         <div className={styles.lower}>
-          {/* <div className={styles.lower_left}> */}
-            <div className={styles.lower_fields}>
-              <span>{selStatus}</span>
-            </div>
-            <div className={styles.lower_fields}>
-              <span>{userName}</span>
-            </div>
-            <div className={styles.lower_fields}>
-              <span>{jobType}</span>
-            </div>
-            <div className={styles.lower_fields}>
-              <span>{difficulty}</span>
-            </div>
-            <div className={styles.lower_fields}>
-              <span>{postedOn}</span>
-            </div>
-          {/* </div> */}
+          <div className={styles.lower_fields}>
+            <span>{selStatus}</span>
+          </div>
+          <div className={styles.lower_fields}>
+            <span>{userName}</span>
+          </div>
+          <div className={styles.lower_fields}>
+            <span>{jobType}</span>
+          </div>
+          <div className={styles.lower_fields}>
+            <span>{difficulty}</span>
+          </div>
+          <div className={styles.lower_fields}>
+            <span>{postedOn}</span>
+          </div>
         </div>
       </div>
     </div>

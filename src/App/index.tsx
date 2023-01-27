@@ -8,7 +8,6 @@ function App() {
     <div className={styles.app}>
       <Header />
       <Sidebar />
-      <Footer />
       <div className={styles.pages}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
