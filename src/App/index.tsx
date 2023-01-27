@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header, Sidebar } from '../components'
-<<<<<<< HEAD
 import {
   Dashboard,
   Profile,
@@ -9,9 +8,6 @@ import {
   Login,
   Signup,
 } from '../pages'
-=======
-import { Dashboard, Profile, InterviewExperience, StudentDetailsForm } from '../pages'
->>>>>>> dev
 import styles from './App.module.scss'
 
 function App() {
