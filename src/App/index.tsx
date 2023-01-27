@@ -11,7 +11,7 @@ import {
 import styles from './App.module.scss'
 
 function App() {
-  console.log(navigator);
+  console.log(navigator)
   return (
     <div className={styles.app}>
       <Header />
