@@ -6,14 +6,13 @@
   outline: none;
 }
 
-.stretched{
+.stretched {
   padding: 6px 8px;
   font-size: 15px;
   transition: 0.5s;
   border-radius: 6px;
   outline: none;
   width: 100%;
-
 }
 
 .primary {
@@ -39,8 +38,6 @@
   }
 }
 
-
-
 @media only screen and (max-width: 1225px) {
   .button {
     padding: 6px 8px;
@@ -49,14 +46,13 @@
     border-radius: 6px;
     outline: none;
   }
-  .stretched{
+  .stretched {
     padding: 6px 8px;
     font-size: 15px;
     transition: 0.5s;
     border-radius: 6px;
     outline: none;
     width: 100%;
-  
   }
 }
 
@@ -70,13 +66,12 @@
     width: 100%;
   }
 
-  .stretched{
+  .stretched {
     padding: 6px 8px;
     font-size: 15px;
     transition: 0.5s;
     border-radius: 6px;
     outline: none;
     width: 100%;
-  
   }
 }

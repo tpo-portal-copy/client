@@ -3,6 +3,7 @@ import styles from './Signup.module.scss'
 import signupUI from '../../utils/Data/signupUIData'
 import Input from '../../components/Input'
 import { Button } from '../../components'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
   return (
@@ -14,7 +15,7 @@ export default function Signup() {
             <Input key={data.id} label={data.label} type={data.type} />
           ))}
           <Button stretch children="Sign Up" />
-          <span className={styles.register}>Already Registered ?</span>
+          <Link to="/login" className={styles.register}>Already Registered ?</Link>
         </div>
       </div>
     </form>

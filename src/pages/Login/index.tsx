@@ -1,8 +1,11 @@
 /* eslint-disable react/no-children-prop */
+import { Link } from 'react-router-dom'
 import styles from './Login.module.scss'
 import loginUI from '../../utils/Data/loginUIData'
 import Input from '../../components/Input'
 import { Button } from '../../components'
+
+
 
 export default function Login() {
   return (
@@ -15,7 +18,9 @@ export default function Login() {
           ))}
           <span className={styles.forgot}>Forgot Password</span>
           <Button stretch children="Login" />
-          <span className={styles.register}>New User ?</span>
+          <Link to="/signup" className={styles.register}>
+            New User ?
+          </Link>
         </div>
       </div>
     </form>
