@@ -36,10 +36,10 @@ export interface ExperienceCardProps {
   postedOn: number
 }
 
-export type InputProps = {
-  label: string
-  type: 'field' | 'list' | 'checkbox'
-  options: Array<OptionsType>
+export interface InputProps {
+  label?: string
+  type: string | 'field' | 'list' | 'checkbox'
+  options?: Array<OptionsType>
 }
 
 type OptionsType = {
