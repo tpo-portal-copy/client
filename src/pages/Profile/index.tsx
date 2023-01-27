@@ -1,7 +1,5 @@
 import styles from './Profile.module.scss'
-import FieldInfo from '../../components/FieldInfo'
-import Button from '../../components/Button'
-import ClusterCard from '../../components/Cards/ClusterCard'
+import { ClusterCard, Button, FieldInfo } from '../../components'
 
 import {
   profileData,
