@@ -124,3 +124,50 @@ export const companyList = [
     name: 'Apple',
   },
 ]
+
+export const roleList = [
+  {
+    id: 0,
+    name: 'SDE',
+  },
+  {
+    id: 1,
+    name: 'Software Eng',
+  },
+  {
+    id: 2,
+    name: 'Electronics Core',
+  },
+  {
+    id: 3,
+    name: 'Electrical Core',
+  },
+  {
+    id: 4,
+    name: 'Civil Core',
+  },
+  {
+    id: 5,
+    name: 'Mechanical Core',
+  },
+  {
+    id: 6,
+    name: 'Chemical Core',
+  },
+  {
+    id: 7,
+    name: 'Data Analyst',
+  },
+  {
+    id: 8,
+    name: 'Business Analyst',
+  },
+  {
+    id: 9,
+    name: 'Material Core',
+  },
+  {
+    id: 10,
+    name: 'Graduate Trainee',
+  },
+]
