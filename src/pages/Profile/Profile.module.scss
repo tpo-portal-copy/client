@@ -70,7 +70,7 @@
 
       .separator {
         height: 1px;
-        border: 1px solid rgb(209, 209, 209);
+        background-color: rgb(209, 209, 209);
         border-radius: 2px;
       }
 
@@ -195,7 +195,7 @@
 
         .separator {
           height: 1px;
-          border: 1px solid rgb(209, 209, 209);
+          background-color: rgb(209, 209, 209);
           border-radius: 2px;
         }
 
@@ -333,7 +333,7 @@
 
         .separator {
           height: 1px;
-          border: 1px solid rgb(209, 209, 209);
+          background-color: rgb(209, 209, 209);
           border-radius: 2px;
         }
 
@@ -419,7 +419,6 @@
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        // max-width: 900px;
         box-shadow: var(--card-shadow);
         background-color: #fff;
         align-items: center;

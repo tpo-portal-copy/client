@@ -12,14 +12,16 @@ export interface FieldInfoProps {
 }
 
 export type ButtonProps = {
-  varient: 'primary' | 'secondary'
-  onclick: MouseEventHandler<HTMLButtonElement>
+  varient?: 'primary' | 'secondary'
+  onclick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
+  stretch?: boolean
 }
 
 export interface ClusterCardProps {
   title: string
   range: string
+  type: 'checkbox' | 'mark'
 }
 
 export interface ExperienceCardProps {
@@ -35,6 +37,21 @@ export interface ExperienceCardProps {
   postedOn: number
 }
 
+export interface InputProps {
+  label?: string
+  type: string | 'field' | 'list' | 'checkbox'
+  options?: Array<OptionsType>
+}
+
+type OptionsType = {
+  id: number
+  value: string
+}
+
+export interface ClusterListProps {
+  clusterName: string
+  clusterRange: string
+}
 export interface CheckListItemProps {
   label: string | number
   year: number
