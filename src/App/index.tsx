@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Footer, Header, Sidebar } from '../components'
+import { Header, Sidebar } from '../components'
 import { Dashboard, Profile, InterviewExperience } from '../pages'
 import styles from './App.module.scss'
 
