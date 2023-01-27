@@ -1,0 +1,48 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    place-items: center;
+    row-gap: 20px;
+    height: 100vh;
+    padding-top: calc(var(--nav-height) + 1rem);
+
+    .info_container {
+        background-color: #fff;
+        box-shadow: var(--card-shadow);
+        width: min-content;
+        border-radius: 15px;
+        transition: ease 0.2s;
+        padding: 25px 35px;
+    
+        .heading {
+          font-size: 40px;
+          line-height: 40px;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: repeat(1, auto);
+            column-gap: 20px;
+            row-gap: 20px;
+            place-items: start;
+            padding-top: 15px;
+            place-items: center;
+    
+            .forgot{
+                color:#0081C9;
+    
+            }
+    
+            .register{
+                color:#0081C9;
+    
+            }
+        }
+    }
+
+    
+    
+}
+
+
+// 0081C9

@@ -12,9 +12,10 @@ export interface FieldInfoProps {
 }
 
 export type ButtonProps = {
-  varient: 'primary' | 'secondary'
-  onclick: MouseEventHandler<HTMLButtonElement>
+  varient?: 'primary' | 'secondary'
+  onclick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
+  stretch?: boolean
 }
 
 export interface ClusterCardProps {
