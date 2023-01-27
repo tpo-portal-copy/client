@@ -2,10 +2,7 @@
 import { Link } from 'react-router-dom'
 import styles from './Login.module.scss'
 import loginUI from '../../utils/Data/loginUIData'
-import Input from '../../components/Input'
-import { Button } from '../../components'
-
-
+import { Button, Input } from '../../components'
 
 export default function Login() {
   return (
