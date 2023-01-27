@@ -84,7 +84,12 @@ function Profile() {
           <p className={styles.cluster_title}>Chosen Clusters</p>
           <div>
             {clusterData.map((data) => (
-              <ClusterCard key={data.id} title={data.cluster_title} range={data.range} />
+              <ClusterCard
+                type="mark"
+                key={data.id}
+                title={data.cluster_title}
+                range={data.range}
+              />
             ))}
           </div>
         </div>

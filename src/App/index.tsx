@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header, Sidebar } from '../components'
-import { Dashboard, Profile, InterviewExperience } from '../pages'
+import { Dashboard, Profile, InterviewExperience, StudentDetailsForm } from '../pages'
 import styles from './App.module.scss'
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/student-details-form" element={<StudentDetailsForm />} />
           <Route path="/experiences" element={<InterviewExperience />} />
         </Routes>
       </div>

@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .label {
+    font-size: 12px;
+    padding-bottom: 4px;
+    color: #b2b2b2;
+  }
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+  }
+
+  .field {
+    width: 400px;
+    outline: none;
+    font-family: 'poppins';
+    font-size: 16px;
+    padding: 6px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+
+    &:focus,
+    &:active {
+      border-radius: 10px;
+      border: 3px solid #5bc1f86a;
+    }
+  }
+
+  .drop_down_container {
+    width: 200px;
+    outline: none;
+    font-family: 'poppins';
+    font-size: 16px;
+    padding: 6px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+
+    &:focus,
+    &:active {
+      border-radius: 10px;
+      border: 3px solid #5bc1f86a;
+    }
+  }
+}
+
+@media only screen and (max-width: 1185px) {
+  .container {
+    .field {
+      width: 300px;
+      font-size: 14px;
+      padding: 6px;
+    }
+  }
+}
