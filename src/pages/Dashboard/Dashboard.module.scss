@@ -29,6 +29,15 @@
     max-height: calc((100vh - var(--nav-height) - 4rem));
     flex-shrink: 0.2;
 
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      border-radius: 5px;
+    }
+
     .sidepanel_card {
       background-color: rgb(254, 254, 254);
       padding: 1.25rem;
