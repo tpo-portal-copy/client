@@ -5,6 +5,7 @@
   .top_container {
     display: grid;
     grid-template-columns: repeat(2, auto);
+    padding-left: 10px;
 
     .user_profile_info {
       display: flex;
