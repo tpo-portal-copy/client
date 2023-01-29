@@ -1,0 +1,51 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--custom-white-v1);
+  padding: 1rem;
+  border-radius: 10px;
+
+  .seperator {
+    height: 1px;
+    background-color: #cfd2cf;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .company{
+    position: relative;
+  }
+
+  .filter_head {
+    display: flex;
+    gap: 1rem;
+
+    .tag {
+      width: 60%;
+    }
+
+    .modal {
+      width: 40%;
+      font-size: medium;
+      font-weight: bold;
+      background-color: #fff;
+      border: #fff;
+      text-align: right;
+
+      .btn {
+        background-color: #fff;
+        border: #fff;
+        font-weight: bold;
+        font-size: 16px;
+
+        &:hover,
+        &:focus {
+          color: #aaa;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
