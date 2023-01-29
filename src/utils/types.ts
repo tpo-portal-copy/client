@@ -55,21 +55,20 @@ export interface ClusterListProps {
 export interface CheckListItemProps {
   label: string | number
   year: number
-  id: number
+  isMobile: boolean
 }
 
 export interface ModalProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   title: string
-  filter:number
 }
 
 export interface ExperiencesSidebarProps {
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export interface InterviewExperienceFIltersProps{
-  setter:number
+export interface ExperienceFilterProps {
+  isMobile?: boolean
 }
 
 export interface CompanyListProps {

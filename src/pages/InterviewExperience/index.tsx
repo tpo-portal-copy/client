@@ -3,12 +3,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import styles from './InterviewExperience.module.scss'
 import { ExperienceCardProps } from '../../utils/types'
-import {
-  ExperienceCard,
-  ExperiencesSidebar,
-  InterviewExperienceFIlters,
-  Modal,
-} from '../../components'
+import { ExperienceCard, ExperiencesSidebar, InterviewExperienceFilters } from '../../components'
 import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 
 function InterviewExperience() {
@@ -25,7 +20,7 @@ function InterviewExperience() {
           ))}
         </div>
         <div className={styles.middle_right}>
-          <InterviewExperienceFIlters setter={0} />
+          <InterviewExperienceFilters />
         </div>
         <div className={styles.right}>
           <FontAwesomeIcon

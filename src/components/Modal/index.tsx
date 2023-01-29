@@ -3,9 +3,7 @@ import { CompanyListProps, ModalProps, RoleListProps } from '../../utils/types'
 import CheckListItem from '../CheckListItem'
 import styles from './Modal.module.scss'
 
-export default function Modal({ title, setIsModalOpen, filter }: ModalProps) {
-  var totalCompanies=companyList.length
-  var totalRoles=roleList.length
+export default function Modal({ title, setIsModalOpen }: ModalProps) {
   return (
     <div className={styles.modalbg}>
       <div className={styles.modal}>
@@ -21,15 +19,13 @@ export default function Modal({ title, setIsModalOpen, filter }: ModalProps) {
             {title === 'Company' &&
               companyList.map((company: CompanyListProps) => (
                 <div key={company.id} className={styles.grid_item}>
-                  {filter===0?(<CheckListItem id={company.id} label={company.name} year={0} />):
-                  (<CheckListItem id={company.id + totalCompanies} label={company.name} year={0} />)}
+                  <CheckListItem label={company.name} year={0} />
                 </div>
               ))}
             {title === 'Role' &&
               roleList.map((role: RoleListProps) => (
                 <div key={role.id} className={styles.grid_item}>
-                  {filter===0?(<CheckListItem id={role.id} label={role.name} year={0} />):
-                  (<CheckListItem id={role.id + totalRoles} label={role.name} year={0} />)}
+                  <CheckListItem label={role.name} year={0} />
                 </div>
               ))}
           </div>

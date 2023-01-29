@@ -1,5 +1,5 @@
 import { ExperiencesSidebarProps } from '../../utils/types'
-import InterviewExperienceFIlters from '../InterviewExperienceFIlters'
+import InterviewExperienceFilters from '../InterviewExperienceFilters'
 import styles from './ExperiencesSidebar.module.scss'
 
 function ExperiencesSidebar({ setIsSidebarOpen }: ExperiencesSidebarProps) {
@@ -9,7 +9,7 @@ function ExperiencesSidebar({ setIsSidebarOpen }: ExperiencesSidebarProps) {
         <button onClick={() => setIsSidebarOpen(false)} className={styles.close}>
           &times;
         </button>
-        <InterviewExperienceFIlters setter={18}  />
+        <InterviewExperienceFilters isMobile />
       </div>
     </div>
   )
