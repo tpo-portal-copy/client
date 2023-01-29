@@ -16,15 +16,8 @@
   --text-color-primary: rgb(40, 40, 40);
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--bg-color);
-}
-
 ::-webkit-scrollbar {
   width: 10px;
-  // height: 10px;
-  // border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -37,5 +30,9 @@ body {
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
-  // border-radius: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
 }

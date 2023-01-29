@@ -39,10 +39,10 @@
       }
     }
 
-     @media screen and (max-width:767px) {
-        &::-webkit-scrollbar{
+    @media screen and (max-width: 767px) {
+      &::-webkit-scrollbar {
         width: 3px;
       }
-      }
+    }
   }
 }

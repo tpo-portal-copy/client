@@ -42,7 +42,7 @@
     .head {
       height: 10%;
       font-size: medium;
-      text-align:left ;
+      text-align: left;
     }
 
     .seperator {
@@ -71,24 +71,24 @@
           grid-template-columns: 100%;
         }
 
-        @media screen and (max-width: 1023px) and (min-width:767px) {
-          grid-template-columns: repeat(2,50%);
+        @media screen and (max-width: 1023px) and (min-width: 767px) {
+          grid-template-columns: repeat(2, 50%);
         }
 
-         @media screen and (max-width: 1350px) and (min-width:1023px) {
-          grid-template-columns: repeat(3,33%);
+        @media screen and (max-width: 1350px) and (min-width: 1023px) {
+          grid-template-columns: repeat(3, 33%);
         }
       }
 
-      @media screen and (max-width:767px) {
-        &::-webkit-scrollbar{
-        width: 2px;
-      }
+      @media screen and (max-width: 767px) {
+        &::-webkit-scrollbar {
+          width: 2px;
+        }
       }
     }
 
-    @media screen and (max-width:767px) {
-      margin:10% 5% 10% 5%;
+    @media screen and (max-width: 767px) {
+      margin: 10% 5% 10% 5%;
       width: 100%;
     }
   }
