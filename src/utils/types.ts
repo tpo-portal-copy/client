@@ -55,7 +55,7 @@ export interface ClusterListProps {
 export interface CheckListItemProps {
   label: string | number
   year: number
-  isMobile: boolean
+  isMobile?: boolean
 }
 
 export interface ModalProps {
