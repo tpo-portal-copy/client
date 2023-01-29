@@ -4,70 +4,33 @@
   gap: 1.5rem;
 
   .middle_left {
-    width: 80%;
-
     .card_margins {
-      margin: 1.5rem 0px;
+      margin-bottom: 2.5rem;
 
       @media screen and (max-width: 1350px) {
-        margin: 25px 0px 0px 0px;
-        padding-left: 0px;
+        margin-bottom: 1.5rem;
       }
-    }
-
-    @media screen and (max-width: 1350px) {
-      margin: 0px;
-    }
-
-    @media screen and (max-width: 1080px) {
-      width: 100%;
     }
   }
 
   .middle_right {
-    width: 25%;
-    margin: 1.5rem 0px;
+    width: 330px;
+    flex-shrink: 0.2;
+    top: calc(var(--nav-height) + 2rem);
+    overflow-y: auto;
+    max-height: calc((100vh - var(--nav-height) - 4rem));
+    position: sticky;
+    z-index: 3;
 
-    .filters {
-      display: flex;
-      flex-direction: column;
-      background-color: var(--custom-white-v1);
-      padding: 1rem;
-      border-radius: 10px;
-
-      .filter_head {
-        display: flex;
-
-        .tag {
-          width: 60%;
-        }
-
-        .modal {
-          width: 40%;
-          font-size: x-small;
-          padding-right: 5px;
-
-          .button {
-            float: right;
-          }
-        }
-      }
-
-      @media screen and (max-width: 1080px) {
-        display: none;
-      }
-    }
-
-    @media screen and (max-width: 1080px) {
-      width: 0px;
-      padding-right: 0px;
+    @media screen and (max-width: 950px) {
+      display: none;
     }
   }
 
   .right {
     display: none;
 
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 950px) {
       display: flex;
       float: right;
       position: fixed;
@@ -80,6 +43,12 @@
       margin: 0px 10px 20px;
       background-color: var(--custom-white-v1);
       padding-top: 15px;
+
+      &:hover {
+        color: #aaa;
+        text-decoration: none;
+        cursor: pointer;
+      }
     }
   }
 
@@ -88,13 +57,12 @@
     padding-right: 2rem;
   }
 
-  @media screen and (max-width: 1080px) {
+  @media screen and (max-width: 950px) {
     gap: 0rem;
   }
 
   @media screen and (max-width: 520px) {
     padding: 1rem;
-    gap: 0rem;
   }
 }
 
@@ -119,4 +87,5 @@
   background-color: #cfd2cf;
   border-radius: 5px;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
