@@ -52,7 +52,7 @@
       align-items: center;
       gap: 5px;
       text-decoration: none;
-      color: rgb(40, 40, 40);
+      color: var(--text-color-primary);
       letter-spacing: -0.02em;
       padding: 0.5rem;
       border-radius: 7px;
@@ -68,7 +68,7 @@
     }
   }
 
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 }

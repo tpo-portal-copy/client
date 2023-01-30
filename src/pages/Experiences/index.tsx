@@ -14,9 +14,7 @@ function Experiences() {
       <div className={styles.display}>
         <div className={styles.middle_left}>
           {interviewExperienceInfoList.map((user: ExperienceCardProps) => (
-            <div key={user.id} className={styles.card_margins}>
-              <ExperienceCard {...user} />
-            </div>
+            <ExperienceCard key={user.id} {...user} />
           ))}
         </div>
         <div className={styles.middle_right}>

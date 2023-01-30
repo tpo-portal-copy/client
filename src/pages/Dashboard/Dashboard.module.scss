@@ -1,3 +1,5 @@
+@use '../../index.scss' as main;
+
 .page_name {
   font-size: var(--lg-heading);
   font-weight: 600;
@@ -15,7 +17,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 1rem 2rem;
-  gap: 2rem;
+  gap: 1.6rem;
 
   .side_panel {
     width: 270px;
@@ -25,21 +27,7 @@
     max-height: calc((100vh - var(--nav-height) - 3rem));
     flex-shrink: 0.2;
 
-    &::-webkit-scrollbar {
-      width: 4px;
-      display: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: darkgrey;
-      border-radius: 4px;
-    }
-
-    &:hover {
-      &::-webkit-scrollbar {
-        display: initial;
-      }
-    }
+    @include main.thin-scrollbar;
 
     .sidepanel_card {
       background-color: rgb(254, 254, 254);
@@ -53,7 +41,7 @@
       h1 {
         font-size: var(--md-heading);
         font-weight: 600;
-        color: rgb(40, 40, 40);
+        color: var(--text-color-primary);
       }
 
       .list_container {
