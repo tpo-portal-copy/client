@@ -7,6 +7,8 @@ import ClusterCard from '../../components/Cards/ClusterCard'
 
 export default function Form() {
   return (
+    <>
+    <h1 className={styles.page_name}>Fill Your Details</h1>
     <form className={styles.container}>
       <div className={styles.info_container}>
         <span className={styles.heading}>Basic Info</span>
@@ -60,5 +62,6 @@ export default function Form() {
         </div>
       </div>
     </form>
+    </>
   )
 }

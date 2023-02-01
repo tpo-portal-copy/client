@@ -8,7 +8,11 @@ export default function Signup() {
   return (
     <form className={styles.container}>
       <div className={styles.info_container}>
-        <span className={styles.heading}>Sign Up</span>
+        <img
+          className={styles.heading}
+          src="https://www.nicepng.com/png/detail/227-2273228_the-university-of-arizona-certifications-nit-hamirpur-logo.png"
+          alt="The University Of Arizona Certifications - Nit Hamirpur Logo Png@nicepng.com"
+        />
         <div className={styles.info}>
           {signupUI.map((data) => (
             <Input key={data.id} label={data.label} type={data.type} />

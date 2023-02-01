@@ -27,7 +27,7 @@
     &:focus,
     &:active {
       border-radius: 10px;
-      border: 3px solid #5bc1f86a;
+      outline: 2px solid #5bc1f86a;
     }
   }
 
@@ -43,17 +43,10 @@
     &:focus,
     &:active {
       border-radius: 10px;
-      border: 3px solid #5bc1f86a;
+      outline: 2px solid #5bc1f86a;
     }
   }
 }
 
-@media only screen and (max-width: 1185px) {
-  .container {
-    .field {
-      width: 300px;
-      font-size: 14px;
-      padding: 6px;
-    }
-  }
-}
+
+
