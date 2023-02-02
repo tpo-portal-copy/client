@@ -41,17 +41,16 @@
   }
 }
 
-@media screen and (max-width:550px){
-  .container{
+@media screen and (max-width: 550px) {
+  .container {
     padding: 0;
     width: 100%;
     padding-top: calc(var(--nav-height));
-    .info_container{
+    .info_container {
       height: 100%;
-      border-radius:0px;
-      box-shadow:none;
+      border-radius: 0px;
+      box-shadow: none;
       width: 100%;
-      
     }
   }
 }
