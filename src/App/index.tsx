@@ -11,7 +11,7 @@ import {
   Resources,
   Drives,
   Statistics,
-  DarkProfile
+  DarkProfile,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
@@ -79,7 +79,7 @@ function App() {
           path="/profile"
           element={
             // <SidebarLayout>
-              <DarkProfile />
+            <DarkProfile />
             // </SidebarLayout>
           }
         />

@@ -62,9 +62,9 @@ export default function DarkProfile() {
           <div className={styles.div6}>
             <p className={styles.user_stats_title}>Student&#39;s Stats</p>
             <div className={styles.user_stats_fields_container}>
-            {studentStatData.map((info) => (
-              <FieldInfo key={info.id} label={info.label} value={info.value} />
-            ))}
+              {studentStatData.map((info) => (
+                <FieldInfo key={info.id} label={info.label} value={info.value} />
+              ))}
             </div>
             <div className={styles.profile}>
               <span className={styles.profile_link}>LinkedIn profile</span>
