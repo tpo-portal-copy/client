@@ -11,6 +11,7 @@ import {
   Resources,
   Drives,
   Statistics,
+  DarkProfile
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
@@ -18,7 +19,7 @@ import styles from './App.module.scss'
 function App() {
   return (
     <div className={styles.app}>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
@@ -77,9 +78,9 @@ function App() {
         <Route
           path="/profile"
           element={
-            <SidebarLayout>
-              <Profile />
-            </SidebarLayout>
+            // <SidebarLayout>
+              <DarkProfile />
+            // </SidebarLayout>
           }
         />
       </Routes>
