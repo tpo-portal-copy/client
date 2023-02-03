@@ -19,7 +19,7 @@ import styles from './App.module.scss'
 function App() {
   return (
     <div className={styles.app}>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
@@ -78,9 +78,9 @@ function App() {
         <Route
           path="/profile"
           element={
-            // <SidebarLayout>
-            <DarkProfile />
-            // </SidebarLayout>
+            <SidebarLayout>
+            <Profile />
+            </SidebarLayout>
           }
         />
       </Routes>
