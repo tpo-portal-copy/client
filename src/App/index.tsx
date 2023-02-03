@@ -79,7 +79,7 @@ function App() {
           path="/profile"
           element={
             <SidebarLayout>
-            <Profile />
+              <Profile />
             </SidebarLayout>
           }
         />
