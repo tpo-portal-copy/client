@@ -2,12 +2,14 @@
 import styles from './Input.module.scss'
 import { InputProps } from '../../utils/types'
 
-export default function Input({ label, type, options = [] }: InputProps) {
+export default function Input({ label, type, options = [], id }: InputProps) {
   return (
     <div className={styles.container}>
-      <span className={styles.label}>{label}</span>
+      <label className={styles.label} htmlFor={id}>
+        {label}
+      </label>
       {type === 'field' ? (
-        <input placeholder="Enter Here" className={styles.field} />
+        <input id={id} placeholder="Enter Here" className={styles.field} />
       ) : type === 'list' ? (
         <select className={styles.drop_down_container}>
           {options.map((info) => (
@@ -17,7 +19,7 @@ export default function Input({ label, type, options = [] }: InputProps) {
           ))}
         </select>
       ) : (
-        <input className={styles.checkbox} type="checkbox" />
+        <input id={id} className={styles.checkbox} type="checkbox" />
       )}
     </div>
   )

@@ -45,6 +45,7 @@ export interface InputProps {
   label?: string
   type: string | 'field' | 'list' | 'checkbox'
   options?: Array<OptionsType>
+  id?: string
 }
 
 type OptionsType = {
