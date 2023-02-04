@@ -45,9 +45,9 @@
   display: grid;
   grid-template-columns: repeat(1, auto);
   place-items: center;
-  row-gap: 20px;
-  height: 100vh;
-  padding-top: calc(var(--nav-height) + 1rem);
+  row-gap: 2.5rem;
+  height: 100%;
+  padding: 1rem 2.5rem;
   .info {
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -80,10 +80,10 @@
   .info_container {
     background-color: #fff;
     box-shadow: var(--card-shadow);
-    width: min-content;
+    width: 100%;
     border-radius: 15px;
     transition: ease 0.2s;
-    padding: 25px 35px;
+    padding: 1rem 2.5rem;
 
     .heading {
       font-size: 40px;
@@ -94,6 +94,9 @@
 
 @media only screen and (max-width: 1185px) {
   .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
     .info_container {
       .heading {
         font-size: 35px;
@@ -104,6 +107,7 @@
 
 @media only screen and (max-width: 965px) {
   .container {
+    padding: 1.5rem;
     .info_container {
       .info {
         display: grid;
@@ -113,5 +117,12 @@
         font-size: 30px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+    padding: 1.5rem;
+    width: max-content;
   }
 }

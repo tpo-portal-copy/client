@@ -7,16 +7,19 @@
   padding-top: calc(var(--nav-height) + 1rem);
 
   .info_container {
-    background-color: #fff;
     box-shadow: var(--card-shadow);
     width: min-content;
     border-radius: 15px;
     transition: ease 0.2s;
     padding: 25px 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     .heading {
-      font-size: 40px;
-      line-height: 40px;
+      height: 200px;
+      width: 200px;
     }
 
     .info {
@@ -24,8 +27,7 @@
       grid-template-columns: repeat(1, auto);
       column-gap: 20px;
       row-gap: 20px;
-      place-items: start;
-      padding-top: 15px;
+      padding-top: 50px;
       place-items: center;
 
       .forgot {
@@ -39,8 +41,16 @@
   }
 }
 
-@media only screen and (max-width: 425px) {
+@media screen and (max-width: 550px) {
   .container {
-    padding: 20px;
+    padding: 0;
+    width: 100%;
+    padding-top: calc(var(--nav-height));
+    .info_container {
+      height: 100%;
+      border-radius: 0px;
+      box-shadow: none;
+      width: 100%;
+    }
   }
 }

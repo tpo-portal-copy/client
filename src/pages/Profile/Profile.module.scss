@@ -1,22 +1,35 @@
-.profile_container {
-  height: 100vh;
-  padding-top: calc(var(--nav-height) + 1rem);
+.page_name {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  padding: calc(3rem + var(--nav-height)) 2.5rem 1.5rem 2.5rem;
 
+  @media screen and (max-width: 1350px) {
+    padding-left: 2rem;
+  }
+
+  @media screen and (max-width: 520px) {
+    font-size: 32px;
+    padding: calc(2rem + var(--nav-height)) 1rem 0.5rem 1rem;
+  }
+}
+.profile_container {
+  padding: 1rem 2.5rem;
   .top_container {
     display: grid;
     grid-template-columns: repeat(2, auto);
-    padding-left: 10px;
+    margin-bottom: 2.5rem;
 
     .user_profile_info {
       display: flex;
       flex-direction: row;
       width: 98%;
-      padding: 10px;
       border-radius: 10px;
-      max-width: 900px;
+      max-width: 1100px;
       box-shadow: var(--card-shadow);
       background-color: #fff;
       align-items: center;
+      padding: 1rem 2rem;
 
       .img {
         width: 200px;
@@ -58,16 +71,14 @@
   .bottom_container {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    padding: 10px;
-    row-gap: 15px;
-    column-gap: 10px;
+    row-gap: 2.5rem;
+    column-gap: 1.5rem;
 
     .education {
       background-color: #fff;
-      padding: 10px 10px 10px 25px;
       border-radius: 15px;
       box-shadow: var(--card-shadow);
-      height: min-content;
+      padding: 1rem 2rem;
 
       .separator {
         height: 1px;
@@ -90,10 +101,9 @@
     }
     .more_info {
       background-color: #fff;
-      padding: 10px 10px 10px 25px;
       border-radius: 15px;
       box-shadow: var(--card-shadow);
-      height: min-content;
+      padding: 1rem 2rem;
 
       .more_info_title {
         font-size: 30px;
@@ -105,10 +115,9 @@
     }
     .user_stats {
       background-color: #fff;
-      padding: 10px 10px 10px 25px;
       border-radius: 15px;
       box-shadow: var(--card-shadow);
-      height: min-content;
+      padding: 1rem 2rem;
 
       .user_stats_title {
         font-size: 30px;
@@ -143,25 +152,29 @@
         transition: 0.5s;
       }
     }
-    .cluster {
-      background-color: #fff;
-      padding: 10px 10px 10px 25px;
-      border-radius: 15px;
-      box-shadow: var(--card-shadow);
-      height: min-content;
+  }
 
-      .cluster_title {
-        font-size: 30px;
-        font-weight: 600;
-      }
+  .cluster {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    grid-column: 1/-1;
+    padding: 1rem 2rem;
+
+    .info_container {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+    }
+
+    .cluster_title {
+      font-size: 30px;
+      font-weight: 600;
     }
   }
 }
 
 @media only screen and (max-width: 1225px) {
   .profile_container {
-    height: 100vh;
-
     .top_container {
       display: grid;
       grid-template-columns: repeat(2, auto);
@@ -188,12 +201,6 @@
 
     .bottom_container {
       .education {
-        background-color: #fff;
-        padding: 10px 10px 10px 25px;
-        border-radius: 15px;
-        box-shadow: var(--card-shadow);
-        height: min-content;
-
         .separator {
           height: 1px;
           background-color: rgb(209, 209, 209);
@@ -214,12 +221,6 @@
         }
       }
       .more_info {
-        background-color: #fff;
-        padding: 10px 10px 10px 25px;
-        border-radius: 15px;
-        box-shadow: var(--card-shadow);
-        height: min-content;
-
         .more_info_title {
           font-size: 25px;
           font-weight: 600;
@@ -229,12 +230,6 @@
         }
       }
       .user_stats {
-        background-color: #fff;
-        padding: 10px 10px 10px 25px;
-        border-radius: 15px;
-        box-shadow: var(--card-shadow);
-        height: min-content;
-
         .user_stats_title {
           font-size: 25px;
           font-weight: 600;
@@ -269,17 +264,11 @@
           font-size: 12px;
         }
       }
-      .cluster {
-        background-color: #fff;
-        padding: 10px 10px 10px 25px;
-        border-radius: 15px;
-        box-shadow: var(--card-shadow);
-        height: min-content;
-
-        .cluster_title {
-          font-size: 25px;
-          font-weight: 600;
-        }
+    }
+    .cluster {
+      .cluster_title {
+        font-size: 25px;
+        font-weight: 600;
       }
     }
   }
@@ -311,16 +300,11 @@
           }
         }
       }
-
-      .file_name {
-        font-size: 10px;
-        padding: 8px;
-      }
     }
 
     .bottom_container {
       display: grid;
-      grid-template-columns: repeat(2, auto);
+      grid-template-columns: repeat(1, auto);
       padding: 10px;
       row-gap: 15px;
       column-gap: 10px;
@@ -330,7 +314,6 @@
         padding: 10px 10px 10px 25px;
         border-radius: 15px;
         box-shadow: var(--card-shadow);
-        height: min-content;
 
         .separator {
           height: 1px;
@@ -343,8 +326,9 @@
         }
 
         .education_title {
-          font-size: 25px;
+          font-size: 24px;
           font-weight: 600;
+          color: rgb(40, 40, 40);
         }
       }
       .more_info {
@@ -352,11 +336,11 @@
         padding: 10px 10px 10px 25px;
         border-radius: 15px;
         box-shadow: var(--card-shadow);
-        height: min-content;
 
         .more_info_title {
-          font-size: 25px;
+          font-size: 24px;
           font-weight: 600;
+          color: rgb(40, 40, 40);
         }
         .info_fields_container {
           padding-top: 10px;
@@ -367,11 +351,11 @@
         padding: 10px 10px 10px 25px;
         border-radius: 15px;
         box-shadow: var(--card-shadow);
-        height: min-content;
 
         .user_stats_title {
-          font-size: 25px;
+          font-size: 24px;
           font-weight: 600;
+          color: rgb(40, 40, 40);
         }
         .user_stats_fields_container {
           padding-top: 10px;
@@ -397,10 +381,15 @@
       }
       .cluster {
         border-radius: 15px;
+        .info_container {
+          display: grid;
+          grid-template-columns: repeat(1, auto);
+        }
 
         .cluster_title {
-          font-size: 25px;
+          font-size: 24px;
           font-weight: 600;
+          color: rgb(40, 40, 40);
         }
       }
     }
@@ -439,8 +428,9 @@
 
         .info_container {
           .name {
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 600;
+            color: rgb(40, 40, 40);
           }
 
           .sub_info_container {
@@ -458,16 +448,18 @@
         justify-content: center;
         align-items: center;
       }
-
-      .file_name {
-        font-size: 15px;
-        padding: 10px;
-      }
     }
 
     .bottom_container {
       display: grid;
       grid-template-columns: repeat(1, auto);
+
+      .cluster {
+        .info_container {
+          display: grid;
+          grid-template-columns: repeat(1, auto);
+        }
+      }
     }
   }
 }
