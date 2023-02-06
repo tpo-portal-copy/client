@@ -20,6 +20,7 @@ export type ButtonProps = {
   onclick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
   stretch?: boolean
+  type?: 'button' | 'reset' | 'submit'
 }
 
 export interface ClusterCardProps {

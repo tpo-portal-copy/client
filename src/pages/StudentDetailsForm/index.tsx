@@ -1,13 +1,15 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import { Formik, Form, Field } from 'formik'
+/* eslint-disable react/no-children-prop */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUpload } from '@fortawesome/free-solid-svg-icons'
+import { Formik, Form, Field, useFormik } from 'formik'
 // import { FormikHelpers } from 'formik/dist/types'
 import Input from '../../components/Input'
 import styles from './StudentDetailsForm.module.scss'
 import { basicInfo, educationInfo, collegeInfo, clusterData } from '../../utils/Data/FormUIData'
-// import ClusterCard from '../../components/Cards/ClusterCard'
+import { Button } from '../../components'
+import ClusterCard from '../../components/Cards/ClusterCard'
 
-// export default function Form() {
+// export default function StudentDetailsForm() {
 //   return (
 //     <form className={styles.container}>
 //       <div className={styles.info_container}>
@@ -66,9 +68,32 @@ import { basicInfo, educationInfo, collegeInfo, clusterData } from '../../utils/
 // }
 
 export default function StudentDetailsForm() {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2))
+    },
+  })
   return (
-    <form>
-      <Input id="hello" label="hello" type="field" />
+    <form className={styles.info_container} onSubmit={formik.handleSubmit}>
+      <div className={styles.info}>
+        {basicInfo.map((info) => (
+          <Input
+            id={info.label}
+            key={info.id}
+            label={info.label}
+            type={info.type}
+            options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
+          />
+        ))}
+        <div className={styles.img_upload_container}>
+          <span>Upload Your Image</span>
+          <FontAwesomeIcon className={styles.icon} icon={faUpload} />
+        </div>
+      </div>
+      <Button type="submit" stretch={false} children="Submit" />
     </form>
   )
 }

@@ -11,7 +11,7 @@ export default function Input({ label, type, options = [], id }: InputProps) {
       {type === 'field' ? (
         <input id={id} placeholder="Enter Here" className={styles.field} />
       ) : type === 'list' ? (
-        <select className={styles.drop_down_container}>
+        <select id={id} className={styles.drop_down_container}>
           {options.map((info) => (
             <option key={info.id} value={info.value}>
               {info.value}
