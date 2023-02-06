@@ -6,6 +6,10 @@ export type RouteProps = {
   url: string
 }
 
+export type DropdownProps = {
+  placeHolder: string
+}
+
 export interface FieldInfoProps {
   label: string
   value: string | number
@@ -55,4 +59,20 @@ export interface PastExperienceSummary {
   id: number
   date: string
   link: string
+}
+
+export interface DrivesCardProps {
+  id: number
+  companyName: string
+  imgUrl: string
+  ctcOffered: number
+  startingDate: Date
+  type: string
+  eligibleBatches: Array<string>
+  jobProfile: string
+}
+
+export interface ClusterType {
+  id: number
+  label: string
 }
