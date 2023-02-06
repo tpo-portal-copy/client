@@ -71,8 +71,8 @@
 
     .eligible_batches_list {
       display: flex;
-    
-      .eligible_batch{
+
+      .eligible_batch {
         margin: 14px 4px 0px 2px;
         padding: 2px 15px 2px 15px;
         border-radius: 20px;
@@ -82,14 +82,13 @@
       }
     }
 
-    .type{
-        margin: 14px 4px 0px 2px;
-        padding: 2px 15px 2px 15px;
-        border-radius: 20px;
-        align-content: center;
-        background-color: rgb(229, 229, 229);
-        text-align: center;
-         
+    .type {
+      margin: 14px 4px 0px 2px;
+      padding: 2px 15px 2px 15px;
+      border-radius: 20px;
+      align-content: center;
+      background-color: rgb(229, 229, 229);
+      text-align: center;
     }
   }
 }
