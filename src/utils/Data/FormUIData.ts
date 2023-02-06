@@ -75,7 +75,6 @@ export const basicInfo = [
       },
     ],
   },
-  
 ]
 
 export const educationInfo = [

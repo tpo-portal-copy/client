@@ -15,7 +15,6 @@ function Button({ varient, onclick, children, stretch, type = 'button' }: Button
 
 export default Button
 
-
 // ${
 //   varient === 'primary' ? styles.primary : styles.secondary
 // }
