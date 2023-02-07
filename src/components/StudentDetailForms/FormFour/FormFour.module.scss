@@ -1,0 +1,42 @@
+.info_container {
+    background-color: #fff;
+    box-shadow: var(--card-shadow);
+    width: min-content;
+    border-radius: 15px;
+    transition: ease 0.2s;
+    padding: 25px 35px;
+  
+    .heading {
+      font-size: 40px;
+      line-height: 40px;
+    }
+
+    .info {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        column-gap: 20px;
+        row-gap: 20px;
+        place-items: start;
+        padding-top: 15px;
+      
+        .img_upload_container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 40px;
+          border: 2px dashed #eee;
+          border-radius: 10px;
+          transition: ease 0.2s;
+          cursor: pointer;
+      
+          &:hover {
+            border-radius: 10px;
+            border: 2px dashed;
+            border-color: #0081c9;
+          }
+          .icon {
+            padding-left: 10px;
+          }
+        }
+      }
+}

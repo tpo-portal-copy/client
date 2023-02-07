@@ -1,4 +1,6 @@
-import { MouseEventHandler, ReactNode } from 'react'
+// import { FormEventHandler, MouseEventHandler, ReactNode } from 'react'
+import { FormikConfig, FormikFormProps, FormikHelpers, FormikValues } from 'formik'
+import { FormEventHandler, MouseEventHandler, ReactNode } from 'react'
 
 export type RouteProps = {
   id: number
@@ -18,6 +20,7 @@ export interface FieldInfoProps {
 export type ButtonProps = {
   varient?: 'primary' | 'secondary'
   onclick?: MouseEventHandler<HTMLButtonElement>
+  onsubmit?: FormEventHandler<HTMLButtonElement> | React.FormEvent<HTMLButtonElement>
   children: ReactNode
   stretch?: boolean
   type?: 'button' | 'reset' | 'submit'
@@ -107,4 +110,8 @@ export interface PastExperienceSummary {
   id: number
   date: string
   link: string
+}
+
+export interface FormOneProps {
+  onsubmit: FormikConfig<FormikValues>
 }

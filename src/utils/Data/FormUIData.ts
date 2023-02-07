@@ -123,6 +123,11 @@ export const educationInfo = [
 
 export const collegeInfo = [
   {
+    id: 1,
+    label: 'Roll No.',
+    type: 'field',
+  },
+  {
     id: 11,
     label: 'Course',
     type: 'list',
@@ -192,6 +197,30 @@ export const collegeInfo = [
     id: 16,
     label: 'CGPI',
     type: 'field',
+  },
+  { id: 2, label: 'Batch Year', type: 'field' },
+  {
+    id: 3,
+    label: 'Current Year',
+    type: 'list',
+    options: [
+      {
+        id: 4,
+        value: 'I',
+      },
+      {
+        id: 5,
+        value: 'II',
+      },
+      {
+        id: 6,
+        value: 'III',
+      },
+      {
+        id: 7,
+        value: 'IV',
+      },
+    ],
   },
   {
     id: 17,
