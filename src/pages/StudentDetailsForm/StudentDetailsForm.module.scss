@@ -1,11 +1,9 @@
-.container{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding-top: 40px;
-
-
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
 }
 ///////////////////
 // .info {
@@ -137,8 +135,6 @@ padding-top: 40px;
 //   }
 // }
 
-
-
 .steps_container {
   display: flex;
   justify-content: space-between;
@@ -223,7 +219,7 @@ padding-top: 40px;
 
   .active {
     .icon_container {
-      background-color: #AACB73;
+      background-color: #aacb73;
       border: 5.5px solid #fdfdff;
     }
 
