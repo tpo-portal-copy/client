@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { interviewExperienceInfoList } from '../../../utils/Data/interviewExperienceData'
 import { ExperienceCardProps } from '../../../utils/types'
 import styles from './ExperienceCard.module.scss'
@@ -15,7 +15,6 @@ function ExperienceCard({
   difficulty,
   postedOn,
 }: ExperienceCardProps) {
-  const navigate = useNavigate()
   return (
     <Link
       to={`/experience-details/${id}`}
