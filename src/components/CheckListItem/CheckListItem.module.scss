@@ -1,0 +1,12 @@
+.content {
+  display: flex;
+  gap: 0.7em;
+  align-items: center;
+  padding: 3px 0;
+  font-size: 14px;
+
+  .input {
+    width: 15px;
+    height: 15px;
+  }
+}

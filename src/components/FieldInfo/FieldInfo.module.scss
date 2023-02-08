@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  flex-direction: row;
   padding: 2px;
 
   .label {
@@ -15,11 +14,5 @@
 @media only screen and (max-width: 1225px) {
   .container p {
     font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: 864px) {
-  .container p {
-    // word-break: break-all;
   }
 }

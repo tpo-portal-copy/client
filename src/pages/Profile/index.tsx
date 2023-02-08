@@ -1,7 +1,5 @@
 import styles from './Profile.module.scss'
-import FieldInfo from '../../components/FieldInfo'
-import Button from '../../components/Button'
-import ClusterCard from '../../components/Cards/ClusterCard'
+import { ClusterCard, Button, FieldInfo } from '../../components'
 
 import {
   profileData,
@@ -84,7 +82,12 @@ function Profile() {
           <p className={styles.cluster_title}>Chosen Clusters</p>
           <div>
             {clusterData.map((data) => (
-              <ClusterCard key={data.id} title={data.cluster_title} range={data.range} />
+              <ClusterCard
+                type="mark"
+                key={data.id}
+                title={data.cluster_title}
+                range={data.range}
+              />
             ))}
           </div>
         </div>

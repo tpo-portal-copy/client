@@ -38,34 +38,32 @@ function Dropdown({ placeHolder }: DropdownProps) {
   }
 
   return (
-    <div className={styles.dropdown_container}>
-      <div className={styles.dropdown_input}>
-        {showMenu && (
-          <div className={styles.dropdown_menu}>
-            {clustersData.map((cluster: ClusterType) => {
-              return (
-                <div
-                  key={cluster.id}
-                  className={`${styles.dropdown_item} ${isSelected(cluster) && styles.selected}`}
+    <div className={styles.dropdown_input}>
+      {showMenu && (
+        <div className={styles.dropdown_menu}>
+          {clustersData.map((cluster: ClusterType) => {
+            return (
+              <div
+                key={cluster.id}
+                className={`${styles.dropdown_item} ${isSelected(cluster) && styles.selected}`}
+              >
+                <button
+                  className={styles.cluster_label}
+                  onClick={() => {
+                    onItemClick(cluster)
+                  }}
                 >
-                  <button
-                    className={styles.cluster_label}
-                    onClick={() => {
-                      onItemClick(cluster)
-                    }}
-                  >
-                    {cluster.label}
-                  </button>
-                </div>
-              )
-            })}
-          </div>
-        )}
-        <div className={styles.dropdown_selected_value}>{getDisplay()}</div>
-        <div className={styles.dropdown_tools}>
-          <div className={styles.dropdown_tool}>
-            <FontAwesomeIcon onClick={handleInputClick} icon={faArrowDown} size="lg" />
-          </div>
+                  {cluster.label}
+                </button>
+              </div>
+            )
+          })}
+        </div>
+      )}
+      <div className={styles.dropdown_selected_value}>{getDisplay()}</div>
+      <div className={styles.dropdown_tools}>
+        <div className={styles.dropdown_tool}>
+          <FontAwesomeIcon onClick={handleInputClick} icon={faArrowDown} size="lg" />
         </div>
       </div>
     </div>

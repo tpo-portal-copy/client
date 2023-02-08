@@ -1,0 +1,112 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--custom-white-v1);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 880px;
+  transition: 0.5s ease-in-out;
+
+  .main_container {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    .img {
+      width: 96px;
+      height: 96px;
+      border-radius: 8px;
+    }
+
+    .info_container {
+      .title {
+        font-size: var(--md-heading);
+        font-weight: 600;
+        color: var(--text-color-primary);
+        letter-spacing: -0.02em;
+      }
+
+      .role {
+        font-size: 15px;
+        color: var(--text-color-primary);
+        padding-bottom: 10px;
+        align-content: flex-start;
+        font-weight: 600;
+        text-align: start;
+      }
+
+      .truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+
+  .separator {
+    height: 1px;
+    background-color: #cfd2cf;
+    border-radius: 5px;
+    margin-top: 1rem;
+  }
+
+  .tags_container {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: wrap;
+
+    .tag {
+      width: auto;
+      margin: 10px 2px 0px 2px;
+      padding: 2px 15px 0px 15px;
+      border-radius: 20px;
+      align-content: center;
+      background-color: lightblue;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 525px) {
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    .main_container {
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .img {
+        border-radius: 50%;
+      }
+
+      .info_container {
+        padding-left: 0;
+        display: block;
+
+        .title {
+          font-size: 18px;
+        }
+
+        .role {
+          padding-bottom: 5px;
+        }
+
+        .truncate {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .separator {
+      margin-top: 0.5rem;
+    }
+
+    .tags_container {
+      font-size: 14px;
+    }
+  }
+}

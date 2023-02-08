@@ -5,10 +5,10 @@
   .top_container {
     display: grid;
     grid-template-columns: repeat(2, auto);
+    padding-left: 10px;
 
     .user_profile_info {
       display: flex;
-      flex-direction: row;
       width: 98%;
       padding: 10px;
       border-radius: 10px;
@@ -70,7 +70,7 @@
 
       .separator {
         height: 1px;
-        border: 1px solid rgb(209, 209, 209);
+        background-color: rgb(209, 209, 209);
         border-radius: 2px;
       }
 
@@ -195,7 +195,7 @@
 
         .separator {
           height: 1px;
-          border: 1px solid rgb(209, 209, 209);
+          background-color: rgb(209, 209, 209);
           border-radius: 2px;
         }
 
@@ -333,7 +333,7 @@
 
         .separator {
           height: 1px;
-          border: 1px solid rgb(209, 209, 209);
+          background-color: rgb(209, 209, 209);
           border-radius: 2px;
         }
 
@@ -415,11 +415,9 @@
 
       .user_profile_info {
         display: flex;
-        flex-direction: row;
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        // max-width: 900px;
         box-shadow: var(--card-shadow);
         background-color: #fff;
         align-items: center;

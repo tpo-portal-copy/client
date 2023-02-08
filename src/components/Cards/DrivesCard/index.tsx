@@ -16,11 +16,13 @@ function DrivesCard({
         <img className={styles.company_image} src={imgUrl} alt="company Logo" />
         <div className={styles.content}>
           <h2 className={styles.company_name}>{companyName}</h2>
-          <div className={styles.company_info}>
-            <p className={styles.job_profile}>{jobProfile}</p>
-            <p className={styles.ctc_offered}>{ctcOffered} LPA</p>
+          <div className={styles.company_details}>
+            <div className={styles.company_info}>
+              <p>{jobProfile}</p>
+              <p>{ctcOffered} LPA</p>
+            </div>
+            <p className={styles.starting_date}>{startingDate.toLocaleDateString()}</p>
           </div>
-          <p className={styles.starting_date}>{startingDate.toLocaleDateString()}</p>
         </div>
       </div>
       <div className={styles.separator} />

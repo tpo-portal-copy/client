@@ -6,6 +6,15 @@
   outline: none;
 }
 
+.stretched {
+  padding: 6px 8px;
+  font-size: 15px;
+  transition: 0.5s;
+  border-radius: 6px;
+  outline: none;
+  width: 100%;
+}
+
 .primary {
   border: 1px solid #68b984;
   color: #68b984;
@@ -37,6 +46,14 @@
     border-radius: 6px;
     outline: none;
   }
+  .stretched {
+    padding: 6px 8px;
+    font-size: 15px;
+    transition: 0.5s;
+    border-radius: 6px;
+    outline: none;
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 1034px) {
@@ -45,6 +62,15 @@
     font-size: 15px;
     transition: 0.5s;
     border-radius: 40px;
+    outline: none;
+    width: 100%;
+  }
+
+  .stretched {
+    padding: 6px 8px;
+    font-size: 15px;
+    transition: 0.5s;
+    border-radius: 6px;
     outline: none;
     width: 100%;
   }

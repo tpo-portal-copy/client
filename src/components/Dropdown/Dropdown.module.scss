@@ -1,11 +1,11 @@
 .dropdown_input {
   padding: 5px;
-  height: 45px;
-  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
+  font-size: 22px;
+  width: 242px;
 
   .dropdown_menu {
     position: absolute;
