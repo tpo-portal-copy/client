@@ -1,21 +1,18 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { interviewExperienceInfoList } from '../../../utils/Data/interviewExperienceData'
 import { ExperienceCardProps } from '../../../utils/types'
-import styles from './ExperienceCard.module.scss'
+import styles from './RelatedExperienceCard.module.scss'
 
 function ExperienceCard({
   id,
   title,
   description,
-  imgUrl,
   role,
-  jobType,
   selStatus,
   userName,
   difficulty,
   postedOn,
 }: ExperienceCardProps) {
-  const navigate = useNavigate()
   return (
     <Link
       to={`/experience-details/${id}`}
@@ -24,7 +21,6 @@ function ExperienceCard({
     >
       <div className={styles.card}>
         <div className={styles.main_container}>
-          <img src={imgUrl} className={styles.img} alt="profileDp" />
           <div className={styles.info_container}>
             <p className={styles.title}>{title}</p>
             <p className={styles.role}>{role}</p>
@@ -38,9 +34,6 @@ function ExperienceCard({
           </div>
           <div className={styles.tag}>
             <span>{userName}</span>
-          </div>
-          <div className={styles.tag}>
-            <span>{jobType}</span>
           </div>
           <div className={styles.tag}>
             <span>{difficulty}</span>

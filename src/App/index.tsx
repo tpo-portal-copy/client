@@ -11,6 +11,7 @@ import {
   Resources,
   Drives,
   Statistics,
+  ExperienceDetails,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
@@ -47,6 +48,14 @@ function App() {
           element={
             <SidebarLayout>
               <Experiences />
+            </SidebarLayout>
+          }
+        />
+        <Route
+          path="/experience-details/:id"
+          element={
+            <SidebarLayout>
+              <ExperienceDetails />
             </SidebarLayout>
           }
         />
