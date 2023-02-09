@@ -34,7 +34,6 @@ const StyledContent = styled('div')(({ theme }) => ({
 export default function LoginPage() {
   const [value, setValue] = React.useState(0)
 
-
   return (
     <StyledRoot>
       <StyledSection>

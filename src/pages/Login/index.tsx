@@ -33,24 +33,18 @@ const StyledContent = styled('div')(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }))
 
-
 function TabPanel(props) {
   const { children, value, index } = props
 
   return value === index && <div>{children}</div>
 }
 
-
-
 export default function LoginPage() {
-
   const [value, setValue] = React.useState(0)
 
   const handleChange = (e, values) => {
     setValue(values)
-  } 
-
- 
+  }
 
   return (
     <StyledRoot>
@@ -98,5 +92,3 @@ export default function LoginPage() {
     </StyledRoot>
   )
 }
-
-
