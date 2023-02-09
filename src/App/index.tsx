@@ -15,6 +15,7 @@ import {
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
+import Page404 from '../pages/Page404'
 
 function App() {
   return (
@@ -83,6 +84,7 @@ function App() {
             </SidebarLayout>
           }
         />
+        <Route path="/404" element={<Page404 />} />
       </Routes>
     </div>
   )
