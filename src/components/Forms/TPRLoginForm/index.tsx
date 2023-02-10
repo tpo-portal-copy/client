@@ -81,15 +81,7 @@ export default function TPRLoginForm() {
       </Stack>
 
       <Box sx={{ paddingTop: '20px' }}>
-        <Button
-          disabled={
-            !formik.isValid
-          }
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-        >
+        <Button disabled={!formik.isValid} fullWidth size="large" type="submit" variant="contained">
           Login
         </Button>
       </Box>

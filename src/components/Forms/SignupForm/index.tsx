@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {  Link as Links } from 'react-router-dom'
+import { Link as Links } from 'react-router-dom'
 import {
   Stack,
   IconButton,
@@ -11,7 +11,7 @@ import {
   Typography,
   Alert,
 } from '@mui/material'
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 })
 
 export default function SignupForm() {
-  const classes = useStyles();
+  const classes = useStyles()
   const [showPassword, setShowPassword] = useState(false)
 
   const formik = useFormik({
@@ -148,15 +148,7 @@ export default function SignupForm() {
       </Box>
 
       <Box sx={{ paddingTop: '20px' }}>
-        <Button
-          disabled={
-            !formik.isValid
-          }
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-        >
+        <Button disabled={!formik.isValid} fullWidth size="large" type="submit" variant="contained">
           Register
         </Button>
       </Box>
