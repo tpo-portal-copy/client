@@ -1,43 +1,82 @@
-/* eslint-disable react/no-children-prop */
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useFormik, FormikConfig, FormikValues, FormikHelpers } from 'formik'
-import styles from './FormOne.module.scss'
-import Input from '../../Input'
+import {
+  TextField,
+  Box,
+  Container,
+  Alert,
+  Stack,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Typography,
+  Card,
+  CardContent,
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { basicInfo } from '../../../utils/Data/FormUIData'
-import { Button } from '../../index'
 
-export default function FormOne({ onsubmit }: FormikHelpers<FormikValues>) {
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-    },
-    onSubmit: async (values, helper) => {
-      console.log(values, helper)
-      await onsubmit()
-    },
-  })
+const useStyles = makeStyles({
+  info: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2,auto)',
+    columnGap: '1.5rem',
+    rowGap: '1rem',
+  },
+  field: {
+    width: '95%',
+    minWidth: '400px',
+  },
+  select: {
+    width: '95%',
+    minWidth: '400px',
+  },
+})
+
+export default function FormOne() {
+  const classes = useStyles()
   return (
-    <form className={styles.info_container} onSubmit={formik.handleSubmit}>
-      <div className={styles.info}>
+    <>
+      <Typography variant="h4" gutterBottom>
+        Basic Info
+      </Typography>
+      <Box className={classes.info}>
         {basicInfo.map((info) => (
-          <Input
-            id={info.label}
-            key={info.id}
-            label={info.label}
-            type={info.type}
-            options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
-          />
+          <Stack key={info.id} spacing={2}>
+            {info.type === 'field' ? (
+              <TextField
+                className={classes.field}
+                key={info.id}
+                label={info.label}
+                id="outlined-size-small"
+                size="small"
+              />
+            ) : (
+              <Box sx={{ width: '95%', minWidth: '400px' }} key={info.id}>
+                <FormControl fullWidth>
+                  <InputLabel component={Typography} id={info.id}>
+                    {info.label}
+                  </InputLabel>
+                  <Select
+                    className={classes.select}
+                    id={info.id}
+                    label={info.label}
+                    size="small"
+                    key={info.id}
+                  >
+                    {info.options?.map((option) => (
+                      <MenuItem key={option.id} value={option.value}>
+                        {option.value}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+            )}
+
+            {/* <Alert severity="error">Error</Alert> */}
+          </Stack>
         ))}
-        <div className={styles.img_upload_container}>
-          <span>Upload Your Image</span>
-          <FontAwesomeIcon className={styles.icon} icon={faUpload} />
-        </div>
-      </div>
-      <div className={styles.button_container}>
-        <Button onsubmit={onsubmit} type="submit" stretch={false} children="Back" />
-        <Button onsubmit={onsubmit} type="submit" stretch={false} children="Next" />
-      </div>
-    </form>
+      </Box>
+    </>
   )
 }

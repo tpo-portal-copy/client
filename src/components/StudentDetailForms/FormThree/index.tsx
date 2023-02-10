@@ -1,35 +1,80 @@
-/* eslint-disable react/no-children-prop */
-import { FormikHelpers, FormikValues, useFormik } from 'formik'
-import styles from './FormThree.module.scss'
+import {
+  TextField,
+  Box,
+  Container,
+  Alert,
+  Stack,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Typography,
+} from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import { collegeInfo } from '../../../utils/Data/FormUIData'
-import Button from '../../Button'
-import Input from '../../Input'
 
-export default function FormThree({ onsubmit }: FormikHelpers<FormikValues>) {
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-    },
-    onSubmit: async (values, helper) => {
-      console.log(values, helper)
-      await onsubmit()
-    },
-  })
+const useStyles = makeStyles({
+  info: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2,auto)',
+    columnGap: '1.5rem',
+    rowGap: '1rem',
+  },
+  field: {
+    width: '95%',
+    minWidth: '400px',
+  },
+  select: {
+    width: '95%',
+    minWidth: '400px',
+  },
+})
 
+export default function FormTwo() {
+  const classes = useStyles()
   return (
-    <form className={styles.info_container} onSubmit={formik.handleSubmit}>
-      <div className={styles.info}>
+    <>
+      <Typography variant="h4" gutterBottom>
+        College
+      </Typography>
+      <Box className={classes.info}>
         {collegeInfo.map((info) => (
-          <Input
-            id={info.label}
-            key={info.id}
-            label={info.label}
-            type={info.type}
-            options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
-          />
+          <Stack key={info.id} spacing={2}>
+            {info.type === 'field' ? (
+              <TextField
+                className={classes.field}
+                key={info.id}
+                label={info.label}
+                id="outlined-size-small"
+                size="small"
+              />
+            ) : (
+              <Box sx={{ width: '95%', minWidth: '400px' }} key={info.id}>
+                <FormControl fullWidth>
+                  <InputLabel component={Typography} id={info.id}>
+                    {info.label}
+                  </InputLabel>
+                  <Select
+                    className={classes.select}
+                    id={info.id}
+                    label={info.label}
+                    size="small"
+                    key={info.id}
+                  >
+                    {info.options?.map((option) => (
+                      <MenuItem key={option.id} value={option.value}>
+                        {option.value}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+            )}
+
+            {/* <Alert severity="error">Error</Alert> */}
+          </Stack>
         ))}
-      </div>
-      <Button onsubmit={onsubmit} type="submit" stretch={false} children="Next" />
-    </form>
+      </Box>
+    </>
   )
 }
