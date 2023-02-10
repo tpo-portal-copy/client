@@ -102,7 +102,11 @@ export default function LoginPage() {
           Your Details
         </Typography>
         <Grid container justifyContent="center" alignItems="center">
-          <CustomizedSteppers handleNext={handleNext} handleBack={handleBack} currStep={activeStep} />
+          <CustomizedSteppers
+            handleNext={handleNext}
+            handleBack={handleBack}
+            currStep={activeStep}
+          />
         </Grid>
       </StyledSection>
 
