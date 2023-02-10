@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useNavigate, Link as Links } from 'react-router-dom'
+import {  Link as Links } from 'react-router-dom'
 import {
-  Link,
   Stack,
   IconButton,
   InputAdornment,
@@ -12,10 +11,23 @@ import {
   Typography,
   Alert,
 } from '@mui/material'
+import {makeStyles} from '@mui/styles'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+const useStyles = makeStyles({
+  link: {
+    textDecoration: 'none',
+    color: '#1976D2',
+    paddingLeft: '10px',
+  },
+  showPwd: {
+    fontSize: '5px',
+  },
+})
+
 export default function SignupForm() {
+  const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false)
 
   const formik = useFormik({
@@ -28,12 +40,12 @@ export default function SignupForm() {
     validationSchema: Yup.object().shape({
       roll: Yup.string()
         .required('Roll No. is required')
-        .matches('^[a-zA-Z0-9]+$', 'Invalid roll no.'),
+        .matches(/^[a-zA-Z0-9]+$/, 'Invalid roll no.'),
       email: Yup.string()
         .email('Please enter a valid email')
         .required('Email is required')
         .matches(
-          '^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@nith.ac.in$',
+          /^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@nith.ac.in$/,
           'Please enter your college id',
         ),
       password: Yup.string()
@@ -89,7 +101,7 @@ export default function SignupForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  {/* <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} /> */}
+                  <Typography className={classes.showPwd}> Show Password</Typography>
                 </IconButton>
               </InputAdornment>
             ),
@@ -111,7 +123,7 @@ export default function SignupForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  {/* <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} /> */}
+                  <Typography className={classes.showPwd}> Show Password</Typography>
                 </IconButton>
               </InputAdornment>
             ),
@@ -130,13 +142,21 @@ export default function SignupForm() {
 
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingTop: '15px' }}>
         <Typography>Already Registered ?</Typography>
-        <Links style={{ paddingLeft: '10px' }} to="/login">
+        <Links className={classes.link} to="/login">
           Login Here
         </Links>
       </Box>
 
       <Box sx={{ paddingTop: '20px' }}>
-        <Button fullWidth size="large" type="submit" variant="contained">
+        <Button
+          disabled={
+            !formik.isValid
+          }
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+        >
           Register
         </Button>
       </Box>

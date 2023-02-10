@@ -1,22 +1,26 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
-  Link,
   Stack,
   IconButton,
   InputAdornment,
   TextField,
-  Checkbox,
   Button,
   Box,
   Alert,
+  Typography,
 } from '@mui/material'
-
+import { makeStyles } from '@mui/styles'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+const useStyles = makeStyles({
+  showPwd: {
+    fontSize: '5px',
+  },
+})
+
 export default function TPOLoginForm() {
-  // const navigate = useNavigate();
+  const classes = useStyles()
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -29,7 +33,7 @@ export default function TPOLoginForm() {
       email: Yup.string()
         .email('Please enter a valid email')
         .required('Email is required')
-        .matches('tpo@nith.ac.in', 'Please enter TPO official id'),
+        .matches(/^[tpo@nith.ac.in]+$/, 'Please enter TPO official id'),
       password: Yup.string().required('Password is required'),
     }),
     onSubmit: (values) => {
@@ -61,7 +65,7 @@ export default function TPOLoginForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  {/* <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} /> */}
+                  <Typography className={classes.showPwd}> Show Password</Typography>
                 </IconButton>
               </InputAdornment>
             ),
@@ -78,7 +82,15 @@ export default function TPOLoginForm() {
       </Stack>
 
       <Box sx={{ paddingTop: '20px' }}>
-        <Button fullWidth size="large" type="submit" variant="contained">
+        <Button
+          disabled={
+            !formik.isValid
+          }
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+        >
           Login
         </Button>
       </Box>

@@ -1,24 +1,33 @@
 import { useState } from 'react'
-import { useNavigate, Link as Links } from 'react-router-dom'
+import { Link as Links } from 'react-router-dom'
 import {
-  Link,
   Stack,
   IconButton,
   InputAdornment,
   TextField,
-  Checkbox,
   Button,
   Box,
   Typography,
   Alert,
 } from '@mui/material'
-import { useFormik, ErrorMessage } from 'formik'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { makeStyles } from '@mui/styles'
+
+const useStyles = makeStyles({
+  link: {
+    textDecoration: 'none',
+    color: '#1976D2',
+    paddingLeft: '10px',
+  },
+  showPwd: {
+    fontSize: '5px',
+  },
+})
 
 export default function StudentLoginForm() {
-  const navigate = useNavigate()
-
   const [showPassword, setShowPassword] = useState(false)
+  const classes = useStyles()
 
   const formik = useFormik({
     initialValues: {
@@ -28,7 +37,7 @@ export default function StudentLoginForm() {
     validationSchema: Yup.object().shape({
       roll: Yup.string()
         .required('Roll No. is required')
-        .matches('^[a-zA-Z0-9]+$', 'Invalid roll no.'),
+        .matches(/^[a-zA-Z0-9]+$/, 'Invalid roll no.'),
       password: Yup.string().required('Password is required'),
     }),
     onSubmit: (values) => {
@@ -60,7 +69,7 @@ export default function StudentLoginForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  {/* <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} /> */}
+                  <Typography className={classes.showPwd}> Show Password</Typography>
                 </IconButton>
               </InputAdornment>
             ),
@@ -77,13 +86,13 @@ export default function StudentLoginForm() {
 
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingTop: '15px' }}>
         <Typography>Not Registered ?</Typography>
-        <Links style={{ paddingLeft: '10px' }} to="/signup">
+        <Links className={classes.link} to="/signup">
           Register Here
         </Links>
       </Box>
 
       <Box sx={{ paddingTop: '20px' }}>
-        <Button fullWidth size="large" type="submit" variant="contained">
+        <Button disabled={!formik.isValid} fullWidth size="large" type="submit" variant="contained">
           Login
         </Button>
       </Box>

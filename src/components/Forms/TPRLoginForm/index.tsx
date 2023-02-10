@@ -1,21 +1,27 @@
 import { useState } from 'react'
-import { useNavigate, Link as Links } from 'react-router-dom'
+import { Link as Links } from 'react-router-dom'
 import {
-  Link,
   Stack,
   IconButton,
   InputAdornment,
   TextField,
-  Checkbox,
   Button,
   Box,
   Alert,
   Typography,
 } from '@mui/material'
 import { useFormik } from 'formik'
+import { makeStyles } from '@mui/styles'
 import * as Yup from 'yup'
 
+const useStyles = makeStyles({
+  showPwd: {
+    fontSize: '5px',
+  },
+})
+
 export default function TPRLoginForm() {
+  const classes = useStyles()
   const [showPassword, setShowPassword] = useState(false)
 
   const formik = useFormik({
@@ -26,7 +32,7 @@ export default function TPRLoginForm() {
     validationSchema: Yup.object().shape({
       roll: Yup.string()
         .required('Roll No. is required')
-        .matches('^[a-zA-Z0-9]+$', 'Invalid roll no.'),
+        .matches(/^[a-zA-Z0-9]+$/, 'Invalid roll no.'),
       password: Yup.string().required('Password is required'),
     }),
     onSubmit: (values) => {
@@ -58,13 +64,14 @@ export default function TPRLoginForm() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  {/* <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} /> */}
+                  <Typography className={classes.showPwd}> Show Password</Typography>
                 </IconButton>
               </InputAdornment>
             ),
           }}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.password}
         />
         {formik.touched.password && formik.errors.password ? (
           <Alert severity="error">
@@ -74,7 +81,15 @@ export default function TPRLoginForm() {
       </Stack>
 
       <Box sx={{ paddingTop: '20px' }}>
-        <Button fullWidth size="large" type="submit" variant="contained">
+        <Button
+          disabled={
+            !formik.isValid
+          }
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+        >
           Login
         </Button>
       </Box>

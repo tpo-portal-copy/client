@@ -1,16 +1,19 @@
-/* eslint-disable react/no-children-prop */
-import { styled } from '@mui/material/styles'
-import { Link, Container, Typography, Divider, Stack, Button, Tabs, Tab, Box } from '@mui/material'
-import Lottie from 'lottie-react'
 import React from 'react'
+import { styled } from '@mui/material/styles'
+import { Container, Typography, Tabs, Tab, Box } from '@mui/material'
+import Lottie from 'lottie-react'
 import StudentLoginForm from '../../components/Forms/StudentLoginForm'
 import Animation from '../../assets/animations/119048-login-verification.json'
 import TPOLoginForm from '../../components/Forms/TPOLoginForm'
 import TPRLoginForm from '../../components/Forms/TPRLoginForm'
+import useResponsive from '../../hooks/useResponsive'
 
 const StyledRoot = styled('div')(({ theme }) => ({
   display: 'flex',
   backgroundColor: 'white',
+  [theme.breakpoints.up('md')]: {
+    display: 'flex',
+  },
 }))
 
 const StyledSection = styled('div')(({ theme }) => ({
@@ -33,28 +36,30 @@ const StyledContent = styled('div')(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }))
 
-function TabPanel(props) {
+function TabPanel(props: any): any {
   const { children, value, index } = props
 
   return value === index && <div>{children}</div>
 }
 
 export default function LoginPage() {
+  const mdUp = useResponsive('up', 'md', 'lg')
   const [value, setValue] = React.useState(0)
 
-  const handleChange = (e, values) => {
+  const handleChange = (e: any, values: number) => {
     setValue(values)
   }
 
   return (
     <StyledRoot>
-      <StyledSection>
-        <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-          Hi, Welcome Back
-        </Typography>
-        {/* <img src="/assets/illustrations/illustration_login.png" alt="login" /> */}
-        <Lottie animationData={Animation} />
-      </StyledSection>
+      {mdUp && (
+        <StyledSection>
+          <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+            Hi, Welcome Back
+          </Typography>
+          <Lottie animationData={Animation} />
+        </StyledSection>
+      )}
       <Container maxWidth="sm">
         <StyledContent>
           <Typography variant="h4" gutterBottom>

@@ -17,8 +17,7 @@
   grid-template-columns: repeat(2, auto);
   row-gap: 1.5rem;
   column-gap: 1.5rem;
-  padding: 2rem;
-  padding-top: calc(var(--nav-height) + 1.6rem);
+  padding: 1rem 2rem;
   height: 100%;
 
   .info_container {
@@ -146,8 +145,7 @@
     grid-template-columns: repeat(1, auto);
     row-gap: 1.5rem;
     column-gap: 1.5rem;
-    padding: 2rem;
-    padding-top: calc(var(--nav-height) + 1.6rem);
+    padding: 1rem 2rem;
     height: 100%;
 
     .sub_container {
@@ -163,13 +161,18 @@
     grid-template-columns: repeat(1, auto);
     row-gap: 1.5rem;
     column-gap: 1.5rem;
-    padding: 2rem;
-    padding-top: calc(var(--nav-height) + 1.6rem);
+    padding: 1rem 2rem;
     height: 100%;
 
     .sub_container {
       grid-template-columns: repeat(1, auto);
       row-gap: 1.5rem;
     }
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .container{
+    padding:1rem;
   }
 }

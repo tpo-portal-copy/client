@@ -11,7 +11,6 @@ import {
   Resources,
   Drives,
   Statistics,
-  DarkProfile,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'

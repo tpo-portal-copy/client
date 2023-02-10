@@ -106,3 +106,4 @@ export interface PastExperienceSummary {
   date: string
   link: string
 }
+
