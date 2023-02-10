@@ -8,11 +8,12 @@ import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienc
 
 function Experiences() {
   const [openFilters, setOpenFilters] = useState(false)
+
   return (
     <>
       <h1 className={styles.page_name}>Interview Experiences</h1>
       <div className={styles.display}>
-        <div className={styles.middle_left}>
+        <div>
           {interviewExperienceInfoList.map((user: ExperienceCardProps) => (
             <ExperienceCard key={user.id} {...user} />
           ))}

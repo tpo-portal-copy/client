@@ -1,11 +1,17 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { DashboardIcon, PortalLogo } from '../../assets/svgs'
 import navItems from '../../utils/Data/sidebarData'
-import { RouteProps } from '../../utils/types'
+import { RouteProps, SidebarProps } from '../../utils/types'
 import styles from './Sidebar.module.scss'
 
-function Sidebar() {
+function Sidebar({ onLinkClickHandler, isMobile = false }: SidebarProps) {
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const goToLink = () => {
+    // Closing sidebar on mobile only
+    if (isMobile && onLinkClickHandler) onLinkClickHandler()
+  }
 
   return (
     <div className={styles.sidebar}>
@@ -18,6 +24,7 @@ function Sidebar() {
           return (
             <NavLink
               to={navItem.url}
+              onClick={() => goToLink()}
               key={navItem.id}
               className={`${styles.nav_item} ${
                 location.pathname === navItem.url ? styles.selected : ''

@@ -1,11 +1,98 @@
-.page_name {
-  font-size: var(--lg-heading);
-  font-weight: 600;
-  color: var(--text-color-primary);
-  padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
+@use '../../index.scss' as main;
 
-  @media screen and (max-width: 520px) {
-    font-size: 28px;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  max-width: 1200px;
+  padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
+  gap: 1.6rem;
+
+  @media screen and (max-width: 740px) {
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 525px) {
     padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+  }
+
+  .page_name {
+    font-size: var(--lg-heading);
+    font-weight: 600;
+    color: var(--text-color-primary);
+
+    @media screen and (max-width: 525px) {
+      font-size: 28px;
+    }
+  }
+
+  .filter_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    .dropdown {
+      text-align: left;
+      position: relative;
+      background-color: white;
+      border-radius: 5px;
+      margin: 0 16px 0 0;
+    }
+
+    .search_box {
+      position: relative;
+      max-width: fit-content;
+      background-color: white;
+      border-radius: 6px;
+      border: 0;
+
+      .input {
+        max-width: 150px;
+        height: 38px;
+        outline: auto rgb(255, 255, 255);
+        padding-inline: 5px;
+        font-size: 22px;
+        position: relative;
+
+        @media screen and (max-width: 525px) {
+          max-width: 150px;
+        }
+      }
+
+      ::placeholder {
+        color: black;
+      }
+
+      .input_icon {
+        height: 22px;
+        padding: 6px 10px 0 0;
+        position: relative;
+      }
+    }
+
+    @media screen and (max-width: 740px) {
+      gap: 1.5rem;
+    }
+
+    @media screen and (max-width: 525px) {
+      gap: 1rem;
+    }
+  }
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem 2rem 1rem 2rem;
+  gap: 2rem;
+
+  @media screen and (max-width: 525px) {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100%;
   }
 }

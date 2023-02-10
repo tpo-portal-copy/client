@@ -10,6 +10,10 @@ export interface SidebarLayoutProps {
   children: ReactNode
 }
 
+export type DropdownProps = {
+  placeHolder: string
+}
+
 export interface FieldInfoProps {
   label: string
   value: string | number
@@ -32,7 +36,7 @@ export interface ExperienceCardProps {
   id: number
   title: string
   description: string
-  imgUrl: string
+  imgUrl?: string
   jobType: string
   selStatus: string
   userName: string
@@ -105,4 +109,26 @@ export interface PastExperienceSummary {
   id: number
   date: string
   link: string
+}
+
+export interface DrivesCardProps {
+  id: number
+  companyName: string
+  imgUrl: string
+  ctcOffered: number
+  startingDate: Date
+  type: string
+  eligibleBatches: Array<string>
+  jobProfile: string
+  cluster: number
+}
+
+export interface ClusterType {
+  id: number
+  label: string
+}
+
+export interface SidebarProps {
+  onLinkClickHandler?: () => void
+  isMobile?: boolean
 }
