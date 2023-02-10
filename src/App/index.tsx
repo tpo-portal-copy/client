@@ -11,7 +11,7 @@ import {
   Resources,
   Drives,
   Statistics,
-  Page404
+  Page404,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
