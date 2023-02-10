@@ -2,10 +2,8 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { Container, Typography, Tabs, Tab, Box } from '@mui/material'
 import Lottie from 'lottie-react'
-import StudentLoginForm from '../../components/Forms/StudentLoginForm'
+import { StudentLoginForm, TPOLoginForm, TPRLoginForm } from '../../components/Forms'
 import Animation from '../../assets/animations/119048-login-verification.json'
-import TPOLoginForm from '../../components/Forms/TPOLoginForm'
-import TPRLoginForm from '../../components/Forms/TPRLoginForm'
 import useResponsive from '../../hooks/useResponsive'
 
 const StyledRoot = styled('div')(({ theme }) => ({

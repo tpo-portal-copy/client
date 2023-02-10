@@ -11,10 +11,10 @@ import {
   Resources,
   Drives,
   Statistics,
+  Page404
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
-import Page404 from '../pages/Page404'
 
 function App() {
   return (

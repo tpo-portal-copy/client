@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles'
 import { Link, Container, Typography, Divider, Stack, Button, Tabs, Tab, Box } from '@mui/material'
 import Lottie from 'lottie-react'
 import Animation from '../../assets/animations/119048-login-verification.json'
-import SignupForm from '../../components/Forms/SignupForm'
+import { SignupForm } from '../../components/Forms'
 import useResponsive from '../../hooks/useResponsive'
 
 const StyledRoot = styled('div')(({ theme }) => ({
