@@ -26,7 +26,7 @@ function Header() {
       </div>
       <div className={`${styles.overlay} ${isSidebarVisible ? styles.show : ''}`}>
         <div className={`${styles.sidebar_container}`} ref={sidebarRef}>
-          <Sidebar />
+          <Sidebar onLinkClickHandler={closeSidebar} isMobile />
         </div>
       </div>
       <div className={styles.content}>

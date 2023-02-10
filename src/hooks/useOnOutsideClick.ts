@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect } from 'react'
 type HandlerType = () => void
 
 export default function useOnOutsideClick(
-  ref: React.MutableRefObject<HTMLElement | null>,
+  ref: MutableRefObject<HTMLElement | null>,
   handler: HandlerType,
 ) {
   useEffect(() => {
@@ -11,7 +11,6 @@ export default function useOnOutsideClick(
       if (ref == null) return
 
       if (!ref.current || ref.current.contains(event.target)) return
-      console.log('called')
 
       handler()
     }

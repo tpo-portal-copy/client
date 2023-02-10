@@ -126,3 +126,8 @@ export interface ClusterType {
   id: number
   label: string
 }
+
+export interface SidebarProps {
+  onLinkClickHandler?: () => void
+  isMobile?: boolean
+}
