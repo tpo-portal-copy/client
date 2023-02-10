@@ -19,9 +19,9 @@
       align-items: center;
       gap: 1rem;
 
-       @media screen and (max-width: 525px) {
-           flex-direction: column;
-        }
+      @media screen and (max-width: 525px) {
+        flex-direction: column;
+      }
 
       .company_image {
         width: 120px;
@@ -76,9 +76,9 @@
       place-self: start normal;
       margin-top: 0.5rem;
 
-       @media screen and (max-width: 525px) {
-          place-self: center normal;
-        }
+      @media screen and (max-width: 525px) {
+        place-self: center normal;
+      }
     }
   }
 
