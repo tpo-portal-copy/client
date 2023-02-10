@@ -16,8 +16,8 @@ function Drives() {
             <Dropdown placeHolder="Select..." />
           </div>
           <div className={styles.search_box}>
-            <FontAwesomeIcon icon={faSearch} size="sm" className={styles.input_icon} />
             <input placeholder="Company..." type="text" name="text" className={styles.input} />
+            <FontAwesomeIcon icon={faSearch} size="sm" className={styles.input_icon} />
           </div>
         </div>
       </div>

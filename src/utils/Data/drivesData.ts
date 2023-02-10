@@ -8,6 +8,7 @@ const drivesData = [
     type: 'Full Time',
     eligibleBatches: ['ECE', 'CSE', 'ME', 'CE'],
     jobProfile: 'SDE',
+    cluster: 3,
   },
   {
     id: 1,
@@ -18,6 +19,7 @@ const drivesData = [
     type: 'Intership',
     eligibleBatches: ['ECE', 'CSE', 'ME'],
     jobProfile: 'SDE',
+    cluster: 3,
   },
   {
     id: 2,
@@ -28,6 +30,7 @@ const drivesData = [
     type: 'Full Time',
     eligibleBatches: ['ECE', 'CSE'],
     jobProfile: 'SDE',
+    cluster: 4,
   },
 ]
 

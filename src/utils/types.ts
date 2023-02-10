@@ -120,6 +120,7 @@ export interface DrivesCardProps {
   type: string
   eligibleBatches: Array<string>
   jobProfile: string
+  cluster: number
 }
 
 export interface ClusterType {

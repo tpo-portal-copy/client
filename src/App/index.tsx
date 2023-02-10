@@ -12,6 +12,7 @@ import {
   Drives,
   Statistics,
   ExperienceDetails,
+  DriveDetails,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
