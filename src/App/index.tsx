@@ -11,6 +11,7 @@ import {
   Resources,
   Drives,
   Statistics,
+  Page404,
   ExperienceDetails,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
@@ -88,6 +89,7 @@ function App() {
             </SidebarLayout>
           }
         />
+        <Route path="/404" element={<Page404 />} />
       </Routes>
     </div>
   )

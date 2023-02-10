@@ -89,8 +89,8 @@ export const educationData = [
 export const moreInfoData = [
   {
     id: 1,
-    label: 'Category',
-    value: 'General',
+    label: 'College Email',
+    value: 'collegeEmail@nith.ac.in',
   },
   {
     id: 2,
@@ -114,8 +114,8 @@ export const moreInfoData = [
   },
   {
     id: 6,
-    label: 'College Email',
-    value: 'collegeEmail@nith.ac.in',
+    label: 'Category',
+    value: 'General',
   },
   {
     id: 7,
