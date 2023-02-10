@@ -9,6 +9,7 @@
     padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
   }
 }
+
 .main {
   display: flex;
   padding: 1rem 2rem;
@@ -19,12 +20,6 @@
     border-radius: 10px;
     background-color: var(--custom-white-v1);
     padding: 1rem 1rem;
-
-    .separator {
-      height: 1px;
-      background-color: #cfd2cf;
-      border-radius: 5px;
-    }
 
     .title {
       .name {
@@ -44,6 +39,11 @@
         text-align: start;
       }
     }
+    .separator {
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+    }
 
     .attributes {
       display: flex;
@@ -58,6 +58,12 @@
       }
     }
 
+    .separator {
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+    }
+
     .description {
       padding: 1rem 1rem;
       font-size: larger;
@@ -69,14 +75,5 @@
       justify-content: space-between;
       padding-top: 10px;
     }
-  }
-
-  .right {
-    width: 450px;
-    top: calc(2rem + var(--nav-height));
-    position: sticky;
-    overflow-y: auto;
-    max-height: calc((100vh - var(--nav-height) - 3rem));
-    text-decoration: none;
   }
 }
