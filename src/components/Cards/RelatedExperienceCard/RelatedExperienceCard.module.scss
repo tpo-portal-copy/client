@@ -1,0 +1,106 @@
+.link {
+  text-decoration: none;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--custom-white-v1);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 880px;
+    transition: 0.5s ease-in-out;
+    color: var(--text-color-primary);
+
+    .main_container {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+
+      .info_container {
+        .title {
+          font-size: var(--md-heading);
+          font-weight: 600;
+          letter-spacing: -0.02em;
+
+          @media screen and (max-width: 525px) {
+            font-size: 18px;
+          }
+        }
+
+        .role {
+          font-size: 15px;
+          padding-bottom: 10px;
+          align-content: flex-start;
+          font-weight: 600;
+          text-align: start;
+
+          @media screen and (max-width: 525px) {
+            padding-bottom: 5px;
+          }
+        }
+
+        .truncate {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+
+          @media screen and (max-width: 525px) {
+            font-size: 14px;
+          }
+        }
+
+        @media screen and (max-width: 525px) {
+          padding-left: 0;
+          align-self: stretch;
+        }
+      }
+
+      @media screen and (max-width: 525px) {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .separator {
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+      margin-top: 1rem;
+
+      @media screen and (max-width: 525px) {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .tags_container {
+      display: flex;
+      justify-content: flex-start;
+      flex-flow: wrap;
+
+      .tag {
+        width: auto;
+        margin: 10px 2px 0px 2px;
+        padding: 2px 15px 0px 15px;
+        border-radius: 20px;
+        align-content: center;
+        background-color: lightblue;
+        text-align: center;
+        font-size: small;
+      }
+
+      @media screen and (max-width: 525px) {
+        font-size: 14px;
+      }
+    }
+
+    @media screen and (max-width: 525px) {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   padding: 10px;
   width: 95%;
@@ -17,7 +16,7 @@
     padding-left: 10px;
 
     .cluster_title {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
     }
     .cluster_range {
@@ -29,7 +28,6 @@
 @media only screen and (max-width: 1225px) {
   .container {
     display: flex;
-    flex-direction: row;
     align-items: center;
     padding: 10px;
     border-radius: 10px;

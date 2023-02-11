@@ -1,112 +1,115 @@
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--custom-white-v1);
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 880px;
-  transition: 0.5s ease-in-out;
+.link {
+  text-decoration: none;
 
-  .main_container {
+  .card {
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
-
-    .img {
-      width: 96px;
-      height: 96px;
-      border-radius: 8px;
-    }
-
-    .info_container {
-      .title {
-        font-size: var(--md-heading);
-        font-weight: 600;
-        color: var(--text-color-primary);
-        letter-spacing: -0.02em;
-      }
-
-      .role {
-        font-size: 15px;
-        color: var(--text-color-primary);
-        padding-bottom: 10px;
-        align-content: flex-start;
-        font-weight: 600;
-        text-align: start;
-      }
-
-      .truncate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2; /* number of lines to show */
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-      }
-    }
-  }
-
-  .separator {
-    height: 1px;
-    background-color: #cfd2cf;
-    border-radius: 5px;
-    margin-top: 1rem;
-  }
-
-  .tags_container {
-    display: flex;
-    justify-content: flex-start;
-    flex-flow: wrap;
-
-    .tag {
-      width: auto;
-      margin: 10px 2px 0px 2px;
-      padding: 2px 15px 0px 15px;
-      border-radius: 20px;
-      align-content: center;
-      background-color: lightblue;
-      text-align: center;
-    }
-  }
-
-  @media screen and (max-width: 525px) {
-    padding: 1rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    background-color: var(--custom-white-v1);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 880px;
+    transition: 0.5s ease-in-out;
+    color: var(--text-color-primary);
 
     .main_container {
-      flex-direction: column;
-      gap: 0.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
 
       .img {
-        border-radius: 50%;
+        width: 96px;
+        height: 96px;
+        border-radius: 8px;
+
+        @media screen and (max-width: 525px) {
+          border-radius: 50%;
+        }
       }
 
       .info_container {
-        padding-left: 0;
-        display: block;
-
         .title {
-          font-size: 18px;
+          font-size: var(--md-heading);
+          font-weight: 600;
+          letter-spacing: -0.02em;
+
+          @media screen and (max-width: 525px) {
+            font-size: 18px;
+          }
         }
 
         .role {
-          padding-bottom: 5px;
+          font-size: 15px;
+          padding-bottom: 10px;
+          align-content: flex-start;
+          font-weight: 600;
+          text-align: start;
+
+          @media screen and (max-width: 525px) {
+            padding-bottom: 5px;
+          }
         }
 
         .truncate {
-          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+
+          @media screen and (max-width: 525px) {
+            font-size: 14px;
+          }
         }
+
+        @media screen and (max-width: 525px) {
+          padding-left: 0;
+          align-self: stretch;
+        }
+      }
+
+      @media screen and (max-width: 525px) {
+        flex-direction: column;
+        gap: 0.5rem;
       }
     }
 
     .separator {
-      margin-top: 0.5rem;
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+      margin-top: 1rem;
+
+      @media screen and (max-width: 525px) {
+        margin-top: 0.5rem;
+      }
     }
 
     .tags_container {
-      font-size: 14px;
+      display: flex;
+      justify-content: flex-start;
+      flex-flow: wrap;
+
+      .tag {
+        width: auto;
+        margin: 10px 2px 0px 2px;
+        padding: 2px 15px 0px 15px;
+        border-radius: 20px;
+        align-content: center;
+        background-color: lightblue;
+        text-align: center;
+      }
+
+      @media screen and (max-width: 525px) {
+        font-size: 14px;
+      }
+    }
+
+    @media screen and (max-width: 525px) {
+      padding: 1rem;
+      margin-bottom: 1rem;
     }
   }
 }

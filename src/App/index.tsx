@@ -11,6 +11,8 @@ import {
   Resources,
   Drives,
   Statistics,
+  Page404,
+  ExperienceDetails,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
@@ -23,9 +25,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/student-details-form" element={<StudentDetailsForm />} />
-      </Routes>
-
-      <Routes>
         <Route
           path="/"
           element={
@@ -47,6 +46,14 @@ function App() {
           element={
             <SidebarLayout>
               <Experiences />
+            </SidebarLayout>
+          }
+        />
+        <Route
+          path="/experience-details/:id"
+          element={
+            <SidebarLayout>
+              <ExperienceDetails />
             </SidebarLayout>
           }
         />
@@ -82,6 +89,7 @@ function App() {
             </SidebarLayout>
           }
         />
+        <Route path="/404" element={<Page404 />} />
       </Routes>
     </div>
   )

@@ -1,7 +1,4 @@
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
   height: 100vh;
   width: var(--sidebar-width);
   background-color: var(--custom-white-v1);
@@ -66,9 +63,5 @@
       font-weight: 500;
       background-color: rgb(240, 240, 240);
     }
-  }
-
-  @media screen and (max-width: 1150px) {
-    display: none;
   }
 }
