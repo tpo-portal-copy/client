@@ -19,8 +19,16 @@ function Profile() {
         <div className={styles.profile_header_container}>
           <div className={styles.profile_header}>
             <div className={styles.profile_content}>
-              <img className={styles.cover_img} src="https://source.unsplash.com/WLUHO9A_xik/" alt="" />
-              <img className={styles.profile_img} src="https://www.dropbox.com/s/iv3vsr5k6ib2pqx/avatar_default.jpg?dl=1" alt="" />
+              <img
+                className={styles.cover_img}
+                src="https://source.unsplash.com/WLUHO9A_xik/"
+                alt=""
+              />
+              <img
+                className={styles.profile_img}
+                src="https://www.dropbox.com/s/iv3vsr5k6ib2pqx/avatar_default.jpg?dl=1"
+                alt=""
+              />
             </div>
             <div className={styles.student_name_container}>
               <span className={styles.name}>{profileData[0].name}</span>
