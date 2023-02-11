@@ -12,30 +12,28 @@
   }
 }
 
-.profile_header_container{
+.profile_header_container {
   width: 100%;
   flex: 9;
-  
 
-  .profile_header{
+  .profile_header {
     height: 320px;
     position: relative;
 
-    .profile_content{
+    .profile_content {
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow: hidden;
 
-      .cover_img{
+      .cover_img {
         width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-        
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
       }
-  
-      .profile_img{
+
+      .profile_img {
         width: 150px;
         height: 150px;
         border-radius: 50%;
@@ -47,48 +45,44 @@
         top: 150px;
         border: 3px solid white;
 
-        @media only screen and (max-width:456px){
+        @media only screen and (max-width: 456px) {
           width: 80px;
-          height:80px;
+          height: 80px;
           top: 220px;
         }
       }
+    }
 
-    }     
-
-    .student_name_container{
+    .student_name_container {
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
       top: 50px;
 
-      .name{
+      .name {
         font-size: 28px;
         font-weight: 600;
 
-        @media only screen and (max-width:500px){
+        @media only screen and (max-width: 500px) {
           font-size: 24px;
-
         }
-
       }
-      .roll{
+      .roll {
         font-size: 22px;
         line-height: 1;
 
-        @media only screen and (max-width:500px){
+        @media only screen and (max-width: 500px) {
           font-size: 18px;
         }
       }
     }
-    
   }
 }
 
-.master_container{
+.master_container {
   display: grid;
-  grid-template-columns: repeat(1,auto);
+  grid-template-columns: repeat(1, auto);
   row-gap: 1.5rem;
   padding: 1rem 2rem;
 
@@ -99,7 +93,7 @@
     column-gap: 1.5rem;
     height: 100%;
     padding-top: 40px;
-  
+
     .college_container {
       border-radius: 10px;
       padding: 1rem;
@@ -110,14 +104,14 @@
       .college_title {
         font-size: var(--md-heading);
         font-weight: 600;
-        color: var(--text-color-primary);;
+        color: var(--text-color-primary);
       }
-  
+
       .sub_info_container {
         display: grid;
         grid-template-columns: repeat(2, auto);
         column-gap: 1rem;
-  
+
         @media only screen and (max-width: 635px) {
           grid-template-columns: repeat(1, auto);
         }
@@ -130,7 +124,7 @@
       justify-content: center;
       align-items: center;
       box-shadow: var(--card-shadow);
-  
+
       .message {
         font-size: var(--md-heading);
         font-weight: 600;
@@ -144,7 +138,7 @@
       flex-direction: column;
       box-shadow: var(--card-shadow);
       justify-content: space-between;
-  
+
       .label {
         font-size: 22px;
       }
@@ -160,14 +154,14 @@
       grid-template-columns: repeat(2, auto);
       column-gap: 1.5rem;
       height: min-content;
-  
+
       .cluster_container {
         border-radius: 10px;
         padding: 1rem;
         box-shadow: var(--card-shadow);
         display: flex;
         flex-direction: column;
-  
+
         .cluster_title {
           font-size: var(--md-heading);
           font-weight: 600;
@@ -175,7 +169,7 @@
         }
       }
 
-      .address_container{
+      .address_container {
         border-radius: 10px;
         padding: 1rem;
         box-shadow: var(--card-shadow);
@@ -184,7 +178,7 @@
           font-weight: 600;
           color: var(--text-color-primary);
         }
-        .address_fields_container{
+        .address_fields_container {
           padding-top: 10px;
           padding-bottom: 40px;
         }
@@ -193,18 +187,18 @@
         border-radius: 10px;
         padding: 1rem;
         box-shadow: var(--card-shadow);
-  
+
         .user_stats_title {
           font-size: var(--md-heading);
           font-weight: 600;
           color: var(--text-color-primary);
         }
-  
+
         .user_stats_fields_container {
           padding-top: 10px;
           padding-bottom: 40px;
         }
-  
+
         .profile {
           display: flex;
           flex-direction: column;
@@ -213,7 +207,7 @@
           padding: 10px;
           border: 2px solid #0077b5;
           border-radius: 40px;
-  
+
           &:hover {
             color: white;
             background-color: #0077b5;
@@ -231,44 +225,39 @@
         }
       }
     }
-  
-    @media screen and (max-width:500px) {
+
+    @media screen and (max-width: 500px) {
       padding-top: 10px;
-      
     }
   }
 }
 
-
-
-
 @media only screen and (max-width: 1064px) {
-  .master_container{
-  display: grid;
-  grid-template-columns: repeat(1,auto);
-  row-gap: 1.5rem;
-  padding: 1rem 2rem;
-  .container {
+  .master_container {
     display: grid;
     grid-template-columns: repeat(1, auto);
     row-gap: 1.5rem;
-    column-gap: 1.5rem;
-    height: 100%;
-    padding-top: 40px;
-
-    .sub_container {
-      grid-template-columns: repeat(2, auto);
+    padding: 1rem 2rem;
+    .container {
+      display: grid;
+      grid-template-columns: repeat(1, auto);
+      row-gap: 1.5rem;
       column-gap: 1.5rem;
+      height: 100%;
+      padding-top: 40px;
+
+      .sub_container {
+        grid-template-columns: repeat(2, auto);
+        column-gap: 1.5rem;
+      }
     }
   }
 }
-  
-}
 
 @media only screen and (max-width: 635px) {
-  .master_container{
+  .master_container {
     display: grid;
-    grid-template-columns: repeat(1,auto);
+    grid-template-columns: repeat(1, auto);
     row-gap: 1.5rem;
     padding: 1rem 2rem;
 
@@ -279,19 +268,17 @@
       column-gap: 1.5rem;
       height: 100%;
       padding-top: 40px;
-  
+
       .sub_container {
         grid-template-columns: repeat(1, auto);
         row-gap: 1.5rem;
       }
     }
   }
-  
-  
 }
 
 @media screen and (max-width: 525px) {
-  .master_container{    
+  .master_container {
     padding: 1rem;
   }
 }
