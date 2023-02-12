@@ -13,6 +13,7 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
+  ExperienceForm,
 } from '../pages'
 import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
@@ -90,6 +91,7 @@ function App() {
           }
         />
         <Route path="/404" element={<Page404 />} />
+        <Route path="/experience-form" element={<ExperienceForm />} />
       </Routes>
     </div>
   )

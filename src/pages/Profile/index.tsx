@@ -45,8 +45,6 @@ function Profile() {
                   ))}
                 </div>
                 <div className={styles.spacer} />
-
-                <div className={styles.spacer} />
               </div>
             )
           })}

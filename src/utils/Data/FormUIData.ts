@@ -252,3 +252,70 @@ export const clusterData = [
   { id: 5, clusterName: 'Cluster 5', clusterRange: '16-25 Lakhs' },
   { id: 6, clusterName: 'Cluster 6', clusterRange: '>25 Lakhs' },
 ]
+
+export const experienceFormData = [
+  {
+    id: 1,
+    name: 'title',
+    label: 'Title',
+    type: 'field',
+  },
+  {
+    id: 2,
+    name: 'companyName',
+    label: 'Company Name',
+    type: 'field',
+  },
+  {
+    id: 3,
+    name: 'role',
+    label: 'Role',
+    type: 'list',
+    options: [
+      { id: 4, value: 'SDE' },
+      { id: 5, value: 'GET' },
+      { id: 6, value: 'Management Trainee' },
+      { id: 7, value: 'Full Stack Developer' },
+    ],
+  },
+  {
+    id: 8,
+    name: 'type',
+    label: 'Type',
+    type: 'list',
+
+    options: [
+      { id: 9, value: 'Intern' },
+      { id: 10, value: 'Full Time' },
+    ],
+  },
+  {
+    id: 11,
+    name: 'rounds',
+    label: 'No. of rounds',
+    type: 'field',
+  },
+  {
+    id: 12,
+    name: 'verdict',
+    label: 'Verdict',
+    type: 'list',
+    options: [
+      {
+        id: 16,
+        value: 'Selected',
+      },
+      { id: 17, value: 'Not Selected' },
+    ],
+  },
+  {
+    id: 13,
+    name: 'anonymous',
+    label: 'Anonymous',
+    type: 'list',
+    options: [
+      { id: 14, value: 'Yes' },
+      { id: 15, value: 'No' },
+    ],
+  },
+]

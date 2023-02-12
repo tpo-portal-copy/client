@@ -1,7 +1,6 @@
 import {
   TextField,
   Box,
-  Container,
   Alert,
   Stack,
   Select,
@@ -9,8 +8,6 @@ import {
   InputLabel,
   FormControl,
   Typography,
-  Card,
-  CardContent,
 } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { basicInfo } from '../../../utils/Data/FormUIData'
@@ -21,14 +18,6 @@ const useStyles = makeStyles({
     gridTemplateColumns: 'repeat(2,auto)',
     columnGap: '1.5rem',
     rowGap: '1rem',
-  },
-  field: {
-    width: '95%',
-    minWidth: '400px',
-  },
-  select: {
-    width: '95%',
-    minWidth: '400px',
   },
 })
 
@@ -43,26 +32,12 @@ export default function FormOne() {
         {basicInfo.map((info) => (
           <Stack key={info.id} spacing={2}>
             {info.type === 'field' ? (
-              <TextField
-                className={classes.field}
-                key={info.id}
-                label={info.label}
-                id="outlined-size-small"
-                size="small"
-              />
+              <TextField key={info.id} label={info.label} variant="standard" size="small" />
             ) : (
               <Box sx={{ width: '95%', minWidth: '400px' }} key={info.id}>
-                <FormControl fullWidth>
-                  <InputLabel component={Typography} id={info.id}>
-                    {info.label}
-                  </InputLabel>
-                  <Select
-                    className={classes.select}
-                    id={info.id}
-                    label={info.label}
-                    size="small"
-                    key={info.id}
-                  >
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel>{info.label}</InputLabel>
+                  <Select id={info.id.toString()} label={info.label} size="small" key={info.id}>
                     {info.options?.map((option) => (
                       <MenuItem key={option.id} value={option.value}>
                         {option.value}
