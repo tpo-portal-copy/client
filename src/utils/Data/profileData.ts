@@ -159,3 +159,39 @@ export const clusterData = [
     range: '>25 Lakhs',
   },
 ]
+
+export const addressData = [
+  {
+    id: 1,
+    label: 'City',
+    value: 'Gurugram',
+  },
+  {
+    id: 2,
+    label: 'State',
+    value: 'Haryana',
+  },
+  {
+    id: 3,
+    label: 'Pin Code',
+    value: '2009332',
+  },
+]
+
+export const competitiveData = [
+  {
+    id: 1,
+    label: 'GATE Score',
+    value: '95',
+  },
+  {
+    id: 2,
+    label: 'CAT Percentile',
+    value: '99.9',
+  },
+  {
+    id: 3,
+    label: 'JEE(Main) Rank',
+    value: '1',
+  },
+]
