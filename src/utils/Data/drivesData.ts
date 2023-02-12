@@ -16,7 +16,7 @@ const drivesData = [
     imgUrl: 'https://picsum.photos/200',
     ctcOffered: 15,
     startingDate: new Date('2022-10-16'),
-    type: 'Intership',
+    type: 'Internship',
     eligibleBatches: ['ECE', 'CSE', 'ME'],
     jobProfile: 'SDE',
     cluster: 3,

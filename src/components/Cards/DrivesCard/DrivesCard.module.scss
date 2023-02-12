@@ -44,9 +44,8 @@
         }
 
         .company_name {
-          font-size: 24px;
+          font-size: 22px;
           font-weight: 500;
-          letter-spacing: -0.02em;
           padding-bottom: 0.6rem;
         }
 
@@ -91,26 +90,20 @@
 
   .bottom_content {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    font-size: 14px;
+    padding-top: 0.5rem;
 
     .eligible_batches_list {
       display: flex;
-
-      .eligible_batch {
-        margin: 14px 4px 0px 2px;
-        padding: 2px 15px 2px 15px;
-        border-radius: 20px;
-        align-content: center;
-        background-color: rgb(229, 229, 229);
-        text-align: center;
-      }
+      gap: 6px;
+      height: fit-content;
     }
 
-    .type {
-      margin: 14px 4px 0px 2px;
-      padding: 2px 15px 2px 15px;
-      border-radius: 20px;
-      align-content: center;
+    span {
+      border-radius: 12px;
+      padding: 2px 12px;
       background-color: rgb(229, 229, 229);
       text-align: center;
     }
