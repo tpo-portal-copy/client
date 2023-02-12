@@ -5,7 +5,6 @@ import {
   IconButton,
   InputAdornment,
   TextField,
-  Checkbox,
   Button,
   Box,
   Typography,
