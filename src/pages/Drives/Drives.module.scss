@@ -3,7 +3,6 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
   width: 100%;
   max-width: 1200px;
   padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
@@ -15,6 +14,7 @@
 
   @media screen and (max-width: 525px) {
     padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+    gap: 0.8rem;
   }
 
   .page_name {
@@ -29,59 +29,28 @@
 
   .filter_container {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    flex-flow: wrap;
+    gap: 1rem;
 
     .dropdown {
-      text-align: left;
-      position: relative;
       background-color: white;
-      border-radius: 5px;
-      margin: 0 16px 0 0;
+      border-radius: 6px;
+      height: fit-content;
     }
 
     .search_box {
-      position: relative;
-      max-width: fit-content;
       background-color: white;
       border-radius: 6px;
-      border: 0;
-
-      .input {
-        max-width: 150px;
-        height: 38px;
-        outline: auto rgb(255, 255, 255);
-        padding-inline: 5px;
-        font-size: 22px;
-        position: relative;
-
-        @media screen and (max-width: 525px) {
-          max-width: 150px;
-        }
-      }
-
-      ::placeholder {
-        color: black;
-      }
-
-      .input_icon {
-        height: 22px;
-        padding: 6px 10px 0 0;
-        position: relative;
-      }
-    }
-
-    @media screen and (max-width: 740px) {
-      gap: 1.5rem;
+      height: fit-content;
     }
 
     @media screen and (max-width: 525px) {
-      gap: 1rem;
+      flex-direction: column;
     }
   }
 }
 
-.display {
+.content {
   display: flex;
   flex-direction: column;
   width: 100%;

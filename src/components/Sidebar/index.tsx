@@ -6,7 +6,6 @@ import styles from './Sidebar.module.scss'
 
 function Sidebar({ onLinkClickHandler, isMobile = false }: SidebarProps) {
   const location = useLocation()
-  const navigate = useNavigate()
 
   const goToLink = () => {
     // Closing sidebar on mobile only

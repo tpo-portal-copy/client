@@ -14,7 +14,6 @@ import {
   Page404,
   ExperienceDetails,
 } from '../pages'
-import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
 
 function App() {
@@ -57,14 +56,7 @@ function App() {
             </SidebarLayout>
           }
         />
-        <Route
-          path="/interview-history"
-          element={
-            <SidebarLayout>
-              <InterviewHistory />
-            </SidebarLayout>
-          }
-        />
+
         <Route
           path="/statistics"
           element={

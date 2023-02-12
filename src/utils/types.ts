@@ -62,13 +62,13 @@ export interface ClusterListProps {
 }
 export interface CheckListItemProps {
   label: string | number
-  year: number
   isMobile?: boolean
 }
 
 export interface ModalProps {
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen: boolean
   title: string
+  onCloseHandler: () => void
 }
 
 export interface ExperiencesSidebarProps {
