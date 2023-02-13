@@ -68,13 +68,13 @@ export interface ClusterListProps {
 }
 export interface CheckListItemProps {
   label: string | number
-  year: number
   isMobile?: boolean
 }
 
 export interface ModalProps {
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen: boolean
   title: string
+  onCloseHandler: () => void
 }
 
 export interface ExperiencesSidebarProps {
@@ -126,9 +126,15 @@ export interface DrivesCardProps {
   type: string
   eligibleBatches: Array<string>
   jobProfile: string
+  cluster: number
 }
 
 export interface ClusterType {
   id: number
   label: string
+}
+
+export interface SidebarProps {
+  onLinkClickHandler?: () => void
+  isMobile?: boolean
 }

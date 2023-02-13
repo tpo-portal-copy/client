@@ -5,7 +5,9 @@ import styles from './SidebarLayout.module.scss'
 function SidebarLayout({ children }: SidebarLayoutProps) {
   return (
     <div className={styles.layout}>
-      <Sidebar />
+      <div className={styles.sidebar_container}>
+        <Sidebar />
+      </div>
       <div className={styles.page}>{children}</div>
     </div>
   )

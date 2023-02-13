@@ -23,13 +23,13 @@
 
     .close {
       color: #aaa;
-      float: right;
-      font-size: 40px;
-      font-weight: bold;
+      font-size: 32px;
+      font-weight: 500;
       background-color: #fff;
       border: #fff;
       position: absolute;
-      right: 0;
+      right: 16px;
+      top: 28px;
 
       &:hover,
       &:focus {
@@ -39,7 +39,7 @@
       }
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 880px) {
       &::-webkit-scrollbar {
         width: 3px;
       }

@@ -11,6 +11,7 @@ import {
   Resources,
   Drives,
   Statistics,
+  Page404,
   ExperienceDetails,
   InterviewHistory,
   ResourceDetails,
@@ -25,9 +26,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/student-details-form" element={<StudentDetailsForm />} />
-      </Routes>
-
-      <Routes>
         <Route
           path="/"
           element={
@@ -60,14 +58,7 @@ function App() {
             </SidebarLayout>
           }
         />
-        <Route
-          path="/interview-history"
-          element={
-            <SidebarLayout>
-              <InterviewHistory />
-            </SidebarLayout>
-          }
-        />
+
         <Route
           path="/statistics"
           element={
@@ -100,6 +91,7 @@ function App() {
             </SidebarLayout>
           }
         />
+        <Route path="/404" element={<Page404 />} />
       </Routes>
     </div>
   )

@@ -9,6 +9,7 @@
     padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
   }
 }
+
 .main {
   display: flex;
   padding: 1rem 2rem;
@@ -19,12 +20,6 @@
     border-radius: 10px;
     background-color: var(--custom-white-v1);
     padding: 1rem 1rem;
-
-    .separator {
-      height: 1px;
-      background-color: #cfd2cf;
-      border-radius: 5px;
-    }
 
     .title {
       .name {
@@ -44,6 +39,11 @@
         text-align: start;
       }
     }
+    .separator {
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+    }
 
     .attributes {
       display: flex;
@@ -56,6 +56,12 @@
         align-content: center;
         text-align: center;
       }
+    }
+
+    .separator {
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
     }
 
     .description {

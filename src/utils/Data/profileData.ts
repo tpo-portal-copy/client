@@ -89,8 +89,8 @@ export const educationData = [
 export const moreInfoData = [
   {
     id: 1,
-    label: 'Category',
-    value: 'General',
+    label: 'College Email',
+    value: 'collegeEmail@nith.ac.in',
   },
   {
     id: 2,
@@ -114,8 +114,8 @@ export const moreInfoData = [
   },
   {
     id: 6,
-    label: 'College Email',
-    value: 'collegeEmail@nith.ac.in',
+    label: 'Category',
+    value: 'General',
   },
   {
     id: 7,
@@ -157,5 +157,41 @@ export const clusterData = [
     id: 3,
     cluster_title: 'Cluster6',
     range: '>25 Lakhs',
+  },
+]
+
+export const addressData = [
+  {
+    id: 1,
+    label: 'City',
+    value: 'Gurugram',
+  },
+  {
+    id: 2,
+    label: 'State',
+    value: 'Haryana',
+  },
+  {
+    id: 3,
+    label: 'Pin Code',
+    value: '2009332',
+  },
+]
+
+export const competitiveData = [
+  {
+    id: 1,
+    label: 'GATE Score',
+    value: '95',
+  },
+  {
+    id: 2,
+    label: 'CAT Percentile',
+    value: '99.9',
+  },
+  {
+    id: 3,
+    label: 'JEE(Main) Rank',
+    value: '1',
   },
 ]
