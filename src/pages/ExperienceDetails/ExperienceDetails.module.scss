@@ -83,7 +83,7 @@
     max-height: calc((100vh - var(--nav-height) - 3rem));
     text-decoration: none;
 
-     @media screen and (max-width: 880px) {
+    @media screen and (max-width: 880px) {
       display: none;
     }
   }
