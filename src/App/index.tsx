@@ -12,8 +12,9 @@ import {
   Drives,
   Statistics,
   ExperienceDetails,
+  InterviewHistory,
+  ResourceDetails,
 } from '../pages'
-import InterviewHistory from '../pages/InterviewHistory'
 import styles from './App.module.scss'
 
 function App() {
@@ -80,6 +81,14 @@ function App() {
           element={
             <SidebarLayout>
               <Resources />
+            </SidebarLayout>
+          }
+        />
+        <Route
+          path="/resource-details/:id"
+          element={
+            <SidebarLayout>
+              <ResourceDetails />
             </SidebarLayout>
           }
         />
