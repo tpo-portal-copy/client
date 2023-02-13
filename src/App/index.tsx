@@ -13,6 +13,7 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
+  ResourceDetails,
 } from '../pages'
 import styles from './App.module.scss'
 
@@ -70,6 +71,14 @@ function App() {
           element={
             <SidebarLayout>
               <Resources />
+            </SidebarLayout>
+          }
+        />
+        <Route
+          path="/resource-details/:id"
+          element={
+            <SidebarLayout>
+              <ResourceDetails />
             </SidebarLayout>
           }
         />
