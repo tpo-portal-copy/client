@@ -13,7 +13,6 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
-  InterviewHistory,
   ResourceDetails,
 } from '../pages'
 import styles from './App.module.scss'
