@@ -5,6 +5,8 @@
   font-weight: 600;
   color: var(--text-color-primary);
   padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
+  max-width: var(--max-w);
+  margin: auto;
 
   @media screen and (max-width: 520px) {
     font-size: 28px;
@@ -14,10 +16,12 @@
 
 .content {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   padding: 1rem 2rem;
   gap: 1.6rem;
+  width: fit-content;
+  margin: auto;
 
   .side_panel {
     width: 270px;
