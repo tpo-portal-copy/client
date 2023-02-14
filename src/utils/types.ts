@@ -32,6 +32,12 @@ export interface ClusterCardProps {
   type: 'checkbox' | 'mark'
 }
 
+export interface ResourcesCardProps {
+  id: number
+  label: string
+  imgUrl: string
+}
+
 export interface ExperienceCardProps {
   id: number
   title: string

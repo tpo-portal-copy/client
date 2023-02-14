@@ -12,6 +12,7 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
+  ResourceDetails,
 } from '../pages'
 
 function App() {
