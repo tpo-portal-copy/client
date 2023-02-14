@@ -1,38 +1,14 @@
+import { Accordion, Box, Divider, Heading } from '@chakra-ui/react'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Card, useMediaQuery } from '@mui/material'
-import { makeStyles } from '@mui/styles'
 import { useLocation } from 'react-router-dom'
-import { ResourceDetailsCard } from '../../components'
+import { FaqItem, ResourceDetailsCard } from '../../components'
+import { FaqData } from '../../utils/Data/ResourcesData'
+import { FaqProps } from '../../utils/types'
 import styles from './ResourceDetails.module.scss'
 
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    gap: '1rem',
-    padding: '0rem 2rem',
-    '@media (max-width:525px)': {
-      padding: '0rem 1rem',
-    },
-  },
-  resource: {
-    width: '70%',
-    '@media (max-width:850px)': {
-      width: '100%',
-    },
-  },
-  faq: {
-    width: '30%',
-  },
-  card: {
-    marginBottom: '1rem',
-  },
-})
-
 function ResourceDetails() {
-  const classes = useStyles()
   const { state } = useLocation()
-  const isMobile = useMediaQuery('(max-width:850px)')
 
   return (
     <>
@@ -43,19 +19,19 @@ function ResourceDetails() {
           <input placeholder="Resource..." type="text" name="text" className={styles.input} />
         </div>
       </div>
-      <Box className={classes.container}>
-        <Box className={classes.resource}>
-          <Box className={classes.card}>
-            <ResourceDetailsCard />
-          </Box>
-          <Box className={classes.card}>
-            <ResourceDetailsCard />
-          </Box>
-          <Box className={classes.card}>
-            <ResourceDetailsCard />
-          </Box>
+      <Box className={styles.page_body}>
+        <Box className={styles.resource}>
+          <ResourceDetailsCard />
+          <ResourceDetailsCard />
+          <ResourceDetailsCard />
         </Box>
-        {!isMobile && <Card className={classes.faq}>faq</Card>}
+        <Divider height="10px" />
+        <Heading>FAQs</Heading>
+        <Accordion allowToggle mb={10}>
+          {FaqData.map((faq: FaqProps) => (
+            <FaqItem key={faq.id} {...faq} />
+          ))}
+        </Accordion>
       </Box>
     </>
   )
