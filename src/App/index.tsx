@@ -29,6 +29,7 @@ function App() {
         <Route path="/experience-details/:id" element={<ExperienceDetails />} />
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/resource-details/:id" element={<ResourceDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/404" element={<Page404 />} />
       </Routes>
