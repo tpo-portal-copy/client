@@ -1,23 +1,24 @@
-import { Accordion, Box, Divider, Heading } from '@chakra-ui/react'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useLocation } from 'react-router-dom'
+import { Accordion, Box, Input, useMediaQuery } from '@chakra-ui/react'
+import { useParams } from 'react-router'
 import { FaqItem, ResourceDetailsCard } from '../../components'
-import { FaqData } from '../../utils/Data/ResourcesData'
+import { faqData } from '../../utils/Data/resourcesData'
 import { FaqProps } from '../../utils/types'
 import styles from './ResourceDetails.module.scss'
 
 function ResourceDetails() {
-  const { state } = useLocation()
+  const { branchName } = useParams()
+  const [isLargerThan525] = useMediaQuery('(min-width: 525px)')
 
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.page_name}>{state.label} Resources</h1>
-        <div className={styles.search_box}>
-          <FontAwesomeIcon icon={faSearch} size="sm" className={styles.input_icon} />
-          <input placeholder="Resource..." type="text" name="text" className={styles.input} />
-        </div>
+        <h1 className={styles.page_name}>{`${branchName} Resources`}</h1>
+        <Input
+          type="search"
+          placeholder="Search Resources"
+          maxW={isLargerThan525 ? '300px' : 'none'}
+          backgroundColor="var(--custom-white-v1)"
+        />
       </div>
       <Box className={styles.page_body}>
         <Box className={styles.resource}>
@@ -25,10 +26,9 @@ function ResourceDetails() {
           <ResourceDetailsCard />
           <ResourceDetailsCard />
         </Box>
-        <Divider height="10px" />
-        <Heading>FAQs</Heading>
+        <h3 className={styles.faq_title}>FAQs</h3>
         <Accordion allowToggle mb={10}>
-          {FaqData.map((faq: FaqProps) => (
+          {faqData.map((faq: FaqProps) => (
             <FaqItem key={faq.id} {...faq} />
           ))}
         </Accordion>

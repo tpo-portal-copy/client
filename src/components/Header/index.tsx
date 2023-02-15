@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import styles from './Header.module.scss'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
+import styles from './Header.module.scss'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)

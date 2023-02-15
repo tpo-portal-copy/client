@@ -1,50 +1,31 @@
 .container {
   display: flex;
+  flex-flow: wrap;
   justify-content: space-between;
-  align-items: baseline;
-  // width: 70%;
+  align-items: center;
   padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
   gap: 1.6rem;
-  max-width: 1250px;
+  max-width: var(--max-w);
+  margin: auto;
 
-  @media screen and (max-width: 850px) {
-    // width: 100%;
+  @media screen and (max-width: 768px) {
     padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
+    gap: 1rem;
+  }
 
-    @media screen and (max-width: 526px) {
-      padding: calc(1.5rem + var(--nav-height)) 1rem 1.5rem 1rem;
-      flex-direction: column;
-    }
+  @media screen and (max-width: 525px) {
+    padding: calc(1.5rem + var(--nav-height)) 1rem 1.5rem 1rem;
+    flex-direction: column;
   }
 
   .page_name {
     font-size: var(--lg-heading);
     font-weight: 600;
     color: var(--text-color-primary);
+    align-self: flex-start;
 
     @media screen and (max-width: 525px) {
       font-size: 28px;
-    }
-  }
-
-  .search_box {
-    position: relative;
-
-    .input_icon {
-      height: 22px;
-      padding: 10px 0 0 10px;
-      position: absolute;
-    }
-
-    .input {
-      max-width: 200px;
-      height: 45px;
-      border-radius: 7px;
-      border: 0;
-      background-color: white;
-      outline: auto rgb(255, 255, 255);
-      padding-inline: 40px;
-      font-size: 20px;
     }
   }
 }
@@ -53,6 +34,12 @@
   gap: 1rem;
   padding: 0rem 2rem;
   max-width: 1250px;
+
+  .faq_title {
+    font-size: 24px;
+    font-weight: 600;
+    padding-top: 1rem;
+  }
 
   @media screen and (max-width: 525px) {
     padding: 0rem 1rem;

@@ -75,7 +75,7 @@ function App() {
           }
         />
         <Route
-          path="/resource-details/:id"
+          path="/resource-details/:branchName"
           element={
             <SidebarLayout>
               <ResourceDetails />

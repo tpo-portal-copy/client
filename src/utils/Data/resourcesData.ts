@@ -1,4 +1,4 @@
-export const ResourcesData = [
+export const resourcesData = [
   {
     id: 0,
     label: 'CSE',
@@ -40,13 +40,13 @@ export const ResourcesData = [
     imgUrl: 'https://picsum.photos/id/2/800/575',
   },
   {
-    id: 6,
+    id: 8,
     label: 'MSC',
     imgUrl: 'https://picsum.photos/id/2/800/575',
   },
 ]
 
-export const FaqData = [
+export const faqData = [
   { id: 0, title: 'Que1', description: 'Ans1' },
   { id: 1, title: 'Que2', description: 'Ans2' },
   { id: 2, title: 'Que3', description: 'Ans3' },
