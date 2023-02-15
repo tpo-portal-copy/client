@@ -6,11 +6,11 @@ import styles from './Resources.module.scss'
 
 function Resources() {
   return (
-    <>
+    <div className={styles.resources}>
       <h1 className={styles.page_name}>Resources</h1>
       <Grid
-        alignItems="center"
         justifyContent="center"
+        placeItems="center"
         templateColumns="repeat(auto-fit,minmax(350px,1fr))"
         gap="1.5rem"
         padding="1rem 2rem"
@@ -22,7 +22,7 @@ function Resources() {
           </GridItem>
         ))}
       </Grid>
-    </>
+    </div>
   )
 }
 

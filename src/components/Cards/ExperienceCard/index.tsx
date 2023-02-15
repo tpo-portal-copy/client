@@ -17,7 +17,7 @@ function ExperienceCard({
 }: ExperienceCardProps) {
   return (
     <Link
-      to={`/experience-details/${id}`}
+      to={`/experiences-details/${id}`}
       state={interviewExperienceInfoList[id]}
       className={styles.link}
     >

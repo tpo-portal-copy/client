@@ -49,3 +49,8 @@
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
+
+body {
+  background-color: var(--bg-color);
+  font-family: 'Poppins', sans-serif;
+}

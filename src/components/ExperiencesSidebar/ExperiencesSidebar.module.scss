@@ -25,11 +25,12 @@
       color: #aaa;
       font-size: 32px;
       font-weight: 500;
-      background-color: #fff;
-      border: #fff;
+      background-color: #fefefe;
       position: absolute;
       right: 16px;
       top: 28px;
+      line-height: 32px;
+      margin-top: 6px;
 
       &:hover,
       &:focus {

@@ -32,6 +32,17 @@ const drivesData = [
     jobProfile: 'SDE',
     cluster: 4,
   },
+  {
+    id: 3,
+    companyName: 'Facebook',
+    imgUrl: 'https://picsum.photos/200',
+    ctcOffered: 20,
+    startingDate: new Date('2021-12-21'),
+    type: 'Full Time',
+    eligibleBatches: ['ECE', 'CSE'],
+    jobProfile: 'SDE',
+    cluster: 4,
+  },
 ]
 
 export default drivesData

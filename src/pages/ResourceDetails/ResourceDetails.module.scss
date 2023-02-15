@@ -33,7 +33,8 @@
 .page_body {
   gap: 1rem;
   padding: 0rem 2rem;
-  max-width: 1250px;
+  max-width: var(--max-w);
+  margin: auto;
 
   .faq_title {
     font-size: 24px;

@@ -142,7 +142,7 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
 export const companyList = [
   {
     id: 0,
-    name: 'Apple0',
+    name: 'Netwest',
   },
   {
     id: 1,
