@@ -36,7 +36,7 @@ function Header() {
       <div className={styles.content}>
         <div className={`${styles.overlay} ${isSidebarVisible ? styles.show : ''}`}>
           <div className={`${styles.sidebar_container}`} ref={sidebarRef}>
-            <Sidebar onLinkClickHandler={closeSidebar} isMobile />
+            <Sidebar onLinkClickHandler={closeSidebar} />
           </div>
         </div>
         <div className={styles.title_container}>
@@ -55,7 +55,7 @@ function Header() {
                 <NavLink
                   to={navItem.url}
                   className={`${styles.nav_item} ${
-                    location.pathname === navItem.url ? styles.selected : ''
+                    location.pathname.includes(navItem.url) ? styles.selected : ''
                   }`}
                 >
                   {navItem.name}

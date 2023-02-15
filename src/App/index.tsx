@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Header } from '../components'
 import {
   Dashboard,
@@ -23,7 +23,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/student-details-form" element={<StudentDetailsForm />} />
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/drives" element={<Drives />} />
         <Route path="/experiences" element={<Experiences />} />
         <Route path="/experiences-details/:id" element={<ExperienceDetails />} />
@@ -31,6 +31,7 @@ function App() {
         <Route path="/resources" element={<Resources />} />
         <Route path="/resources-details/:branchName" element={<ResourceDetails />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/404" element={<Page404 />} />
       </Routes>
     </>

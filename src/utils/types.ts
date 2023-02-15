@@ -135,8 +135,7 @@ export interface ClusterType {
 }
 
 export interface SidebarProps {
-  onLinkClickHandler?: () => void
-  isMobile?: boolean
+  onLinkClickHandler: () => void
 }
 
 export interface FaqProps {
