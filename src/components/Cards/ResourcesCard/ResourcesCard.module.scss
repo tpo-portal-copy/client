@@ -1,24 +1,24 @@
 .card {
-    display: flex;
-    border-radius: 20px;
-    max-width: 400px;
-    max-height: 300px;
+  display: flex;
+  border-radius: 20px;
+  max-width: 400px;
+  max-height: 300px;
 
   .img {
     width: fit-content;
     border-radius: 20px;
   }
 
-  .title{
+  .title {
     position: absolute;
     color: var(--custom-white-v1);
     padding: 1rem 1.5rem;
     font-size: xx-large;
   }
 
-  .btn{
+  .btn {
     position: absolute;
-    bottom:1.5rem;
+    bottom: 1.5rem;
     left: 1rem;
   }
 }
