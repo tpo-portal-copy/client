@@ -4,12 +4,11 @@ import navItems from '../../utils/Data/sidebarData'
 import { RouteProps, SidebarProps } from '../../utils/types'
 import styles from './Sidebar.module.scss'
 
-function Sidebar({ onLinkClickHandler, isMobile = false }: SidebarProps) {
+function Sidebar({ onLinkClickHandler }: SidebarProps) {
   const location = useLocation()
 
   const goToLink = () => {
-    // Closing sidebar on mobile only
-    if (isMobile && onLinkClickHandler) onLinkClickHandler()
+    onLinkClickHandler()
   }
 
   return (
@@ -26,7 +25,7 @@ function Sidebar({ onLinkClickHandler, isMobile = false }: SidebarProps) {
               onClick={() => goToLink()}
               key={navItem.id}
               className={`${styles.nav_item} ${
-                location.pathname === navItem.url ? styles.selected : ''
+                location.pathname.includes(navItem.url) ? styles.selected : ''
               }`}
             >
               <img src={DashboardIcon} alt="Dashboard" />
