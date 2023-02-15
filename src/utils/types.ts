@@ -138,3 +138,9 @@ export interface SidebarProps {
   onLinkClickHandler?: () => void
   isMobile?: boolean
 }
+
+export interface FaqProps {
+  id: number
+  title: string
+  description: string
+}

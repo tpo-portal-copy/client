@@ -26,10 +26,10 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/drives" element={<Drives />} />
         <Route path="/experiences" element={<Experiences />} />
-        <Route path="/experience-details/:id" element={<ExperienceDetails />} />
+        <Route path="/experiences-details/:id" element={<ExperienceDetails />} />
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/resources" element={<Resources />} />
-        <Route path="/resource-details/:id" element={<ResourceDetails />} />
+        <Route path="/resources-details/:branchName" element={<ResourceDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/404" element={<Page404 />} />
       </Routes>

@@ -10,10 +10,10 @@ import {
   PopoverTrigger,
   useDisclosure,
 } from '@chakra-ui/react'
-import styles from './Header.module.scss'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
+import styles from './Header.module.scss'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
