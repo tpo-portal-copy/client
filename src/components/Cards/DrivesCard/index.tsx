@@ -38,14 +38,10 @@ function DrivesCard({
       <div className={styles.bottom_content}>
         <div className={styles.eligible_batches_list}>
           {eligibleBatches.map((batch) => {
-            return (
-              <div className={styles.eligible_batch} key={batch}>
-                {batch}
-              </div>
-            )
+            return <span key={batch}>{batch}</span>
           })}
         </div>
-        <div className={styles.type}>{type}</div>
+        <span>{type}</span>
       </div>
     </div>
   )

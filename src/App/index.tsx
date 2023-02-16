@@ -1,6 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Header } from '../components'
-import SidebarLayout from '../components/SidebarLayout'
 import {
   Dashboard,
   Profile,
@@ -14,86 +13,30 @@ import {
   Page404,
   ExperienceDetails,
   ExperienceForm,
+  ResourceDetails,
 } from '../pages'
-import InterviewHistory from '../pages/InterviewHistory'
-import styles from './App.module.scss'
 
 function App() {
   return (
-    <div className={styles.app}>
-      {/* <Header /> */}
+    <>
+      <Header />
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/student-details-form" element={<StudentDetailsForm />} />
-        <Route
-          path="/"
-          element={
-            <SidebarLayout>
-              <Dashboard />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/drives"
-          element={
-            <SidebarLayout>
-              <Drives />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/experiences"
-          element={
-            <SidebarLayout>
-              <Experiences />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/experience-details/:id"
-          element={
-            <SidebarLayout>
-              <ExperienceDetails />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/interview-history"
-          element={
-            <SidebarLayout>
-              <InterviewHistory />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/statistics"
-          element={
-            <SidebarLayout>
-              <Statistics />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/resources"
-          element={
-            <SidebarLayout>
-              <Resources />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <SidebarLayout>
-              <Profile />
-            </SidebarLayout>
-          }
-        />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/drives" element={<Drives />} />
+        <Route path="/experiences" element={<Experiences />} />
+        <Route path="/experiences-details/:id" element={<ExperienceDetails />} />
+        <Route path="/statistics" element={<Statistics />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/resources-details/:branchName" element={<ResourceDetails />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/404" element={<Page404 />} />
         <Route path="/experience-form" element={<ExperienceForm />} />
       </Routes>
-    </div>
+    </>
   )
 }
 

@@ -1,16 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import App from './App'
 import './index.scss'
 
+const theme = extendTheme({
+  styles: {
+    global: () => ({
+      body: {
+        bg: 'var(--bg-color)',
+        color: 'var(--text-color-primary)',
+        lineHeight: 'initial',
+        fontFamily: "'Poppins', sans-serif",
+      },
+    }),
+  },
+})
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ChakraProvider>
+    <ChakraProvider resetCSS theme={theme}>
+      <BrowserRouter>
         <App />
-      </ChakraProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>,
 )

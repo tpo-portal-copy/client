@@ -7,8 +7,24 @@ import { ExperienceFilterProps } from '../../utils/types'
 import styles from './ExperiencesFilters.module.scss'
 
 function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
-  const [openCompany, setOpenCompany] = useState(false)
-  const [openRole, setOpenRole] = useState(false)
+  const [isCompaniesModalOpen, setIsCompaniesModalOpen] = useState(false)
+  const [isRolesModalOpen, setIsRolesModalOpen] = useState(false)
+
+  const openCompaiesModal = () => {
+    setIsCompaniesModalOpen(true)
+  }
+
+  const closeCompaniesModal = () => {
+    setIsCompaniesModalOpen(false)
+  }
+
+  const openRolesModal = () => {
+    setIsRolesModalOpen(true)
+  }
+
+  const closeRolesModal = () => {
+    setIsRolesModalOpen(false)
+  }
 
   return (
     <div className={styles.filters}>
@@ -20,23 +36,24 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
             <h4>Companies</h4>
           </div>
           <div className={styles.modal}>
-            <button
-              className={styles.btn}
-              onClick={() => {
-                setOpenCompany(true)
-              }}
-            >
+            <button className={styles.btn} onClick={openCompaiesModal}>
               View All
               <FontAwesomeIcon icon={faCircleRight} />
             </button>
-            {openCompany && <Modal title="Company" setIsModalOpen={setOpenCompany} />}
+            {isCompaniesModalOpen && (
+              <Modal
+                title="Companies"
+                isOpen={isCompaniesModalOpen}
+                onCloseHandler={closeCompaniesModal}
+              />
+            )}
           </div>
         </div>
         <div>
-          <CheckListItem label="Amazon" year={0} isMobile={isMobile} />
-          <CheckListItem label="Samsung" year={0} isMobile={isMobile} />
-          <CheckListItem label="Wells Fargo" year={0} isMobile={isMobile} />
-          <CheckListItem label="Natwest" year={0} isMobile={isMobile} />
+          <CheckListItem label="Amazon" isMobile={isMobile} />
+          <CheckListItem label="Samsung" isMobile={isMobile} />
+          <CheckListItem label="Wells Fargo" isMobile={isMobile} />
+          <CheckListItem label="Natwest" isMobile={isMobile} />
         </div>
       </div>
       <div className={styles.seperator} />
@@ -46,57 +63,54 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
             <h4>Roles</h4>
           </div>
           <div className={styles.modal}>
-            <button
-              className={styles.btn}
-              onClick={() => {
-                setOpenRole(true)
-              }}
-            >
+            <button className={styles.btn} onClick={openRolesModal}>
               View All
               <FontAwesomeIcon icon={faCircleRight} />
             </button>
-            {openRole && <Modal title="Role" setIsModalOpen={setOpenRole} />}
+            {isRolesModalOpen && (
+              <Modal title="Roles" isOpen={isRolesModalOpen} onCloseHandler={closeRolesModal} />
+            )}
           </div>
         </div>
         <div>
-          <CheckListItem label="IT" year={0} isMobile={isMobile} />
-          <CheckListItem label="ECE Core" year={0} isMobile={isMobile} />
-          <CheckListItem label="Civil Core" year={0} isMobile={isMobile} />
+          <CheckListItem label="IT" isMobile={isMobile} />
+          <CheckListItem label="ECE Core" isMobile={isMobile} />
+          <CheckListItem label="Civil Core" isMobile={isMobile} />
         </div>
       </div>
       <div className={styles.seperator} />
       <div>
         <h4 className={styles.filter_category}>Selection Status</h4>
         <div>
-          <CheckListItem label="Selected" year={0} isMobile={isMobile} />
-          <CheckListItem label="Not Selected" year={0} isMobile={isMobile} />
+          <CheckListItem label="Selected" isMobile={isMobile} />
+          <CheckListItem label="Not Selected" isMobile={isMobile} />
         </div>
       </div>
       <div className={styles.seperator} />
       <div>
         <h4 className={styles.filter_category}>Oppurtunity Year</h4>
         <div>
-          <CheckListItem label="2019" year={0} isMobile={isMobile} />
-          <CheckListItem label="2020" year={0} isMobile={isMobile} />
-          <CheckListItem label="2021" year={0} isMobile={isMobile} />
-          <CheckListItem label="2022" year={0} isMobile={isMobile} />
+          <CheckListItem label="2019" isMobile={isMobile} />
+          <CheckListItem label="2020" isMobile={isMobile} />
+          <CheckListItem label="2021" isMobile={isMobile} />
+          <CheckListItem label="2022" isMobile={isMobile} />
         </div>
       </div>
       <div className={styles.seperator} />
       <div>
         <h4 className={styles.filter_category}>Type</h4>
         <div>
-          <CheckListItem label="Internship" year={0} isMobile={isMobile} />
-          <CheckListItem label="Full Time" year={0} isMobile={isMobile} />
+          <CheckListItem label="Internship" isMobile={isMobile} />
+          <CheckListItem label="Full Time" isMobile={isMobile} />
         </div>
       </div>
       <div className={styles.seperator} />
       <div>
         <h4 className={styles.filter_category}>Difficulty</h4>
         <div>
-          <CheckListItem label="Easy" year={0} isMobile={isMobile} />
-          <CheckListItem label="Medium" year={0} isMobile={isMobile} />
-          <CheckListItem label="Hard" year={0} isMobile={isMobile} />
+          <CheckListItem label="Easy" isMobile={isMobile} />
+          <CheckListItem label="Medium" isMobile={isMobile} />
+          <CheckListItem label="Hard" isMobile={isMobile} />
         </div>
       </div>
     </div>

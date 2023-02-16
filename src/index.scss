@@ -16,6 +16,7 @@
   --text-color-primary: rgb(40, 40, 40);
   --lg-heading: 32px;
   --md-heading: 20px;
+  --max-w: 1250px;
 }
 
 @mixin thin-scrollbar {
@@ -50,6 +51,6 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
+  font-family: 'Poppins', sans-serif;
 }

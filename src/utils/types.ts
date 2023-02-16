@@ -40,6 +40,12 @@ export interface ClusterCardProps {
   range: string
 }
 
+export interface ResourcesCardProps {
+  id: number
+  label: string
+  imgUrl: string
+}
+
 export interface ExperienceCardProps {
   id: number
   title: string
@@ -82,13 +88,13 @@ export interface ClusterListProps {
 }
 export interface CheckListItemProps {
   label: string | number
-  year: number
   isMobile?: boolean
 }
 
 export interface ModalProps {
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen: boolean
   title: string
+  onCloseHandler: () => void
 }
 
 export interface ExperiencesSidebarProps {
@@ -149,8 +155,13 @@ export interface ClusterType {
 }
 
 export interface SidebarProps {
-  onLinkClickHandler?: () => void
-  isMobile?: boolean
+  onLinkClickHandler: () => void
+}
+
+export interface FaqProps {
+  id: number
+  title: string
+  description: string
 }
 
 export type FormOneData = {
