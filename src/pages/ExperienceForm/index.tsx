@@ -1,4 +1,4 @@
-import { Button, VStack, Text } from '@chakra-ui/react'
+import { Button, VStack, Text, Alert, AlertIcon } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -106,9 +106,10 @@ export default function ExperienceForm() {
                     value={formik.values.companyName}
                   />
                   {formik.touched.companyName && formik.errors.companyName ? (
-                    <Text color="tomato" fontSize="md">
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
                       {formik.errors.companyName}
-                    </Text>
+                    </Alert>
                   ) : null}
 
                   <Select
@@ -123,9 +124,10 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.difficulty && formik.errors.difficulty ? (
-                    <Text color="tomato" fontSize="md">
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
                       {formik.errors.difficulty}
-                    </Text>
+                    </Alert>
                   ) : null}
 
                   <Select
@@ -140,9 +142,10 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.role && formik.errors.role ? (
-                    <Text color="tomato" fontSize="md">
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
                       {formik.errors.role}
-                    </Text>
+                    </Alert>
                   ) : null}
 
                   <Select
@@ -157,9 +160,10 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.type && formik.errors.type ? (
-                    <Text color="tomato" fontSize="md">
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
                       {formik.errors.type}
-                    </Text>
+                    </Alert>
                   ) : null}
                   <Input
                     onBlur={formik.handleBlur}
@@ -169,9 +173,10 @@ export default function ExperienceForm() {
                     value={formik.values.rounds}
                   />
                   {formik.touched.rounds && formik.errors.rounds ? (
-                    <Text color="tomato" fontSize="md">
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
                       {formik.errors.rounds}
-                    </Text>
+                    </Alert>
                   ) : null}
                   <Select
                     value={formik.values.verdict}
@@ -185,9 +190,10 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.verdict && formik.errors.verdict ? (
-                    <Text color="tomato" fontSize="md">
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
                       {formik.errors.verdict}
-                    </Text>
+                    </Alert>
                   ) : null}
                   <Select
                     value={formik.values.anonymous}
@@ -200,10 +206,11 @@ export default function ExperienceForm() {
                       <option key={data.id}>{data.value}</option>
                     ))}
                   </Select>
-                  {formik.touched.verdict && formik.errors.verdict ? (
-                    <Text color="tomato" fontSize="md">
-                      {formik.errors.verdict}
-                    </Text>
+                  {formik.touched.anonymous && formik.errors.anonymous ? (
+                    <Alert borderRadius={5} status="error">
+                      <AlertIcon />
+                      {formik.errors.anonymous}
+                    </Alert>
                   ) : null}
 
                   <ReactQuill
