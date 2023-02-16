@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react'
 import { Text } from '@chakra-ui/react'
-import { SignupForm } from '../../components/Forms'
 import Animation from '../../assets/animations/119048-login-verification.json'
+import { StudentSignupForm } from '../../components/Forms'
 import styles from './Signup.module.scss'
 
 export default function Login() {
@@ -15,7 +15,7 @@ export default function Login() {
       <div className={styles.content}>
         <Text className={styles.heading}>Hi There,</Text>
         <Text className={styles.sub_heading}>Register Yourself</Text>
-        <SignupForm />
+        <StudentSignupForm />
       </div>
     </div>
   )

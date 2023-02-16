@@ -2,9 +2,9 @@
 import { VStack, Text, Alert, AlertIcon, Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { FormThreeProps } from '../../../utils/types'
+import { FormThreeProps } from '../../../../utils/types'
 import styles from './FormThree.module.scss'
-import { Input, Select } from '../../index'
+import { Input, Select } from '../../../index'
 
 const courseData = [
   {

@@ -16,8 +16,8 @@ import {
 } from '@chakra-ui/react'
 import * as Yup from 'yup'
 import styles from './FormFour.module.scss'
-import { FormFourProps } from '../../../utils/types'
-import { Input } from '../../index'
+import { FormFourProps } from '../../../../utils/types'
+import { Input } from '../../../index'
 
 const columns = [
   { id: 1, value: 'Choose' },

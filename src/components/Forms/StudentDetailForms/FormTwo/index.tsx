@@ -1,9 +1,9 @@
 import { VStack, Text, Alert, AlertIcon, Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { FormTwoProps } from '../../../utils/types'
+import { FormTwoProps } from '../../../../utils/types'
 import styles from './FormTwo.module.scss'
-import { Input } from '../../index'
+import { Input } from '../../../index'
 
 export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
   const formik = useFormik({

@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { VStack, Alert, AlertIcon, Button, Checkbox } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { FormOneProps } from '../../../utils/types'
-import ImgUploader from '../../ImgUploader'
+import { FormOneProps } from '../../../../utils/types'
+import ImgUploader from '../../../ImgUploader'
 import styles from './FormOne.module.scss'
-import { Input, Select } from '../../index'
+import { Input, Select } from '../../../index'
 
 const genderData = [
   { id: 1, value: 'Male' },

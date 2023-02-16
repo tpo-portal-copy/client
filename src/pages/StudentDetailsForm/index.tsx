@@ -4,7 +4,7 @@ import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/61212-add-to-watchlistcart.json'
 import styles from './StudentDetailsForm.module.scss'
-import { FormFour, FormOne, FormThree, FormTwo } from '../../components/StudentDetailForms'
+import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/StudentDetailForms'
 import Checked from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 

@@ -1,5 +1,5 @@
 import styles from './Profile.module.scss'
-import { ClusterCard, FieldInfo } from '../../components'
+import { FieldInfo } from '../../components'
 
 import {
   profileData,
@@ -10,6 +10,7 @@ import {
   addressData,
   competitiveData,
 } from '../../utils/Data/profileData'
+import { ClusterCard } from '../../components/Cards'
 
 function Profile() {
   return (

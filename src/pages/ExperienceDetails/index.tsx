@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 import styles from './ExperienceDetails.module.scss'
 import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 import { ExperienceCardProps } from '../../utils/types'
-import { RelatedExperienceCard } from '../../components'
+import { RelatedExperienceCard } from '../../components/Cards'
 
 function ExperienceDetails() {
   const { state } = useLocation()

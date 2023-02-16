@@ -233,3 +233,7 @@ export interface ProgressBarProps {
   completed: number
   step: number
 }
+
+export interface HeaderLayoutProps {
+  children: ReactNode
+}
