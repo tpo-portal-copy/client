@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Header } from '../components'
+import { Header, HeaderLayout } from '../components'
 import {
   Dashboard,
   Profile,
@@ -12,29 +12,91 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
+  ExperienceForm,
   ResourceDetails,
 } from '../pages'
 
 function App() {
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/student-details-form" element={<StudentDetailsForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/drives" element={<Drives />} />
-        <Route path="/experiences" element={<Experiences />} />
-        <Route path="/experiences-details/:id" element={<ExperienceDetails />} />
-        <Route path="/statistics" element={<Statistics />} />
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/resources-details/:branchName" element={<ResourceDetails />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/404" element={<Page404 />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/student-details-form" element={<StudentDetailsForm />} />
+      <Route path="/experience-form" element={<ExperienceForm />} />
+      <Route
+        path="/dashboard"
+        element={
+          <HeaderLayout>
+            <Dashboard />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/drives"
+        element={
+          <HeaderLayout>
+            <Drives />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/experiences"
+        element={
+          <HeaderLayout>
+            <Experiences />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/experiences-details/:id"
+        element={
+          <HeaderLayout>
+            <ExperienceDetails />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/statistics"
+        element={
+          <HeaderLayout>
+            <Statistics />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/resources"
+        element={
+          <HeaderLayout>
+            <Resources />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/resources-details/:branchName"
+        element={
+          <HeaderLayout>
+            <ResourceDetails />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <HeaderLayout>
+            <Profile />
+          </HeaderLayout>
+        }
+      />
+      <Route path="/" element={<Navigate to="/dashboard" />} />
+      <Route
+        path="/404"
+        element={
+          <HeaderLayout>
+            <Page404 />
+          </HeaderLayout>
+        }
+      />
+    </Routes>
   )
 }
 

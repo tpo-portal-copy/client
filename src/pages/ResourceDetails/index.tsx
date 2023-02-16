@@ -1,6 +1,7 @@
 import { Accordion, Box, Input, useMediaQuery } from '@chakra-ui/react'
 import { useParams } from 'react-router'
-import { FaqItem, ResourceDetailsCard } from '../../components'
+import { FaqItem } from '../../components'
+import { ResourceDetailsCard } from '../../components/Cards'
 import { faqData } from '../../utils/Data/resourcesData'
 import { FaqProps } from '../../utils/types'
 import styles from './ResourceDetails.module.scss'

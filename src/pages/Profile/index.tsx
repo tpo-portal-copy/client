@@ -1,5 +1,5 @@
 import styles from './Profile.module.scss'
-import { ClusterCard, FieldInfo } from '../../components'
+import { FieldInfo } from '../../components'
 
 import {
   profileData,
@@ -10,6 +10,7 @@ import {
   addressData,
   competitiveData,
 } from '../../utils/Data/profileData'
+import { ClusterCard } from '../../components/Cards'
 
 function Profile() {
   return (
@@ -81,12 +82,7 @@ function Profile() {
             <div className={styles.cluster_container}>
               <p className={styles.cluster_title}>Chosen Clusters</p>
               {clusterData.map((data) => (
-                <ClusterCard
-                  type="mark"
-                  key={data.id}
-                  title={data.cluster_title}
-                  range={data.range}
-                />
+                <ClusterCard key={data.id} title={data.cluster_title} range={data.range} />
               ))}
             </div>
             <div className={styles.stats_container}>
@@ -100,9 +96,6 @@ function Profile() {
                 <span className={styles.profile_link}>LinkedIn profile</span>
               </div>
             </div>
-          </div>
-
-          <div className={styles.sub_container}>
             <div className={styles.address_container}>
               <p className={styles.address_title}>Competitive Exams</p>
               <div className={styles.address_fields_container}>

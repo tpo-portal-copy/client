@@ -2,10 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useMediaQuery } from '@chakra-ui/react'
-import styles from './Experiences.module.scss'
 import { ExperienceCardProps } from '../../utils/types'
-import { ExperienceCard, ExperiencesSidebar, ExperiencesFilters } from '../../components'
+import { ExperiencesSidebar, ExperiencesFilters } from '../../components'
 import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
+import styles from './Experiences.module.scss'
+import { ExperienceCard } from '../../components/Cards'
 
 function Experiences() {
   const [openFilters, setOpenFilters] = useState(false)

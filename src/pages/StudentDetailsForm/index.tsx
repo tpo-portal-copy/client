@@ -1,64 +1,152 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import Input from '../../components/Input'
+import { useState } from 'react'
+import { Text } from '@chakra-ui/react'
+import Lottie from 'lottie-react'
+import ProgressBar from '../../components/ProgressBar'
+import Animation from '../../assets/animations/61212-add-to-watchlistcart.json'
 import styles from './StudentDetailsForm.module.scss'
-import { basicInfo, educationInfo, collegeInfo, clusterData } from '../../utils/Data/FormUIData'
-import ClusterCard from '../../components/Cards/ClusterCard'
+import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/StudentDetailForms'
+import Checked from '../../assets/animations/81544-rolling-check-mark.json'
+import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 
-export default function Form() {
+export default function StudentDetailsForm() {
+  const [value, setValue] = useState(0)
+  const [step, setStep] = useState(0)
+  const [formOneData, setFormOneData] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    dob: '',
+    state: '',
+    city: '',
+    pincode: 0,
+    personalEmail: '',
+    gender: '',
+    category: '',
+    phone: 0,
+    linkedin: '',
+    isPwd: false,
+    disabilityTypes: '',
+  })
+
+  const [formTwoData, setFormTwoData] = useState({
+    tenthYear: 0,
+    tenthSchool: '',
+    tenthBoard: '',
+    tenthPercentage: 0,
+    twelfthYear: 0,
+    twelfthSchool: '',
+    twelfthBoard: '',
+    twelfthPercentage: 0,
+    jeeRank: 0,
+  })
+
+  const [formThreeData, setFormThreeData] = useState({
+    course: '',
+    branch: '',
+    cgpi: 0,
+    activeBacklog: 0,
+    totalBacklog: 0,
+    gateScore: 0,
+    catScore: 0,
+    batchYear: 0,
+    passingYear: 0,
+    currentYear: 0,
+    gapYear12: 0,
+    gapYearUG: 0,
+  })
+
+  const [show, setShow] = useState(false)
+
+  const handleOneNext = (values: FormOneData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setFormOneData(values)
+  }
+
+  const handleTwoNext = (values: FormTwoData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setFormTwoData(values)
+  }
+
+  const handleThreeNext = (values: FormThreeData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setFormThreeData(values)
+  }
+
+  const handleTwoBack = (values: FormTwoData) => {
+    setStep((prevStep) => prevStep - 1)
+    setValue((prevValue) => prevValue - 25)
+    setFormTwoData({ ...values })
+  }
+
+  const handleThreeBack = (values: FormThreeData) => {
+    setStep((prevStep) => prevStep - 1)
+    setValue((prevValue) => prevValue - 25)
+    setFormThreeData({ ...values })
+  }
+
+  const handleSubmit = () => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setShow(true)
+  }
+
+  const getFormContent = (currStep: number) => {
+    switch (currStep) {
+      case 0:
+        return <FormOne data={formOneData} onNext={(values) => handleOneNext(values)} />
+      case 1:
+        return (
+          <FormTwo
+            data={formTwoData}
+            onNext={(values) => handleTwoNext(values)}
+            onBack={(values) => handleTwoBack(values)}
+          />
+        )
+      case 2:
+        return (
+          <FormThree
+            data={formThreeData}
+            onNext={(values) => handleThreeNext(values)}
+            onBack={(values) => handleThreeBack(values)}
+          />
+        )
+      case 3:
+        return <FormFour onSubmit={() => handleSubmit()} />
+      default:
+        return null
+    }
+  }
+
   return (
-    <form className={styles.container}>
-      <div className={styles.info_container}>
-        <span className={styles.heading}>Basic Info</span>
-        <div className={styles.info}>
-          {basicInfo.map((info) => (
-            <Input
-              key={info.id}
-              label={info.label}
-              type={info.type}
-              options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
+    <div className={styles.container}>
+      <div className={styles.section}>
+        <h2 className={styles.heading}>Fill Your Details Here</h2>
+        <Lottie animationData={Animation} />
+        <ProgressBar step={step} completed={value} />
+      </div>
+      <div className={styles.content}>
+        {show ? (
+          <>
+            <Lottie
+              loop={false}
+              autoPlay={false}
+              animationData={Checked}
+              className={styles.animation}
             />
-          ))}
-          <div className={styles.img_upload_container}>
-            <span>Upload Your Image</span>
-            <FontAwesomeIcon className={styles.icon} icon={faUpload} />
-          </div>
-        </div>
+            <Text align="center" fontSize="2xl" color="blue.400">
+              You have successfully submitted your details
+            </Text>{' '}
+          </>
+        ) : (
+          <>
+            <h2 className={styles.heading}>Fill Your Details Here</h2>
+            {getFormContent(step)}
+          </>
+        )}
       </div>
-      <div className={styles.info_container}>
-        <span className={styles.heading}>Education</span>
-        <div className={styles.info}>
-          {educationInfo.map((info) => (
-            <Input key={info.id} label={info.label} type={info.type} />
-          ))}
-        </div>
-      </div>
-      <div className={styles.info_container}>
-        <span className={styles.heading}>College</span>
-        <div className={styles.info}>
-          {collegeInfo.map((info) => (
-            <Input
-              key={info.id}
-              label={info.label}
-              type={info.type}
-              options={info.type === 'list' ? info.options : [{ id: 1, value: '1' }]}
-            />
-          ))}
-        </div>
-      </div>
-      <div className={styles.info_container}>
-        <span className={styles.heading}>Choose Clusters</span>
-        <div className={styles.info}>
-          {clusterData.map((data) => (
-            <ClusterCard
-              type="checkbox"
-              key={data.id}
-              title={data.clusterName}
-              range={data.clusterRange}
-            />
-          ))}
-        </div>
-      </div>
-    </form>
+    </div>
   )
 }

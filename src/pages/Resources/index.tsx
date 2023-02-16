@@ -1,5 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import { ResourcesCard } from '../../components'
+import { ResourcesCard } from '../../components/Cards'
 import { resourcesData } from '../../utils/Data/resourcesData'
 import { ResourcesCardProps } from '../../utils/types'
 import styles from './Resources.module.scss'
