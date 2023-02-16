@@ -1,5 +1,6 @@
 import { Text } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
+import { Link } from 'react-router-dom'
 import Animation from '../../assets/animations/68592-error-404-creature.json'
 import styles from './Page404.module.scss'
 
@@ -12,6 +13,9 @@ export default function Page404() {
       <div className={styles.animation_container}>
         <Lottie animationData={Animation} />
       </div>
+      <Link to="/" className={styles.link}>
+        Go Back To Home
+      </Link>
     </div>
   )
 }

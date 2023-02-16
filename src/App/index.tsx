@@ -88,14 +88,7 @@ function App() {
         }
       />
       <Route path="/" element={<Navigate to="/dashboard" />} />
-      <Route
-        path="/404"
-        element={
-          <HeaderLayout>
-            <Page404 />
-          </HeaderLayout>
-        }
-      />
+      <Route path="*" element={<Page404 />} />
     </Routes>
   )
 }
