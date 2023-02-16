@@ -1,97 +1,39 @@
-import React from 'react'
-import { styled } from '@mui/material/styles'
-import { Container, Typography, Tabs, Tab, Box } from '@mui/material'
 import Lottie from 'lottie-react'
+import { Tabs, Tab, TabList, TabPanels, TabPanel, Text } from '@chakra-ui/react'
 import { StudentLoginForm, TPOLoginForm, TPRLoginForm } from '../../components/Forms'
 import Animation from '../../assets/animations/119048-login-verification.json'
-import useResponsive from '../../hooks/useResponsive'
+import styles from './Login.module.scss'
 
-const StyledRoot = styled('div')(({ theme }) => ({
-  display: 'flex',
-  backgroundColor: 'white',
-  [theme.breakpoints.up('md')]: {
-    display: 'flex',
-  },
-}))
-
-const StyledSection = styled('div')(({ theme }) => ({
-  width: '100%',
-  maxWidth: 480,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  boxShadow: 'hsla(240,5%,41%,.2) 0px 7px 29px 0px',
-  backgroundColor: theme.palette.background.default,
-}))
-
-const StyledContent = styled('div')(({ theme }) => ({
-  maxWidth: 480,
-  margin: 'auto',
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  padding: theme.spacing(12, 0),
-}))
-
-function TabPanel(props: any): any {
-  const { children, value, index } = props
-
-  return value === index && <div>{children}</div>
-}
-
-export default function LoginPage() {
-  const mdUp = useResponsive('up', 'md', 'lg')
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (e: any, values: number) => {
-    setValue(values)
-  }
-
+export default function Login() {
   return (
-    <StyledRoot>
-      {mdUp && (
-        <StyledSection>
-          <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
-          </Typography>
-          <Lottie animationData={Animation} />
-        </StyledSection>
-      )}
-      <Container maxWidth="sm">
-        <StyledContent>
-          <Typography variant="h4" gutterBottom>
-            Login to Sakha
-          </Typography>
-
-          <Box sx={{ width: '100%' }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              textColor="primary"
-              indicatorColor="primary"
-              aria-label="secondary tabs example"
-            >
-              <Tab value={0} label="Student" />
-              <Tab value={1} label="TPO" />
-              <Tab value={2} label="TPR" />
-            </Tabs>
-          </Box>
-          <Box sx={{ paddingTop: '15px' }}>
-            <TabPanel value={value} index={0}>
+    <div className={styles.container}>
+      <div className={styles.section}>
+        <h2 className={styles.heading}>Hi There,</h2>
+        <h2 className={styles.heading}>Welcome back</h2>
+        <Lottie animationData={Animation} />
+      </div>
+      <div className={styles.content}>
+        <Text className={styles.heading}>Hi There,</Text>
+        <Text className={styles.sub_heading}>Welcome back</Text>
+        <Tabs className={styles.tabs_container} variant="soft-rounded" colorScheme="blue">
+          <TabList>
+            <Tab>Student</Tab>
+            <Tab>TPO</Tab>
+            <Tab>TPR</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
               <StudentLoginForm />
             </TabPanel>
-
-            <TabPanel value={value} index={1}>
+            <TabPanel>
               <TPOLoginForm />
             </TabPanel>
-
-            <TabPanel value={value} index={2}>
+            <TabPanel>
               <TPRLoginForm />
             </TabPanel>
-          </Box>
-        </StyledContent>
-      </Container>
-    </StyledRoot>
+          </TabPanels>
+        </Tabs>
+      </div>
+    </div>
   )
 }

@@ -153,6 +153,7 @@
       display: grid;
       grid-template-columns: repeat(2, auto);
       column-gap: 1.5rem;
+      row-gap: 1.5rem;
       height: min-content;
 
       .cluster_container {

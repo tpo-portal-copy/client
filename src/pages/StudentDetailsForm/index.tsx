@@ -1,129 +1,152 @@
-import { useState, Fragment } from 'react'
-import {
-  Stepper,
-  Step,
-  StepLabel,
-  Card,
-  CardContent,
-  CardHeader,
-  Button,
-  Link,
-  Container,
-  Typography,
-  Divider,
-  Stack,
-  Box,
-  Grid,
-} from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import { styled } from '@mui/material/styles'
-import Lottie from 'react-lottie'
-import { FormOne, FormTwo, FormThree, FormFour } from '../../components/StudentDetailForms'
-import CustomizedSteppers from '../../components/Stepper'
-import Animation from '../../assets/animations/81544-rolling-check-mark.json'
+import { useState } from 'react'
+import { Text } from '@chakra-ui/react'
+import Lottie from 'lottie-react'
+import ProgressBar from '../../components/ProgressBar'
+import Animation from '../../assets/animations/61212-add-to-watchlistcart.json'
+import styles from './StudentDetailsForm.module.scss'
+import { FormFour, FormOne, FormThree, FormTwo } from '../../components/StudentDetailForms'
+import Checked from '../../assets/animations/81544-rolling-check-mark.json'
+import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 
-const steps = ['Basic Info', 'Education', 'College', 'Clusters']
+export default function StudentDetailsForm() {
+  const [value, setValue] = useState(0)
+  const [step, setStep] = useState(0)
+  const [formOneData, setFormOneData] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    dob: '',
+    state: '',
+    city: '',
+    pincode: 0,
+    personalEmail: '',
+    gender: '',
+    category: '',
+    phone: 0,
+    linkedin: '',
+    isPwd: false,
+    disabilityTypes: '',
+  })
 
-const defaultOptions = {
-  loop: false,
-  autoplay: true,
-  animationData: Animation,
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
-}
+  const [formTwoData, setFormTwoData] = useState({
+    tenthYear: 0,
+    tenthSchool: '',
+    tenthBoard: '',
+    tenthPercentage: 0,
+    twelfthYear: 0,
+    twelfthSchool: '',
+    twelfthBoard: '',
+    twelfthPercentage: 0,
+    jeeRank: 0,
+  })
 
-function renderStepContent(step) {
-  switch (step) {
-    case 0:
-      return <FormOne />
-    case 1:
-      return <FormTwo />
-    case 2:
-      return <FormThree />
-    case 3:
-      return <FormFour />
-    default:
-      return <Lottie options={defaultOptions} />
-  }
-}
+  const [formThreeData, setFormThreeData] = useState({
+    course: '',
+    branch: '',
+    cgpi: 0,
+    activeBacklog: 0,
+    totalBacklog: 0,
+    gateScore: 0,
+    catScore: 0,
+    batchYear: 0,
+    passingYear: 0,
+    currentYear: 0,
+    gapYear12: 0,
+    gapYearUG: 0,
+  })
 
-const useStyles = makeStyles({
-  container: {
-    width: '600px',
-    padding: '20px',
-  },
-  stepper: {},
-})
+  const [show, setShow] = useState(false)
 
-// ----------------------------------------------------------------------
-
-const StyledRoot = styled('div')(({ theme }) => ({
-  [theme.breakpoints.up('md')]: {
-    display: 'flex',
-  },
-}))
-
-const StyledSection = styled('div')(({ theme }) => ({
-  width: '100%',
-  maxWidth: 480,
-  backgroundColor: 'white',
-  boxShadow: 'hsla(240,5%,41%,.2) 0px 7px 29px 0px',
-}))
-
-const StyledContent = styled('div')(({ theme }) => ({
-  width: '100%',
-  maxWidth: 480,
-  margin: 'auto',
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  padding: theme.spacing(12, 0),
-}))
-
-// ----------------------------------------------------------------------
-
-export default function LoginPage() {
-  const classes = useStyles()
-  const [activeStep, setActiveStep] = useState(0)
-
-  const handleNext = () => {
-    setActiveStep((prevStep) => prevStep + 1)
+  const handleOneNext = (values: FormOneData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setFormOneData(values)
   }
 
-  const handleBack = () => {
-    setActiveStep((prevStep) => prevStep - 1)
+  const handleTwoNext = (values: FormTwoData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setFormTwoData(values)
   }
-  return (
-    <StyledRoot>
-      <StyledSection>
-        <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-          Your Details
-        </Typography>
-        <Grid container justifyContent="center" alignItems="center">
-          <CustomizedSteppers
-            handleNext={handleNext}
-            handleBack={handleBack}
-            currStep={activeStep}
+
+  const handleThreeNext = (values: FormThreeData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setFormThreeData(values)
+  }
+
+  const handleTwoBack = (values: FormTwoData) => {
+    setStep((prevStep) => prevStep - 1)
+    setValue((prevValue) => prevValue - 25)
+    setFormTwoData({ ...values })
+  }
+
+  const handleThreeBack = (values: FormThreeData) => {
+    setStep((prevStep) => prevStep - 1)
+    setValue((prevValue) => prevValue - 25)
+    setFormThreeData({ ...values })
+  }
+
+  const handleSubmit = () => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setShow(true)
+  }
+
+  const getFormContent = (currStep: number) => {
+    switch (currStep) {
+      case 0:
+        return <FormOne data={formOneData} onNext={(values) => handleOneNext(values)} />
+      case 1:
+        return (
+          <FormTwo
+            data={formTwoData}
+            onNext={(values) => handleTwoNext(values)}
+            onBack={(values) => handleTwoBack(values)}
           />
-        </Grid>
-      </StyledSection>
+        )
+      case 2:
+        return (
+          <FormThree
+            data={formThreeData}
+            onNext={(values) => handleThreeNext(values)}
+            onBack={(values) => handleThreeBack(values)}
+          />
+        )
+      case 3:
+        return <FormFour onSubmit={() => handleSubmit()} />
+      default:
+        return null
+    }
+  }
 
-      <Container maxWidth="sm">
-        <StyledContent>
-          {renderStepContent(activeStep)}
-          <Box sx={{ padding: '20px' }}>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={() => setActiveStep(activeStep + 1)}
-            >
-              Click
-            </Button>
-          </Box>
-        </StyledContent>
-      </Container>
-    </StyledRoot>
+  return (
+    <div className={styles.container}>
+      <div className={styles.section}>
+        <h2 className={styles.heading}>Fill Your Details Here</h2>
+        <Lottie animationData={Animation} />
+        <ProgressBar step={step} completed={value} />
+      </div>
+      <div className={styles.content}>
+        {show ? (
+          <>
+            <Lottie
+              loop={false}
+              autoPlay={false}
+              animationData={Checked}
+              className={styles.animation}
+            />
+            <Text align="center" fontSize="2xl" color="blue.400">
+              You have successfully submitted your details
+            </Text>{' '}
+          </>
+        ) : (
+          <>
+            <h2 className={styles.heading}>Fill Your Details Here</h2>
+            {getFormContent(step)}
+          </>
+        )}
+      </div>
+    </div>
   )
 }

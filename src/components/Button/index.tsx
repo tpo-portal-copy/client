@@ -1,7 +1,7 @@
 import { ButtonProps } from '../../utils/types'
 import styles from './Button.module.scss'
 
-function Button({ varient, onclick, onsubmit, children, stretch, type = 'button' }: ButtonProps) {
+function Button({ onclick, onsubmit, children, stretch, type = 'button' }: ButtonProps) {
   return (
     <button
       type={type}
@@ -15,7 +15,3 @@ function Button({ varient, onclick, onsubmit, children, stretch, type = 'button'
 }
 
 export default Button
-
-// ${
-//   varient === 'primary' ? styles.primary : styles.secondary
-// }
