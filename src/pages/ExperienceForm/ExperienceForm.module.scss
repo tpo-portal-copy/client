@@ -30,12 +30,9 @@
     padding: 2rem;
     width: calc(100% - 480px);
 
-    @media screen and (max-width:1040px) {
+    @media screen and (max-width: 1040px) {
       width: 100%;
-      
     }
-
-    
 
     .heading {
       font-size: 38px;
@@ -72,8 +69,8 @@
         padding-bottom: 40px;
 
         @media screen and (max-width: 580px) {
-      padding-bottom: 60px;
-      }
+          padding-bottom: 60px;
+        }
       }
 
       @media screen and (max-width: 950px) {

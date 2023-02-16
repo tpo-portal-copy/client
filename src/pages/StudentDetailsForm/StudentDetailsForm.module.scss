@@ -30,12 +30,12 @@
     padding: 2rem;
     width: calc(100% - 480px);
 
-    .animation{
+    .animation {
       width: 400px;
       height: 400px;
     }
 
-    .heading{
+    .heading {
       display: none;
       @media only screen and (max-width: 1040px) {
         display: block;
@@ -45,8 +45,8 @@
       }
     }
 
-    .tabs_container{
-      width:100%;
+    .tabs_container {
+      width: 100%;
     }
 
     @media only screen and (max-width: 1040px) {

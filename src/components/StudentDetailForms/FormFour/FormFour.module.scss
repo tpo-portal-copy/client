@@ -1,16 +1,16 @@
-.container{
+.container {
   width: 100%;
   max-width: 700px;
 
-  .btn{
-      width:100%;
+  .btn {
+    width: 100%;
   }
 
-  .btn_container{
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      padding-top: 40px;
-      width:100%;
+  .btn_container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 40px;
+    width: 100%;
   }
 }
