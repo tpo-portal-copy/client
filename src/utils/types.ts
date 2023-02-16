@@ -1,12 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  ChangeEvent,
-  DetailedHTMLProps,
-  FormEvent,
-  FormEventHandler,
-  MouseEventHandler,
-  ReactNode,
-} from 'react'
+import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
 
 export type RouteProps = {
   id: number

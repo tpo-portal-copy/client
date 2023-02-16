@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Header, HeaderLayout } from '../components'
+import { HeaderLayout } from '../components'
 import {
   Dashboard,
   Profile,
