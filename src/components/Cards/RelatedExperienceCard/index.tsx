@@ -6,7 +6,6 @@ import styles from './RelatedExperienceCard.module.scss'
 function ExperienceCard({
   id,
   title,
-  description,
   role,
   selStatus,
   userName,
@@ -24,7 +23,6 @@ function ExperienceCard({
           <div className={styles.info_container}>
             <p className={styles.title}>{title}</p>
             <p className={styles.role}>{role}</p>
-            <p className={styles.truncate}>{description}</p>
           </div>
         </div>
         <div className={styles.separator} />

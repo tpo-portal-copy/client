@@ -6,9 +6,9 @@ import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
 import Animation from '../../assets/animations/103081-yoga-2.json'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
-import styles from './ExperienceForm.module.scss'
 import 'react-quill/dist/quill.snow.css'
 import { Input, Select } from '../../components'
+import styles from './ExperienceForm.module.scss'
 
 const roleData = [
   { id: 4, value: 'SDE' },
@@ -73,6 +73,7 @@ export default function ExperienceForm() {
     },
   })
   const [value, setValue] = useState('')
+
   return (
     <div className={styles.container}>
       <div className={styles.section}>
@@ -88,7 +89,7 @@ export default function ExperienceForm() {
               animationData={Loading}
               className={styles.animation}
             />
-            <Text className={styles.tag_line}>Thanks for sharing your valuable experience</Text>{' '}
+            <Text className={styles.tag_line}>Thankyou for sharing your valuable experience.</Text>{' '}
           </div>
         ) : (
           <>
