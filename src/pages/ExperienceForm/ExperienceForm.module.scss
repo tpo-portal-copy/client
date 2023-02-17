@@ -29,11 +29,41 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
     width: calc(100% - 480px);
+    padding: 0 1rem;
 
     @media screen and (max-width: 1040px) {
       width: 100%;
+    }
+
+    .animation_container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+
+      .animation {
+        width: 400px;
+        height: 400px;
+
+        @media screen and (max-width: 525px) {
+          width: 250px;
+          height: 250px;
+        }
+      }
+
+      .tag_line {
+        font-size: 24px;
+        text-align: center;
+        color: #1976d2;
+
+        @media screen and (max-width: 525px) {
+          font-size: 16px;
+          padding: 10px;
+        }
+      }
     }
 
     .heading {
@@ -46,11 +76,6 @@
         display: block;
         font-size: 24px;
       }
-    }
-
-    .animation {
-      width: 400px;
-      height: 400px;
     }
 
     ::-webkit-scrollbar {
@@ -75,13 +100,9 @@
       }
 
       @media screen and (max-width: 525px) {
-        padding: 0.5rem;
+        padding: 1rem;
         padding-top: 1.5rem;
       }
-    }
-
-    @media screen and (max-width: 525px) {
-      padding: 1rem;
     }
   }
 }
