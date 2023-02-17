@@ -81,17 +81,15 @@ export default function ExperienceForm() {
       </div>
       <div className={styles.content}>
         {showAnimation ? (
-          <>
+          <div className={styles.animation_container}>
             <Lottie
               loop={false}
               autoPlay={false}
               animationData={Loading}
               className={styles.animation}
             />
-            <Text align="center" fontSize="2xl" color="blue.400">
-              Thanks for sharing your valuable experience
-            </Text>{' '}
-          </>
+            <Text className={styles.tag_line}>Thanks for sharing your valuable experience</Text>{' '}
+          </div>
         ) : (
           <>
             <h1 className={styles.heading}>Share Your Experience</h1>

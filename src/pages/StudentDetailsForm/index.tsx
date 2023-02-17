@@ -5,7 +5,7 @@ import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/61212-add-to-watchlistcart.json'
 import styles from './StudentDetailsForm.module.scss'
 import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/StudentDetailForms'
-import Checked from '../../assets/animations/81544-rolling-check-mark.json'
+import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 
 export default function StudentDetailsForm() {
@@ -129,17 +129,15 @@ export default function StudentDetailsForm() {
       </div>
       <div className={styles.content}>
         {show ? (
-          <>
+          <div className={styles.animation_container}>
             <Lottie
               loop={false}
               autoPlay={false}
-              animationData={Checked}
+              animationData={Loading}
               className={styles.animation}
             />
-            <Text align="center" fontSize="2xl" color="blue.400">
-              You have successfully submitted your details
-            </Text>{' '}
-          </>
+            <Text className={styles.tag_line}>You have successfully submitted your details</Text>{' '}
+          </div>
         ) : (
           <>
             <h2 className={styles.heading}>Fill Your Details Here</h2>
