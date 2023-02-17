@@ -17,12 +17,19 @@ import {
 } from '../pages'
 
 function App() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <Routes>
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/student-details-form" element={<StudentDetailsForm />} />
-      <Route path="/experience-form" element={<ExperienceForm />} />
+      <Route path="/signup" element={<Signup />} loader={scrollToTop} />
+      <Route path="/login" element={<Login />} loader={scrollToTop} />
+      <Route path="/student-details-form" element={<StudentDetailsForm />} loader={scrollToTop} />
+      <Route path="/experience-form" element={<ExperienceForm />} loader={scrollToTop} />
       <Route
         path="/dashboard"
         element={
@@ -30,6 +37,7 @@ function App() {
             <Dashboard />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/drives"
@@ -38,6 +46,7 @@ function App() {
             <Drives />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/experiences"
@@ -46,6 +55,7 @@ function App() {
             <Experiences />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/experiences-details/:id"
@@ -54,6 +64,7 @@ function App() {
             <ExperienceDetails />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/statistics"
@@ -62,6 +73,7 @@ function App() {
             <Statistics />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/resources"
@@ -70,6 +82,7 @@ function App() {
             <Resources />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/resources-details/:branchName"
@@ -78,6 +91,7 @@ function App() {
             <ResourceDetails />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route
         path="/profile"
@@ -86,6 +100,7 @@ function App() {
             <Profile />
           </HeaderLayout>
         }
+        loader={scrollToTop}
       />
       <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route path="*" element={<Page404 />} />

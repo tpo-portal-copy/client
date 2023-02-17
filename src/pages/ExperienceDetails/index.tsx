@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 import { ExperienceCardProps } from '../../utils/types'
@@ -7,17 +6,6 @@ import styles from './ExperienceDetails.module.scss'
 
 function ExperienceDetails() {
   const { state } = useLocation()
-
-  useEffect(() => {
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
-    }
-
-    scrollToTop()
-  }, [])
 
   return (
     <div className={styles.main}>
