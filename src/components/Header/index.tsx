@@ -71,7 +71,7 @@ function Header() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            w="170px"
+            w="175px"
             _focus={{
               outline: 'none',
               border: '0px',
@@ -100,8 +100,17 @@ function Header() {
               <Link to="/profile" className={styles.option} onClick={onClose}>
                 My Profile
               </Link>
+              <Link to="/student-details-form" className={styles.option} onClick={onClose}>
+                Student Details Form
+              </Link>
               <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                 Placement Policy
+              </Link>
+              <Link to="/login" className={styles.option} onClick={onClose}>
+                Login
+              </Link>
+              <Link to="/signup" className={styles.option} onClick={onClose}>
+                Signup
               </Link>
               <Link to="/login" className={styles.option} onClick={onClose}>
                 Logout
