@@ -1,3 +1,5 @@
+@use '../../index.scss' as main;
+
 .filters {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,10 @@
   padding: 1rem;
   padding-right: calc(1rem + 4px);
   border-radius: 10px;
+  overflow-y: auto;
+  max-height: calc((100vh - var(--nav-height) - 3rem));
+
+  @include main.thin-scrollbar;
 
   @media screen and (min-width: 768px) {
     &:hover {
