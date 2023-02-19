@@ -1,3 +1,4 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
 
 export type RouteProps = {
@@ -228,4 +229,35 @@ export interface ProgressBarProps {
 
 export interface HeaderLayoutProps {
   children: ReactNode
+}
+
+export interface StatsCardProps {
+  icon: IconProp
+  bgColor: string
+  value: number
+  label: string
+  color: string
+  iconColor: string
+}
+
+export interface StatsNumberProps {
+  n: number
+}
+
+type DataType = {
+  id: string
+  label: string
+  value: number
+  color: string
+}
+
+export interface PieChartProps {
+  data: Array<DataType>
+}
+
+export interface PaginatorProps {
+  curr: number
+  max: number
+  onNext: MouseEventHandler<HTMLButtonElement>
+  onPrev: MouseEventHandler<HTMLButtonElement>
 }
