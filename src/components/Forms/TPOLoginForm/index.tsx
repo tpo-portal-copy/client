@@ -80,9 +80,11 @@ export default function TPOLoginForm() {
         ) : null}
 
         <Button
+          background="linear-gradient(40deg,#45cafc,#303f9f)"
+          color="white"
+          _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
           className={styles.btn}
           width="100%"
-          colorScheme="blue"
           isDisabled={!formik.isValid}
           type="submit"
         >

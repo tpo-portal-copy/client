@@ -4,7 +4,7 @@ function ProgressBar({ completed, step }: ProgressBarProps) {
   const containerStyles = {
     height: 10,
     width: '100%',
-    backgroundColor: '#e0e0de',
+    background: 'linear-gradient(90deg,#45cafc,#303f9f)',
     borderRadius: 50,
   }
 
