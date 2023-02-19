@@ -95,7 +95,6 @@ function Statistics() {
           <Select
             w="100%"
             bgColor="white"
-            // paddingLeft={2}
             value={session}
             placeholder="Session"
             onChange={(e) => handleSessionChange(e)}
