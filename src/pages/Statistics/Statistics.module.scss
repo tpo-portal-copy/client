@@ -98,6 +98,10 @@
       row-gap: 1rem;
       width: 100%;
       min-width: 500px;
+
+      @media screen and (max-width: 525px) {
+        min-width: 0;
+      }
     }
 
     .graph_container {
