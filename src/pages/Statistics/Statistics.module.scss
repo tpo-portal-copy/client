@@ -97,7 +97,7 @@
       grid-template-columns: repeat(1, auto);
       row-gap: 1rem;
       width: 100%;
-      max-width: 500px;
+      min-width: 500px;
     }
 
     .graph_container {

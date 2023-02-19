@@ -15,13 +15,13 @@ export default function Login() {
       <div className={styles.content}>
         <Text className={styles.heading}>Hi There,</Text>
         <Text className={styles.sub_heading}>Welcome back</Text>
-        <Tabs className={styles.tabs_container} variant="soft-rounded" colorScheme="blue">
+        <Tabs className={styles.tabs_container} colorScheme="blackAlpha">
           <TabList>
             <Tab>Student</Tab>
             <Tab>TPO</Tab>
             <Tab>TPR</Tab>
           </TabList>
-          <TabPanels>
+          <TabPanels minHeight="230px">
             <TabPanel>
               <StudentLoginForm />
             </TabPanel>
