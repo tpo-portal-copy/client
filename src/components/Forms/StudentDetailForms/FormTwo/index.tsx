@@ -167,16 +167,20 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
 
         <div className={styles.btn_container}>
           <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            colorScheme="blue"
             type="submit"
             onClick={() => onBack(formik.values)}
           >
             Back
           </Button>
           <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            colorScheme="blue"
             isDisabled={!formik.isValid}
             type="submit"
           >

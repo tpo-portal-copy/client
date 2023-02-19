@@ -227,7 +227,9 @@ export default function ExperienceForm() {
                   ) : null}
 
                   <Button
-                    colorScheme="blue"
+                    background="linear-gradient(40deg,#45cafc,#303f9f)"
+                    color="white"
+                    _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
                     isLoading={isLoading}
                     type="submit"
                     isDisabled={!formik.isValid}

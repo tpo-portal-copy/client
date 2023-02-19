@@ -291,12 +291,21 @@ export default function FormOne({ onNext, data }: FormOneProps) {
           <ImgUploader />
 
           <div className={styles.btn_container}>
-            <Button className={styles.btn} colorScheme="blue" isDisabled type="submit">
+            <Button
+              background="linear-gradient(40deg,#45cafc,#303f9f)"
+              color="white"
+              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+              className={styles.btn}
+              isDisabled
+              type="submit"
+            >
               Back
             </Button>
             <Button
+              background="linear-gradient(40deg,#45cafc,#303f9f)"
+              color="white"
+              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
               className={styles.btn}
-              colorScheme="blue"
               isDisabled={!formik.isValid}
               type="submit"
             >
