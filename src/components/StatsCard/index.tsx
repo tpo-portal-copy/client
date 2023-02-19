@@ -32,9 +32,9 @@ export default function StatsCard({
         />
       </div>
       <div className={styles.fields_container}>
-        <Text className={styles.txt1}>
+        <div className={styles.txt1}>
           <Number n={value} />
-        </Text>
+        </div>
         <Text className={styles.txt2}>{label}</Text>
       </div>
     </div>
