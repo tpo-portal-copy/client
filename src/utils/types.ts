@@ -240,6 +240,21 @@ export interface StatsCardProps {
   iconColor: string
 }
 
+export interface StatsNumberProps {
+  n: number
+}
+
+type DataType = {
+  id: string
+  label: string
+  value: number
+  color: string
+}
+
+export interface PieChartProps {
+  data: Array<DataType>
+}
+
 export interface PaginatorProps {
   curr: number
   max: number

@@ -48,11 +48,11 @@ function Statistics() {
   const [job, setJob] = useState('')
   const [session, setSession] = useState('')
 
-  const handleJobChange = (e) => {
+  const handleJobChange = (e: any) => {
     setJob(e.target.value)
   }
 
-  const handleSessionChange = (e) => {
+  const handleSessionChange = (e: any) => {
     setSession(e.target.value)
   }
 

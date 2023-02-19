@@ -1,10 +1,10 @@
 import { Text } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSpring, animated } from 'react-spring'
-import { StatsCardProps } from '../../utils/types'
+import { StatsCardProps, StatsNumberProps } from '../../utils/types'
 import styles from './StatsCard.module.scss'
 
-function Number({ n }) {
+function Number({ n }: StatsNumberProps) {
   const { number } = useSpring({
     from: { number: 0 },
     number: n,

@@ -1,6 +1,7 @@
 import { ResponsivePie } from '@nivo/pie'
+import { PieChartProps } from '../../utils/types'
 
-export default function PieChart({ data }) {
+export default function PieChart({ data }: PieChartProps) {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <ResponsivePie
