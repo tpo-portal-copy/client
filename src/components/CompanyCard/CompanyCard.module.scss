@@ -1,0 +1,40 @@
+.container {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  padding: 1rem;
+  width: 225px;
+
+  .icon_container {
+    .icon {
+      width: 30px;
+      height: 30px;
+      padding: 20px;
+    }
+  }
+
+  .fields_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .txt1 {
+      font-size: 25px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .txt2 {
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    box-shadow: var(--card-shadow);
+  }
+}
