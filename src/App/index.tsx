@@ -13,6 +13,7 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
+  StatisticsDetails,
 } from '../pages'
 import styles from './App.module.scss'
 
@@ -62,6 +63,14 @@ function App() {
           element={
             <SidebarLayout>
               <Statistics />
+            </SidebarLayout>
+          }
+        />
+        <Route
+          path="/statistics-details"
+          element={
+            <SidebarLayout>
+              <StatisticsDetails />
             </SidebarLayout>
           }
         />

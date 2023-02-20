@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Tag } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { DrivesCardProps } from '../../../utils/types'
@@ -9,6 +10,10 @@ function DrivesCard({
   imgUrl,
   ctcOffered,
   startingDate,
+  modeOfHiring,
+  ppt,
+  aptitudeTest,
+  jobLocation,
   type,
   eligibleBatches,
   jobProfile,
@@ -22,10 +27,16 @@ function DrivesCard({
             <h2 className={styles.company_name}>{companyName}</h2>
             <div className={styles.company_details}>
               <div className={styles.company_info}>
-                <p>{jobProfile}</p>
-                <p>{ctcOffered} LPA</p>
+                <Tag>{jobProfile}</Tag>
+                <Tag>{ctcOffered} LPA</Tag>
+                <Tag className={styles.starting_date}>{startingDate.toLocaleDateString()} </Tag>
+                <Tag>Mode of Hiring: {modeOfHiring}</Tag>
               </div>
-              <p className={styles.starting_date}>{startingDate.toLocaleDateString()}</p>
+              <div className={styles.company_info}>
+                <Tag>PPT: {ppt}</Tag>
+                <Tag>Aptitude Test: {aptitudeTest}</Tag>
+                <Tag>Job Location: {jobLocation}</Tag>
+              </div>
             </div>
           </div>
         </div>
@@ -38,10 +49,14 @@ function DrivesCard({
       <div className={styles.bottom_content}>
         <div className={styles.eligible_batches_list}>
           {eligibleBatches.map((batch) => {
-            return <span key={batch}>{batch}</span>
+            return (
+              <Tag backgroundColor="lightGrey" key={batch}>
+                {batch}
+              </Tag>
+            )
           })}
         </div>
-        <span>{type}</span>
+        <Tag backgroundColor="lightGrey">{type}</Tag>
       </div>
     </div>
   )

@@ -117,6 +117,10 @@ export interface DrivesCardProps {
   imgUrl: string
   ctcOffered: number
   startingDate: Date
+  modeOfHiring: string
+  aptitudeTest: string
+  ppt: string
+  jobLocation: string
   type: string
   eligibleBatches: Array<string>
   jobProfile: string
@@ -131,4 +135,40 @@ export interface ClusterType {
 export interface SidebarProps {
   onLinkClickHandler?: () => void
   isMobile?: boolean
+}
+
+export interface StatisticsDetailsProps {
+  id: number
+  company: string
+  totalOffers: number
+  courses: Array<StatisticsDetailsCourseProps>
+}
+
+export interface StatisticsDetailsCourseProps {
+  id: number
+  courseName: string
+  totalCourseOffers?: number
+  roles: Array<StatisticsDetailsRoleProps>
+  branches: Array<StatisticsDetailsCourseBranchesProps>
+}
+
+export interface StatisticsDetailsRoleProps {
+  id: number
+  roleName: string
+  ctcOffered: number
+  totalroleoffers: number
+  branches: Array<StatisticsDetailsBranchProps>
+}
+
+export interface StatisticsDetailsBranchProps {
+  id: number
+  branchName: string
+  offers: number
+}
+
+export interface StatisticsDetailsCourseBranchesProps {
+  id: number
+  branchName?: string
+  Offers: any
+  offersBranchWise: number
 }

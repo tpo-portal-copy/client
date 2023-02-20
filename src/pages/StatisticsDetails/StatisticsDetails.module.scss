@@ -1,0 +1,37 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
+  gap: 1.6rem;
+
+  .page_name {
+    font-size: var(--lg-heading);
+    font-weight: 600;
+    color: var(--text-color-primary);
+
+    @media screen and (max-width: 520px) {
+      font-size: 28px;
+      padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+    }
+  }
+
+  .year_filter {
+    background-color: white;
+    border-radius: 6px;
+    height: fit-content;
+  }
+}
+
+.course_container {
+  padding-bottom: 1rem;
+  margin: 3rem 2rem 0.8rem 2rem;
+  border-radius: 8px;
+  background-color: white;
+    margin-bottom: 1rem;
+ 
+  .course_title {
+    padding: 0.7rem 0rem 0.7rem 1rem;
+    font-weight: 500;
+  }
+}
