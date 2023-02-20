@@ -1,24 +1,21 @@
-/* eslint-disable no-nested-ternary */
 import styles from './Input.module.scss'
 import { InputProps } from '../../utils/types'
 
-export default function Input({ label, type, options = [] }: InputProps) {
+export default function Input({ name, placeholder, onChange, onBlur, value, type }: InputProps) {
   return (
     <div className={styles.container}>
-      <span className={styles.label}>{label}</span>
-      {type === 'field' ? (
-        <input placeholder="Enter Here" className={styles.field} />
-      ) : type === 'list' ? (
-        <select className={styles.drop_down_container}>
-          {options.map((info) => (
-            <option key={info.id} value={info.value}>
-              {info.value}
-            </option>
-          ))}
-        </select>
-      ) : (
-        <input className={styles.checkbox} type="checkbox" />
-      )}
+      <label htmlFor={name} className={styles.label}>
+        {placeholder}
+      </label>
+      <input
+        type={type}
+        value={value}
+        id={name}
+        onChange={onChange}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        className={styles.field}
+      />
     </div>
   )
 }

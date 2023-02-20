@@ -1,32 +1,16 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import { makeStyles } from '@mui/styles'
-import { Box } from '@mui/material'
-
-const useStyles = makeStyles({
-  card: {
-    backgroundColor: 'var(--custom-white-v1)',
-  },
-  title: {
-    fontSize: '24px',
-    paddingBottom: '10px',
-  },
-  description: {
-    fontSize: '16px',
-  },
-})
+import { Box, Card, CardBody } from '@chakra-ui/react'
+import styles from './ResourceDetailsCard.module.scss'
 
 export default function ResourceDetailsCard() {
-  const classes = useStyles()
   return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Box className={classes.title}>Lizard</Box>
-        <Box className={classes.description}>
+    <Card className={styles.card}>
+      <CardBody>
+        <Box className={styles.title}>Lizard</Box>
+        <Box className={styles.description}>
           Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
           across all continents except Antarctica
         </Box>
-      </CardContent>
+      </CardBody>
     </Card>
   )
 }

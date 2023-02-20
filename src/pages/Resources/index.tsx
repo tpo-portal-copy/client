@@ -1,27 +1,28 @@
-import { Grid } from '@mui/material'
-import { ResourcesCard } from '../../components'
-import ResourcesData from '../../utils/Data/ResourcesData'
+import { Grid, GridItem } from '@chakra-ui/react'
+import { ResourcesCard } from '../../components/Cards'
+import { resourcesData } from '../../utils/Data/resourcesData'
 import { ResourcesCardProps } from '../../utils/types'
 import styles from './Resources.module.scss'
 
 function Resources() {
   return (
-    <>
-      {' '}
+    <div className={styles.resources}>
       <h1 className={styles.page_name}>Resources</h1>
       <Grid
-        container
-        padding={4}
-        columns={{ xs: 1, sm: 2, md: 3 }}
-        spacing={{ xs: 2, sm: 3, md: 4 }}
+        justifyContent="center"
+        placeItems="center"
+        templateColumns="repeat(auto-fit,minmax(350px,1fr))"
+        gap="1.5rem"
+        padding="1rem 2rem"
+        marginBottom="3rem"
       >
-        {ResourcesData.map((dept: ResourcesCardProps) => (
-          <Grid item key={dept.id} xs={1}>
+        {resourcesData.map((dept: ResourcesCardProps) => (
+          <GridItem key={dept.id}>
             <ResourcesCard {...dept} />
-          </Grid>
+          </GridItem>
         ))}
       </Grid>
-    </>
+    </div>
   )
 }
 

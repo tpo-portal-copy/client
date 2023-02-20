@@ -1,35 +1,21 @@
-import { styled } from '@mui/material/styles'
-import { Typography, Container, Box } from '@mui/material'
+import { Text } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
+import { Link } from 'react-router-dom'
 import Animation from '../../assets/animations/68592-error-404-creature.json'
-
-const StyledContent = styled('div')(({ theme }) => ({
-  maxWidth: 480,
-  margin: 'auto',
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  padding: theme.spacing(12, 0),
-}))
+import styles from './Page404.module.scss'
 
 export default function Page404() {
   return (
-    <Container>
-      <StyledContent sx={{ textAlign: 'center', alignItems: 'center' }}>
-        <Typography variant="h3" paragraph>
-          Oops....
-        </Typography>
+    <div className={styles.container}>
+      <Text className={styles.heading}>Oops....</Text>
+      <Text className={styles.para}>This page could not be found</Text>
 
-        <Typography sx={{ color: 'text.secondary' }}>
-          Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be
-          sure to check your spelling.
-        </Typography>
-
-        <Box sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}>
-          <Lottie animationData={Animation} />
-        </Box>
-      </StyledContent>
-    </Container>
+      <div className={styles.animation_container}>
+        <Lottie animationData={Animation} />
+      </div>
+      <Link to="/" className={styles.link}>
+        Go Back To Home
+      </Link>
+    </div>
   )
 }

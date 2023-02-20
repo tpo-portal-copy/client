@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  border-radius: 20px;
+  max-width: 400px;
+  max-height: 300px;
+
+  .img {
+    width: fit-content;
+    border-radius: 20px;
+  }
+
+  .title {
+    position: absolute;
+    color: var(--custom-white-v1);
+    padding: 1rem 1.5rem;
+    top: 3%;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  .btn {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+}

@@ -10,10 +10,10 @@ import {
   PopoverTrigger,
   useDisclosure,
 } from '@chakra-ui/react'
-import styles from './Header.module.scss'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
+import styles from './Header.module.scss'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
@@ -36,7 +36,7 @@ function Header() {
       <div className={styles.content}>
         <div className={`${styles.overlay} ${isSidebarVisible ? styles.show : ''}`}>
           <div className={`${styles.sidebar_container}`} ref={sidebarRef}>
-            <Sidebar onLinkClickHandler={closeSidebar} isMobile />
+            <Sidebar onLinkClickHandler={closeSidebar} />
           </div>
         </div>
         <div className={styles.title_container}>
@@ -55,7 +55,7 @@ function Header() {
                 <NavLink
                   to={navItem.url}
                   className={`${styles.nav_item} ${
-                    location.pathname === navItem.url ? styles.selected : ''
+                    location.pathname.includes(navItem.url) ? styles.selected : ''
                   }`}
                 >
                   {navItem.name}
@@ -71,7 +71,7 @@ function Header() {
             </div>
           </PopoverTrigger>
           <PopoverContent
-            w="170px"
+            w="175px"
             _focus={{
               outline: 'none',
               border: '0px',
@@ -100,8 +100,17 @@ function Header() {
               <Link to="/profile" className={styles.option} onClick={onClose}>
                 My Profile
               </Link>
+              <Link to="/student-details-form" className={styles.option} onClick={onClose}>
+                Student Details Form
+              </Link>
               <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                 Placement Policy
+              </Link>
+              <Link to="/login" className={styles.option} onClick={onClose}>
+                Login
+              </Link>
+              <Link to="/signup" className={styles.option} onClick={onClose}>
+                Signup
               </Link>
               <Link to="/login" className={styles.option} onClick={onClose}>
                 Logout

@@ -1,61 +1,38 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Card, useMediaQuery } from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import { useLocation } from 'react-router-dom'
-import { ResourceDetailsCard } from '../../components'
+import { Accordion, Box, Input, useMediaQuery } from '@chakra-ui/react'
+import { useParams } from 'react-router'
+import { FaqItem } from '../../components'
+import { ResourceDetailsCard } from '../../components/Cards'
+import { faqData } from '../../utils/Data/resourcesData'
+import { FaqProps } from '../../utils/types'
 import styles from './ResourceDetails.module.scss'
 
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    gap: '1rem',
-    padding: '0rem 2rem',
-    '@media (max-width:525px)': {
-      padding: '0rem 1rem',
-    },
-  },
-  resource: {
-    width: '70%',
-    '@media (max-width:850px)': {
-      width: '100%',
-    },
-  },
-  faq: {
-    width: '30%',
-  },
-  card: {
-    marginBottom: '1rem',
-  },
-})
-
 function ResourceDetails() {
-  const classes = useStyles()
-  const { state } = useLocation()
-  const isMobile = useMediaQuery('(max-width:850px)')
+  const { branchName } = useParams()
+  const [isLargerThan525] = useMediaQuery('(min-width: 525px)')
 
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.page_name}>{state.label} Resources</h1>
-        <div className={styles.search_box}>
-          <FontAwesomeIcon icon={faSearch} size="sm" className={styles.input_icon} />
-          <input placeholder="Resource..." type="text" name="text" className={styles.input} />
-        </div>
+        <h1 className={styles.page_name}>{`${branchName} Resources`}</h1>
+        <Input
+          type="search"
+          placeholder="Search Resources"
+          maxW={isLargerThan525 ? '300px' : 'none'}
+          backgroundColor="var(--custom-white-v1)"
+        />
       </div>
-      <Box className={classes.container}>
-        <Box className={classes.resource}>
-          <Box className={classes.card}>
-            <ResourceDetailsCard />
-          </Box>
-          <Box className={classes.card}>
-            <ResourceDetailsCard />
-          </Box>
-          <Box className={classes.card}>
-            <ResourceDetailsCard />
-          </Box>
+      <Box className={styles.page_body}>
+        <Box className={styles.resource}>
+          <ResourceDetailsCard />
+          <ResourceDetailsCard />
+          <ResourceDetailsCard />
         </Box>
-        {!isMobile && <Card className={classes.faq}>faq</Card>}
+        <h3 className={styles.faq_title}>FAQs</h3>
+        <Accordion allowToggle mb={10}>
+          {faqData.map((faq: FaqProps) => (
+            <FaqItem key={faq.id} {...faq} />
+          ))}
+        </Accordion>
       </Box>
     </>
   )
