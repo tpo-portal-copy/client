@@ -1,3 +1,4 @@
+import Lottie from 'lottie-react'
 import styles from './Profile.module.scss'
 import { FieldInfo } from '../../components'
 
@@ -10,6 +11,8 @@ import {
   addressData,
   competitiveData,
 } from '../../utils/Data/profileData'
+import MAvatar from '../../assets/animations/131392-avatar.json'
+import FAvatar from '../../assets/animations/131393-avatar-female.json'
 import { ClusterCard } from '../../components/Cards'
 
 function getRandomCoverGradient(): string {
@@ -44,10 +47,11 @@ function Profile() {
           <div className={styles.profile_header}>
             <div className={styles.profile_content}>
               <div style={{ background: getRandomCoverGradient() }} className={styles.cover_img} />
-              <img
+              <Lottie
                 className={styles.profile_img}
-                src="https://www.dropbox.com/s/iv3vsr5k6ib2pqx/avatar_default.jpg?dl=1"
-                alt=""
+                width="150px"
+                height="150px"
+                animationData={MAvatar}
               />
             </div>
             <div className={styles.student_name_container}>
