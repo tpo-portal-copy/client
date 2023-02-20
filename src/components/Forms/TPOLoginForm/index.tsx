@@ -1,27 +1,23 @@
 import { useState } from 'react'
+import { Link as Links } from 'react-router-dom'
 import {
-  Stack,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Button,
+  Input,
+  Text,
+  VStack,
   Box,
+  Button,
   Alert,
-  Typography,
-} from '@mui/material'
-import { makeStyles } from '@mui/styles'
+  AlertIcon,
+  InputGroup,
+  InputRightElement,
+} from '@chakra-ui/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-
-const useStyles = makeStyles({
-  showPwd: {
-    fontSize: '5px',
-  },
-})
+import styles from './TPOLoginForm.module.scss'
 
 export default function TPOLoginForm() {
-  const classes = useStyles()
-
   const [showPassword, setShowPassword] = useState(false)
 
   const formik = useFormik({
@@ -41,51 +37,60 @@ export default function TPOLoginForm() {
     },
   })
 
+  const handleIconClick = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Stack spacing={3}>
-        <TextField
+    <form className={styles.form_container} onSubmit={formik.handleSubmit}>
+      <VStack spacing={3}>
+        <Input
           name="email"
-          label="TPO ID"
-          value={formik.values.email}
+          placeholder="Email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email ? (
-          <Alert severity="error">
+          <Alert borderRadius={5} status="error">
+            <AlertIcon />
             {formik.errors.email.charAt(0).toUpperCase() + formik.errors.email.slice(1)}
           </Alert>
         ) : null}
 
-        <TextField
-          name="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Typography className={classes.showPwd}> Show Password</Typography>
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <InputGroup>
+          <Input
+            name="password"
+            placeholder="Password"
+            type={showPassword ? 'text' : 'password'}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          <InputRightElement>
+            <Button onClick={handleIconClick}>
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </Button>
+          </InputRightElement>
+        </InputGroup>
         {formik.touched.password && formik.errors.password ? (
-          <Alert severity="error">
+          <Alert borderRadius={5} status="error">
+            <AlertIcon />
             {formik.errors.password.charAt(0).toUpperCase() + formik.errors.password.slice(1)}
           </Alert>
         ) : null}
-      </Stack>
 
-      <Box sx={{ paddingTop: '20px' }}>
-        <Button disabled={!formik.isValid} fullWidth size="large" type="submit" variant="contained">
+        <Button
+          background="linear-gradient(40deg,#45cafc,#303f9f)"
+          color="white"
+          _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+          className={styles.btn}
+          width="100%"
+          isDisabled={!formik.isValid}
+          type="submit"
+        >
           Login
         </Button>
-      </Box>
+      </VStack>
     </form>
   )
 }

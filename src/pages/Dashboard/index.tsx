@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 import { faApple } from '@fortawesome/free-brands-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import DashboardPostCard from '../../components/Cards/DashboardPostCard'
 import { pastExperienceData, postsData, upcomingDriveData } from '../../utils/Data/dashboardData'
 import { Drive, PastExperienceSummary, Post } from '../../utils/types'
 import styles from './Dashboard.module.scss'
+import { DashboardPostCard } from '../../components/Cards'
 
 function Dashboard() {
   return (

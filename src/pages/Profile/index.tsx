@@ -1,5 +1,6 @@
+import Lottie from 'lottie-react'
 import styles from './Profile.module.scss'
-import { ClusterCard, FieldInfo } from '../../components'
+import { FieldInfo } from '../../components'
 
 import {
   profileData,
@@ -10,6 +11,32 @@ import {
   addressData,
   competitiveData,
 } from '../../utils/Data/profileData'
+import MAvatar from '../../assets/animations/131392-avatar.json'
+import FAvatar from '../../assets/animations/131393-avatar-female.json'
+import { ClusterCard } from '../../components/Cards'
+
+function getRandomCoverGradient(): string {
+  const random = Math.round(Math.random() * (8 - 0) + 0)
+
+  switch (random) {
+    case 1:
+      return 'linear-gradient(120deg,#f6d365 0,#fda085 100%)'
+    case 2:
+      return 'linear-gradient(to top,#fbc2eb 0,#a6c1ee 100%)'
+    case 3:
+      return 'linear-gradient(to top,#ff9a9e 0,#fecfef 99%,#fecfef 100%)'
+    case 4:
+      return 'linear-gradient(to right, rgb(116, 235, 213), rgb(172, 182, 229))'
+    case 5:
+      return 'linear-gradient(to right, rgb(102, 125, 182), rgb(0, 130, 200), rgb(0, 130, 200), rgb(102, 125, 182))'
+    case 6:
+      return 'linear-gradient(to right, rgb(6, 190, 182), rgb(72, 177, 191))'
+    case 7:
+      return 'linear-gradient(to right, rgb(0, 0, 70), rgb(28, 181, 224))'
+    default:
+      return 'linear-gradient(to right, rgb(58, 28, 113), rgb(215, 109, 119), rgb(255, 175, 123))'
+  }
+}
 
 function Profile() {
   return (
@@ -19,15 +46,12 @@ function Profile() {
         <div className={styles.profile_header_container}>
           <div className={styles.profile_header}>
             <div className={styles.profile_content}>
-              <img
-                className={styles.cover_img}
-                src="https://source.unsplash.com/WLUHO9A_xik/"
-                alt=""
-              />
-              <img
+              <div style={{ background: getRandomCoverGradient() }} className={styles.cover_img} />
+              <Lottie
                 className={styles.profile_img}
-                src="https://www.dropbox.com/s/iv3vsr5k6ib2pqx/avatar_default.jpg?dl=1"
-                alt=""
+                width="150px"
+                height="150px"
+                animationData={MAvatar}
               />
             </div>
             <div className={styles.student_name_container}>
@@ -81,12 +105,7 @@ function Profile() {
             <div className={styles.cluster_container}>
               <p className={styles.cluster_title}>Chosen Clusters</p>
               {clusterData.map((data) => (
-                <ClusterCard
-                  type="mark"
-                  key={data.id}
-                  title={data.cluster_title}
-                  range={data.range}
-                />
+                <ClusterCard key={data.id} title={data.cluster_title} range={data.range} />
               ))}
             </div>
             <div className={styles.stats_container}>
@@ -100,9 +119,6 @@ function Profile() {
                 <span className={styles.profile_link}>LinkedIn profile</span>
               </div>
             </div>
-          </div>
-
-          <div className={styles.sub_container}>
             <div className={styles.address_container}>
               <p className={styles.address_title}>Competitive Exams</p>
               <div className={styles.address_fields_container}>

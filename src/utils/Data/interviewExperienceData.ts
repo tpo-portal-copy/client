@@ -2,9 +2,9 @@ export const interviewExperienceInfoList = [
   {
     id: 0,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'SDE',
-    description: 'lorem ipsum don eros lorem ipsum',
+    description: 'lorem ipsum don eros',
     selStatus: 'Selected',
     userName: 'Nikhil Thakur',
     jobType: 'Internship',
@@ -14,10 +14,10 @@ export const interviewExperienceInfoList = [
   {
     id: 1,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'DA Analyst',
     description:
-      // 'lorem ipsum don eros lorem ipsum ;sbmljvbhjcv,  njsbdhjsVD HJSJHDB Sb kbshcbwj lkjbsdjhc  jhwvdljhbwejh jhbvw   fej nw    hjlwbrhjlbjbjl  ljlhbfljnbsljh vejnlbe    v bl',
+      // 'lorem ipsum don eros ;sbmljvbhjcv,  njsbdhjsVD HJSJHDB Sb kbshcbwj lkjbsdjhc  jhwvdljhbwejh jhbvw   fej nw    hjlwbrhjlbjbjl  ljlhbfljnbsljh vejnlbe    v bl',
       `Info Edge is one of the publicly listed leading internet based companies offering outstanding services in various fields such as recruitment(naukri.com), real estate(99acres.com), matrimony (jeevansathi.com), and education(shiksha.com).
 
 Info Edge visited our campus and conducted a recruitment drive for the role of Software Engineer for final year B Tech students belonging to CSE and ECE branches.
@@ -75,13 +75,13 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
   {
     id: 2,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'SDE2',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis, felis eget commodo mattis, justo tortor dapibus risus, in vulputate orci dolor a arcu. Etiam eu sapien ultricies, maximus magna sit amet, suscipit lorem. Nunc bibendum sodales lacinia. Sed posuere erat felis. Vivamus finibus erat et ullamcorper mattis. Proin a arcu arcu. Donec vitae interdum leo. Duis vel tempus odio, non eleifend diam. Nunc velit lorem, sodales auctor tellus at, commodo lacinia odio. Nulla in lacus at mauris lobortis vestibulum.\n' +
       'In molestie varius neque, in pulvinar nibh efficitur quis. Proin sodales diam ac tortor mattis tempus. Nunc sollicitudin dictum elit, non rutrum lacus bibendum sed. Aenean ac diam ipsum. Cras convallis nisi a dolor tincidunt, vitae semper turpis vulputate. Praesent consectetur justo vitae ante consequat commodo. Curabitur orci neque, cursus et lacinia sed, maximus eu nulla. Fusce vitae facilisis quam, ut mattis tortor. Donec elementum dapibus massa at viverra. Aenean rutrum ut purus id bibendum. Curabitur posuere arcu eu sem dapibus iaculis.\n' +
       'Donec faucibus ac ligula nec porta. Nunc interdum suscipit libero, eget pharetra libero vestibulum ut. Proin at enim eget purus aliquam dictum nec at elit. Morbi vel turpis dapibus, consectetur mauris nec, porttitor nulla. Donec vitae augue ipsum. Sed magna turpis, luctus vitae pretium vitae, dictum ac augue. Vivamus non massa sit amet nisl fermentum aliquet ut eget ipsum. Nullam eget nibh leo. Vivamus condimentum et lacus eget euismod. Nulla sit amet magna blandit, laoreet orci nec, euismod tellus.\n' +
-      'In semper pellentesque dui commodo finibus. Sed leo mauris, ultricies iaculis placerat vel, pharetra nec nibh. Morbi eu elit vitae sem rhoncus finibus. Maecenas viverra nisl in tellus varius, at finibus est porta. Fusce sit amet quam laoreet lectus tincidunt tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate nunc et ipsum euismod sodales. Nunc eleifend odio ex, id dapibus sapien egestas vehicula. Aenean vel augue ipsum. Nulla est turpis, ultricies at lorem lobortis, aliquet hendrerit dolor. Praesent scelerisque volutpat mauris vel ultrices. Praesent turpis nulla, sagittis sit amet tristique in, interdum eget justo. Nullam porta elementum erat sed sagittis.\n' +
+      'In semper pellentesque dui commodo finibus. Sed leo mauris, ultricies iaculis placerat vel, pharetra nec nibh. Morbi eu elit vitae sem rhoncus finibus. Maecenas viverra nisl in tellus varius, at finibus est porta. Fusce sit amet quam laoreet lectus tincidunt tincidunt. dolor sit amet, consectetur adipiscing elit. Curabitur vulputate nunc et ipsum euismod sodales. Nunc eleifend odio ex, id dapibus sapien egestas vehicula. Aenean vel augue ipsum. Nulla est turpis, ultricies at lorem lobortis, aliquet hendrerit dolor. Praesent scelerisque volutpat mauris vel ultrices. Praesent turpis nulla, sagittis sit amet tristique in, interdum eget justo. Nullam porta elementum erat sed sagittis.\n' +
       'Vestibulum eget tortor tincidunt, molestie nulla sed, molestie elit. Vivamus gravida, lorem vel rutrum ultricies, enim enim ullamcorper dui, ac tristique quam urna fringilla diam. Praesent imperdiet blandit odio, id molestie neque posuere eget. Curabitur nec sapien a augue fringilla feugiat sed id felis. Integer id convallis dolor. Phasellus ullamcorper felis in bibendum sagittis. Fusce eleifend varius sem, ut lobortis lacus tincidunt id. In diam arcu, malesuada sit amet dictum a, tincidunt lacinia libero. Pellentesque eu pharetra risus. Nunc posuere leo nec lacus tempus, eu interdum massa efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam iaculis magna sit amet tincidunt venenatis. Praesent accumsan metus ut vehicula ornare. Pellentesque tempor venenatis orci, vitae ultrices mi consequat sit amet. Duis pharetra luctus felis eu ullamcorper. Praesent mattis, libero in sollicitudin eleifend, nibh mi condimentum enim, et lobortis ex quam et elit. Cras pretium pulvinar placerat. Aenean varius nec mi eu dictum. Suspendisse a metus vitae.\n',
     selStatus: 'Selected',
     userName: 'anonymous',
@@ -92,9 +92,9 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
   {
     id: 3,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'SDE',
-    description: 'lorem ipsum don eros lorem ipsum',
+    description: 'lorem ipsum don eros',
     selStatus: 'Selected',
     userName: 'Nikhil Thakur',
     jobType: 'Internship',
@@ -104,9 +104,9 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
   {
     id: 4,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'SDE',
-    description: 'lorem ipsum don eros lorem ipsum',
+    description: 'lorem ipsum don eros',
     selStatus: 'Selected',
     userName: 'Nikhil Thakur',
     jobType: 'Internship',
@@ -116,9 +116,9 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
   {
     id: 5,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'SDE',
-    description: 'lorem ipsum don eros lorem ipsum',
+    description: 'lorem ipsum don eros',
     selStatus: 'Selected',
     userName: 'Nikhil Thakur',
     jobType: 'Internship',
@@ -128,9 +128,9 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
   {
     id: 6,
     imgUrl: 'https://picsum.photos/200',
-    title: 'Company title lorem ipsum',
+    title: 'Company title',
     role: 'SDE',
-    description: 'lorem ipsum don eros lorem ipsum',
+    description: 'lorem ipsum don eros',
     selStatus: 'Selected',
     userName: 'Nikhil Thakur',
     jobType: 'Internship',
@@ -142,7 +142,7 @@ A strong understanding of theoretical core concepts and problem-solving abilitie
 export const companyList = [
   {
     id: 0,
-    name: 'Apple0',
+    name: 'Netwest',
   },
   {
     id: 1,

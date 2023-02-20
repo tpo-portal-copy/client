@@ -1,5 +1,5 @@
 const navItems = [
-  { id: 0, name: 'Dashboard', url: '/' },
+  { id: 0, name: 'Dashboard', url: '/dashboard' },
   {
     id: 1,
     name: 'Drives',

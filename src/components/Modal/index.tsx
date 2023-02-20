@@ -19,20 +19,25 @@ export default function CustomModal({ title, isOpen, onCloseHandler }: ModalProp
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <div className={styles.grid_container}>
-            {title === 'Companies' &&
-              companyList.map((company: CompanyListProps) => (
+          {title === 'Companies' && (
+            <div className={`${styles.grid_container} ${styles.companies}`}>
+              {companyList.map((company: CompanyListProps) => (
                 <div key={company.id} className={styles.grid_item}>
                   <CheckListItem label={company.name} />
                 </div>
               ))}
-            {title === 'Roles' &&
-              roleList.map((role: RoleListProps) => (
+            </div>
+          )}
+
+          {title === 'Roles' && (
+            <div className={`${styles.grid_container} ${styles.roles}`}>
+              {roleList.map((role: RoleListProps) => (
                 <div key={role.id} className={styles.grid_item}>
                   <CheckListItem label={role.name} />
                 </div>
               ))}
-          </div>
+            </div>
+          )}
         </ModalBody>
       </ModalContent>
     </Modal>

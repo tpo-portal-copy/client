@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
-import { Header } from '../components'
-import SidebarLayout from '../components/SidebarLayout'
+import { useEffect } from 'react'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { HeaderLayout } from '../components'
 import {
   Dashboard,
   Profile,
@@ -13,86 +13,106 @@ import {
   Statistics,
   Page404,
   ExperienceDetails,
+  ExperienceForm,
+  ResourceDetails,
   StatisticsDetails,
 } from '../pages'
-import styles from './App.module.scss'
 
 function App() {
-  return (
-    <div className={styles.app}>
-      <Header />
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/student-details-form" element={<StudentDetailsForm />} />
-        <Route
-          path="/"
-          element={
-            <SidebarLayout>
-              <Dashboard />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/drives"
-          element={
-            <SidebarLayout>
-              <Drives />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/experiences"
-          element={
-            <SidebarLayout>
-              <Experiences />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/experience-details/:id"
-          element={
-            <SidebarLayout>
-              <ExperienceDetails />
-            </SidebarLayout>
-          }
-        />
+  const { pathname } = useLocation()
 
-        <Route
-          path="/statistics"
-          element={
-            <SidebarLayout>
-              <Statistics />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/statistics-details"
-          element={
-            <SidebarLayout>
-              <StatisticsDetails />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/resources"
-          element={
-            <SidebarLayout>
-              <Resources />
-            </SidebarLayout>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <SidebarLayout>
-              <Profile />
-            </SidebarLayout>
-          }
-        />
-        <Route path="/404" element={<Page404 />} />
-      </Routes>
-    </div>
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.document.documentElement.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }
+
+    scrollToTop()
+  }, [pathname])
+
+  return (
+    <Routes>
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/student-details-form" element={<StudentDetailsForm />} />
+      <Route path="/experience-form" element={<ExperienceForm />} />
+      <Route
+        path="/dashboard"
+        element={
+          <HeaderLayout>
+            <Dashboard />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/drives"
+        element={
+          <HeaderLayout>
+            <Drives />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/experiences"
+        element={
+          <HeaderLayout>
+            <Experiences />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/experiences-details/:id"
+        element={
+          <HeaderLayout>
+            <ExperienceDetails />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/statistics"
+        element={
+          <HeaderLayout>
+            <Statistics />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/statistics-details"
+        element={
+          <SidebarLayout>
+            <StatisticsDetails />
+          </SidebarLayout>
+        }
+      />
+      <Route
+        path="/resources"
+        element={
+          <HeaderLayout>
+            <Resources />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/resources-details/:branchName"
+        element={
+          <HeaderLayout>
+            <ResourceDetails />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <HeaderLayout>
+            <Profile />
+          </HeaderLayout>
+        }
+      />
+      <Route path="/" element={<Navigate to="/dashboard" />} />
+      <Route path="*" element={<Page404 />} />
+    </Routes>
   )
 }
 

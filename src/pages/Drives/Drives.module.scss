@@ -4,7 +4,8 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--max-w);
+  margin: auto;
   padding: calc(2rem + var(--nav-height)) 2rem 0.8rem 2rem;
   gap: 1.6rem;
 
@@ -54,8 +55,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
-  padding: 1rem 2rem 1rem 2rem;
+  margin: auto;
+  max-width: var(--max-w);
+  padding: 1rem 2rem;
   gap: 2rem;
 
   @media screen and (max-width: 525px) {

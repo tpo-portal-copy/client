@@ -1,9 +1,9 @@
 import { Input, Select } from '@chakra-ui/react'
-import DrivesCard from '../../components/Cards/DrivesCard'
-import styles from './Drives.module.scss'
 import { DrivesCardProps } from '../../utils/types'
 import drivesData from '../../utils/Data/drivesData'
-import { clusterData } from '../../utils/Data/FormUIData'
+import { clusterData } from '../../utils/Data/formUIData'
+import { DrivesCard } from '../../components/Cards'
+import styles from './Drives.module.scss'
 
 function Drives() {
   return (

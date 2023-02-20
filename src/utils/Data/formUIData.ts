@@ -123,6 +123,11 @@ export const educationInfo = [
 
 export const collegeInfo = [
   {
+    id: 1,
+    label: 'Roll No.',
+    type: 'field',
+  },
+  {
     id: 11,
     label: 'Course',
     type: 'list',
@@ -193,6 +198,30 @@ export const collegeInfo = [
     label: 'CGPI',
     type: 'field',
   },
+  { id: 2, label: 'Batch Year', type: 'field' },
+  {
+    id: 3,
+    label: 'Current Year',
+    type: 'list',
+    options: [
+      {
+        id: 4,
+        value: 'I',
+      },
+      {
+        id: 5,
+        value: 'II',
+      },
+      {
+        id: 6,
+        value: 'III',
+      },
+      {
+        id: 7,
+        value: 'IV',
+      },
+    ],
+  },
   {
     id: 17,
     label: 'Active Backlogs',
@@ -222,4 +251,71 @@ export const clusterData = [
   { id: 4, clusterName: 'Cluster 4', clusterRange: '12-16 Lakhs' },
   { id: 5, clusterName: 'Cluster 5', clusterRange: '16-25 Lakhs' },
   { id: 6, clusterName: 'Cluster 6', clusterRange: '>25 Lakhs' },
+]
+
+export const experienceFormData = [
+  {
+    id: 1,
+    name: 'title',
+    label: 'Title',
+    type: 'field',
+  },
+  {
+    id: 2,
+    name: 'companyName',
+    label: 'Company Name',
+    type: 'field',
+  },
+  {
+    id: 3,
+    name: 'role',
+    label: 'Role',
+    type: 'list',
+    options: [
+      { id: 4, value: 'SDE' },
+      { id: 5, value: 'GET' },
+      { id: 6, value: 'Management Trainee' },
+      { id: 7, value: 'Full Stack Developer' },
+    ],
+  },
+  {
+    id: 8,
+    name: 'type',
+    label: 'Type',
+    type: 'list',
+
+    options: [
+      { id: 9, value: 'Intern' },
+      { id: 10, value: 'Full Time' },
+    ],
+  },
+  {
+    id: 11,
+    name: 'rounds',
+    label: 'No. of rounds',
+    type: 'field',
+  },
+  {
+    id: 12,
+    name: 'verdict',
+    label: 'Verdict',
+    type: 'list',
+    options: [
+      {
+        id: 16,
+        value: 'Selected',
+      },
+      { id: 17, value: 'Not Selected' },
+    ],
+  },
+  {
+    id: 13,
+    name: 'anonymous',
+    label: 'Anonymous',
+    type: 'list',
+    options: [
+      { id: 14, value: 'Yes' },
+      { id: 15, value: 'No' },
+    ],
+  },
 ]
