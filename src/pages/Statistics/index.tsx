@@ -18,9 +18,10 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
 import styles from './Statistics.module.scss'
 import {
@@ -57,12 +58,17 @@ function Statistics() {
   }
 
   const [currPage, setCurrPage] = useState(1)
-  const maxPages = 10
+  const [maxPages, setMaxPages] = useState(0)
+  const [ctcData, setCtcData] = useState([])
 
-  const handleNext = () => {
+  const handleNext = async (nextPage: number) => {
     if (currPage < maxPages) {
       setCurrPage(currPage + 1)
     }
+    await axios
+      .get(`http://sakhanith.pagekite.me/companies/?page=${nextPage}`)
+      .then((res) => setCtcData(res.data.results))
+      .catch((err) => console.log(err))
   }
 
   const handlePrev = () => {
@@ -70,6 +76,21 @@ function Statistics() {
       setCurrPage(currPage - 1)
     }
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get('http://sakhanith.pagekite.me/companies/')
+        .then((res) => {
+          setCtcData(res.data.results)
+          setMaxPages(Math.ceil(res.data.count / 10))
+        })
+        .catch((err) => console.log(err))
+    }
+    fetchData()
+  }, [])
+
+  console.log(currPage)
 
   return (
     <>
@@ -156,10 +177,16 @@ function Statistics() {
                         </Tr>
                       </Thead>
                       <Tbody>
-                        {ctcWiseData.map((data) => (
+                        {/* {ctcWiseData.map((data) => (
                           <Tr key={data.id}>
                             <Td>{data.company}</Td>
                             <Td>{data.offeredCtc}</Td>
+                          </Tr>
+                        ))} */}
+                        {ctcData.map((data) => (
+                          <Tr key={data.id}>
+                            <Td>{data.name}</Td>
+                            <Td>45 Lakhs</Td>
                           </Tr>
                         ))}
                       </Tbody>
@@ -191,7 +218,12 @@ function Statistics() {
               </TabPanels>
             </Tabs>
 
-            <Paginator onPrev={handlePrev} onNext={handleNext} curr={currPage} max={maxPages} />
+            <Paginator
+              onPrev={handlePrev}
+              onNext={() => handleNext(currPage + 1)}
+              curr={currPage}
+              max={maxPages}
+            />
           </div>
           <div className={styles.graph_container}>
             <PieChart data={chartData} />
