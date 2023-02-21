@@ -190,7 +190,7 @@
         }
         .address_fields_container {
           padding-top: 10px;
-          padding-bottom: 40px;
+          padding-bottom: 10px;
         }
       }
 
@@ -207,7 +207,11 @@
 
         .user_stats_fields_container {
           padding-top: 10px;
-          padding-bottom: 40px;
+          padding-bottom: 10px;
+
+          @media only screen and (max-width: 1064px) {
+            padding-bottom: 40px;
+          }
         }
 
         .profile {

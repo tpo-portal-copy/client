@@ -1,17 +1,20 @@
 .container {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0px;
   width: 100%;
 
   .icon {
     width: 20px;
     height: 20px;
+    display: flex;
+    align-items: center;
   }
 
   .fields_container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     padding-left: 10px;
 
     .cluster_title {
@@ -20,6 +23,7 @@
     }
     .cluster_range {
       font-size: 14px;
+      padding-left: 10px;
     }
   }
 }
