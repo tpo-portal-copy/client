@@ -31,7 +31,7 @@
   .container {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 2px;
     border-radius: 10px;
 
     .fields_container {
@@ -39,7 +39,7 @@
       padding-left: 10px;
 
       .cluster_title {
-        font-size: 18px;
+        font-size: 12px;
         font-weight: 600;
       }
       .cluster_range {

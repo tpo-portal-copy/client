@@ -176,6 +176,12 @@
           font-weight: 600;
           color: var(--text-color-primary);
         }
+
+        .cluster_field_container {
+          @media screen and (max-width: 1225px) {
+            padding: 10px 0px;
+          }
+        }
       }
 
       .address_container {
@@ -208,10 +214,6 @@
         .user_stats_fields_container {
           padding-top: 10px;
           padding-bottom: 10px;
-
-          @media only screen and (max-width: 1064px) {
-            padding-bottom: 40px;
-          }
         }
 
         .profile {
@@ -229,6 +231,10 @@
             .profile_link {
               color: #fff;
             }
+          }
+
+          @media screen and (max-width: 1225px) {
+            padding: 2px;
           }
         }
         .profile_link {
