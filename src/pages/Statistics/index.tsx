@@ -26,8 +26,6 @@ import axios from 'axios'
 import styles from './Statistics.module.scss'
 import {
   chartData,
-  ctcWiseData,
-  offersWiseData,
   topCompaniesData,
   jobType,
   sessions,
@@ -60,37 +58,56 @@ function Statistics() {
   const [currPage, setCurrPage] = useState(1)
   const [maxPages, setMaxPages] = useState(0)
   const [ctcData, setCtcData] = useState([])
+  const [offersWiseData, setOffersWiseData] = useState([])
+  const [disablePrev, setDisablePrev] = useState(false)
+  const [disableNext, setDisableNext] = useState(false)
 
   const handleNext = async (nextPage: number) => {
+    if (currPage === maxPages - 1) {
+      setDisableNext(true)
+    } else {
+      setDisableNext(false)
+      setDisablePrev(false)
+    }
     if (currPage < maxPages) {
       setCurrPage(currPage + 1)
+      const result = await axios.get(`https://sakhanith.pagekite.me/companies/?page=${nextPage}`)
+      setCtcData(result.data.results)
+      setOffersWiseData(result.data.results)
     }
-    await axios
-      .get(`http://sakhanith.pagekite.me/companies/?page=${nextPage}`)
-      .then((res) => setCtcData(res.data.results))
-      .catch((err) => console.log(err))
   }
 
-  const handlePrev = () => {
+  const handlePrev = async (prevPage: number) => {
     if (currPage > 1 && currPage <= maxPages) {
       setCurrPage(currPage - 1)
+      const result = await axios.get(`https://sakhanith.pagekite.me/companies/?page=${prevPage}`)
+      setCtcData(result.data.results)
+      setOffersWiseData(result.data.results)
+
+      if (result.data.links.previous === null) {
+        setDisablePrev(true)
+      } else {
+        setDisablePrev(false)
+        setDisableNext(false)
+      }
     }
   }
 
   useEffect(() => {
     async function fetchData() {
-      await axios
-        .get('http://sakhanith.pagekite.me/companies/')
-        .then((res) => {
-          setCtcData(res.data.results)
-          setMaxPages(Math.ceil(res.data.count / 10))
-        })
-        .catch((err) => console.log(err))
+      const result = await axios.get('http://sakhanith.pagekite.me/companies')
+      setCtcData(result.data.results)
+      setOffersWiseData(result.data.results)
+      setMaxPages(Math.ceil(result.data.count / 10))
+      if (result.data.links.previous === null) {
+        setDisablePrev(true)
+      }
+      if (result.data.links.next === null) {
+        setDisableNext(true)
+      }
     }
     fetchData()
   }, [])
-
-  console.log(currPage)
 
   return (
     <>
@@ -177,12 +194,6 @@ function Statistics() {
                         </Tr>
                       </Thead>
                       <Tbody>
-                        {/* {ctcWiseData.map((data) => (
-                          <Tr key={data.id}>
-                            <Td>{data.company}</Td>
-                            <Td>{data.offeredCtc}</Td>
-                          </Tr>
-                        ))} */}
                         {ctcData.map((data) => (
                           <Tr key={data.id}>
                             <Td>{data.name}</Td>
@@ -207,8 +218,8 @@ function Statistics() {
                       <Tbody>
                         {offersWiseData.map((data) => (
                           <Tr key={data.id}>
-                            <Td>{data.company}</Td>
-                            <Td>{data.offeredCtc}</Td>
+                            <Td>{data.name}</Td>
+                            <Td>45</Td>
                           </Tr>
                         ))}
                       </Tbody>
@@ -219,10 +230,12 @@ function Statistics() {
             </Tabs>
 
             <Paginator
-              onPrev={handlePrev}
+              onPrev={() => handlePrev(currPage - 1)}
               onNext={() => handleNext(currPage + 1)}
               curr={currPage}
               max={maxPages}
+              disablePrev={disablePrev}
+              disableNext={disableNext}
             />
           </div>
           <div className={styles.graph_container}>

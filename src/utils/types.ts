@@ -260,4 +260,6 @@ export interface PaginatorProps {
   max: number
   onNext: MouseEventHandler<HTMLButtonElement>
   onPrev: MouseEventHandler<HTMLButtonElement>
+  disablePrev: boolean
+  disableNext: boolean
 }

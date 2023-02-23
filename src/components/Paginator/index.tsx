@@ -4,16 +4,23 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { PaginatorProps } from '../../utils/types'
 import styles from './Paginator.module.scss'
 
-export default function Paginator({ curr, max, onNext, onPrev }: PaginatorProps) {
+export default function Paginator({
+  curr,
+  max,
+  onNext,
+  onPrev,
+  disablePrev,
+  disableNext,
+}: PaginatorProps) {
   return (
     <div className={styles.container}>
-      <Button colorScheme="blackAlpha" onClick={onPrev}>
+      <Button isDisabled={disablePrev} colorScheme="blackAlpha" onClick={onPrev}>
         <FontAwesomeIcon icon={faChevronLeft} />
       </Button>
       <Text fontSize="md">
         {curr} of {max}
       </Text>
-      <Button colorScheme="blackAlpha" onClick={onNext}>
+      <Button isDisabled={disableNext} colorScheme="blackAlpha" onClick={onNext}>
         <FontAwesomeIcon icon={faChevronRight} />
       </Button>
     </div>
