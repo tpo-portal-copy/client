@@ -14,7 +14,7 @@ function StatisticsDetails() {
           <Select placeholder="Select Section" />
         </div>
       </div>
-      <div>
+      <div className={styles.body_container}>
         {data.courses.map((course) => {
           return (
             <div key={course.id} className={styles.course_container}>

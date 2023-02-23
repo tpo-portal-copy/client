@@ -26,16 +26,16 @@ function DrivesCard({
           <div className={styles.content}>
             <h2 className={styles.company_name}>{companyName}</h2>
             <div className={styles.company_details}>
-              <div className={styles.company_info}>
-                <Tag>{jobProfile}</Tag>
-                <Tag>{ctcOffered} LPA</Tag>
-                <Tag className={styles.starting_date}>{startingDate.toLocaleDateString()} </Tag>
-                <Tag>Mode of Hiring: {modeOfHiring}</Tag>
+              <div className={styles.company_info_1}>
+                <Tag className={styles.tag}>{jobProfile}</Tag>
+                <Tag className={styles.tag}>{ctcOffered} LPA</Tag>
+                <Tag className={styles.tag}>{startingDate.toLocaleDateString()} </Tag>
+                <Tag className={styles.tag}>Mode of Hiring: {modeOfHiring}</Tag>
               </div>
-              <div className={styles.company_info}>
-                <Tag>PPT: {ppt}</Tag>
-                <Tag>Aptitude Test: {aptitudeTest}</Tag>
-                <Tag>Job Location: {jobLocation}</Tag>
+              <div className={styles.company_info_2}>
+                <Tag className={styles.tag}>PPT: {ppt}</Tag>
+                <Tag className={styles.tag}>Aptitude Test: {aptitudeTest}</Tag>
+                <Tag className={styles.tag}>Job Location: {jobLocation}</Tag>
               </div>
             </div>
           </div>
@@ -49,14 +49,10 @@ function DrivesCard({
       <div className={styles.bottom_content}>
         <div className={styles.eligible_batches_list}>
           {eligibleBatches.map((batch) => {
-            return (
-              <Tag backgroundColor="lightGrey" key={batch}>
-                {batch}
-              </Tag>
-            )
+            return <Tag key={batch}>{batch}</Tag>
           })}
         </div>
-        <Tag backgroundColor="lightGrey">{type}</Tag>
+        <Tag>{type}</Tag>
       </div>
     </div>
   )

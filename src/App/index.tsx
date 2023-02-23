@@ -81,9 +81,9 @@ function App() {
       <Route
         path="/statistics-details"
         element={
-          <SidebarLayout>
+          <HeaderLayout>
             <StatisticsDetails />
-          </SidebarLayout>
+          </HeaderLayout>
         }
       />
       <Route
