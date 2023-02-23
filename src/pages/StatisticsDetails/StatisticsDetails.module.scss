@@ -1,9 +1,17 @@
+@use '../../index.scss' as main;
+
 .header_container {
   display: flex;
   justify-content: space-between;
   margin: auto;
   max-width: var(--max-w);
   padding: calc(2rem + var(--nav-height)) 0.9rem 2.8rem 2rem;
+
+  @media screen and (max-width: 520px) {
+    flex-direction: column;
+    padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+    gap: 1rem;
+  }
 
   .page_name {
     font-size: var(--lg-heading);
@@ -12,7 +20,7 @@
 
     @media screen and (max-width: 520px) {
       font-size: 28px;
-      padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+      padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 0rem;
     }
   }
 
@@ -25,13 +33,22 @@
 
 .body_container {
   max-width: var(--max-w);
+  padding: calc(var(--nav-height)) 0.9rem 2.8rem 2rem;
   margin: auto;
+
+  @media screen and (max-width: 520px) {
+    padding: calc(0.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+  }
 
   .course_container {
     padding-bottom: 0.7rem;
     border-radius: 8px;
     background-color: white;
-    margin: 0rem 1rem 2rem 2rem;
+    margin-bottom: 2rem;
+
+    @media screen and (max-width: 520px) {
+      font-size: 17px;
+    }
 
     .course_title {
       padding: 0.7rem 0rem 0.7rem 1rem;

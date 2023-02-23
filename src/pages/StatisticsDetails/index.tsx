@@ -19,12 +19,12 @@ function StatisticsDetails() {
           return (
             <div key={course.id} className={styles.course_container}>
               <h2 className={styles.course_title}>{course.courseName}</h2>
-              <TableContainer className={styles.table_container}>
+              <TableContainer>
                 <Table size="sm">
                   <Thead>
                     <Tr>
                       {course.roles.map((role) => {
-                        return role.branches.length !== 0 && <Th />
+                        return role.branches.length !== 0 && <Th key={role.id} />
                       })}
                       {course.roles.map((role) => (
                         <Th
