@@ -16,6 +16,7 @@ import {
   ExperienceForm,
   ResourceDetails,
   AnnouncementForm,
+  StatisticsDetails,
 } from '../pages'
 
 function App() {
@@ -76,6 +77,14 @@ function App() {
         element={
           <HeaderLayout>
             <Statistics />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/statistics-details"
+        element={
+          <HeaderLayout>
+            <StatisticsDetails />
           </HeaderLayout>
         }
       />

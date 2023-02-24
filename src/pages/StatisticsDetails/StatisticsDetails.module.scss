@@ -1,0 +1,68 @@
+@use '../../index.scss' as main;
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  max-width: var(--max-w);
+  padding: calc(2rem + var(--nav-height)) 0.9rem 2.8rem 2rem;
+
+  @media screen and (max-width: 520px) {
+    flex-direction: column;
+    padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .page_name {
+    font-size: var(--lg-heading);
+    font-weight: 600;
+    color: var(--text-color-primary);
+
+    @media screen and (max-width: 520px) {
+      font-size: 28px;
+      padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 0rem;
+    }
+  }
+
+  .year_filter {
+    background-color: white;
+    border-radius: 6px;
+    height: fit-content;
+  }
+}
+
+.body_container {
+  max-width: var(--max-w);
+  padding: calc(var(--nav-height)) 0.9rem 2.8rem 2rem;
+  margin: auto;
+
+  @media screen and (max-width: 520px) {
+    padding: calc(0.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+  }
+
+  .course_container {
+    padding-bottom: 0.7rem;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 2rem;
+
+    @media screen and (max-width: 520px) {
+      font-size: 17px;
+    }
+    .table_container {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        border-radius: 1px;
+      }
+    }
+
+    .course_title {
+      padding: 0.7rem 0rem 0.7rem 1rem;
+      font-weight: 500;
+    }
+  }
+}

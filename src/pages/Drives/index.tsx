@@ -28,7 +28,7 @@ function Drives() {
         </div>
       </div>
       <div className={styles.content}>
-        {drivesData.map((drive: DrivesCardProps) => (
+        {drivesData.map((drive: any) => (
           <DrivesCard key={drive.id} {...drive} />
         ))}
       </div>
