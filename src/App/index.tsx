@@ -15,6 +15,7 @@ import {
   ExperienceDetails,
   ExperienceForm,
   ResourceDetails,
+  AnnouncementForm,
   StatisticsDetails,
 } from '../pages'
 
@@ -38,6 +39,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/student-details-form" element={<StudentDetailsForm />} />
       <Route path="/experience-form" element={<ExperienceForm />} />
+      <Route path="/announcement-form" element={<AnnouncementForm />} />
       <Route
         path="/dashboard"
         element={
