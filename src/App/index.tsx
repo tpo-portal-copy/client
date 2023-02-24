@@ -16,7 +16,6 @@ import {
   ExperienceForm,
   ResourceDetails,
   AnnouncementForm,
-  ResultAnnouncementForm,
 } from '../pages'
 
 function App() {
@@ -40,7 +39,6 @@ function App() {
       <Route path="/student-details-form" element={<StudentDetailsForm />} />
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
-      <Route path="/result-announcement-form" element={<ResultAnnouncementForm />} />
       <Route
         path="/dashboard"
         element={
