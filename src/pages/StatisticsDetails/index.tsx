@@ -11,7 +11,7 @@ function StatisticsDetails() {
           <h3>{`(${data.totalOffers} offers)`}</h3>
         </div>
         <div className={styles.year_filter}>
-          <Select placeholder="Select Section" />
+          <Select placeholder="Select Session" />
         </div>
       </div>
       <div className={styles.body_container}>
@@ -19,7 +19,7 @@ function StatisticsDetails() {
           return (
             <div key={course.id} className={styles.course_container}>
               <h2 className={styles.course_title}>{course.courseName}</h2>
-              <TableContainer>
+              <TableContainer className={styles.table_container}>
                 <Table size="sm">
                   <Thead>
                     <Tr>

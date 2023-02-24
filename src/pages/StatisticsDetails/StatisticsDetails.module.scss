@@ -49,6 +49,16 @@
     @media screen and (max-width: 520px) {
       font-size: 17px;
     }
+    .table_container {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        border-radius: 1px;
+      }
+    }
 
     .course_title {
       padding: 0.7rem 0rem 0.7rem 1rem;
