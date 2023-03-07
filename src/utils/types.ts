@@ -168,7 +168,7 @@ export type FormOneData = {
   dob: string
   state: string
   city: string
-  pincode: number
+  pincode: string
   personalEmail: string
   gender: string
   category: string
@@ -300,4 +300,8 @@ export interface StatisticsDetailsCourseBranchesProps {
   branchName?: string
   Offers: any
   offersBranchWise: number
+}
+
+export interface ErrorProps {
+  errorMessage: string
 }

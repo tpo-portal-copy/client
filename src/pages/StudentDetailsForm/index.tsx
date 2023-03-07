@@ -18,14 +18,14 @@ export default function StudentDetailsForm() {
     dob: '',
     state: '',
     city: '',
-    pincode: 0,
+    pincode: '',
     personalEmail: '',
     gender: '',
     category: '',
     phone: 0,
     linkedin: '',
     isPwd: false,
-    disabilityTypes: '',
+    disabilityTypes: 'Others',
   })
 
   const [formTwoData, setFormTwoData] = useState({
@@ -136,13 +136,10 @@ export default function StudentDetailsForm() {
               animationData={Loading}
               className={styles.animation}
             />
-            <Text className={styles.tag_line}>You have successfully submitted your details</Text>{' '}
+            <Text className={styles.tag_line}>You have successfully submitted your details.</Text>{' '}
           </div>
         ) : (
-          <>
-            <h2 className={styles.heading}>Fill Your Details Here</h2>
-            {getFormContent(step)}
-          </>
+          <>{getFormContent(step)}</>
         )}
       </div>
     </div>

@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { FormOneProps } from '../../../../utils/types'
 import ImgUploader from '../../../ImgUploader'
 import styles from './FormOne.module.scss'
-import { Input, Select } from '../../../index'
+import { Error, Input, Select } from '../../../index'
 
 const genderData = [
   { id: 1, value: 'Male' },
@@ -45,18 +45,22 @@ export default function FormOne({ onNext, data }: FormOneProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      firstName: Yup.string().required('*Required'),
+      firstName: Yup.string().required('First Name is required.'),
       middleName: Yup.string(),
-      lastName: Yup.string().required('*Required'),
-      dob: Yup.date().required('*Required'),
-      state: Yup.string().required('*Required'),
-      city: Yup.string().required('*Required'),
-      pincode: Yup.number().typeError('Should be integer').required('*Required'),
-      personalEmail: Yup.string().email('Enter a valid email').required('*Required'),
-      gender: Yup.string().required('*Required'),
-      category: Yup.string().required(),
+      lastName: Yup.string().required('Last Name is required.'),
+      dob: Yup.date().required('DOB Name is required.'),
+      state: Yup.string().required('State is required.'),
+      city: Yup.string().required('City is required.'),
+      pincode: Yup.string().typeError('Should be integer').required('Pincode is required.'),
+      personalEmail: Yup.string()
+        .email('Enter a valid email')
+        .required('Personal Email is required.'),
+      gender: Yup.string().required('Gender is required.'),
+      category: Yup.string().required('Category is required.'),
       phone: Yup.string().matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number'),
-      linkedin: Yup.string().url('Should be a valid link').required('*Required'),
+      linkedin: Yup.string()
+        .url('Should be a valid link')
+        .required('LinkedIn profile link is required.'),
       isPwd: Yup.boolean(),
       disabilityTypes: Yup.string(),
     }),
@@ -66,16 +70,9 @@ export default function FormOne({ onNext, data }: FormOneProps) {
   })
   return (
     <div className={styles.container}>
-      <form
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onSubmit={formik.handleSubmit}
-      >
-        <VStack w="100%" maxW="700px">
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <h2 className={styles.title}>Basic Details</h2>
+        <div className={styles.field}>
           <Input
             name="firstName"
             placeholder="First Name"
@@ -84,12 +81,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.firstName && formik.errors.firstName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.firstName}
-            </Alert>
+            <Error errorMessage={formik.errors.firstName} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="middleName"
             placeholder="Middle Name"
@@ -98,12 +93,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.middleName && formik.errors.middleName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.middleName}
-            </Alert>
+            <Error errorMessage={formik.errors.middleName} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="lastName"
             placeholder="Last Name"
@@ -112,12 +105,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.lastName && formik.errors.lastName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.lastName}
-            </Alert>
+            <Error errorMessage={formik.errors.lastName} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="dob"
             type="date"
@@ -127,12 +118,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.dob && formik.errors.dob ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.dob}
-            </Alert>
+            <Error errorMessage={formik.errors.dob} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="state"
             placeholder="State"
@@ -141,12 +130,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.state && formik.errors.state ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.state}
-            </Alert>
+            <Error errorMessage={formik.errors.state} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="city"
             placeholder="City"
@@ -155,26 +142,22 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.city && formik.errors.city ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.city}
-            </Alert>
+            <Error errorMessage={formik.errors.city} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="pincode"
             placeholder="Pin Code"
-            value={formik.values.pincode || ''}
+            value={formik.values.pincode}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           {formik.touched.pincode && formik.errors.pincode ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.pincode}
-            </Alert>
+            <Error errorMessage={formik.errors.pincode} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="personalEmail"
             placeholder="Personal Email"
@@ -183,11 +166,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.personalEmail && formik.errors.personalEmail ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.personalEmail}
-            </Alert>
+            <Error errorMessage={formik.errors.personalEmail} />
           ) : null}
+        </div>
+        <div className={`${styles.field} ${styles.dropdown}`}>
           <Select
             value={formik.values.gender}
             onChange={formik.handleChange}
@@ -200,12 +182,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             ))}
           </Select>
           {formik.touched.gender && formik.errors.gender ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.gender}
-            </Alert>
+            <Error errorMessage={formik.errors.gender} />
           ) : null}
-
+        </div>
+        <div className={`${styles.field} ${styles.dropdown}`}>
           <Select
             value={formik.values.category}
             onChange={formik.handleChange}
@@ -218,35 +198,27 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             ))}
           </Select>
           {formik.touched.category && formik.errors.category ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.category}
-            </Alert>
+            <Error errorMessage={formik.errors.category} />
           ) : null}
+        </div>
 
-          <div className={styles.is_disabled}>
-            <Checkbox
-              name="isPwd"
-              onChange={(e) => {
-                formik.handleChange(e)
-                setShowDisability(!showDisability)
-              }}
-              isChecked={formik.values.isPwd}
-              value={formik.values.isPwd.toString()}
-              onBlur={formik.handleBlur}
-            >
-              Is PwD ?
-            </Checkbox>
-          </div>
+        <div className={styles.is_disabled}>
+          <Checkbox
+            name="isPwd"
+            onChange={(e) => {
+              formik.handleChange(e)
+              setShowDisability(!showDisability)
+            }}
+            isChecked={formik.values.isPwd}
+            value={formik.values.isPwd.toString()}
+            onBlur={formik.handleBlur}
+          >
+            Is PwD ?
+          </Checkbox>
+        </div>
 
-          {formik.touched.isPwd && formik.errors.isPwd ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.isPwd}
-            </Alert>
-          ) : null}
-
-          {showDisability ? (
+        {showDisability ? (
+          <div className={`${styles.field} ${styles.dropdown}`}>
             <Select
               value={formik.values.disabilityTypes}
               onChange={formik.handleChange}
@@ -258,8 +230,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
                 <option key={datas.id}>{datas.value}</option>
               ))}
             </Select>
-          ) : null}
+          </div>
+        ) : null}
 
+        <div className={styles.field}>
           <Input
             name="phone"
             placeholder="Phone"
@@ -268,12 +242,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.phone && formik.errors.phone ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.phone}
-            </Alert>
+            <Error errorMessage={formik.errors.phone} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="linkedin"
             placeholder="Linkedin"
@@ -282,37 +254,35 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.linkedin && formik.errors.linkedin ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.linkedin}
-            </Alert>
+            <Error errorMessage={formik.errors.linkedin} />
           ) : null}
+        </div>
 
+        <div className={styles.field}>
           <ImgUploader />
+        </div>
 
-          <div className={styles.btn_container}>
-            <Button
-              background="linear-gradient(40deg,#45cafc,#303f9f)"
-              color="white"
-              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-              className={styles.btn}
-              isDisabled
-              type="submit"
-            >
-              Back
-            </Button>
-            <Button
-              background="linear-gradient(40deg,#45cafc,#303f9f)"
-              color="white"
-              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-              className={styles.btn}
-              isDisabled={!formik.isValid}
-              type="submit"
-            >
-              Next
-            </Button>
-          </div>
-        </VStack>
+        <div className={styles.btn_container}>
+          <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+            className={styles.btn}
+            isDisabled
+            type="submit"
+          >
+            Back
+          </Button>
+          <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+            className={styles.btn}
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   )
