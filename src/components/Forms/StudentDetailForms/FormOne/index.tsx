@@ -39,7 +39,7 @@ const disabilityTypes = [
 ]
 
 export default function FormOne({ onNext, data }: FormOneProps) {
-  const [showDisability, setShowDisability] = useState(false)
+  const [showDisability, setShowDisability] = useState(data.isPwd)
   const formik = useFormik({
     initialValues: {
       ...data,
@@ -73,6 +73,9 @@ export default function FormOne({ onNext, data }: FormOneProps) {
       onNext(values)
     },
   })
+
+  console.log(showDisability)
+
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
