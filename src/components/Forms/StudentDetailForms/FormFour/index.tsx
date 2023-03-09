@@ -53,6 +53,7 @@ export default function FormFour({ onSubmit }: FormFourProps) {
   const handleFormSubmit = (event: any) => {
     event.preventDefault()
     setIsClustersTouched(true)
+    if (selectedClusters !== 3) return
     formik.handleSubmit()
   }
 
