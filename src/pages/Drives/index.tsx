@@ -1,5 +1,5 @@
 import { Input, Select } from '@chakra-ui/react'
-// import { DrivesCardProps } from '../../utils/types'
+import { DrivesCardProps } from '../../utils/types'
 import drivesData from '../../utils/Data/drivesData'
 import { clusterData } from '../../utils/Data/formUIData'
 import { DrivesCard } from '../../components/Cards'

@@ -301,3 +301,6 @@ export interface StatisticsDetailsCourseBranchesProps {
   Offers: any
   offersBranchWise: number
 }
+export interface ErrorProps {
+  errorMessage: string
+}

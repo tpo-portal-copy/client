@@ -1,16 +1,4 @@
-import {
-  Button,
-  VStack,
-  Text,
-  Alert,
-  AlertIcon,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-} from '@chakra-ui/react'
+import { Button, VStack, Text, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -19,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserMinus, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Loading from '../../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
-import { Select } from '../..'
+import { Error, Select } from '../..'
 import styles from './ResultForms.module.scss'
 import { drivesData, studentData, typeData } from '../../../utils/Data/resultAnnouncementData'
 
@@ -35,10 +23,10 @@ export default function OnCampusResultForm() {
       jobRole: '',
     },
     validationSchema: Yup.object().shape({
-      studentRollNo: Yup.string().required('*Required').min(6),
-      type: Yup.string().required('*Required'),
-      drive: Yup.string().required('*Required'),
-      jobRole: Yup.string().required('*Required'),
+      studentRollNo: Yup.string().required('Student Roll Number is required').min(6),
+      type: Yup.string().required('Type is required'),
+      drive: Yup.string().required('Drive is required'),
+      jobRole: Yup.string().required('Job Role is required'),
     }),
     onSubmit: (e, values) => {
       setIsLoading(!isLoading)
@@ -118,10 +106,7 @@ export default function OnCampusResultForm() {
               </Select>
 
               {formik.touched.type && formik.errors.type ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.type}
-                </Alert>
+                <Error errorMessage={formik.errors.type} />
               ) : null}
 
               <Select
@@ -139,10 +124,7 @@ export default function OnCampusResultForm() {
               </Select>
 
               {formik.touched.drive && formik.errors.drive ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.drive}
-                </Alert>
+                <Error errorMessage={formik.errors.drive} />
               ) : null}
 
               <Select
@@ -160,10 +142,7 @@ export default function OnCampusResultForm() {
               </Select>
 
               {formik.touched.jobRole && formik.errors.jobRole ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.jobRole}
-                </Alert>
+                <Error errorMessage={formik.errors.jobRole} />
               ) : null}
 
               <div className={styles.input_rollNo}>
@@ -180,10 +159,7 @@ export default function OnCampusResultForm() {
                 </Select>
 
                 {formik.touched.studentRollNo && formik.errors.studentRollNo ? (
-                  <Alert borderRadius={5} status="error">
-                    <AlertIcon />
-                    {formik.errors.studentRollNo}
-                  </Alert>
+                  <Error errorMessage={formik.errors.studentRollNo} />
                 ) : null}
 
                 <Button

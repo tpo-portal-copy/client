@@ -1,16 +1,4 @@
-import {
-  Button,
-  VStack,
-  Text,
-  Alert,
-  AlertIcon,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-} from '@chakra-ui/react'
+import { Button, VStack, Text, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -19,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserMinus, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Loading from '../../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
-import { Input, Select } from '../..'
+import { Error, Input, Select } from '../..'
 import styles from './ResultForms.module.scss'
 import { allStudentData } from '../../../utils/Data/resultAnnouncementData'
 import { companyList, roleList } from '../../../utils/Data/interviewExperienceData'
@@ -38,11 +26,11 @@ export default function PpoResultForm() {
       ctc: 0,
     },
     validationSchema: Yup.object().shape({
-      studentRollNo: Yup.string().required('*Required').min(6),
-      company: Yup.string().required('*Required'),
-      profile: Yup.string().required('*Required'),
-      session: Yup.string().required('*Required'),
-      ctc: Yup.number().required('*Required'),
+      studentRollNo: Yup.string().required('Student Roll Number is required').min(6),
+      company: Yup.string().required('Company is required'),
+      profile: Yup.string().required('Profile is required'),
+      session: Yup.string().required('Session is required'),
+      ctc: Yup.number().required('CTC is required').moreThan(0, 'CTC must be greater than 0'),
     }),
     onSubmit: (e, values) => {
       setIsLoading(!isLoading)
@@ -121,10 +109,7 @@ export default function PpoResultForm() {
                 ))}
               </Select>
               {formik.touched.company && formik.errors.company ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.company}
-                </Alert>
+                <Error errorMessage={formik.errors.company} />
               ) : null}
 
               <Select
@@ -139,10 +124,7 @@ export default function PpoResultForm() {
                 ))}
               </Select>
               {formik.touched.profile && formik.errors.profile ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.profile}
-                </Alert>
+                <Error errorMessage={formik.errors.profile} />
               ) : null}
 
               <Input
@@ -153,10 +135,7 @@ export default function PpoResultForm() {
                 placeholder="CTC in LPA"
               />
               {formik.touched.ctc && formik.errors.ctc ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.ctc}
-                </Alert>
+                <Error errorMessage={formik.errors.ctc} />
               ) : null}
 
               <Select
@@ -184,10 +163,7 @@ export default function PpoResultForm() {
                 </option>
               </Select>
               {formik.touched.session && formik.errors.session ? (
-                <Alert borderRadius={5} status="error">
-                  <AlertIcon />
-                  {formik.errors.session}
-                </Alert>
+                <Error errorMessage={formik.errors.session} />
               ) : null}
 
               <div className={styles.input_rollNo}>
@@ -199,10 +175,7 @@ export default function PpoResultForm() {
                   value={formik.values.studentRollNo}
                 />
                 {formik.touched.studentRollNo && formik.errors.studentRollNo ? (
-                  <Alert borderRadius={5} status="error">
-                    <AlertIcon />
-                    {formik.errors.studentRollNo}
-                  </Alert>
+                  <Error errorMessage={formik.errors.studentRollNo} />
                 ) : null}
 
                 <Button
