@@ -36,6 +36,14 @@
       }
     }
 
+    .file_uploader {
+      padding: 1rem;
+
+      @media screen and (max-width: 525px) {
+        padding: 1rem 0;
+      }
+    }
+
     .dropdown {
       padding: 1.2rem 1rem 0 1rem;
 
@@ -61,7 +69,7 @@
       flex-direction: row;
       width: 100%;
       justify-content: flex-start;
-      padding: 1.2rem 1rem 0.8rem 1rem;
+      padding: 1.2rem 1rem 0rem 1rem;
 
       @media screen and (max-width: 525px) {
         padding: 1.2rem 0 0 0;

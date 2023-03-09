@@ -1,4 +1,4 @@
-import { VStack, Text, Alert, AlertIcon, Button } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FormTwoProps } from '../../../../utils/types'
@@ -11,29 +11,27 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      tenthYear: Yup.string()
-        .min(4, 'Invalid Year')
-        .max(4, 'Invalid Year')
-        .matches(/^[0-9]+$/, 'Only integers are allowed.')
-        .required('*Required'),
-      tenthSchool: Yup.string().required('10th School is required.'),
-      tenthBoard: Yup.string().required('10th Board is required.'),
+      tenthYear: Yup.number()
+        .integer('10th year must be an integer.')
+        .min(2010, 'Invalid Year')
+        .required('10th year is required.'),
+      tenthSchool: Yup.string().required('10th school is required.'),
+      tenthBoard: Yup.string().required('10th board is required.'),
       tenthPercentage: Yup.number()
-        .typeError('10th percentage should be integer.')
+        .typeError('10th percentage must be a number.')
         .required('10th percentage is required.'),
-      twelfthYear: Yup.string()
-        .min(4, 'Invalid Year')
-        .max(4, 'Invalid Year')
-        .matches(/^[0-9]+$/, 'Only integers are allowed')
-        .required('*Required'),
-      twelfthSchool: Yup.string().required('12th School is required.'),
-      twelfthBoard: Yup.string().required('12th Board is required.'),
+      twelfthYear: Yup.number()
+        .integer('12th year must be an integer.')
+        .min(2010, 'Invalid Year')
+        .required('12th year is required.'),
+      twelfthSchool: Yup.string().required('12th school is required.'),
+      twelfthBoard: Yup.string().required('12th board is required.'),
       twelfthPercentage: Yup.number()
-        .typeError('12th percentage should be integer.')
+        .typeError('12th percentage must be a number.')
         .required('12th percentage is required.'),
       jeeRank: Yup.number()
-        .integer()
-        .typeError('Jee Rank should be an integer.')
+        .integer('Jee Rank must be an integer.')
+        .typeError('Jee Rank must be an integer.')
         .required('Jee Rank is required.'),
     }),
     onSubmit: (values) => {

@@ -55,7 +55,7 @@ export interface ExperienceCardProps {
 export type InputProps = {
   name: string
   placeholder: string
-  value: string | number
+  value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
   type?: 'text' | 'password' | 'date' | 'file'
@@ -64,7 +64,7 @@ export type InputProps = {
 export interface SelectProps {
   name: string
   placeholder: string
-  value: string | number
+  value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
   children: any
@@ -168,41 +168,41 @@ export type FormOneData = {
   dob: string
   state: string
   city: string
-  pincode: string
+  pincode: number | undefined
   personalEmail: string
   gender: string
   category: string
-  phone: number
+  phone: string
   linkedin: string
   isPwd: boolean
   disabilityTypes: string
 }
 
 export interface FormTwoData {
-  tenthYear: number
+  tenthYear: number | undefined
   tenthSchool: string
   tenthBoard: string
-  tenthPercentage: number
-  twelfthYear: number
+  tenthPercentage: number | undefined
+  twelfthYear: number | undefined
   twelfthSchool: string
   twelfthBoard: string
-  twelfthPercentage: number
-  jeeRank: number
+  twelfthPercentage: number | undefined
+  jeeRank: number | undefined
 }
 
 export interface FormThreeData {
   course: string
   branch: string
-  cgpi: number
-  activeBacklog: number
-  totalBacklog: number
-  gateScore: number
-  catScore: number
-  batchYear: number
-  passingYear: number
-  currentYear: number
-  gapYear12: number
-  gapYearUG: number
+  cgpi: number | undefined
+  activeBacklog: number | undefined
+  totalBacklog: number | undefined
+  gateScore: number | undefined
+  catScore: number | undefined
+  batchYear: number | undefined
+  passingYear: number | undefined
+  currentYear: number | undefined
+  gapYear12: number | undefined
+  gapYearUG: number | undefined
 }
 
 export interface FormOneProps {

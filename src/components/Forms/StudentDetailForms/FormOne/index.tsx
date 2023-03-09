@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { VStack, Alert, AlertIcon, Button, Checkbox } from '@chakra-ui/react'
+import { Button, Checkbox } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FormOneProps } from '../../../../utils/types'
@@ -51,15 +51,20 @@ export default function FormOne({ onNext, data }: FormOneProps) {
       dob: Yup.date().required('DOB Name is required.'),
       state: Yup.string().required('State is required.'),
       city: Yup.string().required('City is required.'),
-      pincode: Yup.string().typeError('Should be integer').required('Pincode is required.'),
+      pincode: Yup.number()
+        .integer('Pincode must be an integer.')
+        .typeError('Pincode must be an integer.')
+        .required('Pincode is required.'),
       personalEmail: Yup.string()
         .email('Enter a valid email')
         .required('Personal Email is required.'),
       gender: Yup.string().required('Gender is required.'),
       category: Yup.string().required('Category is required.'),
-      phone: Yup.string().matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number'),
+      phone: Yup.string()
+        .matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number')
+        .required('Phone number is required.'),
       linkedin: Yup.string()
-        .url('Should be a valid link')
+        .url('LinkedIn profile link must be a valid link.')
         .required('LinkedIn profile link is required.'),
       isPwd: Yup.boolean(),
       disabilityTypes: Yup.string(),
@@ -237,7 +242,7 @@ export default function FormOne({ onNext, data }: FormOneProps) {
           <Input
             name="phone"
             placeholder="Phone"
-            value={formik.values.phone || ''}
+            value={formik.values.phone}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -258,7 +263,7 @@ export default function FormOne({ onNext, data }: FormOneProps) {
           ) : null}
         </div>
 
-        <div className={styles.field}>
+        <div className={styles.file_uploader}>
           <ImgUploader />
         </div>
 
