@@ -113,11 +113,8 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
         .integer('Gap year must be an integer.')
         .typeError('Gap year must be an integer.')
         .min(0, 'Gap year cannot be negative.')
-        .max(4, 'Gap year cannot be greater than 4.')
-        .required('No. of gap years is required.'),
-      gapYearUG: Yup.number()
-        .min(0, 'Gap year cannot be negative.')
-        .required('No. of gap years is required.'),
+        .max(4, 'Gap year cannot be greater than 4.'),
+      gapYearUG: Yup.number().min(0, 'Gap year cannot be negative.'),
     }),
     onSubmit: (values) => {
       onNext(values)
