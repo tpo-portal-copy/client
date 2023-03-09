@@ -74,8 +74,6 @@ export default function FormOne({ onNext, data }: FormOneProps) {
     },
   })
 
-  console.log(showDisability)
-
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
