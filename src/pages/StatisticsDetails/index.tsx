@@ -23,14 +23,12 @@ function StatisticsDetails() {
                 <Table size="sm">
                   <Thead>
                     <Tr>
-                      {course.roles.map((role) => {
-                        return role.branches.length !== 0 && <Th key={role.id} />
-                      })}
+                      {course.branches[0].branchName !== undefined ? <Th /> : null}
                       {course.roles.map((role) => (
                         <Th
                           textAlign="center"
                           key={role.id}
-                        >{`${role.roleName}(${role.ctcOffered})`}</Th>
+                        >{`${role.roleName}(${role.ctcOffered} LPA)`}</Th>
                       ))}
                       <Th textAlign="center">Total Offers</Th>
                     </Tr>
@@ -40,9 +38,12 @@ function StatisticsDetails() {
                       return (
                         <Tr key={branch.id}>
                           {branch?.branchName && <Td>{branch.branchName}</Td>}
-                          {course.roles.map((role) => {
-                            const entry = branch?.Offers[role.roleName]?.noOfOffers || '-'
-                            return <Td textAlign="center" key={role.id}>{`${entry}`}</Td>
+                          {branch.offersRoleWise.map((offer) => {
+                            return (
+                              <Td key={offer.id} textAlign="center">
+                                {offer.noOfOffers}
+                              </Td>
+                            )
                           })}
                           <Td textAlign="center">{branch.offersBranchWise}</Td>
                         </Tr>

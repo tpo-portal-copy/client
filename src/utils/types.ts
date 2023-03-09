@@ -278,7 +278,7 @@ export interface StatisticsDetailsCourseProps {
   courseName: string
   totalCourseOffers?: number
   roles: Array<StatisticsDetailsRoleProps>
-  branches: Array<StatisticsDetailsCourseBranchesProps>
+  branches: Array<StatisticsDetailsBranchesProps>
 }
 
 export interface StatisticsDetailsRoleProps {
@@ -286,20 +286,18 @@ export interface StatisticsDetailsRoleProps {
   roleName: string
   ctcOffered: number
   totalroleoffers: number
-  branches: Array<StatisticsDetailsBranchProps>
 }
 
-export interface StatisticsDetailsBranchProps {
-  id: number
-  branchName: string
-  offers: number
-}
-
-export interface StatisticsDetailsCourseBranchesProps {
+export interface StatisticsDetailsBranchesProps {
   id: number
   branchName?: string
-  Offers: any
+  offersRoleWise: Array<StatisticsDetailsOffersRoleWiseProps>
   offersBranchWise: number
+}
+
+export interface StatisticsDetailsOffersRoleWiseProps {
+  id: number
+  noOfOffers: number
 }
 
 export interface ErrorProps {

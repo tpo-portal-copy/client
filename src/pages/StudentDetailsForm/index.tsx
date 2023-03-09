@@ -10,7 +10,7 @@ import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(3)
   const [formOneData, setFormOneData] = useState<FormOneData>({
     firstName: '',
     middleName: '',

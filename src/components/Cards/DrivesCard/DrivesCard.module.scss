@@ -82,14 +82,32 @@
       }
     }
 
-    .jd_link {
+    .link {
       text-decoration: none;
       place-self: start normal;
       margin-top: 0.5rem;
 
+      .jd_link {
+        text-decoration: none;
+        margin: 0.5rem;
+
+        @media screen and (max-width: 525px) {
+          place-self: center normal;
+          margin-top: 0.5rem;
+        }
+      }
+
+      .past_exp_btn {
+        color: #fff;
+        background: linear-gradient(40deg, #45cafc, #303f9f);
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 4px;
+      }
       @media screen and (max-width: 525px) {
         place-self: center normal;
-        margin-top: 0;
+        margin-top: 0.5rem;
       }
     }
   }

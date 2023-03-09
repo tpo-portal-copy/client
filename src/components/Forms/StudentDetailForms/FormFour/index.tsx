@@ -56,12 +56,10 @@ export default function FormFour({ onSubmit }: FormFourProps) {
     formik.handleSubmit()
   }
 
-  console.log(formik.values.cluster1)
-
   return (
     <form className={styles.container} onSubmit={handleFormSubmit}>
       <div>
-        <TableContainer>
+        <TableContainer className={styles.table_container}>
           <Table variant="simple">
             <Thead>
               <Tr>
