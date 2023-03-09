@@ -39,17 +39,23 @@ export interface ResourcesCardProps {
   imgUrl: string
 }
 
+export type NameObject = {
+  name: string
+  logo: string
+}
+
 export interface ExperienceCardProps {
   id: number
-  title: string
-  description: string
+  company: string
+  description_read: string
   imgUrl?: string
-  jobType: string
-  selStatus: string
-  userName: string
+  jobtype: string
+  selected: boolean
+  name?: NameObject
   difficulty: string
-  role: string
-  postedOn: number
+  roles: string
+  created_at: string
+  anonymity: boolean
 }
 
 export type InputProps = {

@@ -8,10 +8,18 @@ import { ExperiencesSidebar, ExperiencesFilters } from '../../components'
 import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 import { ExperienceCard } from '../../components/Cards'
 import styles from './Experiences.module.scss'
+import useExperiencesPosts from '../../hooks/useExperiencesPosts'
 
 function Experiences() {
   const [openFilters, setOpenFilters] = useState(false)
   const [isLargerThan880] = useMediaQuery('(min-width: 880px)')
+
+  const { data, isLoading, isSuccess, isError, error } = useExperiencesPosts()
+
+  if (isLoading || !isSuccess) {
+    return <div>Loading...</div>
+  }
+  const { results } = data
 
   return (
     <>
@@ -23,7 +31,7 @@ function Experiences() {
       </div>
       <div className={styles.content}>
         <div>
-          {interviewExperienceInfoList.map((user: ExperienceCardProps) => (
+          {results.map((user: ExperienceCardProps) => (
             <ExperienceCard key={user.id} {...user} />
           ))}
         </div>

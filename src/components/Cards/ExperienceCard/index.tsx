@@ -5,16 +5,22 @@ import styles from './ExperienceCard.module.scss'
 
 function ExperienceCard({
   id,
-  title,
-  description,
-  imgUrl,
-  role,
-  jobType,
-  selStatus,
-  userName,
+  company,
+  description_read,
+  roles,
+  jobtype,
+  selected,
+  name,
   difficulty,
-  postedOn,
+  created_at,
+  anonymity,
 }: ExperienceCardProps) {
+  const getDifficulty = (difficultySymbol: string) => {
+    if (difficultySymbol === 'E') return 'Easy'
+    if (difficultySymbol === 'M') return 'Medium'
+    return 'Hard'
+  }
+
   return (
     <Link
       to={`/experiences-details/${id}`}
@@ -23,29 +29,41 @@ function ExperienceCard({
     >
       <div className={styles.card}>
         <div className={styles.main_container}>
-          <img src={imgUrl} className={styles.img} alt="profileDp" />
+          {anonymity ? (
+            <img className={styles.anonymous_img} src="/anonymous_pic.jpg" alt="Anonymous" />
+          ) : (
+            <img src={name?.logo} className={styles.img} alt="profileDp" />
+          )}
           <div className={styles.info_container}>
-            <p className={styles.title}>{title}</p>
-            <p className={styles.role}>{role}</p>
-            <p className={styles.truncate}>{description}</p>
+            <p className={styles.title}>{company}</p>
+            <p className={styles.role}>{roles}</p>
+            <p className={styles.truncate}>{description_read}</p>
           </div>
         </div>
         <div className={styles.separator} />
         <div className={styles.tags_container}>
+          {selected && (
+            <div className={styles.tag}>
+              <span>Selected</span>
+            </div>
+          )}
+          {anonymity ? (
+            <div className={styles.tag}>
+              <span>Anonymous</span>
+            </div>
+          ) : (
+            <div className={styles.tag}>
+              <span>{name?.name}</span>
+            </div>
+          )}
           <div className={styles.tag}>
-            <span>{selStatus}</span>
+            <span>{jobtype}</span>
           </div>
           <div className={styles.tag}>
-            <span>{userName}</span>
+            <span>{getDifficulty(difficulty)}</span>
           </div>
           <div className={styles.tag}>
-            <span>{jobType}</span>
-          </div>
-          <div className={styles.tag}>
-            <span>{difficulty}</span>
-          </div>
-          <div className={styles.tag}>
-            <span>{postedOn}</span>
+            <span>{new Date(created_at).toLocaleDateString()}</span>
           </div>
         </div>
       </div>
