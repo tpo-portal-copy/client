@@ -88,8 +88,13 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
         .integer('Total backlog must be an integer.')
         .typeError('Total backlog must be an integer.')
         .required('Total backlog is required.'),
-      gateScore: Yup.number().typeError('Gate score must be a number.'),
-      catScore: Yup.number().typeError('Cat score must be a number.'),
+      gateScore: Yup.number()
+        .typeError('Gate score must be a number.')
+        .max(100, "Gate score can't be greater than 100."),
+      catScore: Yup.number()
+        .typeError('Cat percentile must be a number.')
+        .min(0, "Cat percentile can't be negative.")
+        .max(100, "Cat percentile can't be greater than 100."),
       batchYear: Yup.number()
         .integer('Batch year must be an integer.')
         .typeError('Batch year must be an integer.')
@@ -107,9 +112,12 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       gapYear12: Yup.number()
         .integer('Gap year must be an integer.')
         .typeError('Gap year must be an integer.')
+        .min(0, 'Gap year cannot be negative.')
         .max(4, 'Gap year cannot be greater than 4.')
-        .min(0, 'Gap year cannot be negative.'),
-      gapYearUG: Yup.number().min(0, 'Gap year cannot be negative.'),
+        .required('No. of gap years is required.'),
+      gapYearUG: Yup.number()
+        .min(0, 'Gap year cannot be negative.')
+        .required('No. of gap years is required.'),
     }),
     onSubmit: (values) => {
       onNext(values)
@@ -232,7 +240,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       <div className={styles.feild}>
         <Input
           name="catScore"
-          placeholder="CAT Score"
+          placeholder="CAT Percentile"
           value={formik.values.catScore}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -255,26 +263,37 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       </div>
       <div className={styles.feild}>
         {formik.values.course === 'B.Tech' ? (
-          <Input
-            name="gapYear12"
-            placeholder="Gap Year after 12th"
-            value={formik.values.gapYear12}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <>
+            <Input
+              name="gapYear12"
+              placeholder="No. of Gap Years after 12th"
+              value={formik.values.gapYear12}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.gapYear12 && formik.errors.gapYear12 ? (
+              <Error errorMessage={formik.errors.gapYear12} />
+            ) : null}
+          </>
         ) : null}
       </div>
       <div className={styles.feild}>
         {formik.values.course === 'M.Tech' ||
         formik.values.course === 'MBA' ||
         formik.values.course === 'MSc' ? (
-          <Input
-            name="gapYearUG"
-            placeholder="Gap Year after UG"
-            value={formik.values.gapYearUG}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          <>
+            <Input
+              name="gapYearUG"
+              placeholder="No. of Gap Years after UG"
+              value={formik.values.gapYearUG}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+
+            {formik.touched.gapYearUG && formik.errors.gapYearUG ? (
+              <Error errorMessage={formik.errors.gapYearUG} />
+            ) : null}
+          </>
         ) : null}
       </div>
       <div className={styles.btn_container}>
