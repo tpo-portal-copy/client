@@ -10,49 +10,49 @@ import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
-  const [step, setStep] = useState(0)
-  const [formOneData, setFormOneData] = useState({
+  const [step, setStep] = useState(3)
+  const [formOneData, setFormOneData] = useState<FormOneData>({
     firstName: '',
     middleName: '',
     lastName: '',
     dob: '',
     state: '',
     city: '',
-    pincode: 0,
+    pincode: undefined,
     personalEmail: '',
     gender: '',
     category: '',
-    phone: 0,
+    phone: '',
     linkedin: '',
     isPwd: false,
-    disabilityTypes: '',
+    disabilityTypes: 'Others',
   })
 
-  const [formTwoData, setFormTwoData] = useState({
-    tenthYear: 0,
+  const [formTwoData, setFormTwoData] = useState<FormTwoData>({
+    tenthYear: undefined,
     tenthSchool: '',
     tenthBoard: '',
-    tenthPercentage: 0,
-    twelfthYear: 0,
+    tenthPercentage: undefined,
+    twelfthYear: undefined,
     twelfthSchool: '',
     twelfthBoard: '',
-    twelfthPercentage: 0,
-    jeeRank: 0,
+    twelfthPercentage: undefined,
+    jeeRank: undefined,
   })
 
-  const [formThreeData, setFormThreeData] = useState({
+  const [formThreeData, setFormThreeData] = useState<FormThreeData>({
     course: '',
     branch: '',
-    cgpi: 0,
-    activeBacklog: 0,
-    totalBacklog: 0,
-    gateScore: 0,
-    catScore: 0,
-    batchYear: 0,
-    passingYear: 0,
-    currentYear: 0,
-    gapYear12: 0,
-    gapYearUG: 0,
+    cgpi: undefined,
+    activeBacklog: undefined,
+    totalBacklog: undefined,
+    gateScore: undefined,
+    catScore: undefined,
+    batchYear: undefined,
+    passingYear: undefined,
+    currentYear: undefined,
+    gapYear12: undefined,
+    gapYearUG: undefined,
   })
 
   const [show, setShow] = useState(false)
@@ -136,13 +136,10 @@ export default function StudentDetailsForm() {
               animationData={Loading}
               className={styles.animation}
             />
-            <Text className={styles.tag_line}>You have successfully submitted your details</Text>{' '}
+            <Text className={styles.tag_line}>You have successfully submitted your details.</Text>{' '}
           </div>
         ) : (
-          <>
-            <h2 className={styles.heading}>Fill Your Details Here</h2>
-            {getFormContent(step)}
-          </>
+          <>{getFormContent(step)}</>
         )}
       </div>
     </div>
