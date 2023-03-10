@@ -1,10 +1,9 @@
-/* eslint-disable eqeqeq */
-import { VStack, Text, Alert, AlertIcon, Button } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FormThreeProps } from '../../../../utils/types'
 import styles from './FormThree.module.scss'
-import { Input, Select } from '../../../index'
+import { Error, Input, Select } from '../../../index'
 
 const courseData = [
   {
@@ -65,11 +64,11 @@ const branchData = [
 ]
 
 const currentYearData = [
-  { id: 1, value: 'I' },
-  { id: 2, value: 'II' },
-  { id: 3, value: 'III' },
-  { id: 4, value: 'IV' },
-  { id: 5, value: 'V' },
+  { id: 1, label: 'I', value: 1 },
+  { id: 2, label: 'II', value: 2 },
+  { id: 3, label: 'III', value: 3 },
+  { id: 4, label: 'IV', value: 4 },
+  { id: 5, label: 'V', value: 5 },
 ]
 
 export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
@@ -78,26 +77,44 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      course: Yup.string().required('*Required'),
-      branch: Yup.string().required('*Required'),
-      cgpi: Yup.number().typeError('Should be integer').required('*Required'),
-      activeBacklog: Yup.number().typeError('Should be integer').required('*Required'),
-      totalBacklog: Yup.number().typeError('Should be integer').required('*Required'),
-      gateScore: Yup.number().typeError('Should be number'),
-      catScore: Yup.number().typeError('Should be number'),
-      batchYear: Yup.string()
-        .min(4, 'Invalid Year')
-        .max(4, 'Invalid Year')
-        .matches(/^[0-9]+$/, 'Only integers are allowed')
-        .required('*Required'),
-      passingYear: Yup.string()
-        .min(4, 'Invalid Year')
-        .max(4, 'Invalid Year')
-        .matches(/^[0-9]+$/, 'Only integers are allowed')
-        .required('*Required'),
-      currentYear: Yup.string().required('*Required'),
-      gapYear12: Yup.number(),
-      gapYearUG: Yup.number(),
+      course: Yup.string().required('Course is required.'),
+      branch: Yup.string().required('Branch is required.'),
+      cgpi: Yup.number().typeError('CGPI must be a number.').required('CGPI is required.'),
+      activeBacklog: Yup.number()
+        .integer('Active backlog must be an integer.')
+        .typeError('Active backlog must be an integer.')
+        .required('Active backlog is required.'),
+      totalBacklog: Yup.number()
+        .integer('Total backlog must be an integer.')
+        .typeError('Total backlog must be an integer.')
+        .required('Total backlog is required.'),
+      gateScore: Yup.number()
+        .typeError('Gate score must be a number.')
+        .max(100, "Gate score can't be greater than 100."),
+      catScore: Yup.number()
+        .typeError('Cat percentile must be a number.')
+        .min(0, "Cat percentile can't be negative.")
+        .max(100, "Cat percentile can't be greater than 100."),
+      batchYear: Yup.number()
+        .integer('Batch year must be an integer.')
+        .typeError('Batch year must be an integer.')
+        .min(2019, 'Minimum batch year required is 2019.')
+        .required('Batch year is required.'),
+      passingYear: Yup.number()
+        .integer('Passing year must be an integer.')
+        .typeError('Passing year must be an integer.')
+        .min(2024, 'Minimum passing year required is 2024.')
+        .required('Passing is required.'),
+      currentYear: Yup.number()
+        .typeError('Currenr year must be an integer.')
+        .required('Current Year is required.')
+        .min(1, 'Current Year is required.'),
+      gapYear12: Yup.number()
+        .integer('Gap year must be an integer.')
+        .typeError('Gap year must be an integer.')
+        .min(0, 'Gap year cannot be negative.')
+        .max(4, 'Gap year cannot be greater than 4.'),
+      gapYearUG: Yup.number().min(0, 'Gap year cannot be negative.'),
     }),
     onSubmit: (values) => {
       onNext(values)
@@ -105,7 +122,8 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
   })
   return (
     <form className={styles.container} onSubmit={formik.handleSubmit}>
-      <VStack>
+      <h2 className={styles.title}>College Academic Details</h2>
+      <div className={`${styles.field} ${styles.dropdown}`}>
         <Select
           value={formik.values.course}
           onChange={formik.handleChange}
@@ -118,12 +136,10 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           ))}
         </Select>
         {formik.touched.course && formik.errors.course ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.course}
-          </Alert>
+          <Error errorMessage={formik.errors.course} />
         ) : null}
-
+      </div>
+      <div className={`${styles.field} ${styles.dropdown}`}>
         <Select
           value={formik.values.branch}
           onChange={formik.handleChange}
@@ -136,40 +152,35 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           ))}
         </Select>
         {formik.touched.branch && formik.errors.branch ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.branch}
-          </Alert>
+          <Error errorMessage={formik.errors.branch} />
         ) : null}
+      </div>
 
+      <div className={styles.feild}>
         <Input
           name="batchYear"
           placeholder="Batch Year"
-          value={formik.values.batchYear || ''}
+          value={formik.values.batchYear}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.batchYear && formik.errors.batchYear ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.batchYear}
-          </Alert>
+          <Error errorMessage={formik.errors.batchYear} />
         ) : null}
-
+      </div>
+      <div className={styles.feild}>
         <Input
           name="passingYear"
           placeholder="Passing Year"
-          value={formik.values.passingYear || ''}
+          value={formik.values.passingYear}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.passingYear && formik.errors.passingYear ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.passingYear}
-          </Alert>
+          <Error errorMessage={formik.errors.passingYear} />
         ) : null}
-
+      </div>
+      <div className={`${styles.feild} ${styles.dropdown}`}>
         <Select
           value={formik.values.currentYear}
           onChange={formik.handleChange}
@@ -177,132 +188,132 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           name="currentYear"
           placeholder="Current Year"
         >
-          {currentYearData.map((datas) => (
-            <option key={datas.id}>{datas.value}</option>
+          {currentYearData.map((option) => (
+            <option key={option.id} value={option.value}>
+              {option.label}
+            </option>
           ))}
         </Select>
         {formik.touched.currentYear && formik.errors.currentYear ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.currentYear}
-          </Alert>
+          <Error errorMessage={formik.errors.currentYear} />
         ) : null}
-
+      </div>
+      <div className={styles.feild}>
         <Input
           name="cgpi"
           placeholder="CGPI"
-          value={formik.values.cgpi || ''}
+          value={formik.values.cgpi}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.cgpi && formik.errors.cgpi ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.cgpi}
-          </Alert>
+          <Error errorMessage={formik.errors.cgpi} />
         ) : null}
-
+      </div>
+      <div className={styles.feild}>
         <Input
           name="activeBacklog"
           placeholder="Active Backlog"
-          value={formik.values.activeBacklog || ''}
+          value={formik.values.activeBacklog}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.activeBacklog && formik.errors.activeBacklog ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.activeBacklog}
-          </Alert>
+          <Error errorMessage={formik.errors.activeBacklog} />
         ) : null}
-
+      </div>
+      <div className={styles.feild}>
         <Input
           name="totalBacklog"
           placeholder="Total Backlog"
-          value={formik.values.totalBacklog || ''}
+          value={formik.values.totalBacklog}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.totalBacklog && formik.errors.totalBacklog ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.totalBacklog}
-          </Alert>
+          <Error errorMessage={formik.errors.totalBacklog} />
         ) : null}
-
+      </div>
+      <div className={styles.feild}>
         <Input
           name="catScore"
-          placeholder="CAT Score"
-          value={formik.values.catScore || ''}
+          placeholder="CAT Percentile"
+          value={formik.values.catScore}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.catScore && formik.errors.catScore ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.catScore}
-          </Alert>
+          <Error errorMessage={formik.errors.catScore} />
         ) : null}
-
+      </div>
+      <div className={styles.feild}>
         <Input
           name="gateScore"
           placeholder="GATE Score"
-          value={formik.values.gateScore || ''}
+          value={formik.values.gateScore}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.gateScore && formik.errors.gateScore ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.gateScore}
-          </Alert>
+          <Error errorMessage={formik.errors.gateScore} />
         ) : null}
-
-        {formik.values.course == 'B.Tech' ? (
-          <Input
-            name="gapYear12"
-            placeholder="Gap Year after 12th"
-            value={formik.values.gapYear12 || ''}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+      </div>
+      <div className={styles.feild}>
+        {formik.values.course === 'B.Tech' ? (
+          <>
+            <Input
+              name="gapYear12"
+              placeholder="No. of Gap Years after 12th"
+              value={formik.values.gapYear12}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.gapYear12 && formik.errors.gapYear12 ? (
+              <Error errorMessage={formik.errors.gapYear12} />
+            ) : null}
+          </>
         ) : null}
+      </div>
+      <div className={styles.feild}>
+        {formik.values.course === 'M.Tech' ||
+        formik.values.course === 'MBA' ||
+        formik.values.course === 'MSc' ? (
+          <>
+            <Input
+              name="gapYearUG"
+              placeholder="No. of Gap Years after UG"
+              value={formik.values.gapYearUG}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
 
-        {formik.values.course == 'M.Tech' ||
-        formik.values.course == 'MBA' ||
-        formik.values.course == 'MSc' ? (
-          <Input
-            name="gapYearUG"
-            placeholder="Gap Year after UG"
-            value={formik.values.gapYearUG || ''}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+            {formik.touched.gapYearUG && formik.errors.gapYearUG ? (
+              <Error errorMessage={formik.errors.gapYearUG} />
+            ) : null}
+          </>
         ) : null}
-
-        <div className={styles.btn_container}>
-          <Button
-            background="linear-gradient(40deg,#45cafc,#303f9f)"
-            color="white"
-            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-            className={styles.btn}
-            type="submit"
-            onClick={() => onBack(formik.values)}
-          >
-            Back
-          </Button>
-          <Button
-            background="linear-gradient(40deg,#45cafc,#303f9f)"
-            color="white"
-            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-            className={styles.btn}
-            isDisabled={!formik.isValid}
-            type="submit"
-          >
-            Next
-          </Button>
-        </div>
-      </VStack>
+      </div>
+      <div className={styles.btn_container}>
+        <Button
+          background="linear-gradient(40deg,#45cafc,#303f9f)"
+          color="white"
+          _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+          className={styles.btn}
+          type="submit"
+          onClick={() => onBack(formik.values)}
+        >
+          Back
+        </Button>
+        <Button
+          background="linear-gradient(40deg,#45cafc,#303f9f)"
+          color="white"
+          _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+          className={styles.btn}
+          type="submit"
+        >
+          Next
+        </Button>
+      </div>
     </form>
   )
 }
