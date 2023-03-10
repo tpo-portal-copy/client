@@ -143,7 +143,7 @@
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 8px;
       background-color: var(--custom-white-v1);
 
       .label {
@@ -153,6 +153,7 @@
         font-size: var(--md-heading);
         font-weight: 600;
         color: var(--text-color-primary);
+        padding-bottom: 2px;
       }
     }
 
@@ -176,6 +177,12 @@
           font-weight: 600;
           color: var(--text-color-primary);
         }
+
+        .cluster_field_container {
+          @media screen and (max-width: 1225px) {
+            padding: 10px 0px;
+          }
+        }
       }
 
       .address_container {
@@ -190,7 +197,7 @@
         }
         .address_fields_container {
           padding-top: 10px;
-          padding-bottom: 40px;
+          padding-bottom: 10px;
         }
       }
 
@@ -207,7 +214,7 @@
 
         .user_stats_fields_container {
           padding-top: 10px;
-          padding-bottom: 40px;
+          padding-bottom: 10px;
         }
 
         .profile {
@@ -225,6 +232,10 @@
             .profile_link {
               color: #fff;
             }
+          }
+
+          @media screen and (max-width: 1225px) {
+            padding: 2px;
           }
         }
         .profile_link {

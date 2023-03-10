@@ -40,10 +40,15 @@ function DrivesCard({
             </div>
           </div>
         </div>
-        <Link to="/dashboard" className={styles.jd_link}>
-          <FontAwesomeIcon icon={faLink} />
-          <span> JD</span>
-        </Link>
+        <div className={styles.link}>
+          <Link to="/experience-form" className={styles.past_exp_btn}>
+            Past Experience
+          </Link>
+          <Link to="/dashboard" className={styles.jd_link}>
+            <FontAwesomeIcon icon={faLink} />
+            <span> JD</span>
+          </Link>
+        </div>
       </div>
       <div className={styles.separator} />
       <div className={styles.bottom_content}>
