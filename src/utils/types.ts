@@ -55,7 +55,7 @@ export interface ExperienceCardProps {
 export type InputProps = {
   name: string
   placeholder: string
-  value: string | number
+  value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
   type?: 'text' | 'password' | 'date' | 'file'
@@ -64,7 +64,7 @@ export type InputProps = {
 export interface SelectProps {
   name: string
   placeholder: string
-  value: string | number
+  value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
   children: any
@@ -136,6 +136,10 @@ export interface DrivesCardProps {
   imgUrl: string
   ctcOffered: number
   startingDate: Date
+  modeOfHiring: string
+  aptitudeTest: string
+  ppt: string
+  jobLocation: string
   type: string
   eligibleBatches: Array<string>
   jobProfile: string
@@ -164,41 +168,41 @@ export type FormOneData = {
   dob: string
   state: string
   city: string
-  pincode: number
+  pincode: number | undefined
   personalEmail: string
   gender: string
   category: string
-  phone: number
+  phone: string
   linkedin: string
   isPwd: boolean
   disabilityTypes: string
 }
 
 export interface FormTwoData {
-  tenthYear: number
+  tenthYear: number | undefined
   tenthSchool: string
   tenthBoard: string
-  tenthPercentage: number
-  twelfthYear: number
+  tenthPercentage: number | undefined
+  twelfthYear: number | undefined
   twelfthSchool: string
   twelfthBoard: string
-  twelfthPercentage: number
-  jeeRank: number
+  twelfthPercentage: number | undefined
+  jeeRank: number | undefined
 }
 
 export interface FormThreeData {
   course: string
   branch: string
-  cgpi: number
-  activeBacklog: number
-  totalBacklog: number
-  gateScore: number
-  catScore: number
-  batchYear: number
-  passingYear: number
-  currentYear: number
-  gapYear12: number
-  gapYearUG: number
+  cgpi: number | undefined
+  activeBacklog: number | undefined
+  totalBacklog: number | undefined
+  gateScore: number | undefined
+  catScore: number | undefined
+  batchYear: number | undefined
+  passingYear: number | undefined
+  currentYear: number | undefined
+  gapYear12: number | undefined
+  gapYearUG: number | undefined
 }
 
 export interface FormOneProps {
@@ -262,4 +266,42 @@ export interface PaginatorProps {
   onPrev: MouseEventHandler<HTMLButtonElement>
   disablePrev: boolean
   disableNext: boolean
+}
+
+export interface StatisticsDetailsProps {
+  id: number
+  company: string
+  totalOffers: number
+  courses: Array<StatisticsDetailsCourseProps>
+}
+
+export interface StatisticsDetailsCourseProps {
+  id: number
+  courseName: string
+  totalCourseOffers?: number
+  roles: Array<StatisticsDetailsRoleProps>
+  branches: Array<StatisticsDetailsBranchesProps>
+}
+
+export interface StatisticsDetailsRoleProps {
+  id: number
+  roleName: string
+  ctcOffered: number
+  totalroleoffers: number
+}
+
+export interface StatisticsDetailsBranchesProps {
+  id: number
+  branchName?: string
+  offersRoleWise: Array<StatisticsDetailsOffersRoleWiseProps>
+  offersBranchWise: number
+}
+
+export interface StatisticsDetailsOffersRoleWiseProps {
+  id: number
+  noOfOffers: number
+}
+
+export interface ErrorProps {
+  errorMessage: string
 }
