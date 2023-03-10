@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-children-prop */
 import {
   Select,
@@ -17,21 +18,20 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
-
+import Lottie from 'lottie-react'
 import styles from './Statistics.module.scss'
-import {
-  chartData,
-  topCompaniesData,
-  jobType,
-  sessions,
-  statsInfo,
-} from '../../utils/Data/statisticsData'
+import { chartData, jobType, sessions, statsCardStyles } from '../../utils/Data/statisticsData'
 import { PieChart, StatsCard, CompanyCard, Paginator } from '../../components'
+import useStatisticsDetails from '../../hooks/useStatisticsData'
+import LoadingAnimation from '../../assets/animations/98770-assistagro-loading-bars.json'
+import Page500 from '../Page500'
+import { companiesDetailsAPI } from '../../utils/apis'
+import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 
 const ctcTableHeader = [
   { id: 1, heading: 'Company' },
@@ -44,23 +44,56 @@ const offersTableHeader = [
 ]
 
 function Statistics() {
-  const [job, setJob] = useState('')
-  const [session, setSession] = useState('')
-
-  const handleJobChange = (e: any) => {
-    setJob(e.target.value)
-  }
-
-  const handleSessionChange = (e: any) => {
-    setSession(e.target.value)
-  }
+  const [job, setJob] = useState('placement')
+  const [session, setSession] = useState('2022-23')
 
   const [currPage, setCurrPage] = useState(1)
-  const [maxPages, setMaxPages] = useState(0)
+  const [maxPages, setMaxPages] = useState(1)
   const [ctcData, setCtcData] = useState([])
   const [offersWiseData, setOffersWiseData] = useState([])
   const [disablePrev, setDisablePrev] = useState(false)
   const [disableNext, setDisableNext] = useState(false)
+  const [tab, setTab] = useState('ctc')
+  const [companyData, setCompanyData] = useState([])
+  const [isTableLoading, setTableLoading] = useState(false)
+  const [searchedCompany, setSearchedCompany] = useState('')
+  const toast = useToast()
+
+  const { data, isLoading, isSuccess, isError, error } = useStatisticsDetails(
+    { type: job.toLowerCase(), session },
+    job,
+    session,
+  )
+
+  useEffect(() => {
+    const getCompaniesData = async (params) => {
+      try {
+        setTableLoading(true)
+        const response = await companiesDetailsAPI.get('/', {
+          params,
+        })
+        setMaxPages(Math.ceil(response.data.count / 10))
+        setTableLoading(false)
+        setCompanyData(response.data.results)
+      } catch (errors) {
+        if (errors) {
+          setTableLoading(false)
+          toast({
+            title: `Something went wrong....`,
+            status: 'error',
+            isClosable: true,
+          })
+        }
+      }
+    }
+    const companyDatas = getCompaniesData({
+      page: currPage,
+      session,
+      type: job.toLowerCase(),
+      order: tab,
+      company: searchedCompany,
+    })
+  }, [currPage, job, tab])
 
   const handleNext = async (nextPage: number) => {
     if (currPage === maxPages - 1) {
@@ -71,43 +104,95 @@ function Statistics() {
     }
     if (currPage < maxPages) {
       setCurrPage(currPage + 1)
-      const result = await axios.get(`https://sakhanith.pagekite.me/companies/?page=${nextPage}`)
-      setCtcData(result.data.results)
-      setOffersWiseData(result.data.results)
     }
   }
 
   const handlePrev = async (prevPage: number) => {
     if (currPage > 1 && currPage <= maxPages) {
       setCurrPage(currPage - 1)
-      const result = await axios.get(`https://sakhanith.pagekite.me/companies/?page=${prevPage}`)
-      setCtcData(result.data.results)
-      setOffersWiseData(result.data.results)
-
-      if (result.data.links.previous === null) {
-        setDisablePrev(true)
-      } else {
-        setDisablePrev(false)
-        setDisableNext(false)
-      }
     }
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get('http://sakhanith.pagekite.me/companies')
-      setCtcData(result.data.results)
-      setOffersWiseData(result.data.results)
-      setMaxPages(Math.ceil(result.data.count / 10))
-      if (result.data.links.previous === null) {
-        setDisablePrev(true)
-      }
-      if (result.data.links.next === null) {
-        setDisableNext(true)
-      }
+  const debounce = (func) => {
+    let timer: any
+    return function (...args) {
+      // const context = this
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => {
+        timer = null
+        func.apply(this, args)
+      }, 1000)
     }
-    fetchData()
-  }, [])
+  }
+
+  const handleSearch = async (e) => {
+    const controller = new AbortController()
+    setSearchedCompany(e.target.value)
+    setTableLoading(true)
+    const response = await companiesDetailsAPI.get('/', {
+      signal: controller.signal,
+      params: {
+        session,
+        type: job.toLowerCase(),
+        order: tab,
+        company: e.target.value,
+      },
+    })
+
+    controller.abort()
+
+    setMaxPages(Math.ceil(response.data.count / 10))
+
+    setCompanyData(response.data.results)
+    setTableLoading(false)
+  }
+  const debouncedFunction = debounce(handleSearch)
+
+  const handleJobChange = (e: any) => {
+    setJob(e.target.value)
+  }
+
+  const handleSessionChange = (e: any) => {
+    setSession(e.target.value)
+  }
+
+  if (isError) {
+    return <Page500 />
+  }
+
+  if (isLoading || !isSuccess) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          height: '100vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Lottie style={{ height: '200px', width: '200px' }} animationData={LoadingAnimation} />
+      </div>
+    )
+  }
+
+  const { statsInfo, topCompanies, basicStats } = data
+  const arr: any[] = []
+  if (job !== 'PPO') {
+    basicStats.map((obj) => {
+      if (obj.course === 'B.Tech') {
+        const newObj = { ...obj, value: obj.offers, id: obj.branch.toLowerCase() }
+        arr.push(newObj)
+      }
+      return ''
+    })
+  }
+
+  const tabs = ['ctc', 'offer']
+
+  const handleTabChange = (e) => {
+    setTab(tabs[e])
+  }
 
   return (
     <>
@@ -147,86 +232,116 @@ function Statistics() {
       </div>
       <div className={styles.master_container}>
         <div className={styles.stats_info_container}>
-          {statsInfo.map((info) => (
+          {statsInfo.map((info, idx) => (
             <StatsCard
-              icon={info.icon}
+              icon={statsCardStyles[idx].icon}
               key={info.id}
               value={info.value}
               label={info.label}
-              bgColor={info.bgColor}
-              color={info.color}
-              iconColor={info.iconColor}
+              bgColor={statsCardStyles[idx].bgColor}
+              color={statsCardStyles[idx].color}
+              iconColor={statsCardStyles[idx].iconColor}
             />
           ))}
         </div>
-        <div className={styles.top_companies_container}>
-          <Text className={styles.top_companies_heading}>Our Top Recruiting Partners</Text>
-          <div className={styles.info_container_wrapper}>
-            <div className={styles.info_container}>
-              {topCompaniesData.map((data) => (
-                <CompanyCard icon={data.icon} key={data.id} label={data.label} value={data.value} />
-              ))}
+        {job === 'PPO' ? null : (
+          <div className={styles.top_companies_container}>
+            <Text className={styles.top_companies_heading}>Our Top Recruiting Partners</Text>
+            <div className={styles.info_container_wrapper}>
+              <div className={styles.info_container}>
+                {topCompanies.map((companiesData) => (
+                  <CompanyCard
+                    type={job}
+                    link={companiesData.logo}
+                    key={companiesData.logo}
+                    label={companiesData.name}
+                    value={
+                      job.toLowerCase() === 'intern'
+                        ? companiesData.max_stipend
+                        : companiesData.max_ctc
+                    }
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className={styles.table_graph_container}>
           <div className={styles.table_container}>
             <InputGroup>
-              <Input style={{ borderColor: '#ccc' }} placeholder="Search For Company" />
+              <Input
+                onChange={debouncedFunction}
+                style={{ borderColor: '#ccc' }}
+                placeholder="Search For Company"
+              />
               <InputRightElement children={<FontAwesomeIcon color="grey" icon={faSearch} />} />
             </InputGroup>
-            <Tabs colorScheme="blackAlpha">
+            <Tabs onChange={handleTabChange} colorScheme="blackAlpha">
               <TabList>
-                <Tab>CTC Wise</Tab>
+                <Tab>{job.toLowerCase() === 'intern' ? 'Stipend Wise' : 'CTC Wise'}</Tab>
                 <Tab>Offers Wise</Tab>
               </TabList>
 
-              <TabPanels>
-                <TabPanel>
-                  <TableContainer>
-                    <Table>
-                      <Thead>
-                        <Tr>
-                          {ctcTableHeader.map((header) => (
-                            <Th key={header.id}>{header.heading}</Th>
-                          ))}
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {ctcData.map((data) => (
-                          <Tr key={data.id}>
-                            <Td>{data.name}</Td>
-                            <Td>45 Lakhs</Td>
+              {isTableLoading ? (
+                <Lottie animationData={Loader} />
+              ) : (
+                <TabPanels>
+                  <TabPanel>
+                    <TableContainer>
+                      <Table>
+                        <Thead>
+                          <Tr>
+                            {ctcTableHeader.map((header, idx) => (
+                              <Th key={header.id}>
+                                {idx === 1 && job.toLowerCase() === 'intern'
+                                  ? 'Stipend Offered'
+                                  : header.heading}
+                              </Th>
+                            ))}
                           </Tr>
-                        ))}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </TabPanel>
-                <TabPanel>
-                  <TableContainer>
-                    <Table>
-                      <Thead>
-                        <Tr>
-                          {offersTableHeader.map((header) => (
-                            <Th key={header.id}>{header.heading}</Th>
+                        </Thead>
+                        <Tbody>
+                          {companyData.map((datas) => (
+                            <Tr
+                              key={
+                                job.toLowerCase() === 'intern' ? datas.max_stipend : datas.max_ctc
+                              }
+                            >
+                              <Td>{datas.name}</Td>
+                              <Td>
+                                {job.toLowerCase() === 'intern' ? datas.max_stipend : datas.max_ctc}
+                              </Td>
+                            </Tr>
                           ))}
-                        </Tr>
-                      </Thead>
+                        </Tbody>
+                      </Table>
+                    </TableContainer>
+                  </TabPanel>
+                  <TabPanel>
+                    <TableContainer>
+                      <Table>
+                        <Thead>
+                          <Tr>
+                            {offersTableHeader.map((header) => (
+                              <Th key={header.id}>{header.heading}</Th>
+                            ))}
+                          </Tr>
+                        </Thead>
 
-                      <Tbody>
-                        {offersWiseData.map((data) => (
-                          <Tr key={data.id}>
-                            <Td>{data.name}</Td>
-                            <Td>45</Td>
-                          </Tr>
-                        ))}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </TabPanel>
-              </TabPanels>
+                        <Tbody>
+                          {companyData.map((datas) => (
+                            <Tr key={datas.offfers}>
+                              <Td>{datas.name}</Td>
+                              <Td>{datas.offers}</Td>
+                            </Tr>
+                          ))}
+                        </Tbody>
+                      </Table>
+                    </TableContainer>
+                  </TabPanel>
+                </TabPanels>
+              )}
             </Tabs>
 
             <Paginator
@@ -239,7 +354,7 @@ function Statistics() {
             />
           </div>
           <div className={styles.graph_container}>
-            <PieChart data={chartData} />
+            {job === 'PPO' ? null : <PieChart data={arr} />}
           </div>
         </div>
       </div>
