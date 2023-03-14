@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import {
   Input,
-  Text,
   VStack,
-  Box,
   Button,
   Alert,
   AlertIcon,
@@ -29,9 +27,7 @@ export default function StudentLoginForm() {
         .matches(/^[a-zA-Z0-9]+$/, 'Invalid roll no.'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
+    onSubmit: () => {},
   })
 
   const handleIconClick = () => {

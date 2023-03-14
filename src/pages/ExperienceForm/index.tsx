@@ -1,7 +1,7 @@
-import { Button, VStack, Text, Alert, AlertIcon } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Button, VStack, Text, Alert, AlertIcon, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useState } from 'react'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
 import Animation from '../../assets/animations/103081-yoga-2.json'
@@ -9,6 +9,10 @@ import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
 import { Input, Select } from '../../components'
 import styles from './ExperienceForm.module.scss'
+import { companiesAPI } from '../../utils/apis'
+import useRoles from '../../hooks/useRoles'
+import LoadingAnimation from '../../assets/animations/98770-assistagro-loading-bars.json'
+import { Company } from '../../utils/types'
 
 const roleData = [
   { id: 4, value: 'SDE' },
@@ -44,6 +48,9 @@ const difficultyData = [
 export default function ExperienceForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
+  const [search, setSearch] = useState('')
+  const toast = useToast()
+  const { isError, data, isLoading: isRolesLoading, isSuccess, error } = useRoles()
 
   const formik = useFormik({
     initialValues: {
@@ -73,6 +80,40 @@ export default function ExperienceForm() {
     },
   })
   const [value, setValue] = useState('')
+  const [company, setCompany] = useState([])
+
+  if (isRolesLoading || !isSuccess) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          height: '100vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Lottie style={{ height: '200px', width: '200px' }} animationData={LoadingAnimation} />
+      </div>
+    )
+  }
+  if (isSuccess) {
+    console.log(data)
+  }
+
+  const handleSearch = async (e: any) => {
+    formik.setFieldValue('companyName', e.target.value)
+    const controller = new AbortController()
+    const response = await companiesAPI.get('/', {
+      signal: controller.signal,
+      params: {
+        search: e.target.value,
+      },
+    })
+
+    controller.abort()
+    setCompany(response.data)
+  }
 
   return (
     <div className={styles.container}>
@@ -99,11 +140,23 @@ export default function ExperienceForm() {
                 <>
                   <Input
                     onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
+                    onChange={(e) => handleSearch(e)}
                     name="companyName"
                     placeholder="Company Name"
                     value={formik.values.companyName}
                   />
+                  {formik.values.companyName && (
+                    <div
+                      style={{ display: `${company.length === 0 ? 'none' : 'block'}` }}
+                      className={styles.suggestions}
+                    >
+                      {company.map((companyData: Company) => (
+                        <p style={{ padding: '5px' }} key={companyData.id}>
+                          {companyData.name}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                   {formik.touched.companyName && formik.errors.companyName ? (
                     <Alert borderRadius={5} status="error">
                       <AlertIcon />
@@ -118,8 +171,8 @@ export default function ExperienceForm() {
                     name="difficulty"
                     placeholder="Difficulty"
                   >
-                    {difficultyData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {difficultyData.map((diffData) => (
+                      <option key={diffData.id}>{diffData.value}</option>
                     ))}
                   </Select>
                   {formik.touched.difficulty && formik.errors.difficulty ? (
@@ -128,7 +181,6 @@ export default function ExperienceForm() {
                       {formik.errors.difficulty}
                     </Alert>
                   ) : null}
-
                   <Select
                     value={formik.values.role}
                     onBlur={formik.handleBlur}
@@ -136,9 +188,9 @@ export default function ExperienceForm() {
                     name="role"
                     placeholder="Role"
                   >
-                    {roleData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
-                    ))}
+                    {/* {roles.map((data) => (
+                      <option key={data}>{data}</option>
+                    ))} */}
                   </Select>
                   {formik.touched.role && formik.errors.role ? (
                     <Alert borderRadius={5} status="error">
@@ -154,8 +206,8 @@ export default function ExperienceForm() {
                     name="type"
                     placeholder="Type"
                   >
-                    {typeData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {typeData.map((typeDatas) => (
+                      <option key={typeDatas.id}>{typeDatas.value}</option>
                     ))}
                   </Select>
                   {formik.touched.type && formik.errors.type ? (
@@ -184,8 +236,8 @@ export default function ExperienceForm() {
                     name="verdict"
                     placeholder="Verdict"
                   >
-                    {verdictData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {verdictData.map((verData) => (
+                      <option key={verData.id}>{verData.value}</option>
                     ))}
                   </Select>
                   {formik.touched.verdict && formik.errors.verdict ? (
@@ -201,8 +253,8 @@ export default function ExperienceForm() {
                     name="anonymous"
                     placeholder="Anonymous"
                   >
-                    {anonymousData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {anonymousData.map((anonyData) => (
+                      <option key={anonyData.id}>{anonyData.value}</option>
                     ))}
                   </Select>
                   {formik.touched.anonymous && formik.errors.anonymous ? (

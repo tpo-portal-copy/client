@@ -1,5 +1,31 @@
 @use '../../index.scss' as main;
 
+.lottie_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .animation_container {
+    height: 400px;
+    width: 400px;
+
+    @media screen and (max-width: 650px) {
+      height: 300px;
+      width: 300px;
+    }
+  }
+
+  .heading {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .para {
+    font-size: 20px;
+  }
+}
+
 .container {
   display: flex;
   justify-content: space-between;

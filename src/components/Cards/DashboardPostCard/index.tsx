@@ -12,7 +12,7 @@ function DashboardPostCard({ title, description, imageUrl, postedOn }: Post) {
         </div>
       </div>
       <div className={styles.separator} />
-      <span className={styles.time_stamp}>{postedOn} min ago</span>
+      <span className={styles.time_stamp}>{postedOn}</span>
     </div>
   )
 }

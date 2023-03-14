@@ -25,13 +25,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import Lottie from 'lottie-react'
 import styles from './Statistics.module.scss'
-import { chartData, jobType, sessions, statsCardStyles } from '../../utils/Data/statisticsData'
+import { jobType, sessions, statsCardStyles } from '../../utils/Data/statisticsData'
 import { PieChart, StatsCard, CompanyCard, Paginator } from '../../components'
 import useStatisticsDetails from '../../hooks/useStatisticsData'
 import LoadingAnimation from '../../assets/animations/98770-assistagro-loading-bars.json'
 import Page500 from '../Page500'
 import { companiesDetailsAPI } from '../../utils/apis'
 import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
+import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
 
 const ctcTableHeader = [
   { id: 1, heading: 'Company' },
@@ -49,30 +50,26 @@ function Statistics() {
 
   const [currPage, setCurrPage] = useState(1)
   const [maxPages, setMaxPages] = useState(1)
-  const [ctcData, setCtcData] = useState([])
-  const [offersWiseData, setOffersWiseData] = useState([])
-  const [disablePrev, setDisablePrev] = useState(false)
-  const [disableNext, setDisableNext] = useState(false)
   const [tab, setTab] = useState('ctc')
   const [companyData, setCompanyData] = useState([])
   const [isTableLoading, setTableLoading] = useState(false)
   const [searchedCompany, setSearchedCompany] = useState('')
   const toast = useToast()
 
-  const { data, isLoading, isSuccess, isError, error } = useStatisticsDetails(
+  const { data, isLoading, isSuccess, isError } = useStatisticsDetails(
     { type: job.toLowerCase(), session },
     job,
     session,
   )
 
   useEffect(() => {
-    const getCompaniesData = async (params) => {
+    const getCompaniesData = async (params: any) => {
       try {
         setTableLoading(true)
         const response = await companiesDetailsAPI.get('/', {
           params,
         })
-        setMaxPages(Math.ceil(response.data.count / 10))
+        setMaxPages(response.data.pages)
         setTableLoading(false)
         setCompanyData(response.data.results)
       } catch (errors) {
@@ -95,28 +92,9 @@ function Statistics() {
     })
   }, [currPage, job, tab])
 
-  const handleNext = async (nextPage: number) => {
-    if (currPage === maxPages - 1) {
-      setDisableNext(true)
-    } else {
-      setDisableNext(false)
-      setDisablePrev(false)
-    }
-    if (currPage < maxPages) {
-      setCurrPage(currPage + 1)
-    }
-  }
-
-  const handlePrev = async (prevPage: number) => {
-    if (currPage > 1 && currPage <= maxPages) {
-      setCurrPage(currPage - 1)
-    }
-  }
-
-  const debounce = (func) => {
+  const debounce = (func: any) => {
     let timer: any
-    return function (...args) {
-      // const context = this
+    return function (...args: any[]) {
       if (timer) clearTimeout(timer)
       timer = setTimeout(() => {
         timer = null
@@ -125,7 +103,7 @@ function Statistics() {
     }
   }
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e: any) => {
     const controller = new AbortController()
     setSearchedCompany(e.target.value)
     setTableLoading(true)
@@ -141,9 +119,9 @@ function Statistics() {
 
     controller.abort()
 
-    setMaxPages(Math.ceil(response.data.count / 10))
-
     setCompanyData(response.data.results)
+    setCurrPage(1)
+    setMaxPages(response.data.pages)
     setTableLoading(false)
   }
   const debouncedFunction = debounce(handleSearch)
@@ -179,7 +157,7 @@ function Statistics() {
   const { statsInfo, topCompanies, basicStats } = data
   const arr: any[] = []
   if (job !== 'PPO') {
-    basicStats.map((obj) => {
+    basicStats.map((obj: BasicStats) => {
       if (obj.course === 'B.Tech') {
         const newObj = { ...obj, value: obj.offers, id: obj.branch.toLowerCase() }
         arr.push(newObj)
@@ -190,7 +168,7 @@ function Statistics() {
 
   const tabs = ['ctc', 'offer']
 
-  const handleTabChange = (e) => {
+  const handleTabChange = (e: any) => {
     setTab(tabs[e])
   }
 
@@ -232,7 +210,7 @@ function Statistics() {
       </div>
       <div className={styles.master_container}>
         <div className={styles.stats_info_container}>
-          {statsInfo.map((info, idx) => (
+          {statsInfo.map((info: StatsInfo, idx: number) => (
             <StatsCard
               icon={statsCardStyles[idx].icon}
               key={info.id}
@@ -249,10 +227,10 @@ function Statistics() {
             <Text className={styles.top_companies_heading}>Our Top Recruiting Partners</Text>
             <div className={styles.info_container_wrapper}>
               <div className={styles.info_container}>
-                {topCompanies.map((companiesData) => (
+                {topCompanies.map((companiesData: TopCompanies) => (
                   <CompanyCard
                     type={job}
-                    link={companiesData.logo}
+                    link={companiesData.logo || 'https://picsum.photos/100'}
                     key={companiesData.logo}
                     label={companiesData.name}
                     value={
@@ -302,7 +280,7 @@ function Statistics() {
                           </Tr>
                         </Thead>
                         <Tbody>
-                          {companyData.map((datas) => (
+                          {companyData.map((datas: TopCompanies) => (
                             <Tr
                               key={
                                 job.toLowerCase() === 'intern' ? datas.max_stipend : datas.max_ctc
@@ -330,8 +308,8 @@ function Statistics() {
                         </Thead>
 
                         <Tbody>
-                          {companyData.map((datas) => (
-                            <Tr key={datas.offfers}>
+                          {companyData.map((datas: TopCompanies) => (
+                            <Tr key={datas.offers}>
                               <Td>{datas.name}</Td>
                               <Td>{datas.offers}</Td>
                             </Tr>
@@ -345,12 +323,12 @@ function Statistics() {
             </Tabs>
 
             <Paginator
-              onPrev={() => handlePrev(currPage - 1)}
-              onNext={() => handleNext(currPage + 1)}
+              onPrev={() => setCurrPage(currPage - 1)}
+              onNext={() => setCurrPage(currPage + 1)}
               curr={currPage}
               max={maxPages}
-              disablePrev={disablePrev}
-              disableNext={disableNext}
+              disablePrev={currPage === 1}
+              disableNext={currPage === maxPages}
             />
           </div>
           <div className={styles.graph_container}>

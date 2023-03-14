@@ -1,14 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { ChakraProvider, extendTheme, Button } from '@chakra-ui/react'
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-  QueryErrorResetBoundary,
-} from '@tanstack/react-query'
-import { ErrorBoundary } from 'react-error-boundary'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import App from './App'
 import './index.scss'
 // import {} from '@ta'
