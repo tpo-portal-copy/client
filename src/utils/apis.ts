@@ -7,6 +7,7 @@ import {
   RECENT_NOTIFICATIONS_API,
   DASHBOARD_API,
   ROLES_API,
+  COMPANIES_ORDERWISE_API,
 } from './constants'
 
 export const studentAPI = axios.create({
@@ -18,7 +19,7 @@ export const drivesAPI = axios.create({
 })
 
 export const companiesDetailsAPI = axios.create({
-  baseURL: COMPANIES_API,
+  baseURL: COMPANIES_ORDERWISE_API,
 })
 
 export const statisticsDetailsAPI = axios.create({

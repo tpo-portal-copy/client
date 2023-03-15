@@ -101,6 +101,10 @@
         flex-direction: column;
         overflow-y: scroll;
         border-radius: 0.375rem;
+
+        .item {
+          padding: 5px;
+        }
       }
 
       .description {

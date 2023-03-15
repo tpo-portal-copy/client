@@ -1,13 +1,12 @@
 /* eslint-disable no-restricted-syntax */
 import { useState } from 'react'
-import Lottie from 'lottie-react'
-import LoadingAnimation from '../../assets/animations/98770-assistagro-loading-bars.json'
 import styles from './Dashboard.module.scss'
 import { DashboardPostCard } from '../../components/Cards'
 import useRecentNotifications from '../../hooks/useRecentNotifications'
 import Page500 from '../Page500'
 import useDashboard from '../../hooks/useDashboard'
 import { fromNow } from '../../utils/functions'
+import PageLoader from '../../components/PageLoader'
 
 function Dashboard() {
   const [type, setType] = useState('all')
@@ -25,7 +24,7 @@ function Dashboard() {
     isLoading: isDashboardLoading,
   } = useDashboard({ type }, type)
 
-  if (isNotificationError) {
+  if (isNotificationError || isDashboardError) {
     return <Page500 />
   }
 
@@ -35,25 +34,10 @@ function Dashboard() {
     isDashboardLoading ||
     !isDashboardSuccess
   ) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: '100vh',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Lottie style={{ height: '200px', width: '200px' }} animationData={LoadingAnimation} />
-      </div>
-    )
+    return <PageLoader />
   }
 
   return (
-    /// post : Post
-    /// / listItem : Drive
-    /// / listItem: PastExperienceSummary
     <>
       <h1 className={styles.page_name}>Dashboard</h1>
       <div className={styles.content}>

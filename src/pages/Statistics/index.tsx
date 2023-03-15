@@ -33,6 +33,7 @@ import Page500 from '../Page500'
 import { companiesDetailsAPI } from '../../utils/apis'
 import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
+import PageLoader from '../../components/PageLoader'
 
 const ctcTableHeader = [
   { id: 1, heading: 'Company' },
@@ -139,19 +140,7 @@ function Statistics() {
   }
 
   if (isLoading || !isSuccess) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          height: '100vh',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Lottie style={{ height: '200px', width: '200px' }} animationData={LoadingAnimation} />
-      </div>
-    )
+    return <PageLoader />
   }
 
   const { statsInfo, topCompanies, basicStats } = data
