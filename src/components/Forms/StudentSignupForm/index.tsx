@@ -50,9 +50,7 @@ export default function SignupForm() {
         .required()
         .oneOf([Yup.ref('password')], 'Password must match'),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
+    onSubmit: () => {},
   })
 
   const handleIconClick = () => {

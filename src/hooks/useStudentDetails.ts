@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { studentAPI } from '../utils/apis'
 
 const getStudentDetails = async () => {
@@ -7,5 +7,5 @@ const getStudentDetails = async () => {
 }
 
 export default function useStudentDetails() {
-  return useQuery('students', getStudentDetails)
+  return useQuery(['students'], getStudentDetails)
 }

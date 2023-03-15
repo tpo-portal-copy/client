@@ -1,24 +1,31 @@
-import { Image, Text } from '@chakra-ui/react'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Text } from '@chakra-ui/react'
 import styles from './CompanyCard.module.scss'
 
 interface CompanyCardProps {
-  icon: IconProp
+  link: string
   label: string
   value: string
+  type: string
 }
 
-export default function CompanyCard({ icon, label, value }: CompanyCardProps) {
+export default function CompanyCard({ link, label, value, type }: CompanyCardProps) {
   return (
     <div className={styles.container}>
       <div className={styles.icon_container}>
-        <FontAwesomeIcon className={styles.icon} icon={icon} />
+        <img
+          className={styles.icon}
+          src={`https://sakhanithnith.pagekite.me/media/${link}`}
+          width={40}
+          height={40}
+          alt="icon"
+        />
       </div>
       <div />
       <div className={styles.fields_container}>
         <Text className={styles.txt1}>{label}</Text>
-        <Text className={styles.txt2}>CTC Offered: {value}</Text>
+        <Text className={styles.txt2}>
+          {type.toLowerCase() === 'intern' ? 'Stipend Offered' : 'CTC Offered'}: {value}
+        </Text>
       </div>
     </div>
   )

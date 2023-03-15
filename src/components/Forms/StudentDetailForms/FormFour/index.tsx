@@ -45,7 +45,7 @@ export default function FormFour({ onSubmit }: FormFourProps) {
         .oneOf([true], 'You must provide your consent.')
         .required('You must provide your consent.'),
     }),
-    onSubmit: (values) => {
+    onSubmit: () => {
       onSubmit()
     },
   })

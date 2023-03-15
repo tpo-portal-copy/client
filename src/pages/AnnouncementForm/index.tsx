@@ -31,7 +31,7 @@ export default function AnnouncementForm() {
       title: Yup.string().required('*Required'),
       type: Yup.string().required('*Required'),
     }),
-    onSubmit: (e, values) => {
+    onSubmit: () => {
       setIsLoading(!isLoading)
       setTimeout(() => {
         setIsLoading((prevState) => !prevState)

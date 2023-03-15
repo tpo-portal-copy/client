@@ -70,11 +70,6 @@ export interface SelectProps {
   children: any
 }
 
-type OptionsType = {
-  id: number
-  value: string
-}
-
 export interface ClusterListProps {
   clusterName: string
   clusterRange: string
@@ -113,7 +108,7 @@ export interface Post {
   title: string
   description: string
   imageUrl: string
-  postedOn: string
+  postedOn: string | undefined
 }
 
 export interface Drive {
@@ -130,18 +125,23 @@ export interface PastExperienceSummary {
   link: string
 }
 
+interface EligibleBatchesObj {
+  branch_name: string
+  course: string
+  id: number
+}
 export interface DrivesCardProps {
   id: number
   companyName: string
   imgUrl: string
   ctcOffered: number
-  startingDate: Date
+  startingDate: string
   modeOfHiring: string
-  aptitudeTest: string
-  ppt: string
+  isAptitudeTest: boolean
+  isPpt: boolean
   jobLocation: string
   type: string
-  eligibleBatches: Array<string>
+  eligibleBatches: Array<EligibleBatchesObj>
   jobProfile: string
   cluster: number
 }
@@ -249,10 +249,10 @@ export interface StatsNumberProps {
 }
 
 type DataType = {
-  id: string
-  label: string
-  value: number
-  color: string
+  max_stipend: any
+  min_stipend: any
+  avg_stipend: any
+  offers: any
 }
 
 export interface PieChartProps {
@@ -264,6 +264,8 @@ export interface PaginatorProps {
   max: number
   onNext: MouseEventHandler<HTMLButtonElement>
   onPrev: MouseEventHandler<HTMLButtonElement>
+  disablePrev: boolean
+  disableNext: boolean
 }
 
 export interface StatisticsDetailsProps {
@@ -302,4 +304,39 @@ export interface StatisticsDetailsOffersRoleWiseProps {
 
 export interface ErrorProps {
   errorMessage: string
+}
+
+export interface TopCompanies {
+  logo?: string
+  name: string
+  max_stipend: string
+  max_ctc: string
+  offers?: string
+}
+
+export interface StatsInfo {
+  id: string | number
+  value: number
+  label: string
+}
+
+export interface Company {
+  id: number | string
+  name: string
+}
+
+export interface BasicStats {
+  course: string
+  offers: number
+  branch: string
+}
+
+export interface TimeStamps {
+  years: number
+  months: number
+  weeks: number
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
 }
