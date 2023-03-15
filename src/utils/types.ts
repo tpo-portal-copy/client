@@ -304,4 +304,3 @@ export interface StatisticsDetailsOffersRoleWiseProps {
 export interface ErrorProps {
   errorMessage: string
 }
-
