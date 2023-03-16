@@ -162,47 +162,47 @@ export interface FaqProps {
 }
 
 export type FormOneData = {
-  firstName: string
-  middleName: string
-  lastName: string
+  first_name: string
+  middle_name: string
+  last_name: string
   dob: string
   state: string
   city: string
   pincode: number | undefined
-  personalEmail: string
+  personal_email: string
   gender: string
   category: string
-  phone: string
+  pnumber: string
   linkedin: string
-  isPwd: boolean
-  disabilityTypes: string
+  pwd: boolean
+  disability_type: string
 }
 
 export interface FormTwoData {
-  tenthYear: number | undefined
-  tenthSchool: string
-  tenthBoard: string
-  tenthPercentage: number | undefined
-  twelfthYear: number | undefined
-  twelfthSchool: string
-  twelfthBoard: string
-  twelfthPercentage: number | undefined
-  jeeRank: number | undefined
+  class_10_year: number | undefined
+  class_10_school: string
+  class_10_board: string
+  class_10_perc: number | undefined
+  class_12_year: number | undefined
+  class_12_school: string
+  class_12_board: string
+  class_12_perc: number | undefined
+  jee_mains_rank: number | undefined
 }
 
 export interface FormThreeData {
   course: string
   branch: string
   cgpi: number | undefined
-  activeBacklog: number | undefined
-  totalBacklog: number | undefined
-  gateScore: number | undefined
-  catScore: number | undefined
-  batchYear: number | undefined
-  passingYear: number | undefined
-  currentYear: number | undefined
-  gapYear12: number | undefined
-  gapYearUG: number | undefined
+  active_backlog: number | undefined
+  total_backlog: number | undefined
+  gate_score: number | undefined
+  cat_score: number | undefined
+  batch_year: number | undefined
+  passing_year: number | undefined
+  current_year: number | undefined
+  gap_12_ug: number | undefined
+  gap_ug_pg: number | undefined
 }
 
 export interface FormOneProps {

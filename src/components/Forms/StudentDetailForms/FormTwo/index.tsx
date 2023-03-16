@@ -11,25 +11,25 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      tenthYear: Yup.number()
+      class_10_year: Yup.number()
         .integer('10th year must be an integer.')
         .min(2010, 'Invalid Year')
         .required('10th year is required.'),
-      tenthSchool: Yup.string().required('10th school is required.'),
-      tenthBoard: Yup.string().required('10th board is required.'),
-      tenthPercentage: Yup.number()
+      class_10_school: Yup.string().required('10th school is required.'),
+      class_10_board: Yup.string().required('10th board is required.'),
+      class_10_perc: Yup.number()
         .typeError('10th percentage must be a number.')
         .required('10th percentage is required.'),
-      twelfthYear: Yup.number()
+      class_12_year: Yup.number()
         .integer('12th year must be an integer.')
         .min(2010, 'Invalid Year')
         .required('12th year is required.'),
-      twelfthSchool: Yup.string().required('12th school is required.'),
-      twelfthBoard: Yup.string().required('12th board is required.'),
-      twelfthPercentage: Yup.number()
+      class_12_school: Yup.string().required('12th school is required.'),
+      class_12_board: Yup.string().required('12th board is required.'),
+      class_12_perc: Yup.number()
         .typeError('12th percentage must be a number.')
         .required('12th percentage is required.'),
-      jeeRank: Yup.number()
+      jee_mains_rank: Yup.number()
         .integer('Jee Rank must be an integer.')
         .typeError('Jee Rank must be an integer.')
         .required('Jee Rank is required.'),
@@ -42,102 +42,102 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
     <form className={styles.container} onSubmit={formik.handleSubmit}>
       <h2 className={styles.title}>Education Details</h2>
       <Input
-        name="tenthSchool"
+        name="class_10_school"
         placeholder="10th School"
-        value={formik.values.tenthSchool}
+        value={formik.values.class_10_school}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.tenthSchool && formik.errors.tenthSchool ? (
-        <Error errorMessage={formik.errors.tenthSchool} />
+      {formik.touched.class_10_school && formik.errors.class_10_school ? (
+        <Error errorMessage={formik.errors.class_10_school} />
       ) : null}
 
       <Input
-        name="tenthBoard"
+        name="class_10_board"
         placeholder="10th Board"
-        value={formik.values.tenthBoard}
+        value={formik.values.class_10_board}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.tenthBoard && formik.errors.tenthBoard ? (
-        <Error errorMessage={formik.errors.tenthBoard} />
+      {formik.touched.class_10_board && formik.errors.class_10_board ? (
+        <Error errorMessage={formik.errors.class_10_board} />
       ) : null}
 
       <Input
-        name="tenthYear"
+        name="class_10_year"
         placeholder="10th Year"
-        value={formik.values.tenthYear || ''}
+        value={formik.values.class_10_year || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.tenthYear && formik.errors.tenthYear ? (
-        <Error errorMessage={formik.errors.tenthYear} />
+      {formik.touched.class_10_year && formik.errors.class_10_year ? (
+        <Error errorMessage={formik.errors.class_10_year} />
       ) : null}
 
       <Input
-        name="tenthPercentage"
+        name="class_10_perc"
         placeholder="10th Percentage"
-        value={formik.values.tenthPercentage || ''}
+        value={formik.values.class_10_perc || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.tenthPercentage && formik.errors.tenthPercentage ? (
-        <Error errorMessage={formik.errors.tenthPercentage} />
+      {formik.touched.class_10_perc && formik.errors.class_10_perc ? (
+        <Error errorMessage={formik.errors.class_10_perc} />
       ) : null}
 
       <Input
-        name="twelfthSchool"
+        name="class_12_school"
         placeholder="12th School"
-        value={formik.values.twelfthSchool}
+        value={formik.values.class_12_school}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.twelfthSchool && formik.errors.twelfthSchool ? (
-        <Error errorMessage={formik.errors.twelfthSchool} />
+      {formik.touched.class_12_school && formik.errors.class_12_school ? (
+        <Error errorMessage={formik.errors.class_12_school} />
       ) : null}
 
       <Input
-        name="twelfthBoard"
+        name="class_12_board"
         placeholder="12th Board"
-        value={formik.values.twelfthBoard}
+        value={formik.values.class_12_board}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.twelfthBoard && formik.errors.twelfthBoard ? (
-        <Error errorMessage={formik.errors.twelfthBoard} />
+      {formik.touched.class_12_board && formik.errors.class_12_board ? (
+        <Error errorMessage={formik.errors.class_12_board} />
       ) : null}
 
       <Input
-        name="twelfthYear"
+        name="class_12_year"
         placeholder="12th Year"
-        value={formik.values.twelfthYear || ''}
+        value={formik.values.class_12_year || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.twelfthYear && formik.errors.twelfthYear ? (
-        <Error errorMessage={formik.errors.twelfthYear} />
+      {formik.touched.class_12_year && formik.errors.class_12_year ? (
+        <Error errorMessage={formik.errors.class_12_year} />
       ) : null}
 
       <Input
-        name="twelfthPercentage"
+        name="class_12_perc"
         placeholder="12th Percentage"
-        value={formik.values.twelfthPercentage || ''}
+        value={formik.values.class_12_perc || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.twelfthPercentage && formik.errors.twelfthPercentage ? (
-        <Error errorMessage={formik.errors.twelfthPercentage} />
+      {formik.touched.class_12_perc && formik.errors.class_12_perc ? (
+        <Error errorMessage={formik.errors.class_12_perc} />
       ) : null}
 
       <Input
-        name="jeeRank"
+        name="jee_mains_rank"
         placeholder="JEE(Main) Rank"
-        value={formik.values.jeeRank || ''}
+        value={formik.values.jee_mains_rank || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
-      {formik.touched.jeeRank && formik.errors.jeeRank ? (
-        <Error errorMessage={formik.errors.jeeRank} />
+      {formik.touched.jee_mains_rank && formik.errors.jee_mains_rank ? (
+        <Error errorMessage={formik.errors.jee_mains_rank} />
       ) : null}
 
       <div className={styles.btn_container}>
