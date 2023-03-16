@@ -39,15 +39,15 @@ const disabilityTypes = [
 ]
 
 export default function FormOne({ onNext, data }: FormOneProps) {
-  const [showDisability, setShowDisability] = useState(data.isPwd)
+  const [showDisability, setShowDisability] = useState(data.pwd)
   const formik = useFormik({
     initialValues: {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      firstName: Yup.string().required('First Name is required.'),
-      middleName: Yup.string(),
-      lastName: Yup.string().required('Last Name is required.'),
+      first_name: Yup.string().required('First Name is required.'),
+      middle_name: Yup.string(),
+      last_name: Yup.string().required('Last Name is required.'),
       dob: Yup.date().required('DOB Name is required.'),
       state: Yup.string().required('State is required.'),
       city: Yup.string().required('City is required.'),
@@ -55,19 +55,19 @@ export default function FormOne({ onNext, data }: FormOneProps) {
         .integer('Pincode must be an integer.')
         .typeError('Pincode must be an integer.')
         .required('Pincode is required.'),
-      personalEmail: Yup.string()
+      personal_email: Yup.string()
         .email('Enter a valid email')
         .required('Personal Email is required.'),
       gender: Yup.string().required('Gender is required.'),
       category: Yup.string().required('Category is required.'),
-      phone: Yup.string()
+      pnumber: Yup.string()
         .matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number')
         .required('Phone number is required.'),
       linkedin: Yup.string()
         .url('LinkedIn profile link must be a valid link.')
         .required('LinkedIn profile link is required.'),
-      isPwd: Yup.boolean(),
-      disabilityTypes: Yup.string(),
+      pwd: Yup.boolean(),
+      disability_type: Yup.string(),
     }),
     onSubmit: (values) => {
       onNext(values)
@@ -80,38 +80,38 @@ export default function FormOne({ onNext, data }: FormOneProps) {
         <h2 className={styles.title}>Basic Details</h2>
         <div className={styles.field}>
           <Input
-            name="firstName"
+            name="first_name"
             placeholder="First Name"
-            value={formik.values.firstName}
+            value={formik.values.first_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.firstName && formik.errors.firstName ? (
-            <Error errorMessage={formik.errors.firstName} />
+          {formik.touched.first_name && formik.errors.first_name ? (
+            <Error errorMessage={formik.errors.first_name} />
           ) : null}
         </div>
         <div className={styles.field}>
           <Input
-            name="middleName"
+            name="middle_name"
             placeholder="Middle Name"
-            value={formik.values.middleName}
+            value={formik.values.middle_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.middleName && formik.errors.middleName ? (
-            <Error errorMessage={formik.errors.middleName} />
+          {formik.touched.middle_name && formik.errors.middle_name ? (
+            <Error errorMessage={formik.errors.middle_name} />
           ) : null}
         </div>
         <div className={styles.field}>
           <Input
-            name="lastName"
+            name="last_name"
             placeholder="Last Name"
-            value={formik.values.lastName}
+            value={formik.values.last_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.lastName && formik.errors.lastName ? (
-            <Error errorMessage={formik.errors.lastName} />
+          {formik.touched.last_name && formik.errors.last_name ? (
+            <Error errorMessage={formik.errors.last_name} />
           ) : null}
         </div>
         <div className={styles.field}>
@@ -165,14 +165,14 @@ export default function FormOne({ onNext, data }: FormOneProps) {
         </div>
         <div className={styles.field}>
           <Input
-            name="personalEmail"
+            name="personal_email"
             placeholder="Personal Email"
-            value={formik.values.personalEmail}
+            value={formik.values.personal_email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.personalEmail && formik.errors.personalEmail ? (
-            <Error errorMessage={formik.errors.personalEmail} />
+          {formik.touched.personal_email && formik.errors.personal_email ? (
+            <Error errorMessage={formik.errors.personal_email} />
           ) : null}
         </div>
         <div className={`${styles.field} ${styles.dropdown}`}>
@@ -210,13 +210,13 @@ export default function FormOne({ onNext, data }: FormOneProps) {
 
         <div className={styles.is_disabled}>
           <Checkbox
-            name="isPwd"
+            name="pwd"
             onChange={(e) => {
               formik.handleChange(e)
               setShowDisability(!showDisability)
             }}
-            isChecked={formik.values.isPwd}
-            value={formik.values.isPwd.toString()}
+            isChecked={formik.values.pwd}
+            value={formik.values.pwd ? 'true' : 'false'}
             onBlur={formik.handleBlur}
           >
             Is PwD ?
@@ -226,10 +226,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
         {showDisability ? (
           <div className={`${styles.field} ${styles.dropdown}`}>
             <Select
-              value={formik.values.disabilityTypes}
+              value={formik.values.disability_type}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              name="disabilityTypes"
+              name="disability_type"
               placeholder="Disability Types"
             >
               {disabilityTypes.map((datas) => (
@@ -241,14 +241,14 @@ export default function FormOne({ onNext, data }: FormOneProps) {
 
         <div className={styles.field}>
           <Input
-            name="phone"
+            name="pnumber"
             placeholder="Phone"
-            value={formik.values.phone}
+            value={formik.values.pnumber}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.phone && formik.errors.phone ? (
-            <Error errorMessage={formik.errors.phone} />
+          {formik.touched.pnumber && formik.errors.pnumber ? (
+            <Error errorMessage={formik.errors.pnumber} />
           ) : null}
         </div>
         <div className={styles.field}>

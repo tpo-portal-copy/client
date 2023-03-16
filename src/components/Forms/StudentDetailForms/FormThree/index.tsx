@@ -80,41 +80,41 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       course: Yup.string().required('Course is required.'),
       branch: Yup.string().required('Branch is required.'),
       cgpi: Yup.number().typeError('CGPI must be a number.').required('CGPI is required.'),
-      activeBacklog: Yup.number()
+      active_backlog: Yup.number()
         .integer('Active backlog must be an integer.')
         .typeError('Active backlog must be an integer.')
         .required('Active backlog is required.'),
-      totalBacklog: Yup.number()
+      total_backlog: Yup.number()
         .integer('Total backlog must be an integer.')
         .typeError('Total backlog must be an integer.')
         .required('Total backlog is required.'),
-      gateScore: Yup.number()
+      gate_score: Yup.number()
         .typeError('Gate score must be a number.')
         .max(100, "Gate score can't be greater than 100."),
-      catScore: Yup.number()
+      cat_score: Yup.number()
         .typeError('Cat percentile must be a number.')
         .min(0, "Cat percentile can't be negative.")
         .max(100, "Cat percentile can't be greater than 100."),
-      batchYear: Yup.number()
+      batch_year: Yup.number()
         .integer('Batch year must be an integer.')
         .typeError('Batch year must be an integer.')
         .min(2019, 'Minimum batch year required is 2019.')
         .required('Batch year is required.'),
-      passingYear: Yup.number()
+      passing_year: Yup.number()
         .integer('Passing year must be an integer.')
         .typeError('Passing year must be an integer.')
         .min(2024, 'Minimum passing year required is 2024.')
         .required('Passing is required.'),
-      currentYear: Yup.number()
+      current_year: Yup.number()
         .typeError('Currenr year must be an integer.')
         .required('Current Year is required.')
         .min(1, 'Current Year is required.'),
-      gapYear12: Yup.number()
+      gap_12_ug: Yup.number()
         .integer('Gap year must be an integer.')
         .typeError('Gap year must be an integer.')
         .min(0, 'Gap year cannot be negative.')
         .max(4, 'Gap year cannot be greater than 4.'),
-      gapYearUG: Yup.number().min(0, 'Gap year cannot be negative.'),
+      gap_ug_pg: Yup.number().min(0, 'Gap year cannot be negative.'),
     }),
     onSubmit: (values) => {
       onNext(values)
@@ -158,34 +158,34 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
 
       <div className={styles.feild}>
         <Input
-          name="batchYear"
+          name="batch_year"
           placeholder="Batch Year"
-          value={formik.values.batchYear}
+          value={formik.values.batch_year}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.batchYear && formik.errors.batchYear ? (
-          <Error errorMessage={formik.errors.batchYear} />
+        {formik.touched.batch_year && formik.errors.batch_year ? (
+          <Error errorMessage={formik.errors.batch_year} />
         ) : null}
       </div>
       <div className={styles.feild}>
         <Input
-          name="passingYear"
+          name="passing_year"
           placeholder="Passing Year"
-          value={formik.values.passingYear}
+          value={formik.values.passing_year}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.passingYear && formik.errors.passingYear ? (
-          <Error errorMessage={formik.errors.passingYear} />
+        {formik.touched.passing_year && formik.errors.passing_year ? (
+          <Error errorMessage={formik.errors.passing_year} />
         ) : null}
       </div>
       <div className={`${styles.feild} ${styles.dropdown}`}>
         <Select
-          value={formik.values.currentYear}
+          value={formik.values.current_year}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          name="currentYear"
+          name="current_year"
           placeholder="Current Year"
         >
           {currentYearData.map((option) => (
@@ -194,8 +194,8 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
             </option>
           ))}
         </Select>
-        {formik.touched.currentYear && formik.errors.currentYear ? (
-          <Error errorMessage={formik.errors.currentYear} />
+        {formik.touched.current_year && formik.errors.current_year ? (
+          <Error errorMessage={formik.errors.current_year} />
         ) : null}
       </div>
       <div className={styles.feild}>
@@ -212,64 +212,64 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       </div>
       <div className={styles.feild}>
         <Input
-          name="activeBacklog"
+          name="active_backlog"
           placeholder="Active Backlog"
-          value={formik.values.activeBacklog}
+          value={formik.values.active_backlog}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.activeBacklog && formik.errors.activeBacklog ? (
-          <Error errorMessage={formik.errors.activeBacklog} />
+        {formik.touched.active_backlog && formik.errors.active_backlog ? (
+          <Error errorMessage={formik.errors.active_backlog} />
         ) : null}
       </div>
       <div className={styles.feild}>
         <Input
-          name="totalBacklog"
+          name="total_backlog"
           placeholder="Total Backlog"
-          value={formik.values.totalBacklog}
+          value={formik.values.total_backlog}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.totalBacklog && formik.errors.totalBacklog ? (
-          <Error errorMessage={formik.errors.totalBacklog} />
+        {formik.touched.total_backlog && formik.errors.total_backlog ? (
+          <Error errorMessage={formik.errors.total_backlog} />
         ) : null}
       </div>
       <div className={styles.feild}>
         <Input
-          name="catScore"
+          name="cat_score"
           placeholder="CAT Percentile"
-          value={formik.values.catScore}
+          value={formik.values.cat_score}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.catScore && formik.errors.catScore ? (
-          <Error errorMessage={formik.errors.catScore} />
+        {formik.touched.cat_score && formik.errors.cat_score ? (
+          <Error errorMessage={formik.errors.cat_score} />
         ) : null}
       </div>
       <div className={styles.feild}>
         <Input
-          name="gateScore"
+          name="gate_score"
           placeholder="GATE Score"
-          value={formik.values.gateScore}
+          value={formik.values.gate_score}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        {formik.touched.gateScore && formik.errors.gateScore ? (
-          <Error errorMessage={formik.errors.gateScore} />
+        {formik.touched.gate_score && formik.errors.gate_score ? (
+          <Error errorMessage={formik.errors.gate_score} />
         ) : null}
       </div>
       <div className={styles.feild}>
         {formik.values.course === 'B.Tech' ? (
           <>
             <Input
-              name="gapYear12"
+              name="gap_12_ug"
               placeholder="No. of Gap Years after 12th"
-              value={formik.values.gapYear12}
+              value={formik.values.gap_12_ug}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.gapYear12 && formik.errors.gapYear12 ? (
-              <Error errorMessage={formik.errors.gapYear12} />
+            {formik.touched.gap_12_ug && formik.errors.gap_12_ug ? (
+              <Error errorMessage={formik.errors.gap_12_ug} />
             ) : null}
           </>
         ) : null}
@@ -280,15 +280,15 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
         formik.values.course === 'MSc' ? (
           <>
             <Input
-              name="gapYearUG"
+              name="gap_ug_pg"
               placeholder="No. of Gap Years after UG"
-              value={formik.values.gapYearUG}
+              value={formik.values.gap_ug_pg}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
 
-            {formik.touched.gapYearUG && formik.errors.gapYearUG ? (
-              <Error errorMessage={formik.errors.gapYearUG} />
+            {formik.touched.gap_ug_pg && formik.errors.gap_ug_pg ? (
+              <Error errorMessage={formik.errors.gap_ug_pg} />
             ) : null}
           </>
         ) : null}

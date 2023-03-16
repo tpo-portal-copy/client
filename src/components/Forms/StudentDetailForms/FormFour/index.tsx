@@ -30,18 +30,18 @@ export default function FormFour({ onSubmit }: FormFourProps) {
 
   const formik = useFormik({
     initialValues: {
-      cluster1: true,
-      cluster2: false,
-      cluster3: false,
-      cluster4: false,
-      cluster5: false,
-      cluster6: false,
+      cluster_1: true,
+      cluster_2: false,
+      cluster_3: false,
+      cluster_4: false,
+      cluster_5: false,
+      cluster_6: false,
       resume: '',
-      consent: false,
+      undertaking: false,
     },
     validationSchema: Yup.object().shape({
       resume: Yup.string().url('Please enter a valid link.').required('Resume link is required.'),
-      consent: Yup.boolean()
+      undertaking: Yup.boolean()
         .oneOf([true], 'You must provide your consent.')
         .required('You must provide your consent.'),
     }),
@@ -83,20 +83,20 @@ export default function FormFour({ onSubmit }: FormFourProps) {
               <Tr>
                 <Td>
                   <Checkbox
-                    name="cluster2"
+                    name="cluster_2"
                     onChange={(e) => {
                       formik.handleChange(e)
                       if (isClustersTouched === false) {
                         setIsClustersTouched(true)
                       }
-                      if (formik.values.cluster2 === true) {
+                      if (formik.values.cluster_2 === true) {
                         setSelectedClusters(selectedClusters + 1)
-                      } else if (formik.values.cluster2 === false) {
+                      } else if (formik.values.cluster_2 === false) {
                         setSelectedClusters(selectedClusters - 1)
                       }
                     }}
                     isDisabled={
-                      formik.values.cluster2 === false && Math.abs(selectedClusters) === 3
+                      formik.values.cluster_2 === false && Math.abs(selectedClusters) === 3
                     }
                   >
                     Cluster 2
@@ -109,20 +109,20 @@ export default function FormFour({ onSubmit }: FormFourProps) {
               <Tr>
                 <Td>
                   <Checkbox
-                    name="cluster3"
+                    name="cluster_3"
                     onChange={(e) => {
                       formik.handleChange(e)
                       if (isClustersTouched === false) {
                         setIsClustersTouched(true)
                       }
-                      if (formik.values.cluster3 === true) {
+                      if (formik.values.cluster_3 === true) {
                         setSelectedClusters(selectedClusters + 1)
-                      } else if (formik.values.cluster3 === false) {
+                      } else if (formik.values.cluster_3 === false) {
                         setSelectedClusters(selectedClusters - 1)
                       }
                     }}
                     isDisabled={
-                      formik.values.cluster3 === false && Math.abs(selectedClusters) === 3
+                      formik.values.cluster_3 === false && Math.abs(selectedClusters) === 3
                     }
                   >
                     Cluster 3
@@ -135,20 +135,20 @@ export default function FormFour({ onSubmit }: FormFourProps) {
               <Tr>
                 <Td>
                   <Checkbox
-                    name="cluster4"
+                    name="cluster_4"
                     onChange={(e) => {
                       formik.handleChange(e)
                       if (isClustersTouched === false) {
                         setIsClustersTouched(true)
                       }
-                      if (formik.values.cluster4 === true) {
+                      if (formik.values.cluster_4 === true) {
                         setSelectedClusters(selectedClusters + 1)
-                      } else if (formik.values.cluster4 === false) {
+                      } else if (formik.values.cluster_4 === false) {
                         setSelectedClusters(selectedClusters - 1)
                       }
                     }}
                     isDisabled={
-                      formik.values.cluster4 === false && Math.abs(selectedClusters) === 3
+                      formik.values.cluster_4 === false && Math.abs(selectedClusters) === 3
                     }
                   >
                     Cluster 4
@@ -161,20 +161,20 @@ export default function FormFour({ onSubmit }: FormFourProps) {
               <Tr>
                 <Td>
                   <Checkbox
-                    name="cluster5"
+                    name="cluster_5"
                     onChange={(e) => {
                       formik.handleChange(e)
                       if (isClustersTouched === false) {
                         setIsClustersTouched(true)
                       }
-                      if (formik.values.cluster5 === true) {
+                      if (formik.values.cluster_5 === true) {
                         setSelectedClusters(selectedClusters + 1)
-                      } else if (formik.values.cluster5 === false) {
+                      } else if (formik.values.cluster_5 === false) {
                         setSelectedClusters(selectedClusters - 1)
                       }
                     }}
                     isDisabled={
-                      formik.values.cluster5 === false && Math.abs(selectedClusters) === 3
+                      formik.values.cluster_5 === false && Math.abs(selectedClusters) === 3
                     }
                   >
                     Cluster 5
@@ -187,20 +187,20 @@ export default function FormFour({ onSubmit }: FormFourProps) {
               <Tr>
                 <Td>
                   <Checkbox
-                    name="cluster6"
+                    name="cluster_6"
                     onChange={(e) => {
                       formik.handleChange(e)
                       if (isClustersTouched === false) {
                         setIsClustersTouched(true)
                       }
-                      if (formik.values.cluster6 === true) {
+                      if (formik.values.cluster_6 === true) {
                         setSelectedClusters(selectedClusters + 1)
-                      } else if (formik.values.cluster6 === false) {
+                      } else if (formik.values.cluster_6 === false) {
                         setSelectedClusters(selectedClusters - 1)
                       }
                     }}
                     isDisabled={
-                      formik.values.cluster6 === false && Math.abs(selectedClusters) === 3
+                      formik.values.cluster_6 === false && Math.abs(selectedClusters) === 3
                     }
                   >
                     Cluster 6
@@ -232,12 +232,12 @@ export default function FormFour({ onSubmit }: FormFourProps) {
             ) : null}
           </div>
           <div>
-            <Checkbox name="consent" onChange={formik.handleChange}>
+            <Checkbox name="undertaking" onChange={formik.handleChange}>
               I provide my consent to share my data with TPO for future oppurtunites. I also confirm
               that the information entered by me is accurate and best of my knowledge.
             </Checkbox>
-            {formik.touched.consent && formik.errors.consent ? (
-              <Error errorMessage={formik.errors.consent} />
+            {formik.touched.undertaking && formik.errors.undertaking ? (
+              <Error errorMessage={formik.errors.undertaking} />
             ) : null}
           </div>
         </>
