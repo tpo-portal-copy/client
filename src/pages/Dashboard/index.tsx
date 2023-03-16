@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import { useState } from 'react'
+import { useState, Component, Suspense } from 'react'
 import styles from './Dashboard.module.scss'
 import { DashboardPostCard } from '../../components/Cards'
 import useRecentNotifications from '../../hooks/useRecentNotifications'

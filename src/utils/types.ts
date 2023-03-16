@@ -62,12 +62,12 @@ export type InputProps = {
 }
 
 export interface SelectProps {
-  name: string
-  placeholder: string
-  value: string | number | undefined
-  onChange: (e: ChangeEvent<any>) => void
-  onBlur: (e: ChangeEvent<any>) => void
-  children: any
+  name?: string
+  placeholder?: string
+  value?: string | number | undefined
+  onChange?: (e: ChangeEvent<any>) => void
+  onBlur?: (e: ChangeEvent<any>) => void
+  children?: any
 }
 
 export interface ClusterListProps {
@@ -339,4 +339,21 @@ export interface TimeStamps {
   hours: number
   minutes: number
   seconds: number
+}
+
+export interface MultiSelectDropDownData {
+  value: string
+  label: string
+}
+
+export interface ClusterChosen {
+  id: string | number
+  value: string | number
+}
+export interface MultiSelectDropDownProps {
+  placeholder: string
+  clusterData: Array<MultiSelectDropDownData>
+  choosenClusters: Array<ClusterChosen>
+  onClick: (e: any) => void
+  onDelete: (e: any) => void
 }
