@@ -341,6 +341,22 @@ export interface TimeStamps {
   seconds: number
 }
 
+interface ClusterDetailProps {
+  cluster_id: number
+  range: string
+}
+export interface ClusterProps {
+  cluster_1_r: ClusterDetailProps
+  cluster_2_r: ClusterDetailProps
+  cluster_3_r: ClusterDetailProps
+}
+export interface PlacementDataProps {
+  id: number
+  student: string
+  cluster: ClusterProps
+  resume: string
+  undertaking: boolean
+}
 export interface MultiSelectDropDownData {
   value: string
   label: string
