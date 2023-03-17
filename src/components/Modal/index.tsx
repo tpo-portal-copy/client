@@ -11,7 +11,13 @@ import { CompanyListProps, ModalProps, RoleListProps } from '../../utils/types'
 import CheckListItem from '../CheckListItem'
 import styles from './Modal.module.scss'
 
-export default function CustomModal({ title, isOpen, onCloseHandler }: ModalProps) {
+export default function CustomModal({
+  title,
+  isOpen,
+  onCloseHandler,
+  list,
+  onItemClick,
+}: ModalProps) {
   return (
     <Modal isOpen={isOpen} onClose={onCloseHandler}>
       <ModalOverlay />
@@ -19,25 +25,13 @@ export default function CustomModal({ title, isOpen, onCloseHandler }: ModalProp
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {title === 'Companies' && (
-            <div className={`${styles.grid_container} ${styles.companies}`}>
-              {companyList.map((company: CompanyListProps) => (
-                <div key={company.id} className={styles.grid_item}>
-                  <CheckListItem label={company.name} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {title === 'Roles' && (
-            <div className={`${styles.grid_container} ${styles.roles}`}>
-              {roleList.map((role: RoleListProps) => (
-                <div key={role.id} className={styles.grid_item}>
-                  <CheckListItem label={role.name} />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className={`${styles.grid_container} ${styles.companies}`}>
+            {list.map((company: CompanyListProps) => (
+              <div key={company.id} className={styles.grid_item}>
+                <CheckListItem label={company.name} onClick={onItemClick} />
+              </div>
+            ))}
+          </div>
         </ModalBody>
       </ModalContent>
     </Modal>

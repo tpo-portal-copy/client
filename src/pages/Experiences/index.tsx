@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
+import Lottie from 'lottie-react'
 import { useState } from 'react'
 import { useMediaQuery } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import Animation from '../../assets/animations/ripple_loader.json'
 import { ExperienceCardProps } from '../../utils/types'
-import { ExperiencesSidebar, ExperiencesFilters } from '../../components'
-import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
+import { ExperiencesSidebar, ExperiencesFilters, Paginator } from '../../components'
 import { ExperienceCard } from '../../components/Cards'
 import styles from './Experiences.module.scss'
 import useExperiencesPosts from '../../hooks/useExperiencesPosts'
@@ -13,13 +14,35 @@ import useExperiencesPosts from '../../hooks/useExperiencesPosts'
 function Experiences() {
   const [openFilters, setOpenFilters] = useState(false)
   const [isLargerThan880] = useMediaQuery('(min-width: 880px)')
+  const [currPageNo, setCurrPageNo] = useState(1)
+  const [searchParams, setSearchParams] = useSearchParams()
+  console.log(searchParams.toString())
 
-  const { data, isLoading, isSuccess, isError, error } = useExperiencesPosts()
+  const {
+    data: experiencePostData,
+    isLoading: isExperiencePostLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useExperiencesPosts(currPageNo, searchParams.toString())
 
-  if (isLoading || !isSuccess) {
-    return <div>Loading...</div>
+  if (isExperiencePostLoading || !isSuccess) {
+    return (
+      <div className={styles.loader}>
+        <Lottie animationData={Animation} />
+      </div>
+    )
   }
-  const { results } = data
+
+  const { results, pages } = experiencePostData
+
+  const goToNextPage = () => {
+    if (currPageNo < pages) setCurrPageNo((pageNo) => pageNo + 1)
+  }
+
+  const goToPrevPage = () => {
+    if (currPageNo > 1) setCurrPageNo((pageNo) => pageNo - 1)
+  }
 
   return (
     <>
@@ -31,9 +54,12 @@ function Experiences() {
       </div>
       <div className={styles.content}>
         <div>
-          {results.map((user: ExperienceCardProps) => (
-            <ExperienceCard key={user.id} {...user} />
-          ))}
+          <div>
+            {results.map((user: ExperienceCardProps) => (
+              <ExperienceCard key={user.id} {...user} />
+            ))}
+          </div>
+          <Paginator curr={currPageNo} max={pages} onNext={goToNextPage} onPrev={goToPrevPage} />
         </div>
         <div className={styles.filter_container}>{isLargerThan880 && <ExperiencesFilters />}</div>
         <div className={styles.filter_mobile_container}>

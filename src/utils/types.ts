@@ -88,11 +88,14 @@ export interface ClusterListProps {
 export interface CheckListItemProps {
   label: string | number
   isMobile?: boolean
+  onClick?: (company: string) => void
 }
 
 export interface ModalProps {
   isOpen: boolean
   title: string
+  list: Array<any>
+  onItemClick?: (company: string) => void
   onCloseHandler: () => void
 }
 

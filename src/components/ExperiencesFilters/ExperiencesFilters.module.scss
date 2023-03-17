@@ -16,10 +16,24 @@
     }
   }
 
-  h2 {
-    font-size: var(--md-heading);
-    color: var(--text-color-primary);
-    font-weight: 600;
+  .filter_header {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      font-size: var(--md-heading);
+      color: var(--text-color-primary);
+      font-weight: 600;
+    }
+
+    button {
+      color: #fff;
+      background: linear-gradient(40deg, #45cafc, #303f9f);
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: 4px;
+    }
   }
 
   h4 {
