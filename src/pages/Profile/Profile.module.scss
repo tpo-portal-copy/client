@@ -179,6 +179,12 @@
         }
 
         .cluster_field_container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          font-weight: 600;
+
           @media screen and (max-width: 1225px) {
             padding: 10px 0px;
           }

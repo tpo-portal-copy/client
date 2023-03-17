@@ -7,3 +7,4 @@ export const RECENT_NOTIFICATIONS_API = import.meta.env.VITE_RECENT_NOTIFICATION
 export const DASHBOARD_API = import.meta.env.VITE_DASHBOARD_API
 export const ROLES_API = import.meta.env.VITE_ROLES_API
 export const COMPANIES_ORDERWISE_API = import.meta.env.VITE_COMPANIES_ORDERWISE_API
+export const CLUSTERS_API = import.meta.env.VITE_CLUSTERS_API
