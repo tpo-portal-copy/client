@@ -34,7 +34,7 @@ export interface ClusterCardProps {
 }
 
 export interface ResourcesCardProps {
-  id: number
+  id?: number
   label: string
   imgUrl: string
 }
@@ -62,12 +62,12 @@ export type InputProps = {
 }
 
 export interface SelectProps {
-  name: string
-  placeholder: string
-  value: string | number | undefined
-  onChange: (e: ChangeEvent<any>) => void
-  onBlur: (e: ChangeEvent<any>) => void
-  children: any
+  name?: string
+  placeholder?: string
+  value?: string | number | undefined
+  onChange?: (e: ChangeEvent<any>) => void
+  onBlur?: (e: ChangeEvent<any>) => void
+  children?: any
 }
 
 export interface ClusterListProps {
@@ -356,4 +356,26 @@ export interface PlacementDataProps {
   cluster: ClusterProps
   resume: string
   undertaking: boolean
+}
+export interface MultiSelectDropDownData {
+  value: string
+  label: string
+}
+
+export interface ClusterChosen {
+  id: string | number
+  value: string | number
+}
+export interface MultiSelectDropDownProps {
+  placeholder: string
+  clusterData: Array<MultiSelectDropDownData>
+  choosenClusters: Array<ClusterChosen>
+  onClick: (e: any) => void
+  onDelete: (e: any) => void
+}
+
+export interface CompaniesTableProps {
+  session: string
+  type: string
+  company: string
 }

@@ -9,6 +9,7 @@ import {
   ROLES_API,
   COMPANIES_ORDERWISE_API,
   CLUSTERS_API,
+  RESOURCES_API,
 } from './constants'
 
 export const studentAPI = axios.create({
@@ -45,4 +46,8 @@ export const rolesAPI = axios.create({
 
 export const clustersAPI = axios.create({
   baseURL: CLUSTERS_API,
+})
+
+export const resourcesAPI = axios.create({
+  baseURL: RESOURCES_API,
 })

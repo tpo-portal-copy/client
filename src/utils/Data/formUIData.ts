@@ -319,3 +319,12 @@ export const experienceFormData = [
     ],
   },
 ]
+
+export const clusterOptions = [
+  { value: '1', label: 'Cluster 1' },
+  { value: '2', label: 'Cluster 2' },
+  { value: '3', label: 'Cluster 3' },
+  { value: '4', label: 'Cluster 4' },
+  { value: '5', label: 'Cluster 5' },
+  { value: '6', label: 'Cluster 6' },
+]

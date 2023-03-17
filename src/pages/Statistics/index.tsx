@@ -1,97 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-children-prop */
-import {
-  Select,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-  Table,
-  Tbody,
-  Thead,
-  TableContainer,
-  Tr,
-  Th,
-  Td,
-  Input,
-  InputGroup,
-  InputRightElement,
-  useToast,
-} from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { Select, Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import Lottie from 'lottie-react'
 import styles from './Statistics.module.scss'
 import { jobType, sessions, statsCardStyles } from '../../utils/Data/statisticsData'
-import { PieChart, StatsCard, CompanyCard, Paginator } from '../../components'
+import { PieChart, StatsCard, CompanyCard } from '../../components'
 import useStatisticsDetails from '../../hooks/useStatisticsData'
-import LoadingAnimation from '../../assets/animations/98770-assistagro-loading-bars.json'
 import Page500 from '../Page500'
-import { companiesDetailsAPI } from '../../utils/apis'
-import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
-
-const ctcTableHeader = [
-  { id: 1, heading: 'Company' },
-  { id: 2, heading: 'Offered CTC' },
-]
-
-const offersTableHeader = [
-  { id: 1, heading: 'Company' },
-  { id: 2, heading: 'Number of offers' },
-]
+import CompaniesTable from '../../components/CompaniesTable'
 
 function Statistics() {
   const [job, setJob] = useState('placement')
   const [session, setSession] = useState('2022-23')
 
-  const [currPage, setCurrPage] = useState(1)
-  const [maxPages, setMaxPages] = useState(1)
-  const [tab, setTab] = useState('ctc')
-  const [companyData, setCompanyData] = useState([])
-  const [isTableLoading, setTableLoading] = useState(false)
   const [searchedCompany, setSearchedCompany] = useState('')
-  const toast = useToast()
 
   const { data, isLoading, isSuccess, isError } = useStatisticsDetails(
     { type: job.toLowerCase(), session },
     job,
     session,
   )
-
-  useEffect(() => {
-    const getCompaniesData = async (params: any) => {
-      try {
-        setTableLoading(true)
-        const response = await companiesDetailsAPI.get('/', {
-          params,
-        })
-        setMaxPages(response.data.pages)
-        setTableLoading(false)
-        setCompanyData(response.data.results)
-      } catch (errors) {
-        if (errors) {
-          setTableLoading(false)
-          toast({
-            title: `Something went wrong....`,
-            status: 'error',
-            isClosable: true,
-          })
-        }
-      }
-    }
-    const companyDatas = getCompaniesData({
-      page: currPage,
-      session,
-      type: job.toLowerCase(),
-      order: tab,
-      company: searchedCompany,
-    })
-  }, [currPage, job, tab])
 
   const debounce = (func: any) => {
     let timer: any
@@ -107,23 +39,8 @@ function Statistics() {
   const handleSearch = async (e: any) => {
     const controller = new AbortController()
     setSearchedCompany(e.target.value)
-    setTableLoading(true)
-    const response = await companiesDetailsAPI.get('/', {
-      signal: controller.signal,
-      params: {
-        session,
-        type: job.toLowerCase(),
-        order: tab,
-        company: e.target.value,
-      },
-    })
 
     controller.abort()
-
-    setCompanyData(response.data.results)
-    setCurrPage(1)
-    setMaxPages(response.data.pages)
-    setTableLoading(false)
   }
   const debouncedFunction = debounce(handleSearch)
 
@@ -153,12 +70,6 @@ function Statistics() {
       }
       return ''
     })
-  }
-
-  const tabs = ['ctc', 'offer']
-
-  const handleTabChange = (e: any) => {
-    setTab(tabs[e])
   }
 
   return (
@@ -244,81 +155,8 @@ function Statistics() {
               />
               <InputRightElement children={<FontAwesomeIcon color="grey" icon={faSearch} />} />
             </InputGroup>
-            <Tabs onChange={handleTabChange} colorScheme="blackAlpha">
-              <TabList>
-                <Tab>{job.toLowerCase() === 'intern' ? 'Stipend Wise' : 'CTC Wise'}</Tab>
-                <Tab>Offers Wise</Tab>
-              </TabList>
 
-              {isTableLoading ? (
-                <Lottie animationData={Loader} />
-              ) : (
-                <TabPanels>
-                  <TabPanel>
-                    <TableContainer>
-                      <Table>
-                        <Thead>
-                          <Tr>
-                            {ctcTableHeader.map((header, idx) => (
-                              <Th key={header.id}>
-                                {idx === 1 && job.toLowerCase() === 'intern'
-                                  ? 'Stipend Offered'
-                                  : header.heading}
-                              </Th>
-                            ))}
-                          </Tr>
-                        </Thead>
-                        <Tbody>
-                          {companyData.map((datas: TopCompanies) => (
-                            <Tr
-                              key={
-                                job.toLowerCase() === 'intern' ? datas.max_stipend : datas.max_ctc
-                              }
-                            >
-                              <Td>{datas.name}</Td>
-                              <Td>
-                                {job.toLowerCase() === 'intern' ? datas.max_stipend : datas.max_ctc}
-                              </Td>
-                            </Tr>
-                          ))}
-                        </Tbody>
-                      </Table>
-                    </TableContainer>
-                  </TabPanel>
-                  <TabPanel>
-                    <TableContainer>
-                      <Table>
-                        <Thead>
-                          <Tr>
-                            {offersTableHeader.map((header) => (
-                              <Th key={header.id}>{header.heading}</Th>
-                            ))}
-                          </Tr>
-                        </Thead>
-
-                        <Tbody>
-                          {companyData.map((datas: TopCompanies) => (
-                            <Tr key={datas.offers}>
-                              <Td>{datas.name}</Td>
-                              <Td>{datas.offers}</Td>
-                            </Tr>
-                          ))}
-                        </Tbody>
-                      </Table>
-                    </TableContainer>
-                  </TabPanel>
-                </TabPanels>
-              )}
-            </Tabs>
-
-            <Paginator
-              onPrev={() => setCurrPage(currPage - 1)}
-              onNext={() => setCurrPage(currPage + 1)}
-              curr={currPage}
-              max={maxPages}
-              disablePrev={currPage === 1}
-              disableNext={currPage === maxPages}
-            />
+            <CompaniesTable session={session} type={job.toLowerCase()} company={searchedCompany} />
           </div>
           <div className={styles.graph_container}>
             {job === 'PPO' ? null : <PieChart data={arr} />}

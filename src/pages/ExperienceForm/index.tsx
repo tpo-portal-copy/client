@@ -13,16 +13,7 @@ import 'react-quill/dist/quill.snow.css'
 import { Input, Select } from '../../components'
 import styles from './ExperienceForm.module.scss'
 import { companiesAPI, rolesAPI } from '../../utils/apis'
-import useRoles from '../../hooks/useRoles'
-import LoadingAnimation from '../../assets/animations/98770-assistagro-loading-bars.json'
 import { Company } from '../../utils/types'
-
-const roleData = [
-  { id: 4, value: 'SDE' },
-  { id: 5, value: 'GET' },
-  { id: 6, value: 'Management Trainee' },
-  { id: 7, value: 'Full Stack Developer' },
-]
 
 const typeData = [
   { id: 9, value: 'Internship' },
@@ -254,7 +245,7 @@ export default function ExperienceForm() {
                             setClicked(true)
                             setRoles([])
                           }}
-                          style={{ padding: '5px' }}
+                          className={styles.item}
                           key={rolesData.id}
                         >
                           {rolesData.name}
