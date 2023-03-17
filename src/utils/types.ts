@@ -34,7 +34,7 @@ export interface ClusterCardProps {
 }
 
 export interface ResourcesCardProps {
-  id: number
+  id?: number
   label: string
   imgUrl: string
 }
@@ -356,4 +356,10 @@ export interface MultiSelectDropDownProps {
   choosenClusters: Array<ClusterChosen>
   onClick: (e: any) => void
   onDelete: (e: any) => void
+}
+
+export interface CompaniesTableProps {
+  session: string
+  type: string
+  company: string
 }
