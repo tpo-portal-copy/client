@@ -1,7 +1,6 @@
 import { Grid, GridItem, useMediaQuery } from '@chakra-ui/react'
 import { ResourcesCard } from '../../components/Cards'
 import { resourcesData } from '../../utils/Data/resourcesData'
-import { ResourcesCardProps } from '../../utils/types'
 import styles from './Resources.module.scss'
 
 function Resources() {
@@ -18,9 +17,9 @@ function Resources() {
         padding="1rem 2rem"
         marginBottom="3rem"
       >
-        {resourcesData.map((dept: ResourcesCardProps) => (
+        {resourcesData.map((dept: any) => (
           <GridItem key={dept.id}>
-            <ResourcesCard {...dept} />
+            <ResourcesCard imgUrl={dept.imgUrl} label={dept.label} />
           </GridItem>
         ))}
       </Grid>
