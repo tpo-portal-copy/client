@@ -299,3 +299,47 @@ export interface StatisticsDetailsOffersRoleWiseProps {
   id: number
   noOfOffers: number
 }
+
+export interface JNFFormOneData {
+  companyName: string
+  session: string
+  isPlacement: string
+  isIntern: string
+  modeOfHiring: string
+  prePlacementTalk: string
+  aptitudeTest: string
+  technicalTest: string
+  groupDiscussion: string
+  personalInterview: string
+  noOfPersonVisiting: number
+  jobLocation: string
+  tentativeDriveDate: string
+}
+
+export interface JNFFormOneProps {
+  onNext: (values: JNFFormOneData) => void
+  data: JNFFormOneData
+}
+
+export interface RadioSelectProps {
+  name: string
+  placeholder: string
+  onChange: (e: any) => void
+  onBlur: (e: ChangeEvent<any>) => void
+  value: string
+}
+
+export interface JNFFormTwoData {
+  tentativeStartDate: string
+  jobProfile: string
+  ctc: number
+  jobDescription: string
+  cgpi: number
+  eligibleBatches: string
+}
+
+export interface JNFFormTwoProps {
+  onNext: (values: JNFFormTwoData) => void
+  onBack: (values: JNFFormTwoData) => void
+  data: JNFFormTwoData
+}

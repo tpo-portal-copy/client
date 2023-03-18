@@ -17,6 +17,7 @@ import {
   ResourceDetails,
   AnnouncementForm,
   StatisticsDetails,
+  JNFForm,
 } from '../pages'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
       <Route path="/student-details-form" element={<StudentDetailsForm />} />
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
+      <Route path="/jnf-form" element={<JNFForm />} />
       <Route
         path="/dashboard"
         element={
