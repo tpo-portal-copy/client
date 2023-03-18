@@ -9,3 +9,4 @@ export const ROLES_API = import.meta.env.VITE_ROLES_API
 export const COMPANIES_ORDERWISE_API = import.meta.env.VITE_COMPANIES_ORDERWISE_API
 export const CLUSTERS_API = import.meta.env.VITE_CLUSTERS_API
 export const RESOURCES_API = import.meta.env.VITE_RESOURCES_API
+export const STATISTICS_DETAILS_API = import.meta.env.VITE_STATISTICS_DETAILS_API
