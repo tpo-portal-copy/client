@@ -6,6 +6,8 @@ import { FormOneProps } from '../../../../utils/types'
 import ImgUploader from '../../../ImgUploader'
 import styles from './FormOne.module.scss'
 import { Error, Input, Select } from '../../../index'
+import useStates from '../../../../hooks/useStates'
+import { citiesAPI } from '../../../../utils/apis'
 
 const genderData = [
   { id: 1, value: 'Male' },
@@ -34,12 +36,15 @@ const disabilityTypes = [
   },
   {
     id: 6,
-    value: 'Others',
+    value: 'Other',
   },
 ]
 
 export default function FormOne({ onNext, data }: FormOneProps) {
   const [showDisability, setShowDisability] = useState(data.pwd)
+  const { data: statesData, isSuccess: isStateSuccess } = useStates()
+  const [cities, setCities] = useState([])
+
   const formik = useFormik({
     initialValues: {
       ...data,
@@ -50,7 +55,7 @@ export default function FormOne({ onNext, data }: FormOneProps) {
       last_name: Yup.string().required('Last Name is required.'),
       dob: Yup.date().required('DOB Name is required.'),
       state: Yup.string().required('State is required.'),
-      city: Yup.string().required('City is required.'),
+      city_write: Yup.string().required('City is required.'),
       pincode: Yup.number()
         .integer('Pincode must be an integer.')
         .typeError('Pincode must be an integer.')
@@ -68,11 +73,18 @@ export default function FormOne({ onNext, data }: FormOneProps) {
         .required('LinkedIn profile link is required.'),
       pwd: Yup.boolean(),
       disability_type: Yup.string(),
+      disability_percentage: Yup.number().min(0).max(100),
     }),
     onSubmit: (values) => {
       onNext(values)
     },
   })
+
+  const handleStateChange = async (e: any) => {
+    formik.setFieldValue('state', e.target.value)
+    const res = await citiesAPI.get(`${e.target.value}`)
+    setCities(res.data)
+  }
 
   return (
     <div className={styles.container}>
@@ -128,27 +140,40 @@ export default function FormOne({ onNext, data }: FormOneProps) {
           ) : null}
         </div>
         <div className={styles.field}>
-          <Input
-            name="state"
-            placeholder="State"
-            value={formik.values.state}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+          {isStateSuccess && (
+            <Select
+              value={formik.values.state}
+              onChange={(e) => handleStateChange(e)}
+              onBlur={formik.handleBlur}
+              name="state"
+              placeholder="State"
+            >
+              {statesData.map((datas: string) => (
+                <option key={datas}>{datas}</option>
+              ))}
+            </Select>
+          )}
           {formik.touched.state && formik.errors.state ? (
             <Error errorMessage={formik.errors.state} />
           ) : null}
         </div>
         <div className={styles.field}>
-          <Input
-            name="city"
-            placeholder="City"
-            value={formik.values.city}
-            onChange={formik.handleChange}
+          <Select
+            value={formik.values.city_write}
+            onChange={(e) => formik.setFieldValue('city_write', e.target.value)}
             onBlur={formik.handleBlur}
-          />
-          {formik.touched.city && formik.errors.city ? (
-            <Error errorMessage={formik.errors.city} />
+            name="city_write"
+            placeholder="City"
+          >
+            {cities.length !== 0 &&
+              cities.map((datas: any) => (
+                <option value={datas.id} key={datas.id}>
+                  {datas.name}
+                </option>
+              ))}
+          </Select>
+          {formik.touched.city_write && formik.errors.city_write ? (
+            <Error errorMessage={formik.errors.city_write} />
           ) : null}
         </div>
         <div className={styles.field}>
@@ -236,6 +261,16 @@ export default function FormOne({ onNext, data }: FormOneProps) {
                 <option key={datas.id}>{datas.value}</option>
               ))}
             </Select>
+            <Input
+              name="disability_percentage"
+              placeholder="Disability Percentage"
+              value={formik.values.disability_percentage}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.disability_percentage && formik.errors.disability_percentage ? (
+              <Error errorMessage={formik.errors.disability_percentage} />
+            ) : null}
           </div>
         ) : null}
 

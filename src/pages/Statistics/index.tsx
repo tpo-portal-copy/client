@@ -14,7 +14,7 @@ import PageLoader from '../../components/PageLoader'
 import CompaniesTable from '../../components/CompaniesTable'
 
 function Statistics() {
-  const [job, setJob] = useState('placement')
+  const [job, setJob] = useState('Placement')
   const [session, setSession] = useState('2022-23')
 
   const [searchedCompany, setSearchedCompany] = useState('')
@@ -45,6 +45,7 @@ function Statistics() {
   const debouncedFunction = debounce(handleSearch)
 
   const handleJobChange = (e: any) => {
+    if (e.target.value === '') return
     setJob(e.target.value)
   }
 

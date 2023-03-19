@@ -10,6 +10,10 @@ import {
   COMPANIES_ORDERWISE_API,
   CLUSTERS_API,
   RESOURCES_API,
+  STATES_API,
+  CITIES_API,
+  COURSES_API,
+  BRANCHES_API,
   STATISTICS_DETAILS_API,
 } from './constants'
 
@@ -51,6 +55,22 @@ export const clustersAPI = axios.create({
 
 export const resourcesAPI = axios.create({
   baseURL: RESOURCES_API,
+})
+
+export const statesAPI = axios.create({
+  baseURL: STATES_API,
+})
+
+export const citiesAPI = axios.create({
+  baseURL: CITIES_API,
+})
+
+export const coursesAPI = axios.create({
+  baseURL: COURSES_API,
+})
+
+export const branchesAPI = axios.create({
+  baseURL: BRANCHES_API,
 })
 
 export const statisticsDetailsAPI = axios.create({

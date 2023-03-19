@@ -4,9 +4,20 @@ import { ResponsivePie } from '@nivo/pie'
 import { PieChartProps } from '../../utils/types'
 
 function ToolTip(props: {
-  datum: { data: { max_stipend: any; min_stipend: any; avg_stipend: any; offers: any } }
+  datum: {
+    data: {
+      max_stipend?: any
+      min_stipend?: any
+      avg_stipend?: any
+      offers: any
+      max_ctc?: any
+      min_ctc?: any
+      avg_ctc?: any
+    }
+  }
 }) {
-  const { max_stipend, min_stipend, avg_stipend, offers } = props.datum.data
+  const { max_stipend, min_stipend, avg_stipend, offers, max_ctc, min_ctc, avg_ctc } =
+    props.datum.data
   return (
     <div
       style={{
@@ -16,10 +27,21 @@ function ToolTip(props: {
         borderRadius: '10px',
       }}
     >
-      <div>No. of offers: {offers}</div>
-      <div>Max Stipend: {max_stipend}</div>
-      <div>Min Stipend: {min_stipend}</div>
-      <div>Avg Stipend: {avg_stipend}</div>
+      {'max_stipend' in props.datum.data ? (
+        <>
+          <div>No. of offers: {offers}</div>
+          <div>Max Stipend: {max_stipend}</div>
+          <div>Min Stipend: {min_stipend}</div>
+          <div>Avg Stipend: {avg_stipend}</div>{' '}
+        </>
+      ) : (
+        <>
+          <div>No. of offers: {offers}</div>
+          <div>Max CTC: {max_ctc}</div>
+          <div>Min CTC: {min_ctc}</div>
+          <div>Avg CTC: {avg_ctc}</div>
+        </>
+      )}
     </div>
   )
 }
