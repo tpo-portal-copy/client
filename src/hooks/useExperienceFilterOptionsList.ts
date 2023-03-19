@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { companiesDetailsAPI, drivesAPI } from '../utils/apis'
 
 const getExperienceFilterOptionsList = async () => {
