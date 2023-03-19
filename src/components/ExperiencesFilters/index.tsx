@@ -10,7 +10,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
   const [isCompaniesModalOpen, setIsCompaniesModalOpen] = useState(false)
   const [isRolesModalOpen, setIsRolesModalOpen] = useState(false)
 
-  const openCompaiesModal = () => {
+  const openCompaniesModal = () => {
     setIsCompaniesModalOpen(true)
   }
 
@@ -36,7 +36,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
             <h4>Companies</h4>
           </div>
           <div className={styles.modal}>
-            <button className={styles.btn} onClick={openCompaiesModal}>
+            <button className={styles.btn} onClick={openCompaniesModal}>
               View All
               <FontAwesomeIcon icon={faCircleRight} />
             </button>

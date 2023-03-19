@@ -1,5 +1,13 @@
 /* eslint-disable no-restricted-syntax */
-import { useState, Component, Suspense } from 'react'
+import { useState } from 'react'
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from '@chakra-ui/react'
 import styles from './Dashboard.module.scss'
 import { DashboardPostCard } from '../../components/Cards'
 import useRecentNotifications from '../../hooks/useRecentNotifications'
@@ -7,9 +15,12 @@ import Page500 from '../Page500'
 import useDashboard from '../../hooks/useDashboard'
 import { fromNow } from '../../utils/functions'
 import PageLoader from '../../components/PageLoader'
+import { ModelProps } from '../../utils/types'
 
 function Dashboard() {
   const [type, setType] = useState('all')
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [modelData, setModalData] = useState<ModelProps>({ title: '', description: '' })
   const {
     data: notificationsData,
     isSuccess: isNotificationSuccess,
@@ -37,6 +48,14 @@ function Dashboard() {
     return <PageLoader />
   }
 
+  const openModal = (post: any) => {
+    setIsOpenModal(true)
+    setModalData(post)
+  }
+  const closeModal = () => {
+    setIsOpenModal(false)
+  }
+
   return (
     <>
       <h1 className={styles.page_name}>Dashboard</h1>
@@ -45,14 +64,33 @@ function Dashboard() {
           {isDashboardSuccess &&
             dashboardData.map((post: any) => {
               return (
-                <DashboardPostCard
-                  description={post.description}
-                  title={post.title}
-                  postedOn={fromNow(post.created_at)}
-                  key={post.id}
-                  id={post.id}
-                  imageUrl={post.image_url}
-                />
+                <>
+                  <DashboardPostCard
+                    onClick={() => openModal(post)}
+                    description={post.description}
+                    title={post.title}
+                    postedOn={fromNow(post.created_at)}
+                    key={post.id}
+                    id={post.id}
+                    imageUrl={post.image_url}
+                  />
+
+                  <Modal
+                    key={post.id}
+                    id={post.id}
+                    scrollBehavior="inside"
+                    isOpen={isOpenModal}
+                    onClose={closeModal}
+                    isCentered
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>{modelData.title}</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>{modelData.description}</ModalBody>
+                    </ModalContent>
+                  </Modal>
+                </>
               )
             })}
         </div>

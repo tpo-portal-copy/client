@@ -1,9 +1,9 @@
 import { Post } from '../../../utils/types'
 import styles from './DashboardPostCard.module.scss'
 
-function DashboardPostCard({ title, description, imageUrl, postedOn }: Post) {
+function DashboardPostCard({ title, description, imageUrl, postedOn, onClick }: Post) {
   return (
-    <div className={styles.card}>
+    <div onClick={onClick} className={styles.card}>
       <div className={styles.main_container}>
         <img className={styles.post_image} src={imageUrl} alt="companyLogo" />
         <div className={styles.content}>

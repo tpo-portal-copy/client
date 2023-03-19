@@ -3,9 +3,11 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FormTwoProps } from '../../../../utils/types'
 import styles from './FormTwo.module.scss'
-import { Error, Input } from '../../../index'
+import { Error, Input, Select } from '../../../index'
+import useStates from '../../../../hooks/useStates'
 
 export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
+  const { data: statesData, isSuccess: isStateSuccess } = useStates()
   const formik = useFormik({
     initialValues: {
       ...data,
@@ -33,6 +35,7 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
         .integer('Jee Rank must be an integer.')
         .typeError('Jee Rank must be an integer.')
         .required('Jee Rank is required.'),
+      class_12_domicile: Yup.string().required('Domicile state is required'),
     }),
     onSubmit: (values) => {
       onNext(values)
@@ -127,6 +130,23 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       />
       {formik.touched.class_12_perc && formik.errors.class_12_perc ? (
         <Error errorMessage={formik.errors.class_12_perc} />
+      ) : null}
+
+      {isStateSuccess && (
+        <Select
+          value={formik.values.class_12_domicile}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="class_12_domicile"
+          placeholder="Domicile State"
+        >
+          {statesData.map((datas: string) => (
+            <option key={datas}>{datas}</option>
+          ))}
+        </Select>
+      )}
+      {formik.touched.class_12_domicile && formik.errors.class_12_domicile ? (
+        <Error errorMessage={formik.errors.class_12_domicile} />
       ) : null}
 
       <Input
