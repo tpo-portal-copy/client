@@ -8,14 +8,15 @@ export default function Input({
   onBlur,
   value,
   type,
-  disabled,
+  isDisabled,
 }: InputProps) {
   return (
     <div className={styles.container}>
       <label htmlFor={name} className={styles.label}>
-        {placeholder}
+        {name === 'session' ? 'Session' : placeholder}
       </label>
       <input
+        disabled={isDisabled}
         type={type}
         value={value}
         id={name}
@@ -23,7 +24,6 @@ export default function Input({
         onBlur={onBlur}
         placeholder={placeholder}
         className={styles.field}
-        disabled={disabled}
       />
     </div>
   )

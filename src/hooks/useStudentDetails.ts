@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { studentAPI } from '../utils/apis'
 
 const getStudentDetails = async (roll: string) => {
-  const response = await studentAPI.get(`/profile/${roll}/`)
+  const response = await studentAPI.get(`/${roll}/`)
   return response.data
 }
 

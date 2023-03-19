@@ -59,7 +59,7 @@ export type InputProps = {
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
   type?: 'text' | 'password' | 'date' | 'file'
-  disabled?: boolean
+  isDisabled?: boolean
 }
 
 export interface SelectProps {

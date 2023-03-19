@@ -17,6 +17,7 @@ import {
   ResourceDetails,
   AnnouncementForm,
   StatisticsDetails,
+  ResultAnnouncement,
 } from '../pages'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
       <Route path="/student-details-form" element={<StudentDetailsForm />} />
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
+      <Route path="/result-announcement" element={<ResultAnnouncement />} />
       <Route
         path="/dashboard"
         element={
@@ -81,7 +83,7 @@ function App() {
         }
       />
       <Route
-        path="/statistics-details"
+        path="/statistics-details/:company/:type/:sessionyear"
         element={
           <HeaderLayout>
             <StatisticsDetails />

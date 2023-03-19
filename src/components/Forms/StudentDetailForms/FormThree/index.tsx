@@ -151,7 +151,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           value={formik.values.passing_year}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          disabled
+          isDisabled
         />
         {formik.touched.passing_year && formik.errors.passing_year ? (
           <Error errorMessage={formik.errors.passing_year} />
