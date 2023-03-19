@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 import useCompaniesDetails from '../../hooks/useCompaniesDetails'
 import { CompaniesTableProps, TopCompanies } from '../../utils/types'
@@ -81,7 +82,11 @@ export default function CompaniesTable({ session, type, company }: CompaniesTabl
                   <Tbody>
                     {data.results.map((datas: TopCompanies) => (
                       <Tr key={datas.name}>
-                        <Td>{datas.name}</Td>
+                        <Td>
+                          <Link to={`/statistics-details/${datas.name}/${type}/${session}`}>
+                            {datas.name}
+                          </Link>
+                        </Td>
                         <Td>{type === 'intern' ? datas.max_stipend : datas.max_ctc}</Td>
                       </Tr>
                     ))}
@@ -107,7 +112,11 @@ export default function CompaniesTable({ session, type, company }: CompaniesTabl
                   <Tbody>
                     {data.results.map((datas: TopCompanies) => (
                       <Tr key={datas.name}>
-                        <Td>{datas.name}</Td>
+                        <Td>
+                          <Link to={`/statistics-details/${datas.name}/${type}/${session}`}>
+                            {datas.name}
+                          </Link>
+                        </Td>
                         <Td>{datas.offers}</Td>
                       </Tr>
                     ))}

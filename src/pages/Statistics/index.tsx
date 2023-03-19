@@ -7,7 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import styles from './Statistics.module.scss'
 import { jobType, sessions, statsCardStyles } from '../../utils/Data/statisticsData'
 import { PieChart, StatsCard, CompanyCard } from '../../components'
-import useStatisticsDetails from '../../hooks/useStatisticsData'
+import useStatisticsData from '../../hooks/useStatisticsData'
 import Page500 from '../Page500'
 import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
@@ -19,7 +19,7 @@ function Statistics() {
 
   const [searchedCompany, setSearchedCompany] = useState('')
 
-  const { data, isLoading, isSuccess, isError } = useStatisticsDetails(
+  const { data, isLoading, isSuccess, isError } = useStatisticsData(
     { type: job.toLowerCase(), session },
     job,
     session,
