@@ -169,7 +169,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
         </div>
         <div>
           {data &&
-            data[0].slice(0, 4).map((company: any) => {
+            data[0]?.slice(0, 4).map((company: any) => {
               return (
                 <CheckListItem
                   label={company.name}
@@ -207,7 +207,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
         </div>
         <div>
           {data &&
-            data[1].slice(0, 4).map((role: any) => {
+            data[1]?.slice(0, 4).map((role: any) => {
               return (
                 <CheckListItem
                   label={role.name}
