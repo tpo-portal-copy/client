@@ -16,7 +16,7 @@ export default function CustomModal({
   title,
   isOpen,
   onCloseHandler,
-  list,
+  list = [],
   onItemClick,
   selectedItems,
 }: ModalProps) {

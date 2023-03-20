@@ -24,9 +24,9 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
 
   const navigate = useNavigate()
 
-  const { data, isLoading } = useExperienceFilterOptionsList()
+  const { data, isLoading, isSuccess } = useExperienceFilterOptionsList()
 
-  if (isLoading) {
+  if (isLoading || !isSuccess) {
     return <></>
   }
 
@@ -139,6 +139,8 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
     setJobType('')
   }
 
+  console.log(data)
+
   return (
     <div className={styles.filters}>
       <div className={styles.filter_header}>
@@ -155,11 +157,11 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
               View All
               <FontAwesomeIcon icon={faCircleRight} />
             </button>
-            {isCompaniesModalOpen && (
+            {isCompaniesModalOpen && data && data[0] && (
               <Modal
                 title="Companies"
                 isOpen={isCompaniesModalOpen}
-                list={data && data[0]}
+                list={data[0]}
                 onCloseHandler={closeCompaniesModal}
                 onItemClick={onCompanyToggle}
                 selectedItems={selectedCompanies}
@@ -193,12 +195,12 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
               View All
               <FontAwesomeIcon icon={faCircleRight} />
             </button>
-            {isRolesModalOpen && (
+            {isRolesModalOpen && data && data[1] && (
               <Modal
                 title="Roles"
                 isOpen={isRolesModalOpen}
                 onCloseHandler={closeRolesModal}
-                list={data && data[1]}
+                list={data[1]}
                 onItemClick={onRoleToggle}
                 selectedItems={selectedRoles}
               />
