@@ -189,30 +189,32 @@ export default function PpoResultForm() {
                 </Button>
               </div>
 
-              <Table variant="simple" className={styles.table}>
-                <Thead>
-                  <Tr>
-                    <Th>Roll Number</Th>
-                    <Th>Student</Th>
-                    <Th>Company</Th>
-                    <Th> </Th>
-                  </Tr>
-                </Thead>
-                {uniqueList.slice(1).map((row, index) => (
-                  <Tbody key={row.stuRollNo}>
+              <div className={styles.table}>
+                <Table variant="simple">
+                  <Thead>
                     <Tr>
-                      <Td>{row.stuRollNo}</Td>
-                      <Td>{row.stuName}</Td>
-                      <Td>{row.stuCompany}</Td>
-                      <Td>
-                        <Button size="sm" onClick={() => removeRow(index + 1)}>
-                          <FontAwesomeIcon icon={faUserMinus} />
-                        </Button>
-                      </Td>
+                      <Th>Roll Number</Th>
+                      <Th>Student</Th>
+                      <Th>Company</Th>
+                      <Th> </Th>
                     </Tr>
-                  </Tbody>
-                ))}
-              </Table>
+                  </Thead>
+                  {uniqueList.slice(1).map((row, index) => (
+                    <Tbody key={row.stuRollNo}>
+                      <Tr>
+                        <Td>{row.stuRollNo}</Td>
+                        <Td>{row.stuName}</Td>
+                        <Td>{row.stuCompany}</Td>
+                        <Td>
+                          <Button size="sm" onClick={() => removeRow(index + 1)}>
+                            <FontAwesomeIcon icon={faUserMinus} />
+                          </Button>
+                        </Td>
+                      </Tr>
+                    </Tbody>
+                  ))}
+                </Table>
+              </div>
               <Button
                 background="linear-gradient(40deg,#45cafc,#303f9f)"
                 color="white"
