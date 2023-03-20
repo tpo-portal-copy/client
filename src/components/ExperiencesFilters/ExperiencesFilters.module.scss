@@ -16,10 +16,15 @@
     }
   }
 
-  h2 {
-    font-size: var(--md-heading);
-    color: var(--text-color-primary);
-    font-weight: 600;
+  .filter_header {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      font-size: var(--md-heading);
+      color: var(--text-color-primary);
+      font-weight: 600;
+    }
   }
 
   h4 {
@@ -74,5 +79,21 @@
 
   .filter_category {
     padding-bottom: 4px;
+  }
+
+  .btn_container {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+
+    button {
+      color: #fff;
+      background: linear-gradient(40deg, #45cafc, #303f9f);
+      padding: 0.4rem 0;
+      width: 50%;
+      font-weight: 500;
+      font-size: 16px;
+      border-radius: 4px;
+    }
   }
 }

@@ -120,7 +120,7 @@ export default function StudentDetailsForm() {
     }
     setValue((prevValue) => prevValue + 25)
     setFormThreeData(values)
-    console.log(typeof values.current_year)
+
     try {
       const parsedObj = JSON.parse(values.course)
 

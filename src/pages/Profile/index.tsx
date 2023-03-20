@@ -140,7 +140,7 @@ function Profile() {
                   ? `${data.first_name} ${data.last_name}`
                   : `${data.first_name} ${data.middle_name} ${data.last_name}`}
               </span>
-              <span className={styles.roll}>{`${data.course} ${data.branch} ${displayYear(
+              <span className={styles.roll}>{`${data.course_name} ${data.branch} ${displayYear(
                 data.current_year,
               )}`}</span>
             </div>

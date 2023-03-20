@@ -39,17 +39,23 @@ export interface ResourcesCardProps {
   imgUrl: string
 }
 
+export type NameObject = {
+  name: string
+  logo: string
+}
+
 export interface ExperienceCardProps {
   id: number
-  title: string
-  description: string
+  company: string
+  description_read: string
   imgUrl?: string
-  jobType: string
-  selStatus: string
-  userName: string
+  jobtype: string
+  selected: boolean
+  name?: NameObject
   difficulty: string
-  role: string
-  postedOn: number
+  roles: string
+  created_at: string
+  anonymity: boolean
 }
 
 export type InputProps = {
@@ -78,11 +84,16 @@ export interface ClusterListProps {
 export interface CheckListItemProps {
   label: string | number
   isMobile?: boolean
+  isChecked?: boolean
+  onClick: (company: string) => void
 }
 
 export interface ModalProps {
   isOpen: boolean
   title: string
+  list: Array<any>
+  selectedItems: Array<string>
+  onItemClick: (company: string) => void
   onCloseHandler: () => void
 }
 
@@ -273,8 +284,8 @@ export interface PaginatorProps {
   max: number
   onNext: MouseEventHandler<HTMLButtonElement>
   onPrev: MouseEventHandler<HTMLButtonElement>
-  disablePrev: boolean
-  disableNext: boolean
+  disablePrev?: boolean
+  disableNext?: boolean
 }
 
 export interface StatisticsDetailsProps {

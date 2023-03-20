@@ -15,6 +15,7 @@ import {
   COURSES_API,
   BRANCHES_API,
   STATISTICS_DETAILS_API,
+  EXPERIENCES_API,
 } from './constants'
 
 export const studentAPI = axios.create({
@@ -23,6 +24,14 @@ export const studentAPI = axios.create({
 
 export const drivesAPI = axios.create({
   baseURL: DRIVES_API,
+})
+
+export const experiencesAPI = axios.create({
+  baseURL: EXPERIENCES_API,
+})
+
+export const companiesListAPI = axios.create({
+  baseURL: COMPANIES_API,
 })
 
 export const companiesDetailsAPI = axios.create({
