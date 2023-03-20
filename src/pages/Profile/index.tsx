@@ -60,9 +60,14 @@ function Profile() {
   }
 
   const getDetails = async (roll: string) => {
-    const response = await clustersAPI.get(`/${roll}`)
-    setPlacementData(response.data)
-    return response.data
+    try {
+      const response = await clustersAPI.get(`/${roll}`)
+      setPlacementData(response.data)
+      return response.data
+    } catch (error) {
+      console.log(error)
+      return null
+    }
   }
 
   if (isError) {

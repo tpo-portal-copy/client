@@ -18,6 +18,7 @@ import {
   AnnouncementForm,
   StatisticsDetails,
   ResultAnnouncement,
+  Home,
 } from '../pages'
 
 function App() {
@@ -42,6 +43,14 @@ function App() {
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
       <Route path="/result-announcement" element={<ResultAnnouncement />} />
+      <Route
+        path="/home"
+        element={
+          <HeaderLayout>
+            <Home />
+          </HeaderLayout>
+        }
+      />
       <Route
         path="/dashboard"
         element={
