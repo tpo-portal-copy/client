@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons'
@@ -12,8 +13,8 @@ import useExperienceFilterOptionsList from '../../hooks/useExperienceFilterOptio
 function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
   const [isCompaniesModalOpen, setIsCompaniesModalOpen] = useState(false)
   const [isRolesModalOpen, setIsRolesModalOpen] = useState(false)
-  const [startingYear, setStartingYear] = useState(2023)
-  const [noOfYears, setNoOfYears] = useState(10)
+  const [startingYear] = useState(2023)
+  const [noOfYears] = useState(10)
   const [selectedCompanies, setSelectedCompanies] = useState<string[]>([])
   const [selectedRoles, setSelectedRoles] = useState<string[]>([])
   const [selectedYears, setSelectedYears] = useState<string[]>([])
@@ -26,12 +27,10 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
   const { data, isLoading } = useExperienceFilterOptionsList()
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <></>
   }
 
-  const [companiesData, rolesData] = data
-
-  const openCompaiesModal = () => {
+  const openCompaniesModal = () => {
     setIsCompaniesModalOpen(true)
   }
 
@@ -105,7 +104,8 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
     setSelectedDifficulties([...selectedDifficulties, difficulty])
   }
 
-  const applyFilters = () => {
+  const applyFilters = (event: any) => {
+    event.preventDefault()
     const companiesListString = selectedCompanies.join(',')
     const rolesListString = selectedRoles.join(',')
     const yearsListString = selectedYears.join(',')
@@ -113,27 +113,36 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
     if (selectedDifficulties.includes('Easy')) {
       diffcultyArray.push('E')
     }
+
     if (selectedDifficulties.includes('Medium')) {
       diffcultyArray.push('M')
     }
+
     if (selectedDifficulties.includes('Hard')) {
       diffcultyArray.push('H')
     }
 
     const difficultyListSring = diffcultyArray.join(',')
-
     navigate(
       `/experiences/?company=${companiesListString}&roles=${rolesListString}&year=${yearsListString}&selected=${selectionStatus}&jobtype=${jobType}&difficulty=${difficultyListSring}`,
     )
+  }
+
+  const clearFilters = (event: any) => {
+    event.preventDefault()
+
+    setSelectedCompanies([])
+    setSelectedRoles([])
+    setSelectedYears([])
+    setSelectionStatus('')
+    setSelectedDifficulties([])
+    setJobType('')
   }
 
   return (
     <div className={styles.filters}>
       <div className={styles.filter_header}>
         <h2>Filters</h2>
-        <button className={styles.apply} onClick={applyFilters}>
-          Apply
-        </button>
       </div>
       <div className={styles.seperator} />
       <div className={styles.company}>
@@ -142,7 +151,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
             <h4>Companies</h4>
           </div>
           <div className={styles.modal}>
-            <button className={styles.btn} onClick={openCompaiesModal}>
+            <button className={styles.btn} onClick={openCompaniesModal}>
               View All
               <FontAwesomeIcon icon={faCircleRight} />
             </button>
@@ -150,24 +159,27 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
               <Modal
                 title="Companies"
                 isOpen={isCompaniesModalOpen}
-                list={companiesData}
+                list={data && data[0]}
                 onCloseHandler={closeCompaniesModal}
                 onItemClick={onCompanyToggle}
+                selectedItems={selectedCompanies}
               />
             )}
           </div>
         </div>
         <div>
-          {companiesData.slice(0, 4).map((company) => {
-            return (
-              <CheckListItem
-                label={company.name}
-                key={company.id}
-                isMobile={isMobile}
-                onClick={onCompanyToggle}
-              />
-            )
-          })}
+          {data &&
+            data[0].slice(0, 4).map((company: any) => {
+              return (
+                <CheckListItem
+                  label={company.name}
+                  key={company.id}
+                  isMobile={isMobile}
+                  onClick={onCompanyToggle}
+                  isChecked={selectedCompanies.includes(company.name)}
+                />
+              )
+            })}
         </div>
       </div>
       <div className={styles.seperator} />
@@ -186,23 +198,26 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
                 title="Roles"
                 isOpen={isRolesModalOpen}
                 onCloseHandler={closeRolesModal}
-                list={rolesData}
+                list={data && data[1]}
                 onItemClick={onRoleToggle}
+                selectedItems={selectedRoles}
               />
             )}
           </div>
         </div>
         <div>
-          {rolesData.slice(0, 4).map((role) => {
-            return (
-              <CheckListItem
-                label={role.name}
-                key={role.id}
-                isMobile={isMobile}
-                onClick={onRoleToggle}
-              />
-            )
-          })}
+          {data &&
+            data[1].slice(0, 4).map((role: any) => {
+              return (
+                <CheckListItem
+                  label={role.name}
+                  key={role.id}
+                  isMobile={isMobile}
+                  onClick={onRoleToggle}
+                  isChecked={selectedRoles.includes(role.name)}
+                />
+              )
+            })}
         </div>
       </div>
       <div className={styles.seperator} />
@@ -211,8 +226,8 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
         <div>
           <RadioGroup onChange={setSelectionStatus} value={selectionStatus}>
             <Stack direction="column">
-              <Radio value="selected">Selected</Radio>
-              <Radio value="notSelected">Not Selected</Radio>
+              <Radio value="true">Selected</Radio>
+              <Radio value="false">Not Selected</Radio>
               <Radio value="">All</Radio>
             </Stack>
           </RadioGroup>
@@ -231,6 +246,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
                   label={startingYear - index}
                   isMobile={isMobile}
                   onClick={onYearToggle}
+                  isChecked={selectedYears.includes((startingYear - index).toString())}
                 />
               )
             })}
@@ -253,10 +269,33 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
       <div>
         <h4 className={styles.filter_category}>Difficulty</h4>
         <div>
-          <CheckListItem label="Easy" isMobile={isMobile} onClick={onDifficultyToggle} />
-          <CheckListItem label="Medium" isMobile={isMobile} onClick={onDifficultyToggle} />
-          <CheckListItem label="Hard" isMobile={isMobile} onClick={onDifficultyToggle} />
+          <CheckListItem
+            label="Easy"
+            isMobile={isMobile}
+            onClick={onDifficultyToggle}
+            isChecked={selectedDifficulties.includes('Easy')}
+          />
+          <CheckListItem
+            label="Medium"
+            isMobile={isMobile}
+            onClick={onDifficultyToggle}
+            isChecked={selectedDifficulties.includes('Medium')}
+          />
+          <CheckListItem
+            label="Hard"
+            isMobile={isMobile}
+            onClick={onDifficultyToggle}
+            isChecked={selectedDifficulties.includes('Hard')}
+          />
         </div>
+      </div>
+      <div className={styles.btn_container}>
+        <button className={styles.apply} onClick={clearFilters}>
+          Clear
+        </button>
+        <button className={styles.apply} onClick={applyFilters}>
+          Apply
+        </button>
       </div>
     </div>
   )

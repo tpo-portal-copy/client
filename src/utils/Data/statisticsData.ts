@@ -16,31 +16,49 @@ export const chartData = [
   {
     id: 'cse',
     label: 'CSE',
-    value: 92,
-    color: 'hsl(290, 70%, 50%)',
+    value: 90,
   },
   {
     id: 'ece',
     label: 'ECE',
     value: 95,
-    color: 'hsl(91, 70%, 50%)',
   },
   {
     id: 'ee',
     label: 'EE',
     value: 89,
-    color: 'hsl(110, 70%, 50%)',
   },
   {
     id: 'ce',
     label: 'CE',
     value: 83,
-    color: 'hsl(348, 70%, 50%)',
   },
   {
     id: 'me',
     label: 'ME',
     value: 87,
+  },
+]
+
+export const chartStylesData = [
+  {
+    id: 'cse',
+    color: 'hsl(290, 70%, 50%)',
+  },
+  {
+    id: 'ece',
+    color: 'hsl(91, 70%, 50%)',
+  },
+  {
+    id: 'ee',
+    color: 'hsl(110, 70%, 50%)',
+  },
+  {
+    id: 'ce',
+    color: 'hsl(348, 70%, 50%)',
+  },
+  {
+    id: 'me',
     color: 'hsl(229, 70%, 50%)',
   },
 ]
@@ -98,38 +116,26 @@ export const sessions = [
   },
 ]
 
-export const statsInfo = [
+export const statsCardStyles = [
   {
-    id: 1,
-    label: 'Students Appeared',
-    value: 1000,
     bgColor: '#D1E9FC',
     color: 'linear-gradient(135deg, rgba(16, 57, 150, 0) 0%, rgba(16, 57, 150, 0.24) 100%)',
     iconColor: 'rgb(16, 57, 150)',
     icon: faUser,
   },
   {
-    id: 2,
-    label: 'Offers',
-    value: 800,
     bgColor: '#D0F2FF',
     color: 'linear-gradient(135deg, rgba(12, 83, 183, 0) 0%, rgba(12, 83, 183, 0.24) 100%)',
     iconColor: 'rgb(12, 83, 183)',
     icon: faFileInvoice,
   },
   {
-    id: 3,
-    label: 'Companies Visited',
-    value: 100,
     bgColor: '#FFF7CD',
     color: 'linear-gradient(135deg, rgba(183, 129, 3, 0) 0%, rgba(183, 129, 3, 0.24) 100%)',
     iconColor: 'rgb(183, 129, 3)',
     icon: faIndustry,
   },
   {
-    id: 4,
-    label: 'Courses',
-    value: 8,
     bgColor: '#FFE7D9',
     color: 'linear-gradient(135deg, rgba(183, 33, 54, 0) 0%, rgba(183, 33, 54, 0.24) 100%)',
     iconColor: 'rgb(183, 33, 54)',

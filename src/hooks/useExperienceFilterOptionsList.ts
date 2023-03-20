@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { companiesDetailsAPI, drivesAPI } from '../utils/apis'
+import { companiesListAPI, drivesAPI } from '../utils/apis'
 
 const getExperienceFilterOptionsList = async () => {
   const [response1, response2] = await axios.all([
-    companiesDetailsAPI.get('/'),
+    companiesListAPI.get('/'),
     drivesAPI.get('/getroles'),
   ])
 

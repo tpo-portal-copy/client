@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { interviewExperienceInfoList } from '../../../utils/Data/interviewExperienceData'
+import { getDifficulty } from '../../../utils/functions'
 import { ExperienceCardProps } from '../../../utils/types'
 import styles from './ExperienceCard.module.scss'
 
@@ -15,12 +16,6 @@ function ExperienceCard({
   created_at,
   anonymity,
 }: ExperienceCardProps) {
-  const getDifficulty = (difficultySymbol: string) => {
-    if (difficultySymbol === 'E') return 'Easy'
-    if (difficultySymbol === 'M') return 'Medium'
-    return 'Hard'
-  }
-
   return (
     <Link
       to={`/experiences-details/${id}`}
@@ -37,7 +32,10 @@ function ExperienceCard({
           <div className={styles.info_container}>
             <p className={styles.title}>{company}</p>
             <p className={styles.role}>{roles}</p>
-            <p className={styles.truncate}>{description_read}</p>
+            <div
+              className={styles.truncate}
+              dangerouslySetInnerHTML={{ __html: description_read }}
+            />
           </div>
         </div>
         <div className={styles.separator} />
