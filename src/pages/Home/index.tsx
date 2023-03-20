@@ -4,8 +4,9 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import styles from './Home.module.scss'
 import recruitData from '../../utils/Data/recruitData'
 import { RecruitCard } from '../../components/Cards'
-import { topCompaniesData } from '../../utils/Data/statisticsData'
-import { CompanyCard, Footer } from '../../components'
+import { Footer } from '../../components'
+import landingPageData from '../../utils/Data/landingPageData'
+import LandingCompanyCard from '../../components/Cards/LandingCompanyCard'
 
 function Home() {
   return (
@@ -85,18 +86,22 @@ function Home() {
           <h1 className={styles.heading}>Faculty Incharge&apos;s Message</h1>
           <div className={styles.content}>
             <p>
-              The National Institute of Technology Hamirpur is a prestigious engineering institute
-              in India that has been granted the status of &quot;An Institute of National
-              Importance&quot;. The institute offers top-notch education to its students in
-              graduate, postgraduate, and PhD programs. The institute has state-of-the-art
-              facilities that have contributed to the success of its students in their respective
-              fields. The institute&apos;s students have made a significant impact in the
-              organizations they have been associated with, and they possess a perfect combination
-              of technical intellect and social awareness. The institute focuses on fostering
-              national integration, industry interaction, and basic and applied research.
+              Dear Recruiters, We would like to take this opportunity to cordially invite your
+              esteemed organization for being empaneled for the Campus Recruitment Drive for Batch
+              of 2023. National Institute of Technology Hamirpur is the Technological Hub of Green
+              and Clean Himachal Pradesh and it offers a peaceful and serene environment for
+              academic growth. NIT Hamirpur has been consistently ranked among the top Engineering
+              and Architecture institutions in the country. NIT Hamirpur accords pivotal status to
+              research and development in pursuit of excellence. The institute plays a vital role in
+              diverse facets of research and development addressing the needs of the nation and
+              contributing to global development. Its initiatives toward research and development
+              are reflected in its impressive catalogue of research projects funded by National and
+              International Organizations and Industries.
             </p>
             <div>
-              <Button colorScheme="messenger">READ MORE</Button>
+              <Link href="https://nith.ac.in/uploads/topics/tpo-placement-brochure202316641646754035.pdf">
+                <Button colorScheme="messenger">READ MORE</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -109,8 +114,12 @@ function Home() {
         <h1 className={styles.top_companies_heading}>Past Recruiters</h1>
         <div className={styles.info_container_wrapper}>
           <div className={styles.info_container}>
-            {topCompaniesData.map((data) => (
-              <CompanyCard icon={data.icon} key={data.id} label={data.label} value={data.value} />
+            {landingPageData.map((companiesData: any) => (
+              <LandingCompanyCard
+                link={companiesData.logo}
+                key={companiesData.logo}
+                label={companiesData.name}
+              />
             ))}
           </div>
         </div>

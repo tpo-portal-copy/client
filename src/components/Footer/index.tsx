@@ -17,7 +17,7 @@ function Footer() {
               <Link href="https://alumni.nith.ac.in/">
                 <h2>Alumni Portal</h2>
               </Link>
-              <Link href="https://nith.ac.in/training-placement">
+              <Link href="https://nith.ac.in/uploads/topics/tpo-placement-brochure202316641646754035.pdf">
                 <h2>Placement Brochure</h2>
               </Link>
               <Link href="<h2>Media Coverage</h2>">
@@ -31,7 +31,7 @@ function Footer() {
               <Link href="/drives">
                 <h2>JNF Form</h2>
               </Link>
-              <Link href="https://nith.ac.in/training-placement">
+              <Link href="https://nith.ac.in/uploads/topics/tpo-placement-brochure202316641646754035.pdf">
                 <h2>Placement Procedure</h2>
               </Link>
             </div>

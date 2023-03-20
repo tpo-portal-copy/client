@@ -1,15 +1,17 @@
 import { Box, Card, CardBody } from '@chakra-ui/react'
 import styles from './ResourceDetailsCard.module.scss'
 
-export default function ResourceDetailsCard() {
+interface ResourceDetailsCardProps {
+  heading: string
+  content: string
+}
+
+export default function ResourceDetailsCard({ heading, content }: ResourceDetailsCardProps) {
   return (
     <Card className={styles.card}>
       <CardBody>
-        <Box className={styles.title}>Lizard</Box>
-        <Box className={styles.description}>
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-          across all continents except Antarctica
-        </Box>
+        <Box className={styles.title}>{heading}</Box>
+        <Box className={styles.description}>{content}</Box>
       </CardBody>
     </Card>
   )
