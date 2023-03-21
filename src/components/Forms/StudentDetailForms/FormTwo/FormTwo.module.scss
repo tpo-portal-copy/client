@@ -26,8 +26,8 @@
   .btn_container {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    padding-top: 1rem;
+    gap: 1.5rem;
+    padding: 2rem 0;
     width: 100%;
 
     @media screen and (max-width: 525px) {

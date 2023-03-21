@@ -14,7 +14,7 @@ import { data } from '../../utils/Data/coursesAllowedData'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(2)
   const [formOneData, setFormOneData] = useState<FormOneData>({
     first_name: '',
     middle_name: '',

@@ -69,6 +69,7 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       <Input
         name="class_10_year"
         placeholder="10th Year"
+        type="number"
         value={formik.values.class_10_year || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -80,6 +81,7 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       <Input
         name="class_10_perc"
         placeholder="10th Percentage"
+        type="number"
         value={formik.values.class_10_perc || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -113,6 +115,7 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       <Input
         name="class_12_year"
         placeholder="12th Year"
+        type="number"
         value={formik.values.class_12_year || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -124,6 +127,7 @@ export default function FormTwo({ onNext, onBack, data }: FormTwoProps) {
       <Input
         name="class_12_perc"
         placeholder="12th Percentage"
+        type="number"
         value={formik.values.class_12_perc || ''}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}

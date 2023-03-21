@@ -200,7 +200,7 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             <Error errorMessage={formik.errors.personal_email} />
           ) : null}
         </div>
-        <div className={`${styles.field} ${styles.dropdown}`}>
+        <div className={`${styles.field}`}>
           <Select
             value={formik.values.gender}
             onChange={formik.handleChange}
@@ -216,7 +216,7 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             <Error errorMessage={formik.errors.gender} />
           ) : null}
         </div>
-        <div className={`${styles.field} ${styles.dropdown}`}>
+        <div className={`${styles.field}`}>
           <Select
             value={formik.values.category}
             onChange={formik.handleChange}
