@@ -81,7 +81,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
   return (
     <form className={styles.container} onSubmit={formik.handleSubmit}>
       <h2 className={styles.title}>College Academic Details</h2>
-      <div className={`${styles.field} ${styles.dropdown}`}>
+      <div className={styles.field}>
         {isCoursesSuccess && (
           <Select
             value={formik.values.course}
@@ -104,7 +104,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.course} />
         ) : null}
       </div>
-      <div className={`${styles.field} ${styles.dropdown}`}>
+      <div className={styles.field}>
         <Select
           value={formik.values.branch_write}
           onChange={(e) => handleBranchChange(e)}
@@ -124,19 +124,14 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
         ) : null}
       </div>
 
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="batch_year"
           placeholder="Batch Year"
+          type="number"
           value={formik.values.batch_year}
           onChange={(e) => {
-            formik.setFieldValue('batch_year', e.target.value)
-            formik.setFieldValue(
-              'passing_year',
-              !course.years
-                ? parseInt(e.target.value, 10)
-                : parseInt(e.target.value, 10) + course.years,
-            )
+            formik.setFieldValue('batch_year', parseInt(e.target.value, 10))
           }}
           onBlur={formik.handleBlur}
         />
@@ -144,11 +139,16 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.batch_year} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="passing_year"
           placeholder="Passing Year"
-          value={formik.values.passing_year}
+          type="number"
+          value={
+            course.years == null || formik.values.batch_year == null
+              ? formik.values.batch_year
+              : formik.values.batch_year + course.years
+          }
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           isDisabled
@@ -157,7 +157,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.passing_year} />
         ) : null}
       </div>
-      <div className={`${styles.feild} ${styles.dropdown}`}>
+      <div className={styles.field}>
         <Select
           value={formik.values.current_year}
           onChange={formik.handleChange}
@@ -179,10 +179,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.current_year} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="cgpi"
           placeholder="CGPI"
+          type="number"
           value={formik.values.cgpi}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -191,10 +192,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.cgpi} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="active_backlog"
           placeholder="Active Backlog"
+          type="number"
           value={formik.values.active_backlog}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -203,10 +205,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.active_backlog} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="total_backlog"
           placeholder="Total Backlog"
+          type="number"
           value={formik.values.total_backlog}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -215,10 +218,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.total_backlog} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="cat_score"
           placeholder="CAT Percentile"
+          type="number"
           value={formik.values.cat_score}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -227,10 +231,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.cat_score} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         <Input
           name="gate_score"
           placeholder="GATE Score"
+          type="number"
           value={formik.values.gate_score}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -239,11 +244,12 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           <Error errorMessage={formik.errors.gate_score} />
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         {formik.values.course === 'B.Tech' ? (
           <>
             <Input
               name="gap_12_ug"
+              type="number"
               placeholder="No. of Gap Years after 12th"
               value={formik.values.gap_12_ug}
               onChange={formik.handleChange}
@@ -255,7 +261,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           </>
         ) : null}
       </div>
-      <div className={styles.feild}>
+      <div className={styles.field}>
         {formik.values.course === 'M.Tech' ||
         formik.values.course === 'MBA' ||
         formik.values.course === 'MSc' ? (
@@ -263,6 +269,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
             <Input
               name="gap_ug_pg"
               placeholder="No. of Gap Years after UG"
+              type="number"
               value={formik.values.gap_ug_pg}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

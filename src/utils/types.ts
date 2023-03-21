@@ -64,7 +64,7 @@ export type InputProps = {
   value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
-  type?: 'text' | 'password' | 'date' | 'file'
+  type?: 'text' | 'password' | 'date' | 'file' | 'number'
   isDisabled?: boolean
 }
 
