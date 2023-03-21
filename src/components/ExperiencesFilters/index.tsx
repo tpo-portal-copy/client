@@ -139,8 +139,6 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
     setJobType('')
   }
 
-  console.log(data)
-
   return (
     <div className={styles.filters}>
       <div className={styles.filter_header}>
