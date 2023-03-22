@@ -76,6 +76,18 @@ export default function PpoResultForm() {
     setRoles(response.data)
   }
 
+  const getCompanySuggestions = (name: string) => {
+    formik.setFieldValue('company', name)
+    setClicked(true)
+    setCompany([])
+  }
+
+  const getRoleSuggestions = (name: string) => {
+    formik.setFieldValue('profile', name)
+    setClicked(true)
+    setRoles([])
+  }
+
   const [rowData, setRowData] = useState([
     {
       stuName: allStudentData
@@ -148,11 +160,7 @@ export default function PpoResultForm() {
                 >
                   {company.map((companyData: Company) => (
                     <p
-                      onClick={(e) => {
-                        formik.setFieldValue('company', companyData.name)
-                        setClicked(true)
-                        setCompany([])
-                      }}
+                      onClick={() => getCompanySuggestions(companyData.name)}
                       className={styles.item}
                       key={companyData.id}
                     >
@@ -181,11 +189,7 @@ export default function PpoResultForm() {
                 >
                   {roles.map((rolesData: any) => (
                     <p
-                      onClick={(e) => {
-                        formik.setFieldValue('profile', rolesData.name)
-                        setClicked(true)
-                        setRoles([])
-                      }}
+                      onClick={() => getRoleSuggestions(rolesData.name)}
                       className={styles.item}
                       key={rolesData.id}
                     >

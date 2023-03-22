@@ -11,6 +11,7 @@ import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
 import { Error, Input, Select } from '../../components'
 import styles from './AnnouncementForm.module.scss'
+import { dashboardAPI } from '../../utils/apis'
 
 const typeData = [
   { id: 16, value: 'General' },
@@ -48,7 +49,7 @@ export default function AnnouncementForm() {
           type: values.type.toLowerCase(),
           description: value,
         }
-        const res = await axios.post('https://sakhanithnith.pagekite.me/announcements/', objToSend)
+        const res = await dashboardAPI.post('', objToSend)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {

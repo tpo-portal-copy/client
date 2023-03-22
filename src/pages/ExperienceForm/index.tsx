@@ -107,7 +107,7 @@ export default function ExperienceForm() {
           selected: decodeSelected(formik.values.selected),
           student: '191008',
         }
-        const res = await axios.post('https://sakhanithnith.pagekite.me/experiences/', objToSent)
+        const res = await experienceAPI.post('/', objToSent)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {
