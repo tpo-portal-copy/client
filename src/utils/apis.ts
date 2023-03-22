@@ -16,6 +16,8 @@ import {
   BRANCHES_API,
   STATISTICS_DETAILS_API,
   EXPERIENCES_API,
+  STUDENT_LOGIN_API,
+  STUDENT_REGISTER_API,
 } from './constants'
 
 export const studentAPI = axios.create({
@@ -84,4 +86,12 @@ export const branchesAPI = axios.create({
 
 export const statisticsDetailsAPI = axios.create({
   baseURL: STATISTICS_DETAILS_API,
+})
+
+export const studentLoginAPI = axios.create({
+  baseURL: STUDENT_LOGIN_API,
+})
+
+export const studentRegisterAPI = axios.create({
+  baseURL: STUDENT_REGISTER_API,
 })

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link as Links } from 'react-router-dom'
+import { Link as Links, useNavigate } from 'react-router-dom'
 import {
   Input,
   Text,
@@ -10,25 +10,29 @@ import {
   AlertIcon,
   InputGroup,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from './SignupForm.module.scss'
+import { studentRegisterAPI } from '../../../utils/apis'
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
+  const toast = useToast()
 
   const formik = useFormik({
     initialValues: {
-      roll: '',
+      username: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      password2: '',
     },
     validationSchema: Yup.object().shape({
-      roll: Yup.string()
+      username: Yup.string()
         .required('Roll No. is required')
         .matches(/^[a-zA-Z0-9]+$/, 'Invalid roll no.'),
       email: Yup.string()
@@ -46,11 +50,24 @@ export default function SignupForm() {
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s:]).*$/,
           'Password needs to have uppercase,lowercase,digit and a special character',
         ),
-      confirmPassword: Yup.string()
+      password2: Yup.string()
         .required()
         .oneOf([Yup.ref('password')], 'Password must match'),
     }),
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      try {
+        const res = await studentRegisterAPI.post('/', { ...values })
+        navigate('/login')
+      } catch (err: any) {
+        toast({
+          title: 'Sign Up Failed',
+          description: err.response.data.msg,
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        })
+      }
+    },
   })
 
   const handleIconClick = () => {
@@ -61,16 +78,16 @@ export default function SignupForm() {
     <form className={styles.form_container} onSubmit={formik.handleSubmit}>
       <VStack spacing={3}>
         <Input
-          name="roll"
+          name="username"
           placeholder="Roll No."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.roll}
+          value={formik.values.username}
         />
-        {formik.touched.roll && formik.errors.roll ? (
+        {formik.touched.username && formik.errors.username ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.roll.charAt(0).toUpperCase() + formik.errors.roll.slice(1)}
+            {formik.errors.username.charAt(0).toUpperCase() + formik.errors.username.slice(1)}
           </Alert>
         ) : null}
 
@@ -111,7 +128,7 @@ export default function SignupForm() {
 
         <InputGroup>
           <Input
-            name="confirmPassword"
+            name="password2"
             placeholder="Confirm Password"
             type={showPassword ? 'text' : 'password'}
             onChange={formik.handleChange}
@@ -126,8 +143,7 @@ export default function SignupForm() {
         {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.confirmPassword.charAt(0).toUpperCase() +
-              formik.errors.confirmPassword.slice(1)}
+            {formik.errors.password2.charAt(0).toUpperCase() + formik.errors.password2.slice(1)}
           </Alert>
         ) : null}
 
@@ -144,7 +160,9 @@ export default function SignupForm() {
           _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
           className={styles.btn}
           width="100%"
-          isDisabled={!formik.isValid}
+          isLoading={formik.isSubmitting}
+          loadingText="Getting You On Board"
+          isDisabled={!formik.isValid || formik.isSubmitting}
           type="submit"
         >
           Register
