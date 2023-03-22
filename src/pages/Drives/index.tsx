@@ -129,14 +129,16 @@ function Drives() {
           )
         )}
 
-        <Paginator
-          max={data.pages}
-          curr={page}
-          onNext={() => setPage(page + 1)}
-          onPrev={() => setPage(page - 1)}
-          disableNext={page === data.pages}
-          disablePrev={page === 1}
-        />
+        {data.results.length !== 0 && (
+          <Paginator
+            max={data.pages}
+            curr={page}
+            onNext={() => setPage(page + 1)}
+            onPrev={() => setPage(page - 1)}
+            disableNext={page === data.pages}
+            disablePrev={page === 1}
+          />
+        )}
       </div>
     </>
   )

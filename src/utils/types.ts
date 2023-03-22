@@ -39,17 +39,23 @@ export interface ResourcesCardProps {
   imgUrl: string
 }
 
+export type NameObject = {
+  name: string
+  logo: string
+}
+
 export interface ExperienceCardProps {
   id: number
-  title: string
-  description: string
+  company: string
+  description_read: string
   imgUrl?: string
-  jobType: string
-  selStatus: string
-  userName: string
+  jobtype: string
+  selected: boolean
+  name?: NameObject
   difficulty: string
-  role: string
-  postedOn: number
+  roles: string
+  created_at: string
+  anonymity: boolean
 }
 
 export type InputProps = {
@@ -58,7 +64,7 @@ export type InputProps = {
   value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
-  type?: 'text' | 'password' | 'date' | 'file'
+  type?: 'text' | 'password' | 'date' | 'file' | 'number'
   isDisabled?: boolean
 }
 
@@ -78,11 +84,16 @@ export interface ClusterListProps {
 export interface CheckListItemProps {
   label: string | number
   isMobile?: boolean
+  isChecked?: boolean
+  onClick: (company: string) => void
 }
 
 export interface ModalProps {
   isOpen: boolean
   title: string
+  list: Array<any>
+  selectedItems: Array<string>
+  onItemClick: (company: string) => void
   onCloseHandler: () => void
 }
 
@@ -110,6 +121,7 @@ export interface Post {
   description: string
   imageUrl: string
   postedOn: string | undefined
+  onClick: () => void
 }
 
 export interface Drive {
@@ -168,7 +180,7 @@ export type FormOneData = {
   last_name: string
   dob: string
   state: string
-  city: string
+  city_write: string
   pincode: number | undefined
   personal_email: string
   gender: string
@@ -177,6 +189,7 @@ export type FormOneData = {
   linkedin: string
   pwd: boolean
   disability_type: string
+  disability_percentage: number | undefined
 }
 
 export interface FormTwoData {
@@ -189,11 +202,12 @@ export interface FormTwoData {
   class_12_board: string
   class_12_perc: number | undefined
   jee_mains_rank: number | undefined
+  class_12_domicile: string
 }
 
 export interface FormThreeData {
   course: string
-  branch: string
+  branch_write: string
   cgpi: number | undefined
   active_backlog: number | undefined
   total_backlog: number | undefined
@@ -201,7 +215,7 @@ export interface FormThreeData {
   cat_score: number | undefined
   batch_year: number | undefined
   passing_year: number | undefined
-  current_year: number | undefined
+  current_year: string
   gap_12_ug: number | undefined
   gap_ug_pg: number | undefined
 }
@@ -224,7 +238,9 @@ export interface FormThreeProps {
 }
 
 export interface FormFourProps {
-  onSubmit: () => void
+  onSubmit: (values: any) => void
+  course: string
+  year: number | string | undefined
 }
 
 export interface ProgressBarProps {
@@ -250,10 +266,13 @@ export interface StatsNumberProps {
 }
 
 type DataType = {
-  max_stipend: any
-  min_stipend: any
-  avg_stipend: any
+  max_stipend?: any
+  min_stipend?: any
+  avg_stipend?: any
   offers: any
+  max_ctc?: any
+  min_ctc?: any
+  avg_ctc?: any
 }
 
 export interface PieChartProps {
@@ -265,8 +284,8 @@ export interface PaginatorProps {
   max: number
   onNext: MouseEventHandler<HTMLButtonElement>
   onPrev: MouseEventHandler<HTMLButtonElement>
-  disablePrev: boolean
-  disableNext: boolean
+  disablePrev?: boolean
+  disableNext?: boolean
 }
 
 export interface StatisticsDetailsProps {
@@ -379,4 +398,9 @@ export interface CompaniesTableProps {
   session: string
   type: string
   company: string
+}
+
+export interface ModelProps {
+  title: string
+  description: string
 }

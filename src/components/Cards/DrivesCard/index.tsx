@@ -41,7 +41,7 @@ function DrivesCard({
           </div>
         </div>
         <div className={styles.link}>
-          <Link to="/experience-form" className={styles.past_exp_btn}>
+          <Link to={`/experiences/?company=${companyName}`} className={styles.past_exp_btn}>
             Past Experience
           </Link>
           <Link to="/dashboard" className={styles.jd_link}>

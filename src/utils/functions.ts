@@ -43,3 +43,9 @@ export function fromNow(input: Date) {
   }
   return ''
 }
+
+export const getDifficulty = (difficultySymbol: string) => {
+  if (difficultySymbol === 'E') return 'Easy'
+  if (difficultySymbol === 'M') return 'Medium'
+  return 'Hard'
+}
