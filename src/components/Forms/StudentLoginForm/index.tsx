@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link as Links } from 'react-router-dom'
+import { Link as Links, useNavigate } from 'react-router-dom'
 import {
   Input,
   Text,
@@ -16,21 +16,37 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from './StudentLoginForm.module.scss'
+import { setDataToLocalStorage } from '../../../utils/functions'
+import { studentLoginAPI } from '../../../utils/apis'
 
 export default function StudentLoginForm() {
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
+
   const formik = useFormik({
     initialValues: {
-      roll: '',
+      username: '',
       password: '',
     },
     validationSchema: Yup.object().shape({
-      roll: Yup.string()
+      username: Yup.string()
         .required('Roll No. is required')
         .matches(/^[a-zA-Z0-9]+$/, 'Invalid roll no.'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      try {
+        const res = await studentLoginAPI.post('/', { ...values })
+        const { access, refresh } = res.data
+
+        setDataToLocalStorage('access_token', access)
+        setDataToLocalStorage('refresh_token', refresh)
+
+        navigate('/dashboard')
+      } catch (err) {
+        console.log(err)
+      }
+    },
   })
 
   const handleIconClick = () => {
@@ -41,16 +57,16 @@ export default function StudentLoginForm() {
     <form className={styles.form_container} onSubmit={formik.handleSubmit}>
       <VStack spacing={3}>
         <Input
-          name="roll"
+          name="username"
           placeholder="Roll No."
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.roll}
+          value={formik.values.username}
         />
-        {formik.touched.roll && formik.errors.roll ? (
+        {formik.touched.username && formik.errors.username ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.roll.charAt(0).toUpperCase() + formik.errors.roll.slice(1)}
+            {formik.errors.username}
           </Alert>
         ) : null}
 
@@ -71,7 +87,7 @@ export default function StudentLoginForm() {
         {formik.touched.password && formik.errors.password ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.password.charAt(0).toUpperCase() + formik.errors.password.slice(1)}
+            {formik.errors.password}
           </Alert>
         ) : null}
         <Box className={styles.link_container}>
@@ -87,8 +103,10 @@ export default function StudentLoginForm() {
           _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
           className={styles.btn}
           width="100%"
-          isDisabled={!formik.isValid}
+          isDisabled={!formik.isValid || formik.isSubmitting}
           type="submit"
+          isLoading={formik.isSubmitting}
+          loadingText="Logging In...."
         >
           Login
         </Button>

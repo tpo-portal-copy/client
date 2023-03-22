@@ -15,3 +15,5 @@ export const CITIES_API = import.meta.env.VITE_CITIES_API
 export const COURSES_API = import.meta.env.VITE_COURSES_API
 export const BRANCHES_API = import.meta.env.VITE_BRANCHES_API
 export const STATISTICS_DETAILS_API = import.meta.env.VITE_STATISTICS_DETAILS_API
+export const STUDENT_LOGIN_API = import.meta.env.VITE_STUDENT_LOGIN_API
+export const STUDENT_REGISTER_API = import.meta.env.VITE_STUDENT_REGISTER_API
