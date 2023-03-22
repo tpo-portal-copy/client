@@ -87,7 +87,7 @@ export default function SignupForm() {
         {formik.touched.username && formik.errors.username ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.username.charAt(0).toUpperCase() + formik.errors.username.slice(1)}
+            {formik.errors.username}
           </Alert>
         ) : null}
 
@@ -101,7 +101,7 @@ export default function SignupForm() {
         {formik.touched.email && formik.errors.email ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.email.charAt(0).toUpperCase() + formik.errors.email.slice(1)}
+            {formik.errors.email}
           </Alert>
         ) : null}
 
@@ -122,7 +122,7 @@ export default function SignupForm() {
         {formik.touched.password && formik.errors.password ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.password.charAt(0).toUpperCase() + formik.errors.password.slice(1)}
+            {formik.errors.password}
           </Alert>
         ) : null}
 
@@ -140,10 +140,10 @@ export default function SignupForm() {
             </Button>
           </InputRightElement>
         </InputGroup>
-        {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+        {formik.touched.password2 && formik.errors.password2 ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.password2.charAt(0).toUpperCase() + formik.errors.password2.slice(1)}
+            {formik.errors.password2}
           </Alert>
         ) : null}
 

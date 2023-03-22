@@ -66,7 +66,7 @@ export default function StudentLoginForm() {
         {formik.touched.username && formik.errors.username ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.username.charAt(0).toUpperCase() + formik.errors.username.slice(1)}
+            {formik.errors.username}
           </Alert>
         ) : null}
 
@@ -87,7 +87,7 @@ export default function StudentLoginForm() {
         {formik.touched.password && formik.errors.password ? (
           <Alert borderRadius={5} status="error">
             <AlertIcon />
-            {formik.errors.password.charAt(0).toUpperCase() + formik.errors.password.slice(1)}
+            {formik.errors.password}
           </Alert>
         ) : null}
         <Box className={styles.link_container}>
