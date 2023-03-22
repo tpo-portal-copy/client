@@ -57,6 +57,8 @@ export default function FormOne({ onNext, data }: FormOneProps) {
       state: Yup.string().required('State is required.'),
       city_write: Yup.string().required('City is required.'),
       pincode: Yup.number()
+        .min(100000, 'This is not a valid Pincode.')
+        .max(999999, 'This is not a valid Pincode.')
         .integer('Pincode must be an integer.')
         .typeError('Pincode must be an integer.')
         .required('Pincode is required.'),
