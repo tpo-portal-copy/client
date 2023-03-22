@@ -10,7 +10,7 @@ import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/St
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 import { data } from '../../utils/Data/coursesAllowedData'
-import { studentAPI } from '../../utils/apis'
+import { clustersAPI, studentAPI } from '../../utils/apis'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
@@ -208,7 +208,7 @@ export default function StudentDetailsForm() {
             ...placementObj,
           })
         } else {
-          await astudentAPIxios.post('/detailnotsitting/', {
+          await studentAPI.post('/detailnotsitting/', {
             ...notSittingObj,
           })
         }
