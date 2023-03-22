@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { Text } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
@@ -11,6 +10,7 @@ import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/St
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 import { data } from '../../utils/Data/coursesAllowedData'
+import { clustersAPI, studentAPI } from '../../utils/apis'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
@@ -130,7 +130,7 @@ export default function StudentDetailsForm() {
       })
       setStep((prevStep) => prevStep + 1)
 
-      await axios.post('http://sakhanithnith.pagekite.me/student/', {
+      await studentAPI.post('/', {
         ...formOneData,
         ...formTwoData,
         ...values,
@@ -199,16 +199,16 @@ export default function StudentDetailsForm() {
 
     try {
       if (data[idx].type_allowed === 'intern') {
-        await axios.post('https://sakhanithnith.pagekite.me/student/detailintern/', {
+        await studentAPI.post('/detailintern/', {
           ...internObj,
         })
       } else if (data[idx].type_allowed === 'placement') {
         if (values.interested === 'yes') {
-          await axios.post('https://sakhanithnith.pagekite.me/student/detailplacement/', {
+          await clustersAPI.post('/', {
             ...placementObj,
           })
         } else {
-          await axios.post('https://sakhanithnith.pagekite.me/student/detailnotsitting/', {
+          await studentAPI.post('/detailnotsitting/', {
             ...notSittingObj,
           })
         }
