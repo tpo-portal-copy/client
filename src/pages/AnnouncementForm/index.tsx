@@ -5,7 +5,6 @@ import * as Yup from 'yup'
 import { useState } from 'react'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
-import axios from 'axios'
 import Animation from '../../assets/animations/95580-time-table.json'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
@@ -49,7 +48,7 @@ export default function AnnouncementForm() {
           type: values.type.toLowerCase(),
           description: value,
         }
-        const res = await dashboardAPI.post('', objToSend)
+        const res = await dashboardAPI.post('/', objToSend)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {

@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Button, VStack, Text, Alert, AlertIcon, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +11,7 @@ import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
 import { Input, Select, Error } from '../../components'
 import styles from './ExperienceForm.module.scss'
-import { companiesAPI, rolesAPI } from '../../utils/apis'
+import { companiesAPI, experiencesAPI, rolesAPI } from '../../utils/apis'
 import { Company } from '../../utils/types'
 
 const typeData = [
@@ -107,7 +106,7 @@ export default function ExperienceForm() {
           selected: decodeSelected(formik.values.selected),
           student: '191008',
         }
-        const res = await experienceAPI.post('/', objToSent)
+        const res = await experiencesAPI.post('/', objToSent)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {
