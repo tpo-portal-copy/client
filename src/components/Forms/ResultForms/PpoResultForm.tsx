@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Button, VStack, Text, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -10,11 +11,15 @@ import 'react-quill/dist/quill.snow.css'
 import { Error, Input, Select } from '../..'
 import styles from './ResultForms.module.scss'
 import { allStudentData } from '../../../utils/Data/resultAnnouncementData'
-import { companyList, roleList } from '../../../utils/Data/interviewExperienceData'
+import { companiesAPI, rolesAPI } from '../../../utils/apis'
+import { Company } from '../../../utils/types'
 
 export default function PpoResultForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
+  const [company, setCompany] = useState([])
+  const [roles, setRoles] = useState([])
+  const [isClicked, setClicked] = useState(false)
   const date = new Date()
 
   const formik = useFormik({
@@ -40,6 +45,36 @@ export default function PpoResultForm() {
       }, 3000)
     },
   })
+
+  const handleSearch = async (e: any) => {
+    setClicked(false)
+    formik.setFieldValue('company', e.target.value)
+    const controller = new AbortController()
+    const response = await companiesAPI.get('/', {
+      signal: controller.signal,
+      params: {
+        search: e.target.value,
+      },
+    })
+
+    controller.abort()
+    setCompany(response.data)
+  }
+
+  const handleRoleSearch = async (e: any) => {
+    setClicked(false)
+    formik.setFieldValue('profile', e.target.value)
+    const controller = new AbortController()
+    const response = await rolesAPI.get('/', {
+      signal: controller.signal,
+      params: {
+        search: e.target.value,
+      },
+    })
+
+    controller.abort()
+    setRoles(response.data)
+  }
 
   const [rowData, setRowData] = useState([
     {
@@ -97,32 +132,69 @@ export default function PpoResultForm() {
         <form onSubmit={formik.handleSubmit} className={styles.form_container}>
           <VStack align="stretch" spacing={4}>
             <>
-              <Select
-                value={formik.values.company}
+              <Input
                 onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
+                onChange={(e) => handleSearch(e)}
                 name="company"
-                placeholder="Company"
-              >
-                {companyList.map((data) => (
-                  <option key={data.id}>{data.name}</option>
-                ))}
-              </Select>
+                placeholder="Company Name"
+                value={formik.values.company}
+              />
+              {formik.values.company && (
+                <div
+                  style={{
+                    display: `${company.length === 0 || isClicked ? 'none' : 'block'}`,
+                  }}
+                  className={styles.suggestions}
+                >
+                  {company.map((companyData: Company) => (
+                    <p
+                      onClick={(e) => {
+                        formik.setFieldValue('company', companyData.name)
+                        setClicked(true)
+                        setCompany([])
+                      }}
+                      className={styles.item}
+                      key={companyData.id}
+                    >
+                      {companyData.name}
+                    </p>
+                  ))}
+                </div>
+              )}
+
               {formik.touched.company && formik.errors.company ? (
                 <Error errorMessage={formik.errors.company} />
               ) : null}
 
-              <Select
+              <Input
                 value={formik.values.profile}
                 onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
+                onChange={(e) => handleRoleSearch(e)}
                 name="profile"
                 placeholder="Profile"
-              >
-                {roleList.map((data) => (
-                  <option key={data.id}>{data.name}</option>
-                ))}
-              </Select>
+              />
+
+              {formik.values.profile && (
+                <div
+                  style={{ display: `${roles.length === 0 || isClicked ? 'none' : 'block'}` }}
+                  className={styles.suggestions}
+                >
+                  {roles.map((rolesData: any) => (
+                    <p
+                      onClick={(e) => {
+                        formik.setFieldValue('profile', rolesData.name)
+                        setClicked(true)
+                        setRoles([])
+                      }}
+                      className={styles.item}
+                      key={rolesData.id}
+                    >
+                      {rolesData.name}
+                    </p>
+                  ))}
+                </div>
+              )}
+
               {formik.touched.profile && formik.errors.profile ? (
                 <Error errorMessage={formik.errors.profile} />
               ) : null}

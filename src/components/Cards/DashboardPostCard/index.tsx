@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { Post } from '../../../utils/types'
 import styles from './DashboardPostCard.module.scss'
 
@@ -8,7 +9,7 @@ function DashboardPostCard({ title, description, imageUrl, postedOn }: Post) {
         <img className={styles.post_image} src={imageUrl} alt="companyLogo" />
         <div className={styles.content}>
           <h2 className={styles.title}>{title}</h2>
-          <p className={styles.description}>{description}</p>
+          <div className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
         </div>
       </div>
       <div className={styles.separator} />

@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom'
 import { Button, VStack, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
+import axios from 'axios'
 import Animation from '../../assets/animations/95580-time-table.json'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
@@ -11,10 +13,8 @@ import { Error, Input, Select } from '../../components'
 import styles from './AnnouncementForm.module.scss'
 
 const typeData = [
-  { id: 16, value: 'Meeting' },
-  { id: 17, value: 'PPT' },
-  { id: 18, value: 'Intern' },
-  { id: 19, value: 'Placement' },
+  { id: 16, value: 'General' },
+  { id: 17, value: 'Company' },
 ]
 
 export default function AnnouncementForm() {
@@ -23,21 +23,40 @@ export default function AnnouncementForm() {
   const [showAnimation, setShowAnimation] = useState(false)
   const date = new Date()
 
+  const navigate = useNavigate()
+
   const formik = useFormik({
     initialValues: {
       title: '',
       type: '',
+      session:
+        date.getMonth() <= 5
+          ? `${(date.getFullYear() - 1).toString()}-${date.getFullYear().toString().slice(2)}`
+          : `${date.getFullYear().toString()}-${(date.getFullYear() + 1).toString().slice(2)}`,
     },
     validationSchema: Yup.object().shape({
       title: Yup.string().required('Title is required'),
       type: Yup.string().required('Type is required'),
     }),
-    onSubmit: () => {
-      setIsLoading(!isLoading)
-      setTimeout(() => {
-        setIsLoading((prevState) => !prevState)
+    onSubmit: async (values) => {
+      console.log({ ...values, value })
+
+      try {
+        const objToSend = {
+          title: values.title,
+          session: values.session,
+          type: values.type.toLowerCase(),
+          description: value,
+        }
+        const res = await axios.post('https://sakhanithnith.pagekite.me/announcements/', objToSend)
+
         setShowAnimation((state) => !state)
-      }, 3000)
+        setTimeout(() => {
+          navigate('/dashboard')
+        }, 3000)
+      } catch (err) {
+        console.log(err)
+      }
     },
   })
 
@@ -68,7 +87,7 @@ export default function AnnouncementForm() {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     name="session"
-                    value={formik.values.title}
+                    value={formik.values.session}
                     isDisabled
                     placeholder={
                       date.getMonth() > 5

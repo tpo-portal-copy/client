@@ -83,7 +83,7 @@ function App() {
         }
       />
       <Route
-        path="/statistics-details/:company/:type/:sessionyear"
+        path="/statistics-details/:company/:type"
         element={
           <HeaderLayout>
             <StatisticsDetails />
