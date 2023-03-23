@@ -1,0 +1,40 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  padding: 1.5rem 0;
+
+  .btn {
+    width: 100%;
+  }
+
+  .label {
+    font-size: 15px;
+    padding-bottom: 2px;
+    color: #6a6868;
+    font-weight: 600;
+  }
+
+  .course_container {
+    width: 100%;
+    padding-bottom: 2rem;
+
+    .course_title {
+      font-size: 15px;
+      padding-bottom: 2px;
+      font-weight: 700;
+      padding-left: 0;
+    }
+
+    .batch_name {
+      padding-left: 0;
+    }
+  }
+
+  .btn_container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 10px;
+    width: 100%;
+  }
+}

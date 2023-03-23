@@ -4,8 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { JNFFormOneProps } from '../../../../utils/types'
 import styles from './JNFFormOne.module.scss'
-import { Input, Select } from '../../../index'
-import RadioSelect from '../../../Radio'
+import { Input, Select, RadioSelect } from '../../../index'
 
 const sessionData = [
   { id: 0, value: '2020 - 2021' },

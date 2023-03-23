@@ -343,3 +343,34 @@ export interface JNFFormTwoProps {
   onBack: (values: JNFFormTwoData) => void
   data: JNFFormTwoData
 }
+
+export interface JNFFormThreeData {
+  isPPO: string
+  tentativeStartDate: string
+  jobProfile: string
+  stipend: number
+  duration: number
+  ctc: number
+  jobDescription: string
+  cgpi: number
+  eligibleBatches: string
+}
+
+export interface JNFFormThreeProps {
+  onNext: (values: JNFFormThreeData) => void
+  onBack: (values: JNFFormThreeData) => void
+  data: JNFFormThreeData
+}
+
+export interface JNFFormFourData {
+  type: string
+  name: string
+  mobileNumber: string
+  email: number
+}
+
+export interface JNFFormFourProps {
+  onNext: (values: JNFFormFourData) => void
+  onBack: (values: JNFFormFourData) => void
+  data: JNFFormFourData
+}

@@ -2,12 +2,13 @@ import { VStack, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox } from '@chak
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
-import { JNFFormTwoProps } from '../../../../utils/types'
+import { JNFFormThreeProps } from '../../../../utils/types'
 import coursesData from '../../../../utils/Data/coursesData'
-import styles from './JNFFormTwo.module.scss'
-import { Input } from '../../../index'
+import styles from './JNFFormThree.module.scss'
+import { Input, RadioSelect } from '../../../index'
 
-export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
+export default function JNFFormFour({ onNext, onBack, data }: JNFFormThreeProps) {
+  const [ppo, setPPO] = useState('')
   const [checkedBatches, setCheckedBatches] = useState([])
 
   const formik = useFormik({
@@ -15,17 +16,19 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      tentativeStartDate: Yup.date().required('Date is required'),
-      jobProfile: Yup.string().required('job profile is required'),
-      ctc: Yup.number().required(),
-      jobDescription: Yup.string().required('job description is required'),
-      cgpi: Yup.number().required(),
-      eligibleBatches: Yup.string(),
+      type: Yup.string().required(),
+      name: Yup.string().required('name is required'),
+      mobileNumber: Yup.number().required('job profile is required'),
+      email: Yup.string().required(),
     }),
     onSubmit: (values) => {
       onNext(values)
     },
   })
+
+  const handleIsPPOButton = (value: string) => {
+    setPPO(value)
+  }
   return (
     <form
       className={styles.container}
@@ -56,9 +59,33 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
         />
 
         <Input
+          name="stipend"
+          placeholder="Stipend Offered"
+          value={formik.values.stipend || ''}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+
+        <RadioSelect
+          name="isPPO"
+          placeholder="PPO"
+          value={ppo}
+          onChange={handleIsPPOButton}
+          onBlur={formik.handleBlur}
+        />
+
+        <Input
           name="ctc"
           placeholder="CTC Offered"
           value={formik.values.ctc || ''}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+
+        <Input
+          name="duration"
+          placeholder="Duration"
+          value={formik.values.duration || ''}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />

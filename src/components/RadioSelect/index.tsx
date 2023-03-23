@@ -1,5 +1,5 @@
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
-import styles from './Radio.module.scss'
+import styles from './RadioSelect.module.scss'
 import { RadioSelectProps } from '../../utils/types'
 
 export default function RadioSelect({ name, placeholder, onChange, value }: RadioSelectProps) {
