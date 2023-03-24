@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { JNFFormOneProps } from '../../../../utils/types'
 import styles from './JNFFormOne.module.scss'
-import { Input, Select, RadioSelect } from '../../../index'
+import { Input, Select, RadioSelect, Error } from '../../../index'
 
 const sessionData = [
   { id: 0, value: '2020 - 2021' },
@@ -97,10 +97,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.companyName && formik.errors.companyName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.companyName}
-            </Alert>
+            <Error errorMessage={formik.errors.companyName} />
           ) : null}
           <Select
             value={formik.values.session}
@@ -114,10 +111,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             ))}
           </Select>
           {formik.touched.session && formik.errors.session ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.session}
-            </Alert>
+            <Error errorMessage={formik.errors.session} />
           ) : null}
 
           <RadioSelect
@@ -128,10 +122,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.isPlacement && formik.errors.isPlacement ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.isPlacement}
-            </Alert>
+            <Error errorMessage={formik.errors.isPlacement} />
           ) : null}
 
           <RadioSelect
@@ -143,10 +134,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           />
 
           {formik.touched.isIntern && formik.errors.isIntern ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.isIntern}
-            </Alert>
+            <Error errorMessage={formik.errors.isIntern} />
           ) : null}
 
           <Select
@@ -162,10 +150,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           </Select>
 
           {formik.touched.modeOfHiring && formik.errors.modeOfHiring ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.modeOfHiring}
-            </Alert>
+            <Error errorMessage={formik.errors.modeOfHiring} />
           ) : null}
 
           <RadioSelect
@@ -216,10 +201,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.noOfPersonVisiting && formik.errors.noOfPersonVisiting ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.noOfPersonVisiting}
-            </Alert>
+            <Error errorMessage={formik.errors.noOfPersonVisiting} />
           ) : null}
 
           <Input

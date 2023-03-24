@@ -4,9 +4,14 @@ import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/136670-space.json'
 import styles from './JNFForm.module.scss'
-import { JNFFormOne, JNFFormTwo, JNFFormThree } from '../../components/Forms/JNFForms'
+import { JNFFormOne, JNFFormTwo, JNFFormThree, JNFFormFour } from '../../components/Forms/JNFForms'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
-import { JNFFormOneData, JNFFormTwoData, JNFFormThreeData } from '../../utils/types'
+import {
+  JNFFormOneData,
+  JNFFormTwoData,
+  JNFFormThreeData,
+  JNFFormFourData,
+} from '../../utils/types'
 
 export default function JNFForm() {
   const [value, setValue] = useState(0)
@@ -48,6 +53,13 @@ export default function JNFForm() {
     eligibleBatches: '',
   })
 
+  const [jnfFormFourData, setJNFFormFourData] = useState({
+    type: '',
+    name: '',
+    mobileNumber: 0,
+    email: '',
+  })
+
   const [show, setShow] = useState(false)
 
   const handleOneNext = (values: JNFFormOneData) => {
@@ -68,6 +80,12 @@ export default function JNFForm() {
     setJNFFormThreeData(values)
   }
 
+  const handleFourNext = (values: JNFFormFourData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setJNFFormFourData(values)
+  }
+
   const handleTwoBack = (values: JNFFormTwoData) => {
     setStep((prevStep) => prevStep - 1)
     setValue((prevValue) => prevValue - 25)
@@ -80,14 +98,20 @@ export default function JNFForm() {
     setJNFFormThreeData({ ...values })
   }
 
-  //   const handleSubmit = () => {
-  //     setStep((prevStep) => prevStep + 1)
-  //     setValue((prevValue) => prevValue + 25)
-  //     setShow(true)
-  //   }
+  const handleFourBack = (values: JNFFormFourData) => {
+    setStep((prevStep) => prevStep - 1)
+    setValue((prevValue) => prevValue - 25)
+    setJNFFormFourData({ ...values })
+  }
+
+  const handleSubmit = () => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setShow(true)
+  }
 
   const getFormContent = (currStep: number) => {
-    switch (2) {
+    switch (currStep) {
       case 0:
         return <JNFFormOne data={jnfFormOneData} onNext={(values) => handleOneNext(values)} />
       case 1:
@@ -110,13 +134,11 @@ export default function JNFForm() {
       // case 3:
       //   return (
       //     <JNFFormFour
-      //       data={jnfFormThreeData}
-      //       onNext={(values) => handleThreeNext(values)}
-      //       onBack={(values) => handleThreeBack(values)}
+      //       data={jnfFormFourData}
+      //       onSubmit={() => handleSubmit()}}
+      //       onBack={(values) => handleFourBack(values)}
       //     />
       //   )
-      //   case 4:
-      //     return <FormFour onSubmit={() => handleSubmit()} />
       default:
         return null
     }

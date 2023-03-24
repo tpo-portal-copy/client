@@ -365,12 +365,12 @@ export interface JNFFormThreeProps {
 export interface JNFFormFourData {
   type: string
   name: string
-  mobileNumber: string
-  email: number
+  mobileNumber: number
+  email: string
 }
 
 export interface JNFFormFourProps {
-  onNext: (values: JNFFormFourData) => void
+  onSubmit: () => void
   onBack: (values: JNFFormFourData) => void
   data: JNFFormFourData
 }

@@ -20,7 +20,7 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
       ctc: Yup.number().required(),
       jobDescription: Yup.string().required('job description is required'),
       cgpi: Yup.number().required(),
-      eligibleBatches: Yup.string(),
+      eligibleBatches: Yup.string().required('Eligible Batches is required'),
     }),
     onSubmit: (values) => {
       onNext(values)
@@ -114,6 +114,7 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
                             isChecked={checkedBatches.includes(batch.batchName)}
                             onChange={(event) => {
                               event.stopPropagation()
+                              console.log(event)
                               const index = checkedBatches.indexOf(batch.batchName)
                               if (index > -1) {
                                 setCheckedBatches([
