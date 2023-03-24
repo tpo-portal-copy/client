@@ -11,7 +11,7 @@ export const resourcesData = [
   },
   {
     id: 2,
-    label: 'Mechanical',
+    label: 'Mech',
     imgUrl: 'https://picsum.photos/id/371/800/575',
   },
   {
@@ -26,7 +26,7 @@ export const resourcesData = [
   },
   {
     id: 5,
-    label: 'Material Science',
+    label: 'Material',
     imgUrl: 'https://picsum.photos/id/2/800/575',
   },
   {
@@ -41,7 +41,17 @@ export const resourcesData = [
   },
   {
     id: 8,
-    label: 'MSC',
+    label: 'Sciences',
+    imgUrl: 'https://picsum.photos/id/2/800/575',
+  },
+  {
+    id: 9,
+    label: 'MnC',
+    imgUrl: 'https://picsum.photos/id/2/800/575',
+  },
+  {
+    id: 10,
+    label: 'EPh',
     imgUrl: 'https://picsum.photos/id/2/800/575',
   },
 ]

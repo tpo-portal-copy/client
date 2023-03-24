@@ -1,25 +1,22 @@
-import { Button, VStack, Text, Alert, AlertIcon } from '@chakra-ui/react'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import React, { useState } from 'react'
+import { Button, VStack, Text, Alert, AlertIcon, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useState } from 'react'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
+import { useNavigate } from 'react-router-dom'
 import Animation from '../../assets/animations/103081-yoga-2.json'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
-import { Input, Select } from '../../components'
+import { Input, Select, Error } from '../../components'
 import styles from './ExperienceForm.module.scss'
-
-const roleData = [
-  { id: 4, value: 'SDE' },
-  { id: 5, value: 'GET' },
-  { id: 6, value: 'Management Trainee' },
-  { id: 7, value: 'Full Stack Developer' },
-]
+import { companiesAPI, experiencesAPI, rolesAPI } from '../../utils/apis'
+import { Company } from '../../utils/types'
 
 const typeData = [
-  { id: 9, value: 'Intern' },
-  { id: 10, value: 'Full Time' },
+  { id: 9, value: 'Internship' },
+  { id: 10, value: 'Placement' },
 ]
 
 const verdictData = [
@@ -41,38 +38,115 @@ const difficultyData = [
   { id: 18, value: 'Hard' },
 ]
 
+function decodeDifficulty(difficulty: string) {
+  switch (difficulty) {
+    case 'Easy':
+      return 'E'
+    case 'Medium':
+      return 'M'
+    case 'Hard':
+      return 'H'
+    default:
+      return ''
+  }
+}
+
+function decodeAnonymity(verdict: string) {
+  if (verdict === 'Yes') {
+    return true
+  }
+  return false
+}
+
+function decodeSelected(selected: string) {
+  if (selected === 'Selected') {
+    return true
+  }
+  return false
+}
+
 export default function ExperienceForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
+  const [search, setSearch] = useState('')
+  const toast = useToast()
+  const [value, setValue] = useState('')
+  const [company, setCompany] = useState([])
+  const [roles, setRoles] = useState([])
+  const [isClicked, setClicked] = useState(false)
+
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
-      companyName: '',
+      company: '',
       difficulty: '',
-      role: '',
-      type: '',
-      rounds: '',
-      verdict: '',
-      anonymous: '',
+      roles: '',
+      jobtype: '',
+      no_of_rounds: '',
+      selected: '',
+      anonymity: '',
     },
     validationSchema: Yup.object().shape({
-      companyName: Yup.string().required('*Required'),
+      company: Yup.string().required('*Required'),
       difficulty: Yup.string().required('*Required'),
-      role: Yup.string().required('*Required'),
-      type: Yup.string().required('*Required'),
-      rounds: Yup.number().required('*Required').typeError('Should be an integer'),
-      verdict: Yup.string().required('*Required'),
-      anonymous: Yup.string().required('*Required'),
+      roles: Yup.string().required('*Required'),
+      jobtype: Yup.string().required('*Required'),
+      no_of_rounds: Yup.number().required('*Required').typeError('Should be an integer'),
+      selected: Yup.string().required('*Required'),
+      anonymity: Yup.string().required('*Required'),
     }),
-    onSubmit: (e, values) => {
-      setIsLoading(!isLoading)
-      setTimeout(() => {
-        setIsLoading((prevState) => !prevState)
+    onSubmit: async (values) => {
+      try {
+        const objToSent = {
+          ...values,
+          description: value,
+          difficulty: decodeDifficulty(formik.values.difficulty),
+          anonymity: decodeAnonymity(formik.values.anonymity),
+          selected: decodeSelected(formik.values.selected),
+          student: '191008',
+        }
+        const res = await experiencesAPI.post('/', objToSent)
+
         setShowAnimation((state) => !state)
-      }, 3000)
+        setTimeout(() => {
+          navigate('/experiences')
+        }, 2000)
+      } catch (err) {
+        console.log(err)
+      }
     },
   })
-  const [value, setValue] = useState('')
+
+  const handleSearch = async (e: any) => {
+    setClicked(false)
+    formik.setFieldValue('company', e.target.value)
+    const controller = new AbortController()
+    const response = await companiesAPI.get('/', {
+      signal: controller.signal,
+      params: {
+        search: e.target.value,
+      },
+    })
+
+    controller.abort()
+    setCompany(response.data)
+  }
+
+  const handleRoleSearch = async (e: any) => {
+    setClicked(false)
+    formik.setFieldValue('roles', e.target.value)
+    const controller = new AbortController()
+    const response = await rolesAPI.get('/', {
+      signal: controller.signal,
+      params: {
+        search: e.target.value,
+      },
+    })
+
+    controller.abort()
+    setRoles(response.data)
+  }
 
   return (
     <div className={styles.container}>
@@ -99,16 +173,36 @@ export default function ExperienceForm() {
                 <>
                   <Input
                     onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    name="companyName"
+                    onChange={(e) => handleSearch(e)}
+                    name="company"
                     placeholder="Company Name"
-                    value={formik.values.companyName}
+                    value={formik.values.company}
                   />
-                  {formik.touched.companyName && formik.errors.companyName ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.companyName}
-                    </Alert>
+                  {formik.values.company && (
+                    <div
+                      style={{
+                        display: `${company.length === 0 || isClicked ? 'none' : 'block'}`,
+                      }}
+                      className={styles.suggestions}
+                    >
+                      {company.map((companyData: Company) => (
+                        <p
+                          onClick={(e) => {
+                            formik.setFieldValue('company', companyData.name)
+                            setClicked(true)
+                            setCompany([])
+                          }}
+                          className={styles.item}
+                          key={companyData.id}
+                        >
+                          {companyData.name}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
+                  {formik.touched.company && formik.errors.company ? (
+                    <Error errorMessage={formik.errors.company} />
                   ) : null}
 
                   <Select
@@ -118,98 +212,96 @@ export default function ExperienceForm() {
                     name="difficulty"
                     placeholder="Difficulty"
                   >
-                    {difficultyData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {difficultyData.map((diffData) => (
+                      <option key={diffData.id}>{diffData.value}</option>
                     ))}
                   </Select>
                   {formik.touched.difficulty && formik.errors.difficulty ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.difficulty}
-                    </Alert>
+                    <Error errorMessage={formik.errors.difficulty} />
                   ) : null}
 
-                  <Select
-                    value={formik.values.role}
+                  <Input
                     onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    name="role"
+                    onChange={(e) => handleRoleSearch(e)}
+                    name="roles"
                     placeholder="Role"
-                  >
-                    {roleData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
-                    ))}
-                  </Select>
-                  {formik.touched.role && formik.errors.role ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.role}
-                    </Alert>
+                    value={formik.values.roles}
+                  />
+                  {formik.values.roles && (
+                    <div
+                      style={{ display: `${roles.length === 0 || isClicked ? 'none' : 'block'}` }}
+                      className={styles.suggestions}
+                    >
+                      {roles.map((rolesData: any) => (
+                        <p
+                          onClick={(e) => {
+                            formik.setFieldValue('roles', rolesData.name)
+                            setClicked(true)
+                            setRoles([])
+                          }}
+                          className={styles.item}
+                          key={rolesData.id}
+                        >
+                          {rolesData.name}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                  {formik.touched.roles && formik.errors.roles ? (
+                    <Error errorMessage={formik.errors.roles} />
                   ) : null}
 
                   <Select
-                    value={formik.values.type}
+                    value={formik.values.jobtype}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    name="type"
+                    name="jobtype"
                     placeholder="Type"
                   >
-                    {typeData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {typeData.map((typeDatas) => (
+                      <option key={typeDatas.id}>{typeDatas.value}</option>
                     ))}
                   </Select>
-                  {formik.touched.type && formik.errors.type ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.type}
-                    </Alert>
+                  {formik.touched.jobtype && formik.errors.jobtype ? (
+                    <Error errorMessage={formik.errors.jobtype} />
                   ) : null}
                   <Input
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    name="rounds"
+                    name="no_of_rounds"
                     placeholder="Rounds"
-                    value={formik.values.rounds}
+                    value={formik.values.no_of_rounds}
                   />
-                  {formik.touched.rounds && formik.errors.rounds ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.rounds}
-                    </Alert>
+                  {formik.touched.no_of_rounds && formik.errors.no_of_rounds ? (
+                    <Error errorMessage={formik.errors.no_of_rounds} />
                   ) : null}
                   <Select
-                    value={formik.values.verdict}
+                    value={formik.values.selected}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    name="verdict"
+                    name="selected"
                     placeholder="Verdict"
                   >
-                    {verdictData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {verdictData.map((verData) => (
+                      <option key={verData.id}>{verData.value}</option>
                     ))}
                   </Select>
-                  {formik.touched.verdict && formik.errors.verdict ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.verdict}
-                    </Alert>
+                  {formik.touched.selected && formik.errors.selected ? (
+                    <Error errorMessage={formik.errors.selected} />
                   ) : null}
                   <Select
-                    value={formik.values.anonymous}
+                    value={formik.values.anonymity}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    name="anonymous"
+                    name="anonymity"
                     placeholder="Anonymous"
                   >
-                    {anonymousData.map((data) => (
-                      <option key={data.id}>{data.value}</option>
+                    {anonymousData.map((anonyData) => (
+                      <option key={anonyData.id}>{anonyData.value}</option>
                     ))}
                   </Select>
-                  {formik.touched.anonymous && formik.errors.anonymous ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.anonymous}
-                    </Alert>
+                  {formik.touched.anonymity && formik.errors.anonymity ? (
+                    <Error errorMessage={formik.errors.anonymity} />
                   ) : null}
 
                   <ReactQuill
@@ -232,7 +324,7 @@ export default function ExperienceForm() {
                     _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
                     isLoading={isLoading}
                     type="submit"
-                    isDisabled={!formik.isValid}
+                    isDisabled={!formik.isValid || value.length < 50}
                   >
                     Submit Experience
                   </Button>

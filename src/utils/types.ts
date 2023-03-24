@@ -34,45 +34,47 @@ export interface ClusterCardProps {
 }
 
 export interface ResourcesCardProps {
-  id: number
+  id?: number
   label: string
   imgUrl: string
 }
 
+export type NameObject = {
+  name: string
+  logo: string
+}
+
 export interface ExperienceCardProps {
   id: number
-  title: string
-  description: string
+  company: string
+  description_read: string
   imgUrl?: string
-  jobType: string
-  selStatus: string
-  userName: string
+  jobtype: string
+  selected: boolean
+  name?: NameObject
   difficulty: string
-  role: string
-  postedOn: number
+  roles: string
+  created_at: string
+  anonymity: boolean
 }
 
 export type InputProps = {
   name: string
   placeholder: string
-  value: string | number
+  value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
-  type?: 'text' | 'password' | 'date' | 'file'
+  type?: 'text' | 'password' | 'date' | 'file' | 'number'
+  isDisabled?: boolean
 }
 
 export interface SelectProps {
-  name: string
-  placeholder: string
-  value: string | number
-  onChange: (e: ChangeEvent<any>) => void
-  onBlur: (e: ChangeEvent<any>) => void
-  children: any
-}
-
-type OptionsType = {
-  id: number
-  value: string
+  name?: string
+  placeholder?: string
+  value?: string | number | undefined
+  onChange?: (e: ChangeEvent<any>) => void
+  onBlur?: (e: ChangeEvent<any>) => void
+  children?: any
 }
 
 export interface ClusterListProps {
@@ -82,11 +84,16 @@ export interface ClusterListProps {
 export interface CheckListItemProps {
   label: string | number
   isMobile?: boolean
+  isChecked?: boolean
+  onClick: (company: string) => void
 }
 
 export interface ModalProps {
   isOpen: boolean
   title: string
+  list: Array<any>
+  selectedItems: Array<string>
+  onItemClick: (company: string) => void
   onCloseHandler: () => void
 }
 
@@ -113,7 +120,8 @@ export interface Post {
   title: string
   description: string
   imageUrl: string
-  postedOn: string
+  postedOn: string | undefined
+  onClick: () => void
 }
 
 export interface Drive {
@@ -130,18 +138,23 @@ export interface PastExperienceSummary {
   link: string
 }
 
+interface EligibleBatchesObj {
+  branch_name: string
+  course: string
+  id: number
+}
 export interface DrivesCardProps {
   id: number
   companyName: string
   imgUrl: string
   ctcOffered: number
-  startingDate: Date
+  startingDate: string
   modeOfHiring: string
-  aptitudeTest: string
-  ppt: string
+  isAptitudeTest: boolean
+  isPpt: boolean
   jobLocation: string
   type: string
-  eligibleBatches: Array<string>
+  eligibleBatches: Array<EligibleBatchesObj>
   jobProfile: string
   cluster: number
 }
@@ -162,47 +175,49 @@ export interface FaqProps {
 }
 
 export type FormOneData = {
-  firstName: string
-  middleName: string
-  lastName: string
+  first_name: string
+  middle_name: string
+  last_name: string
   dob: string
   state: string
-  city: string
-  pincode: number
-  personalEmail: string
+  city_write: string
+  pincode: number | undefined
+  personal_email: string
   gender: string
   category: string
-  phone: number
+  pnumber: string
   linkedin: string
-  isPwd: boolean
-  disabilityTypes: string
+  pwd: boolean
+  disability_type: string
+  disability_percentage: number | undefined
 }
 
 export interface FormTwoData {
-  tenthYear: number
-  tenthSchool: string
-  tenthBoard: string
-  tenthPercentage: number
-  twelfthYear: number
-  twelfthSchool: string
-  twelfthBoard: string
-  twelfthPercentage: number
-  jeeRank: number
+  class_10_year: number | undefined
+  class_10_school: string
+  class_10_board: string
+  class_10_perc: number | undefined
+  class_12_year: number | undefined
+  class_12_school: string
+  class_12_board: string
+  class_12_perc: number | undefined
+  jee_mains_rank: number | undefined
+  class_12_domicile: string
 }
 
 export interface FormThreeData {
   course: string
-  branch: string
-  cgpi: number
-  activeBacklog: number
-  totalBacklog: number
-  gateScore: number
-  catScore: number
-  batchYear: number
-  passingYear: number
-  currentYear: number
-  gapYear12: number
-  gapYearUG: number
+  branch_write: string
+  cgpi: number | undefined
+  active_backlog: number | undefined
+  total_backlog: number | undefined
+  gate_score: number | undefined
+  cat_score: number | undefined
+  batch_year: number | undefined
+  passing_year: number | undefined
+  current_year: string
+  gap_12_ug: number | undefined
+  gap_ug_pg: number | undefined
 }
 
 export interface FormOneProps {
@@ -223,7 +238,9 @@ export interface FormThreeProps {
 }
 
 export interface FormFourProps {
-  onSubmit: () => void
+  onSubmit: (values: any) => void
+  course: string
+  year: number | string | undefined
 }
 
 export interface ProgressBarProps {
@@ -249,10 +266,13 @@ export interface StatsNumberProps {
 }
 
 type DataType = {
-  id: string
-  label: string
-  value: number
-  color: string
+  max_stipend?: any
+  min_stipend?: any
+  avg_stipend?: any
+  offers: any
+  max_ctc?: any
+  min_ctc?: any
+  avg_ctc?: any
 }
 
 export interface PieChartProps {
@@ -264,6 +284,8 @@ export interface PaginatorProps {
   max: number
   onNext: MouseEventHandler<HTMLButtonElement>
   onPrev: MouseEventHandler<HTMLButtonElement>
+  disablePrev?: boolean
+  disableNext?: boolean
 }
 
 export interface StatisticsDetailsProps {
@@ -298,6 +320,89 @@ export interface StatisticsDetailsBranchesProps {
 export interface StatisticsDetailsOffersRoleWiseProps {
   id: number
   noOfOffers: number
+}
+
+export interface ErrorProps {
+  errorMessage: string
+}
+
+export interface TopCompanies {
+  logo?: string
+  name: string
+  max_stipend: string
+  max_ctc: string
+  offers?: string
+}
+
+export interface StatsInfo {
+  id: string | number
+  value: number
+  label: string
+}
+
+export interface Company {
+  id: number | string
+  name: string
+}
+
+export interface BasicStats {
+  course: string
+  offers: number
+  branch: string
+}
+
+export interface TimeStamps {
+  years: number
+  months: number
+  weeks: number
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+}
+
+interface ClusterDetailProps {
+  cluster_id: number
+  range: string
+}
+export interface ClusterProps {
+  cluster_1_r: ClusterDetailProps
+  cluster_2_r: ClusterDetailProps
+  cluster_3_r: ClusterDetailProps
+}
+export interface PlacementDataProps {
+  id: number
+  student: string
+  cluster: ClusterProps
+  resume: string
+  undertaking: boolean
+}
+export interface MultiSelectDropDownData {
+  value: string
+  label: string
+}
+
+export interface ClusterChosen {
+  id: string | number
+  value: string | number
+}
+export interface MultiSelectDropDownProps {
+  placeholder: string
+  clusterData: Array<MultiSelectDropDownData>
+  choosenClusters: Array<ClusterChosen>
+  onClick: (e: any) => void
+  onDelete: (e: any) => void
+}
+
+export interface CompaniesTableProps {
+  session: string
+  type: string
+  company: string
+}
+
+export interface ModelProps {
+  title: string
+  description: string
 }
 
 export interface JNFFormOneData {

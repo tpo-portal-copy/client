@@ -17,6 +17,8 @@ import {
   ResourceDetails,
   AnnouncementForm,
   StatisticsDetails,
+  ResultAnnouncement,
+  Home,
   JNFForm,
 } from '../pages'
 
@@ -41,6 +43,15 @@ function App() {
       <Route path="/student-details-form" element={<StudentDetailsForm />} />
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
+      <Route path="/result-announcement" element={<ResultAnnouncement />} />
+      <Route
+        path="/home"
+        element={
+          <HeaderLayout>
+            <Home />
+          </HeaderLayout>
+        }
+      />
       <Route path="/jnf-form" element={<JNFForm />} />
       <Route
         path="/dashboard"
@@ -83,7 +94,7 @@ function App() {
         }
       />
       <Route
-        path="/statistics-details"
+        path="/statistics-details/:company/:type"
         element={
           <HeaderLayout>
             <StatisticsDetails />

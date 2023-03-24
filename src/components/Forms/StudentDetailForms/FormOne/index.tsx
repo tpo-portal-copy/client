@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { VStack, Alert, AlertIcon, Button, Checkbox } from '@chakra-ui/react'
+import { Button, Checkbox } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FormOneProps } from '../../../../utils/types'
 import ImgUploader from '../../../ImgUploader'
 import styles from './FormOne.module.scss'
-import { Input, Select } from '../../../index'
+import { Error, Input, Select } from '../../../index'
+import useStates from '../../../../hooks/useStates'
+import { citiesAPI } from '../../../../utils/apis'
 
 const genderData = [
   { id: 1, value: 'Male' },
@@ -34,90 +36,99 @@ const disabilityTypes = [
   },
   {
     id: 6,
-    value: 'Others',
+    value: 'Other',
   },
 ]
 
 export default function FormOne({ onNext, data }: FormOneProps) {
-  const [showDisability, setShowDisability] = useState(false)
+  const [showDisability, setShowDisability] = useState(data.pwd)
+  const { data: statesData, isSuccess: isStateSuccess } = useStates()
+  const [cities, setCities] = useState([])
+
   const formik = useFormik({
     initialValues: {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      firstName: Yup.string().required('*Required'),
-      middleName: Yup.string(),
-      lastName: Yup.string().required('*Required'),
-      dob: Yup.date().required('*Required'),
-      state: Yup.string().required('*Required'),
-      city: Yup.string().required('*Required'),
-      pincode: Yup.number().typeError('Should be integer').required('*Required'),
-      personalEmail: Yup.string().email('Enter a valid email').required('*Required'),
-      gender: Yup.string().required('*Required'),
-      category: Yup.string().required(),
-      phone: Yup.string().matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number'),
-      linkedin: Yup.string().url('Should be a valid link').required('*Required'),
-      isPwd: Yup.boolean(),
-      disabilityTypes: Yup.string(),
+      first_name: Yup.string().required('First Name is required.'),
+      middle_name: Yup.string(),
+      last_name: Yup.string().required('Last Name is required.'),
+      dob: Yup.date().required('DOB Name is required.'),
+      state: Yup.string().required('State is required.'),
+      city_write: Yup.string().required('City is required.'),
+      pincode: Yup.number()
+        .min(100000, 'This is not a valid Pincode.')
+        .max(999999, 'This is not a valid Pincode.')
+        .integer('Pincode must be an integer.')
+        .typeError('Pincode must be an integer.')
+        .required('Pincode is required.'),
+      personal_email: Yup.string()
+        .email('Enter a valid email')
+        .required('Personal Email is required.'),
+      gender: Yup.string().required('Gender is required.'),
+      category: Yup.string().required('Category is required.'),
+      pnumber: Yup.string()
+        .matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number')
+        .required('Phone number is required.'),
+      linkedin: Yup.string()
+        .url('LinkedIn profile link must be a valid link.')
+        .required('LinkedIn profile link is required.'),
+      pwd: Yup.boolean(),
+      disability_type: Yup.string(),
+      disability_percentage: Yup.number().min(0).max(100),
     }),
     onSubmit: (values) => {
       onNext(values)
     },
   })
+
+  const handleStateChange = async (e: any) => {
+    formik.setFieldValue('state', e.target.value)
+    const res = await citiesAPI.get(`${e.target.value}`)
+    setCities(res.data)
+  }
+
   return (
     <div className={styles.container}>
-      <form
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onSubmit={formik.handleSubmit}
-      >
-        <VStack w="100%" maxW="700px">
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <h2 className={styles.title}>Basic Details</h2>
+        <div className={styles.field}>
           <Input
-            name="firstName"
+            name="first_name"
             placeholder="First Name"
-            value={formik.values.firstName}
+            value={formik.values.first_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.firstName && formik.errors.firstName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.firstName}
-            </Alert>
+          {formik.touched.first_name && formik.errors.first_name ? (
+            <Error errorMessage={formik.errors.first_name} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
-            name="middleName"
+            name="middle_name"
             placeholder="Middle Name"
-            value={formik.values.middleName}
+            value={formik.values.middle_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.middleName && formik.errors.middleName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.middleName}
-            </Alert>
+          {formik.touched.middle_name && formik.errors.middle_name ? (
+            <Error errorMessage={formik.errors.middle_name} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
-            name="lastName"
+            name="last_name"
             placeholder="Last Name"
-            value={formik.values.lastName}
+            value={formik.values.last_name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.lastName && formik.errors.lastName ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.lastName}
-            </Alert>
+          {formik.touched.last_name && formik.errors.last_name ? (
+            <Error errorMessage={formik.errors.last_name} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="dob"
             type="date"
@@ -127,67 +138,71 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.dob && formik.errors.dob ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.dob}
-            </Alert>
+            <Error errorMessage={formik.errors.dob} />
           ) : null}
-
-          <Input
-            name="state"
-            placeholder="State"
-            value={formik.values.state}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+        </div>
+        <div className={styles.field}>
+          {isStateSuccess && (
+            <Select
+              value={formik.values.state}
+              onChange={(e) => handleStateChange(e)}
+              onBlur={formik.handleBlur}
+              name="state"
+              placeholder="State"
+            >
+              {statesData.map((datas: string) => (
+                <option key={datas}>{datas}</option>
+              ))}
+            </Select>
+          )}
           {formik.touched.state && formik.errors.state ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.state}
-            </Alert>
+            <Error errorMessage={formik.errors.state} />
           ) : null}
-
-          <Input
-            name="city"
-            placeholder="City"
-            value={formik.values.city}
-            onChange={formik.handleChange}
+        </div>
+        <div className={styles.field}>
+          <Select
+            value={formik.values.city_write}
+            onChange={(e) => formik.setFieldValue('city_write', e.target.value)}
             onBlur={formik.handleBlur}
-          />
-          {formik.touched.city && formik.errors.city ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.city}
-            </Alert>
+            name="city_write"
+            placeholder="City"
+          >
+            {cities.length !== 0 &&
+              cities.map((datas: any) => (
+                <option value={datas.id} key={datas.id}>
+                  {datas.name}
+                </option>
+              ))}
+          </Select>
+          {formik.touched.city_write && formik.errors.city_write ? (
+            <Error errorMessage={formik.errors.city_write} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="pincode"
             placeholder="Pin Code"
-            value={formik.values.pincode || ''}
+            value={formik.values.pincode}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           {formik.touched.pincode && formik.errors.pincode ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.pincode}
-            </Alert>
+            <Error errorMessage={formik.errors.pincode} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
-            name="personalEmail"
+            name="personal_email"
             placeholder="Personal Email"
-            value={formik.values.personalEmail}
+            value={formik.values.personal_email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.personalEmail && formik.errors.personalEmail ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.personalEmail}
-            </Alert>
+          {formik.touched.personal_email && formik.errors.personal_email ? (
+            <Error errorMessage={formik.errors.personal_email} />
           ) : null}
+        </div>
+        <div className={styles.field}>
           <Select
             value={formik.values.gender}
             onChange={formik.handleChange}
@@ -200,12 +215,10 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             ))}
           </Select>
           {formik.touched.gender && formik.errors.gender ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.gender}
-            </Alert>
+            <Error errorMessage={formik.errors.gender} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Select
             value={formik.values.category}
             onChange={formik.handleChange}
@@ -218,62 +231,64 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             ))}
           </Select>
           {formik.touched.category && formik.errors.category ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.category}
-            </Alert>
+            <Error errorMessage={formik.errors.category} />
           ) : null}
+        </div>
 
-          <div className={styles.is_disabled}>
-            <Checkbox
-              name="isPwd"
-              onChange={(e) => {
-                formik.handleChange(e)
-                setShowDisability(!showDisability)
-              }}
-              isChecked={formik.values.isPwd}
-              value={formik.values.isPwd.toString()}
-              onBlur={formik.handleBlur}
-            >
-              Is PwD ?
-            </Checkbox>
-          </div>
+        <div className={styles.is_disabled}>
+          <Checkbox
+            name="pwd"
+            onChange={(e) => {
+              formik.handleChange(e)
+              setShowDisability(!showDisability)
+            }}
+            isChecked={formik.values.pwd}
+            value={formik.values.pwd ? 'true' : 'false'}
+            onBlur={formik.handleBlur}
+          >
+            Is PwD ?
+          </Checkbox>
+        </div>
 
-          {formik.touched.isPwd && formik.errors.isPwd ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.isPwd}
-            </Alert>
-          ) : null}
-
-          {showDisability ? (
+        {showDisability ? (
+          <div className={styles.field}>
             <Select
-              value={formik.values.disabilityTypes}
+              value={formik.values.disability_type}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              name="disabilityTypes"
+              name="disability_type"
               placeholder="Disability Types"
             >
               {disabilityTypes.map((datas) => (
                 <option key={datas.id}>{datas.value}</option>
               ))}
             </Select>
-          ) : null}
+            <Input
+              name="disability_percentage"
+              placeholder="Disability Percentage"
+              value={formik.values.disability_percentage}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.disability_percentage && formik.errors.disability_percentage ? (
+              <Error errorMessage={formik.errors.disability_percentage} />
+            ) : null}
+          </div>
+        ) : null}
 
+        <div className={styles.field}>
           <Input
-            name="phone"
+            name="pnumber"
             placeholder="Phone"
-            value={formik.values.phone || ''}
+            value={formik.values.pnumber}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.phone && formik.errors.phone ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.phone}
-            </Alert>
+          {formik.touched.pnumber && formik.errors.pnumber ? (
+            <Error errorMessage={formik.errors.pnumber} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <Input
             name="linkedin"
             placeholder="Linkedin"
@@ -282,37 +297,35 @@ export default function FormOne({ onNext, data }: FormOneProps) {
             onBlur={formik.handleBlur}
           />
           {formik.touched.linkedin && formik.errors.linkedin ? (
-            <Alert borderRadius={5} status="error">
-              <AlertIcon />
-              {formik.errors.linkedin}
-            </Alert>
+            <Error errorMessage={formik.errors.linkedin} />
           ) : null}
+        </div>
 
+        <div className={styles.file_uploader}>
           <ImgUploader />
+        </div>
 
-          <div className={styles.btn_container}>
-            <Button
-              background="linear-gradient(40deg,#45cafc,#303f9f)"
-              color="white"
-              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-              className={styles.btn}
-              isDisabled
-              type="submit"
-            >
-              Back
-            </Button>
-            <Button
-              background="linear-gradient(40deg,#45cafc,#303f9f)"
-              color="white"
-              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-              className={styles.btn}
-              isDisabled={!formik.isValid}
-              type="submit"
-            >
-              Next
-            </Button>
-          </div>
-        </VStack>
+        <div className={styles.btn_container}>
+          <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+            className={styles.btn}
+            isDisabled
+            type="submit"
+          >
+            Back
+          </Button>
+          <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+            className={styles.btn}
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   )

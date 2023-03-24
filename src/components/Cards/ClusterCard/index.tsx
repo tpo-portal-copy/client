@@ -7,7 +7,7 @@ export default function ClusterCard({ title, range }: ClusterCardProps) {
       <span className={styles.icon}>✅</span>
       <div className={styles.fields_container}>
         <span className={styles.cluster_title}>{title}</span>
-        <span className={styles.cluster_range}>{range}</span>
+        <span className={styles.cluster_range}>&#40;{range}&#41;</span>
       </div>
     </div>
   )

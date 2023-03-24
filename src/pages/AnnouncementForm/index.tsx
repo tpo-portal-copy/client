@@ -1,4 +1,5 @@
-import { Button, VStack, Text, Alert, AlertIcon } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
+import { Button, VStack, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -7,38 +8,57 @@ import ReactQuill from 'react-quill'
 import Animation from '../../assets/animations/95580-time-table.json'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
-import { Input, Select } from '../../components'
+import { Error, Input, Select } from '../../components'
 import styles from './AnnouncementForm.module.scss'
+import { dashboardAPI } from '../../utils/apis'
 
 const typeData = [
-  { id: 16, value: 'Meeting' },
-  { id: 17, value: 'PPT' },
-  { id: 18, value: 'Intern' },
-  { id: 19, value: 'Placement' },
+  { id: 16, value: 'General' },
+  { id: 17, value: 'Company' },
 ]
 
 export default function AnnouncementForm() {
+  const [value, setValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
+  const date = new Date()
+
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
       title: '',
       type: '',
+      session:
+        date.getMonth() <= 5
+          ? `${(date.getFullYear() - 1).toString()}-${date.getFullYear().toString().slice(2)}`
+          : `${date.getFullYear().toString()}-${(date.getFullYear() + 1).toString().slice(2)}`,
     },
     validationSchema: Yup.object().shape({
-      title: Yup.string().required('*Required'),
-      type: Yup.string().required('*Required'),
+      title: Yup.string().required('Title is required'),
+      type: Yup.string().required('Type is required'),
     }),
-    onSubmit: (e, values) => {
-      setIsLoading(!isLoading)
-      setTimeout(() => {
-        setIsLoading((prevState) => !prevState)
+    onSubmit: async (values) => {
+      console.log({ ...values, value })
+
+      try {
+        const objToSend = {
+          title: values.title,
+          session: values.session,
+          type: values.type.toLowerCase(),
+          description: value,
+        }
+        const res = await dashboardAPI.post('/', objToSend)
+
         setShowAnimation((state) => !state)
-      }, 3000)
+        setTimeout(() => {
+          navigate('/dashboard')
+        }, 3000)
+      } catch (err) {
+        console.log(err)
+      }
     },
   })
-  const [value, setValue] = useState('')
 
   return (
     <div className={styles.container}>
@@ -66,15 +86,30 @@ export default function AnnouncementForm() {
                   <Input
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
+                    name="session"
+                    value={formik.values.session}
+                    isDisabled
+                    placeholder={
+                      date.getMonth() > 5
+                        ? `${date.getFullYear().toString()}-${(date.getFullYear() + 1)
+                            .toString()
+                            .slice(2)}`
+                        : `${(date.getFullYear() - 1).toString()}-${date
+                            .getFullYear()
+                            .toString()
+                            .slice(2)}`
+                    }
+                  />
+
+                  <Input
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
                     name="title"
                     placeholder="Title"
                     value={formik.values.title}
                   />
                   {formik.touched.title && formik.errors.title ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.title}
-                    </Alert>
+                    <Error errorMessage={formik.errors.title} />
                   ) : null}
 
                   <Select
@@ -89,10 +124,7 @@ export default function AnnouncementForm() {
                     ))}
                   </Select>
                   {formik.touched.type && formik.errors.type ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.type}
-                    </Alert>
+                    <Error errorMessage={formik.errors.type} />
                   ) : null}
 
                   <ReactQuill

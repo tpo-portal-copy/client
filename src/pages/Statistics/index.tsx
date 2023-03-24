@@ -1,54 +1,51 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-children-prop */
-import {
-  Select,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-  Table,
-  Tbody,
-  Thead,
-  TableContainer,
-  Tr,
-  Th,
-  Td,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from '@chakra-ui/react'
+import { Select, Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-
 import styles from './Statistics.module.scss'
-import {
-  chartData,
-  ctcWiseData,
-  offersWiseData,
-  topCompaniesData,
-  jobType,
-  sessions,
-  statsInfo,
-} from '../../utils/Data/statisticsData'
-import { PieChart, StatsCard, CompanyCard, Paginator } from '../../components'
-
-const ctcTableHeader = [
-  { id: 1, heading: 'Company' },
-  { id: 2, heading: 'Offered CTC' },
-]
-
-const offersTableHeader = [
-  { id: 1, heading: 'Company' },
-  { id: 2, heading: 'Number of offers' },
-]
+import { jobType, sessions, statsCardStyles } from '../../utils/Data/statisticsData'
+import { PieChart, StatsCard, CompanyCard } from '../../components'
+import useStatisticsData from '../../hooks/useStatisticsData'
+import Page500 from '../Page500'
+import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
+import PageLoader from '../../components/PageLoader'
+import CompaniesTable from '../../components/CompaniesTable'
 
 function Statistics() {
-  const [job, setJob] = useState('')
-  const [session, setSession] = useState('')
+  const [job, setJob] = useState('Placement')
+  const [session, setSession] = useState('2022-23')
+
+  const [searchedCompany, setSearchedCompany] = useState('')
+
+  const { data, isLoading, isSuccess, isError } = useStatisticsData(
+    { type: job.toLowerCase(), session },
+    job,
+    session,
+  )
+
+  const debounce = (func: any) => {
+    let timer: any
+    return function (...args: any[]) {
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => {
+        timer = null
+        func.apply(this, args)
+      }, 1000)
+    }
+  }
+
+  const handleSearch = async (e: any) => {
+    const controller = new AbortController()
+    setSearchedCompany(e.target.value)
+
+    controller.abort()
+  }
+  const debouncedFunction = debounce(handleSearch)
 
   const handleJobChange = (e: any) => {
+    if (e.target.value === '') return
     setJob(e.target.value)
   }
 
@@ -56,19 +53,24 @@ function Statistics() {
     setSession(e.target.value)
   }
 
-  const [currPage, setCurrPage] = useState(1)
-  const maxPages = 10
-
-  const handleNext = () => {
-    if (currPage < maxPages) {
-      setCurrPage(currPage + 1)
-    }
+  if (isError) {
+    return <Page500 />
   }
 
-  const handlePrev = () => {
-    if (currPage > 1 && currPage <= maxPages) {
-      setCurrPage(currPage - 1)
-    }
+  if (isLoading || !isSuccess) {
+    return <PageLoader />
+  }
+
+  const { statsInfo, topCompanies, basicStats } = data
+  const arr: any[] = []
+  if (job !== 'PPO') {
+    basicStats.map((obj: BasicStats) => {
+      if (obj.course === 'B.Tech') {
+        const newObj = { ...obj, value: obj.offers, id: obj.branch.toLowerCase() }
+        arr.push(newObj)
+      }
+      return ''
+    })
   }
 
   return (
@@ -109,92 +111,56 @@ function Statistics() {
       </div>
       <div className={styles.master_container}>
         <div className={styles.stats_info_container}>
-          {statsInfo.map((info) => (
+          {statsInfo.map((info: StatsInfo, idx: number) => (
             <StatsCard
-              icon={info.icon}
+              icon={statsCardStyles[idx].icon}
               key={info.id}
               value={info.value}
               label={info.label}
-              bgColor={info.bgColor}
-              color={info.color}
-              iconColor={info.iconColor}
+              bgColor={statsCardStyles[idx].bgColor}
+              color={statsCardStyles[idx].color}
+              iconColor={statsCardStyles[idx].iconColor}
             />
           ))}
         </div>
-        <div className={styles.top_companies_container}>
-          <Text className={styles.top_companies_heading}>Our Top Recruiting Partners</Text>
-          <div className={styles.info_container_wrapper}>
-            <div className={styles.info_container}>
-              {topCompaniesData.map((data) => (
-                <CompanyCard icon={data.icon} key={data.id} label={data.label} value={data.value} />
-              ))}
+        {job === 'PPO' ? null : (
+          <div className={styles.top_companies_container}>
+            <Text className={styles.top_companies_heading}>Our Top Recruiting Partners</Text>
+            <div className={styles.info_container_wrapper}>
+              <div className={styles.info_container}>
+                {topCompanies.map((companiesData: TopCompanies) => (
+                  <CompanyCard
+                    type={job}
+                    link={companiesData.logo || 'https://picsum.photos/100'}
+                    key={companiesData.logo}
+                    label={companiesData.name}
+                    value={
+                      job.toLowerCase() === 'intern'
+                        ? companiesData.max_stipend
+                        : companiesData.max_ctc
+                    }
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className={styles.table_graph_container}>
           <div className={styles.table_container}>
             <InputGroup>
-              <Input style={{ borderColor: '#ccc' }} placeholder="Search For Company" />
+              <Input
+                onChange={debouncedFunction}
+                style={{ borderColor: '#ccc' }}
+                placeholder="Search For Company"
+              />
               <InputRightElement children={<FontAwesomeIcon color="grey" icon={faSearch} />} />
             </InputGroup>
-            <Tabs colorScheme="blackAlpha">
-              <TabList>
-                <Tab>CTC Wise</Tab>
-                <Tab>Offers Wise</Tab>
-              </TabList>
 
-              <TabPanels>
-                <TabPanel>
-                  <TableContainer>
-                    <Table>
-                      <Thead>
-                        <Tr>
-                          {ctcTableHeader.map((header) => (
-                            <Th key={header.id}>{header.heading}</Th>
-                          ))}
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {ctcWiseData.map((data) => (
-                          <Tr key={data.id}>
-                            <Td>{data.company}</Td>
-                            <Td>{data.offeredCtc}</Td>
-                          </Tr>
-                        ))}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </TabPanel>
-                <TabPanel>
-                  <TableContainer>
-                    <Table>
-                      <Thead>
-                        <Tr>
-                          {offersTableHeader.map((header) => (
-                            <Th key={header.id}>{header.heading}</Th>
-                          ))}
-                        </Tr>
-                      </Thead>
-
-                      <Tbody>
-                        {offersWiseData.map((data) => (
-                          <Tr key={data.id}>
-                            <Td>{data.company}</Td>
-                            <Td>{data.offeredCtc}</Td>
-                          </Tr>
-                        ))}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-
-            <Paginator onPrev={handlePrev} onNext={handleNext} curr={currPage} max={maxPages} />
+            <CompaniesTable session={session} type={job.toLowerCase()} company={searchedCompany} />
           </div>
           <div className={styles.graph_container}>
-            <PieChart data={chartData} />
+            {job === 'PPO' ? null : <PieChart data={arr} />}
           </div>
         </div>
       </div>

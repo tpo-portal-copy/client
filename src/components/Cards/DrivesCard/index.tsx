@@ -11,11 +11,11 @@ function DrivesCard({
   ctcOffered,
   startingDate,
   modeOfHiring,
-  ppt,
-  aptitudeTest,
+  isPpt,
+  isAptitudeTest,
   jobLocation,
   type,
-  eligibleBatches,
+  eligibleBatches = [],
   jobProfile,
 }: DrivesCardProps) {
   return (
@@ -29,19 +29,19 @@ function DrivesCard({
               <div className={styles.company_info_1}>
                 <Tag className={styles.tag}>{jobProfile}</Tag>
                 <Tag className={styles.tag}>{ctcOffered} LPA</Tag>
-                <Tag className={styles.tag}>{startingDate.toLocaleDateString()} </Tag>
+                <Tag className={styles.tag}>{startingDate}</Tag>
                 <Tag className={styles.tag}>Mode of Hiring: {modeOfHiring}</Tag>
               </div>
               <div className={styles.company_info_2}>
-                <Tag className={styles.tag}>PPT: {ppt}</Tag>
-                <Tag className={styles.tag}>Aptitude Test: {aptitudeTest}</Tag>
+                {isPpt && <Tag className={styles.tag}>PPT</Tag>}
+                {isAptitudeTest && <Tag className={styles.tag}>Aptitude Test</Tag>}
                 <Tag className={styles.tag}>Job Location: {jobLocation}</Tag>
               </div>
             </div>
           </div>
         </div>
         <div className={styles.link}>
-          <Link to="/experience-form" className={styles.past_exp_btn}>
+          <Link to={`/experiences/?company=${companyName}`} className={styles.past_exp_btn}>
             Past Experience
           </Link>
           <Link to="/dashboard" className={styles.jd_link}>
@@ -54,7 +54,11 @@ function DrivesCard({
       <div className={styles.bottom_content}>
         <div className={styles.eligible_batches_list}>
           {eligibleBatches.map((batch) => {
-            return <Tag key={batch}>{batch}</Tag>
+            return (
+              <Tag key={batch.id}>
+                {batch.course} {batch.branch_name}
+              </Tag>
+            )
           })}
         </div>
         <Tag>{type}</Tag>

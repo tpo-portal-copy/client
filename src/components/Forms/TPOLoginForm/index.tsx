@@ -1,10 +1,7 @@
 import { useState } from 'react'
-import { Link as Links } from 'react-router-dom'
 import {
   Input,
-  Text,
   VStack,
-  Box,
   Button,
   Alert,
   AlertIcon,
@@ -32,9 +29,7 @@ export default function TPOLoginForm() {
         .matches(/^[tpo@nith.ac.in]+$/, 'Please enter TPO official id'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
+    onSubmit: () => {},
   })
 
   const handleIconClick = () => {

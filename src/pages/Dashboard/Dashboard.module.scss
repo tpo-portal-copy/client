@@ -8,7 +8,7 @@
   max-width: var(--max-w);
   margin: auto;
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 525px) {
     font-size: 28px;
     padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
   }
