@@ -19,6 +19,7 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  StudentData,
 } from '../pages'
 
 function App() {
@@ -120,6 +121,15 @@ function App() {
         element={
           <HeaderLayout>
             <Profile />
+          </HeaderLayout>
+        }
+      />
+
+      <Route
+        path="/student-data"
+        element={
+          <HeaderLayout>
+            <StudentData />
           </HeaderLayout>
         }
       />
