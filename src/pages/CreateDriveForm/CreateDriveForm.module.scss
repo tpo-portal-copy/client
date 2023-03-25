@@ -104,6 +104,17 @@
         }
       }
 
+      .seperator {
+        height: 1px;
+        background-color: black;
+        border-radius: 5px;
+        margin-top: 1rem;
+
+        @media screen and (max-width: 525px) {
+          margin-top: 0.5rem;
+        }
+      }
+
       .suggestions {
         max-height: 150px;
         width: 100%;

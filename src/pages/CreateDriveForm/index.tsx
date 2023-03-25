@@ -52,6 +52,7 @@ export default function DrivesForm() {
       startingDate: '',
       jobType: '',
       ctc: 0,
+      cgpi: 0,
       cluster: '',
       course: '',
       branch: '',
@@ -70,6 +71,7 @@ export default function DrivesForm() {
       startingDate: Yup.date().required('Drive Starting Date is required'),
       jobType: Yup.string().required('Job Type is required'),
       ctc: Yup.number().required('CTC is required').moreThan(0, 'CTC must be greater than 0'),
+      cgpi: Yup.number().required('CTC is required').moreThan(0, 'CGPI must be greater than 0'),
       cluster: Yup.string().required('Cluster is required'),
       course: Yup.string().required('Course is required'),
       branch: Yup.string().required('Branch is required'),
@@ -172,22 +174,6 @@ export default function DrivesForm() {
     setEligibleBatches(list)
   }
 
-  const uniqueRoles = jobRoles.filter(
-    (
-      item: { jobProfile: any; jobCtc: any; jobCluster: any; jobEligiblebatches: any },
-      index: any,
-      self: any[],
-    ) =>
-      index ===
-      self.findIndex(
-        (t) =>
-          t.jobProfile === item.jobProfile &&
-          t.jobCtc === item.jobCtc &&
-          t.jobCluster === item.jobCluster &&
-          t.jobEligiblebatches === item.jobEligiblebatches,
-      ),
-  )
-
   const addRoles = () => {
     const obj = {
       jobProfile: formik.values.profile,
@@ -195,7 +181,7 @@ export default function DrivesForm() {
       jobCluster: formik.values.cluster,
       jobEligibleBatches: uniqueList,
     }
-    setJobRoles([...uniqueRoles, obj])
+    setJobRoles([...jobRoles, obj])
     setEligibleBatches([
       {
         branch_id: 0,
@@ -224,7 +210,7 @@ export default function DrivesForm() {
   }
 
   const removeRow = (index: number) => {
-    const list = [...uniqueRoles]
+    const list = [...jobRoles]
     list.splice(index, 1)
     setJobRoles(list)
   }
@@ -366,7 +352,7 @@ export default function DrivesForm() {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     name="jobLocation"
-                    placeholder="Job Locations"
+                    placeholder="Job Locations (Eg:- Mumbai,Delhi)"
                   />
                   {formik.touched.jobLocation && formik.errors.jobLocation ? (
                     <Error errorMessage={formik.errors.jobLocation} />
@@ -398,6 +384,8 @@ export default function DrivesForm() {
                   {formik.touched.jobType && formik.errors.jobType ? (
                     <Error errorMessage={formik.errors.jobType} />
                   ) : null}
+
+                  <div className={styles.seperator} />
 
                   <Input
                     value={formik.values.profile}
@@ -455,6 +443,17 @@ export default function DrivesForm() {
                   </Select>
                   {formik.touched.cluster && formik.errors.cluster ? (
                     <Error errorMessage={formik.errors.cluster} />
+                  ) : null}
+
+                  <Input
+                    value={formik.values.cgpi}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    name="cgpi"
+                    placeholder="Minimun CGPI Required"
+                  />
+                  {formik.touched.cgpi && formik.errors.cgpi ? (
+                    <Error errorMessage={formik.errors.cgpi} />
                   ) : null}
 
                   {isSuccess && (
