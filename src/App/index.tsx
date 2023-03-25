@@ -19,6 +19,7 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  CreateDriveForm,
 } from '../pages'
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
       <Route path="/result-announcement" element={<ResultAnnouncement />} />
+      <Route path="/create-drive" element={<CreateDriveForm />} />
       <Route
         path="/home"
         element={
@@ -123,7 +125,7 @@ function App() {
           </HeaderLayout>
         }
       />
-      <Route path="/" element={<Navigate to="/dashboard" />} />
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   )
