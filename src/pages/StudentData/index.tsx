@@ -12,13 +12,20 @@ import useCourses from '../../hooks/useCourses'
 
 function StudentData() {
   const [page, setPage] = useState(1)
-  const { data, isError, isSuccess, isLoading: studentIsLoading } = useStudentData({ page }, page)
   const { data: courseData, isSuccess: courseIsSuccess } = useCourses()
-  const [isLoading, setIsLoading] = useState(false)
-  const [showAnimation, setShowAnimation] = useState(false)
-  const [course, setCourse] = useState<any>({})
+  const [course, setCourse] = useState({ id: 0, years: 0, name: '' })
   const [branch, setBranch] = useState<any>([])
-  const [branchDetails, setBranchDetails] = useState<any>({})
+  const [branchDetails, setBranchDetails] = useState({ id: 0, name: '' })
+  const [filterCourse, setFilterCourse] = useState('')
+  const [filterBranch, setFilterBranch] = useState('')
+  const [filterCgpi, setFilterCgpi] = useState(0)
+
+  const {
+    data,
+    isError,
+    isSuccess,
+    isLoading: studentIsLoading,
+  } = useStudentData(filterCourse, filterBranch, filterCgpi, page)
 
   const formik = useFormik({
     initialValues: {
@@ -34,23 +41,11 @@ function StudentData() {
       cgpi: Yup.number(),
     }),
     onSubmit: () => {
-      setIsLoading(!isLoading)
-      setTimeout(() => {
-        setIsLoading((prevState) => !prevState)
-        setShowAnimation((state) => !state)
-      }, 3000)
+      setFilterBranch(branchDetails.name)
+      setFilterCgpi(formik.values.cgpi)
+      setFilterCourse(course.name)
     },
   })
-
-  if (isError) {
-    return <Page500 />
-  }
-
-  if (studentIsLoading || !isSuccess) {
-    return <PageLoader />
-  }
-
-  const studentData = data
 
   const handleCourseChange = async (e: any) => {
     const parsedObj = JSON.parse(e.target.value)
@@ -78,6 +73,16 @@ function StudentData() {
         return 'Other'
     }
   }
+
+  if (isError) {
+    return <Page500 />
+  }
+
+  if (studentIsLoading || !isSuccess) {
+    return <PageLoader />
+  }
+
+  const studentData = data
 
   return (
     <>

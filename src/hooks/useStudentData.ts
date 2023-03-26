@@ -1,13 +1,20 @@
 import { useQuery } from '@tanstack/react-query'
 import { studentAPI } from '../utils/apis'
 
-const getStudentData = async (params: any) => {
-  const response = await studentAPI.get('/', {
-    params,
-  })
+const getStudentData = async (course?: string, branch?: string, cgpi?: number, page?: number) => {
+  const response = await studentAPI.get(
+    `/?course=${course}&branch=${branch}&cgpi=${cgpi}&page=${page}`,
+  )
   return response.data
 }
 
-export default function useStudentData(params?: any, page?: number) {
-  return useQuery([`students${page}`], () => getStudentData(params))
+export default function useStudentData(
+  course?: string,
+  branch?: string,
+  cgpi?: number,
+  page?: number,
+) {
+  return useQuery([`students${course}${branch}${cgpi}${page}`], () =>
+    getStudentData(course, branch, cgpi, page),
+  )
 }
