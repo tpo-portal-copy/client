@@ -19,6 +19,7 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  TprDrives,
 } from '../pages'
 
 function App() {
@@ -64,6 +65,14 @@ function App() {
         element={
           <HeaderLayout>
             <Drives />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/drives/tpr"
+        element={
+          <HeaderLayout>
+            <TprDrives />
           </HeaderLayout>
         }
       />
