@@ -11,6 +11,7 @@ import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/St
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 import { data } from '../../utils/Data/coursesAllowedData'
+import { getDataFromLocalStorage } from '../../utils/functions'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
@@ -213,6 +214,12 @@ export default function StudentDetailsForm() {
           })
         }
       }
+
+      const res = await axios.post('https://sakhanithnith.pagekite.me/api/login/refresh/', {
+        refresh: getDataFromLocalStorage('refresh_token'),
+      })
+
+      console.log(res)
 
       setStep((prevStep) => prevStep + 1)
       setValue((prevValue) => prevValue + 25)

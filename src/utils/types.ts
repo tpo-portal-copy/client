@@ -277,6 +277,7 @@ type DataType = {
 
 export interface PieChartProps {
   data: Array<DataType>
+  fill: any
 }
 
 export interface PaginatorProps {

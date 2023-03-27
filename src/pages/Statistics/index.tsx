@@ -63,12 +63,17 @@ function Statistics() {
 
   const { statsInfo, topCompanies, basicStats } = data
   const arr: any[] = []
+  const fill: any[] = []
   if (job !== 'PPO') {
     basicStats.map((obj: BasicStats) => {
-      if (obj.course === 'B.Tech') {
-        const newObj = { ...obj, value: obj.offers, id: obj.branch.toLowerCase() }
+      const newObj = { ...obj, value: obj.offers, id: obj.branch.toLowerCase() }
+
+      const fillObj = { match: { id: obj.branch.toLowerCase() }, id: 'dots' }
+      if (obj.offers !== 0) {
+        fill.push(fillObj)
         arr.push(newObj)
       }
+
       return ''
     })
   }
@@ -160,7 +165,7 @@ function Statistics() {
             <CompaniesTable session={session} type={job.toLowerCase()} company={searchedCompany} />
           </div>
           <div className={styles.graph_container}>
-            {job === 'PPO' ? null : <PieChart data={arr} />}
+            {job === 'PPO' ? null : <PieChart data={arr} fill={fill} />}
           </div>
         </div>
       </div>

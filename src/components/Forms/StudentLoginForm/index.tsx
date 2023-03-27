@@ -10,11 +10,13 @@ import {
   AlertIcon,
   InputGroup,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import jwt_decode from 'jwt-decode'
 import styles from './StudentLoginForm.module.scss'
 import { setDataToLocalStorage } from '../../../utils/functions'
 import { studentLoginAPI } from '../../../utils/apis'
@@ -22,6 +24,7 @@ import { studentLoginAPI } from '../../../utils/apis'
 export default function StudentLoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+  const toast = useToast()
 
   const formik = useFormik({
     initialValues: {
@@ -42,9 +45,21 @@ export default function StudentLoginForm() {
         setDataToLocalStorage('access_token', access)
         setDataToLocalStorage('refresh_token', refresh)
 
-        navigate('/dashboard')
-      } catch (err) {
+        const accessDecoded: any = jwt_decode(access)
+        if ('allowed_for' in accessDecoded) {
+          navigate('/dashboard')
+        } else {
+          navigate('/student-details-form')
+        }
+      } catch (err: any) {
         console.log(err)
+        toast({
+          title: 'Login Failed....',
+          description: err.response.data.detail,
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        })
       }
     },
   })

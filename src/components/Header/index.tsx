@@ -10,10 +10,12 @@ import {
   PopoverTrigger,
   useDisclosure,
 } from '@chakra-ui/react'
+import jwt_decode from 'jwt-decode'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
 import styles from './Header.module.scss'
+import { getDataFromLocalStorage, removeDataFromLocalStorage } from '../../utils/functions'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
@@ -30,6 +32,19 @@ function Header() {
 
   useOnOutsideClick(sidebarRef, closeSidebar)
   const { onOpen, onClose, isOpen } = useDisclosure()
+
+  const handleLogout = () => {
+    removeDataFromLocalStorage('access_token')
+    removeDataFromLocalStorage('refresh_token')
+  }
+
+  let accessDecoded: any
+  if ('access_token' in localStorage) {
+    const accessToken = getDataFromLocalStorage('access_token')
+    if (accessToken) {
+      accessDecoded = jwt_decode(accessToken)
+    }
+  }
 
   return (
     <header className={styles.header}>
@@ -50,6 +65,9 @@ function Header() {
         </div>
         <nav className={styles.nav_items}>
           {navItems.slice(0, -1).map((navItem) => {
+            if (accessDecoded.allowed_for === 'NA' && navItem.name === 'Drives') {
+              return ''
+            }
             return (
               <div key={navItem.id} className={styles.nav_item}>
                 <NavLink
@@ -67,7 +85,7 @@ function Header() {
         <Popover isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
           <PopoverTrigger>
             <div className={styles.profile_img}>
-              <span>JK</span>
+              <img src={accessDecoded?.img_url} alt="profile_img" />
             </div>
           </PopoverTrigger>
           <PopoverContent
@@ -112,7 +130,7 @@ function Header() {
               <Link to="/signup" className={styles.option} onClick={onClose}>
                 Signup
               </Link>
-              <Link to="/login" className={styles.option} onClick={onClose}>
+              <Link to="/login" className={styles.option} onClick={handleLogout}>
                 Logout
               </Link>
             </PopoverBody>

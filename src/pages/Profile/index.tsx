@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Lottie from 'lottie-react'
+import jwt_decode from 'jwt-decode'
 import styles from './Profile.module.scss'
 import { FieldInfo } from '../../components'
-
 import { studentStatData } from '../../utils/Data/profileData'
 import MAvatar from '../../assets/animations/131392-avatar.json'
 import FAvatar from '../../assets/animations/131393-avatar-female.json'
@@ -12,10 +12,18 @@ import PageLoader from '../../components/PageLoader'
 import Page500 from '../Page500'
 import { clustersAPI } from '../../utils/apis'
 import { PlacementDataProps } from '../../utils/types'
+import { getDataFromLocalStorage } from '../../utils/functions'
 
 function Profile() {
-  const rn = '191008'
-  const { data, isSuccess, isError, isLoading } = useStudentDetails(rn)
+  let accessDecoded: any
+  if ('access_token' in localStorage) {
+    const accessToken = getDataFromLocalStorage('access_token')
+    if (accessToken) {
+      accessDecoded = jwt_decode(accessToken)
+    }
+  }
+
+  const { data, isSuccess, isError, isLoading } = useStudentDetails(accessDecoded.roll)
   const [placementData, setPlacementData] = useState<PlacementDataProps>({
     id: 0,
     student: '',
@@ -124,6 +132,7 @@ function Profile() {
     cluster2 = cluster02
     cluster3 = cluster03
   }
+
   return (
     <>
       <h1 className={styles.page_name}>Profile</h1>
@@ -132,12 +141,16 @@ function Profile() {
           <div className={styles.profile_header}>
             <div className={styles.profile_content}>
               <div style={{ background: getRandomCoverGradient() }} className={styles.cover_img} />
-              <Lottie
-                className={styles.profile_img}
-                width="150px"
-                height="150px"
-                animationData={MAvatar}
-              />
+              {'img_url' in data ? (
+                <img src={data.img_url} className={styles.profile_img} alt="user profile" />
+              ) : (
+                <Lottie
+                  className={styles.profile_img}
+                  width="150px"
+                  height="150px"
+                  animationData={data.gender === 'm' ? MAvatar : FAvatar}
+                />
+              )}
             </div>
             <div className={styles.student_name_container}>
               <span className={styles.name}>
@@ -164,7 +177,7 @@ function Profile() {
               <FieldInfo label="College Email" value={data.college_email} />
               <FieldInfo label="Gender" value={displayGender(data.gender)} />
               <FieldInfo label="Mobile No" value={data.pnumber} />
-              <FieldInfo label="Course" value={data.course} />
+              <FieldInfo label="Course" value={data.course_name} />
               <FieldInfo label="Date of Birth" value={data.dob} />
               <FieldInfo label="Category" value={data.category} />
               <FieldInfo label="Active Backlog(s)" value={data.active_backlog} />

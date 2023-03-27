@@ -6,8 +6,6 @@ import {
   VStack,
   Box,
   Button,
-  Alert,
-  AlertIcon,
   InputGroup,
   InputRightElement,
   useToast,
@@ -17,10 +15,12 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from './SignupForm.module.scss'
-import { studentRegisterAPI } from '../../../utils/apis'
+import { studentOtpAPI, studentRegisterAPI } from '../../../utils/apis'
+import Error from '../../Error'
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
+  const [showOtp, setShowOtp] = useState(false)
   const navigate = useNavigate()
   const toast = useToast()
 
@@ -30,6 +30,7 @@ export default function SignupForm() {
       email: '',
       password: '',
       password2: '',
+      otp: '',
     },
     validationSchema: Yup.object().shape({
       username: Yup.string()
@@ -51,17 +52,18 @@ export default function SignupForm() {
           'Password needs to have uppercase,lowercase,digit and a special character',
         ),
       password2: Yup.string()
-        .required()
+        .required('Confirm Password is required')
         .oneOf([Yup.ref('password')], 'Password must match'),
+      otp: Yup.number().max(6, 'OTP length exceeded'),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async () => {
       try {
-        const res = await studentRegisterAPI.post('/', { ...values })
-        navigate('/login')
+        const res = await studentRegisterAPI.post('/', { ...formik.values })
+        setShowOtp(true)
       } catch (err: any) {
         toast({
           title: 'Sign Up Failed',
-          description: err.response.data.msg,
+          description: err.response.data.username,
           status: 'error',
           duration: 4000,
           isClosable: true,
@@ -73,100 +75,184 @@ export default function SignupForm() {
   const handleIconClick = () => {
     setShowPassword(!showPassword)
   }
+  const [isLoading, setIsLoading] = useState(false)
+  const [isResending, setIsResending] = useState(false)
+
+  const handleRequestOTP = async () => {
+    try {
+      setIsLoading(true)
+      const res = await studentOtpAPI.post('/verify/', {
+        username: formik.values.username,
+        otp: formik.values.otp,
+      })
+
+      setIsLoading(false)
+      toast({
+        title: 'User Registered Successfully....',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      })
+      navigate('/login')
+    } catch (err) {
+      setIsLoading(false)
+    }
+  }
+
+  const handleResendOtp = async () => {
+    try {
+      setIsResending(true)
+      const res = await studentOtpAPI.post('/resend/', {
+        username: formik.values.username,
+      })
+      setIsResending(false)
+      toast({
+        title: 'OTP Resend Successfully....',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      })
+    } catch (err: any) {
+      console.log(err)
+      toast({
+        title: 'Resend OTP Failed....',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+      })
+      setIsResending(false)
+    }
+  }
 
   return (
     <form className={styles.form_container} onSubmit={formik.handleSubmit}>
       <VStack spacing={3}>
-        <Input
-          name="username"
-          placeholder="Roll No."
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.username}
-        />
-        {formik.touched.username && formik.errors.username ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.username}
-          </Alert>
-        ) : null}
-
-        <Input
-          name="email"
-          placeholder="Email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.email}
-          </Alert>
-        ) : null}
-
-        <InputGroup>
-          <Input
-            name="password"
-            placeholder="Password"
-            type={showPassword ? 'text' : 'password'}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          <InputRightElement>
-            <Button onClick={handleIconClick}>
-              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+        {showOtp ? (
+          <>
+            <Text style={{ fontSize: '1.25rem' }}>
+              Please enter the One-Time Password to verify your account
+            </Text>
+            <Text paddingBottom={4}>
+              A One-Time Password has been sent to {formik.values.email}
+            </Text>
+            <Input
+              placeholder="Enter OTP"
+              name="otp"
+              value={formik.values.otp}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {isResending ? (
+              <p className={styles.resending}>Resending OTP....</p>
+            ) : (
+              <div className={styles.resend_container}>
+                <button type="button" onClick={handleResendOtp} className={styles.resend_button}>
+                  Resend OTP
+                </button>
+              </div>
+            )}
+            <Box height={2} />
+            <Button
+              background="linear-gradient(40deg,#45cafc,#303f9f)"
+              color="white"
+              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+              className={styles.btn}
+              width="100%"
+              isLoading={isLoading}
+              loadingText="Getting You On Board"
+              isDisabled={isLoading}
+              type="submit"
+              onClick={handleRequestOTP}
+            >
+              Register
             </Button>
-          </InputRightElement>
-        </InputGroup>
-        {formik.touched.password && formik.errors.password ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.password}
-          </Alert>
-        ) : null}
+          </>
+        ) : (
+          <>
+            <div style={{ width: '100%' }}>
+              <Input
+                name="username"
+                placeholder="Roll No."
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+              />
+              {formik.touched.username && formik.errors.username ? (
+                <Error errorMessage={formik.errors.username} />
+              ) : null}
+            </div>
+            <div style={{ width: '100%' }}>
+              <Input
+                name="email"
+                placeholder="Email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <Error errorMessage={formik.errors.email} />
+              ) : null}
+            </div>
+            <div style={{ width: '100%' }}>
+              <InputGroup>
+                <Input
+                  name="password"
+                  placeholder="Password"
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <InputRightElement>
+                  <Button onClick={handleIconClick}>
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              {formik.touched.password && formik.errors.password ? (
+                <Error errorMessage={formik.errors.password} />
+              ) : null}
+            </div>
+            <div style={{ width: '100%' }}>
+              <InputGroup>
+                <Input
+                  name="password2"
+                  placeholder="Confirm Password"
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <InputRightElement>
+                  <Button onClick={handleIconClick}>
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              {formik.touched.password2 && formik.errors.password2 ? (
+                <Error errorMessage={formik.errors.password2} />
+              ) : null}
+            </div>
 
-        <InputGroup>
-          <Input
-            name="password2"
-            placeholder="Confirm Password"
-            type={showPassword ? 'text' : 'password'}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          <InputRightElement>
-            <Button onClick={handleIconClick}>
-              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            <Box className={styles.link_container}>
+              <Text>Already Registered ?</Text>
+              <Links className={styles.link} to="/login">
+                Login Here
+              </Links>
+            </Box>
+
+            <Button
+              background="linear-gradient(40deg,#45cafc,#303f9f)"
+              color="white"
+              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+              className={styles.btn}
+              width="100%"
+              isDisabled={!formik.isValid || formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+              type="submit"
+            >
+              Request OTP
             </Button>
-          </InputRightElement>
-        </InputGroup>
-        {formik.touched.password2 && formik.errors.password2 ? (
-          <Alert borderRadius={5} status="error">
-            <AlertIcon />
-            {formik.errors.password2}
-          </Alert>
-        ) : null}
-
-        <Box className={styles.link_container}>
-          <Text>Already Registered ?</Text>
-          <Links className={styles.link} to="/login">
-            Login Here
-          </Links>
-        </Box>
-
-        <Button
-          background="linear-gradient(40deg,#45cafc,#303f9f)"
-          color="white"
-          _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-          className={styles.btn}
-          width="100%"
-          isLoading={formik.isSubmitting}
-          loadingText="Getting You On Board"
-          isDisabled={!formik.isValid || formik.isSubmitting}
-          type="submit"
-        >
-          Register
-        </Button>
+          </>
+        )}
       </VStack>
     </form>
   )

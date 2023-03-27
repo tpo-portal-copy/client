@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-syntax */
 
-import { local } from 'd3'
 import { TimeStamps } from './types'
 
 // sets data to local storage
@@ -18,6 +17,7 @@ export const removeDataFromLocalStorage = (key: string) => {
   localStorage.removeItem(key)
 }
 
+// clears data from local storage
 export const clearDataFromLocalStorage = () => {
   localStorage.clear()
 }

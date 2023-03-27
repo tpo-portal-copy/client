@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { HeaderLayout } from '../components'
+
 import {
   Dashboard,
   Profile,
@@ -20,6 +21,7 @@ import {
   ResultAnnouncement,
   Home,
 } from '../pages'
+import Protected from '../utils/Protected'
 
 function App() {
   const { pathname } = useLocation()
@@ -39,91 +41,139 @@ function App() {
     <Routes>
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/student-details-form" element={<StudentDetailsForm />} />
-      <Route path="/experience-form" element={<ExperienceForm />} />
-      <Route path="/announcement-form" element={<AnnouncementForm />} />
-      <Route path="/result-announcement" element={<ResultAnnouncement />} />
+      <Route
+        path="/student-details-form"
+        element={
+          <Protected>
+            <StudentDetailsForm />
+          </Protected>
+        }
+      />
+      <Route
+        path="/experience-form"
+        element={
+          <Protected>
+            <ExperienceForm />
+          </Protected>
+        }
+      />
+      <Route
+        path="/announcement-form"
+        element={
+          <Protected>
+            <AnnouncementForm />
+          </Protected>
+        }
+      />
+      <Route
+        path="/result-announcement"
+        element={
+          <Protected>
+            <ResultAnnouncement />
+          </Protected>
+        }
+      />
       <Route
         path="/home"
         element={
-          <HeaderLayout>
-            <Home />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Home />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/dashboard"
         element={
-          <HeaderLayout>
-            <Dashboard />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Dashboard />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/drives"
         element={
-          <HeaderLayout>
-            <Drives />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Drives />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/experiences"
         element={
-          <HeaderLayout>
-            <Experiences />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Experiences />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/experiences-details/:id"
         element={
-          <HeaderLayout>
-            <ExperienceDetails />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <ExperienceDetails />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/statistics"
         element={
-          <HeaderLayout>
-            <Statistics />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Statistics />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/statistics-details/:company/:type/:sessionyear"
         element={
-          <HeaderLayout>
-            <StatisticsDetails />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <StatisticsDetails />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/resources"
         element={
-          <HeaderLayout>
-            <Resources />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Resources />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/resources-details/:branchName"
         element={
-          <HeaderLayout>
-            <ResourceDetails />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <ResourceDetails />
+            </HeaderLayout>
+          </Protected>
         }
       />
       <Route
         path="/profile"
         element={
-          <HeaderLayout>
-            <Profile />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <Profile />
+            </HeaderLayout>
+          </Protected>
         }
       />
-      <Route path="/" element={<Navigate to="/dashboard" />} />
+      {/* <Route path="/" element={<Navigate to="/login" />} /> */}
       <Route path="*" element={<Page404 />} />
     </Routes>
   )
