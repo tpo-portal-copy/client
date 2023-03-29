@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { HeaderLayout } from '../components'
 
 import {
@@ -179,7 +179,7 @@ function App() {
           </Protected>
         }
       />
-      {/* <Route path="/" element={<Navigate to="/login" />} /> */}
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   )
