@@ -45,8 +45,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       passing_year: Yup.number()
         .integer('Passing year must be an integer.')
         .typeError('Passing year must be an integer.')
-        .min(2024, 'Minimum passing year required is 2024.')
-        .required('Passing is required.'),
+        .required('Passing year is required.'),
       current_year: Yup.string()
         .required('Current Year is required.')
         .min(1, 'Current Year is required.'),

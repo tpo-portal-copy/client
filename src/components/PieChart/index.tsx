@@ -46,7 +46,7 @@ function ToolTip(props: {
   )
 }
 
-export default function PieChart({ data }: PieChartProps) {
+export default function PieChart({ data, fill }: PieChartProps) {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <ResponsivePie
@@ -91,38 +91,7 @@ export default function PieChart({ data }: PieChartProps) {
             spacing: 10,
           },
         ]}
-        fill={[
-          {
-            match: {
-              id: 'cse',
-            },
-            id: 'dots',
-          },
-          {
-            match: {
-              id: 'ee',
-            },
-            id: 'dots',
-          },
-          {
-            match: {
-              id: 'mech',
-            },
-            id: 'dots',
-          },
-          {
-            match: {
-              id: 'ece',
-            },
-            id: 'lines',
-          },
-          {
-            match: {
-              id: 'ce',
-            },
-            id: 'lines',
-          },
-        ]}
+        fill={fill}
       />
     </div>
   )

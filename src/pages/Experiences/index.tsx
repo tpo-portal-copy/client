@@ -16,6 +16,7 @@ import styles from './Experiences.module.scss'
 import useExperiencesPosts from '../../hooks/useExperiencesPosts'
 import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
+import { getDataFromLocalStorage } from '../../utils/functions'
 
 function Experiences() {
   const [openFilters, setOpenFilters] = useState(false)
@@ -66,9 +67,11 @@ function Experiences() {
     <>
       <div className={styles.title_container}>
         <h1 className={styles.page_name}>Interview Experiences</h1>
-        <Link to="/experience-form" className={styles.post_exp_btn}>
-          Post Your Experience
-        </Link>
+        {getDataFromLocalStorage('eligible') !== 'NA' && (
+          <Link to="/experience-form" className={styles.post_exp_btn}>
+            Post Your Experience
+          </Link>
+        )}
       </div>
       <div className={styles.content}>
         <div className={styles.posts_grand}>

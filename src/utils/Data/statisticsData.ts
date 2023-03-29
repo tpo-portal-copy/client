@@ -103,9 +103,9 @@ export const offersWiseData = [
 ]
 
 export const jobType = [
-  { id: 1, value: 'Intern' },
-  { id: 2, value: 'Placement' },
-  { id: 3, value: 'PPO' },
+  { id: 1, value: 'intern', label: 'Intern' },
+  { id: 2, value: 'placement', label: 'Placement' },
+  { id: 3, value: 'ppo', label: 'PPO' },
 ]
 
 export const sessions = [

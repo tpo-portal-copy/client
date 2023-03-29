@@ -18,6 +18,7 @@ import {
   EXPERIENCES_API,
   STUDENT_LOGIN_API,
   STUDENT_REGISTER_API,
+  STUDENT_OTP_API,
 } from './constants'
 
 export const studentAPI = axios.create({
@@ -94,4 +95,8 @@ export const studentLoginAPI = axios.create({
 
 export const studentRegisterAPI = axios.create({
   baseURL: STUDENT_REGISTER_API,
+})
+
+export const studentOtpAPI = axios.create({
+  baseURL: STUDENT_OTP_API,
 })
