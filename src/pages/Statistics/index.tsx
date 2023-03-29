@@ -167,7 +167,7 @@ function Statistics() {
               <InputRightElement children={<FontAwesomeIcon color="grey" icon={faSearch} />} />
             </InputGroup>
 
-            <CompaniesTable session={session} type={job.toLowerCase()} company={searchedCompany} />
+            <CompaniesTable session={session} type={job?.toLowerCase()} company={searchedCompany} />
           </div>
           <div className={styles.graph_container}>
             {job === 'PPO' ? null : <PieChart data={arr} fill={fill} />}

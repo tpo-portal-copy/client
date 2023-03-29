@@ -24,7 +24,7 @@ export default function CompanyCard({ link, label, value, type }: CompanyCardPro
       <div className={styles.fields_container}>
         <Text className={styles.txt1}>{label}</Text>
         <Text className={styles.txt2}>
-          {type.toLowerCase() === 'intern' ? 'Stipend Offered' : 'CTC Offered'}:{value}
+          {type?.toLowerCase() === 'intern' ? 'Stipend Offered' : 'CTC Offered'}:{value}
         </Text>
       </div>
     </div>
