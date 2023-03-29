@@ -141,16 +141,24 @@ export default function StudentDetailsForm() {
 
       const rollNo = accessDecoded.roll
 
-      await studentAPI.post('/', {
-        ...formOneData,
-        ...formTwoData,
-        ...values,
-        roll: rollNo,
-        gender: extractGender(formOneData.gender),
-        disability_type: extractDisabilityType(formOneData.disability_type),
-        course: parsedObj.id,
-        current_year: parseInt(values.current_year, 10),
-      })
+      await studentAPI.post(
+        '/',
+        {
+          ...formOneData,
+          ...formTwoData,
+          ...values,
+          roll: rollNo,
+          gender: extractGender(formOneData.gender),
+          disability_type: extractDisabilityType(formOneData.disability_type),
+          course: parsedObj.id,
+          current_year: parseInt(values.current_year, 10),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+          },
+        },
+      )
     } catch (err) {
       console.log(err)
     }
@@ -220,18 +228,42 @@ export default function StudentDetailsForm() {
 
     try {
       if (data[idx].type_allowed === 'intern') {
-        await studentAPI.post('/detailintern/', {
-          ...internObj,
-        })
+        await studentAPI.post(
+          '/detailintern/',
+          {
+            ...internObj,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+            },
+          },
+        )
       } else if (data[idx].type_allowed === 'placement') {
         if (values.interested === 'yes') {
-          await clustersAPI.post('/', {
-            ...placementObj,
-          })
+          await clustersAPI.post(
+            '/',
+            {
+              ...placementObj,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+              },
+            },
+          )
         } else {
-          await studentAPI.post('/detailnotsitting/', {
-            ...notSittingObj,
-          })
+          await studentAPI.post(
+            '/detailnotsitting/',
+            {
+              ...notSittingObj,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+              },
+            },
+          )
         }
       }
 

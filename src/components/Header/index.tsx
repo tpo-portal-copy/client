@@ -84,6 +84,7 @@ function Header() {
             if (eligibility === 'NA' && navItem.name === 'Drives') {
               return ''
             }
+
             return (
               <div key={navItem.id} className={styles.nav_item}>
                 <NavLink
