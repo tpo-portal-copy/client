@@ -121,7 +121,7 @@ export default function StudentDetailsForm() {
     if (values.gap_ug_pg === undefined) {
       delete values.gap_ug_pg
     }
-    setValue((prevValue) => prevValue + 25)
+
     setFormThreeData(values)
 
     try {
@@ -159,6 +159,7 @@ export default function StudentDetailsForm() {
         },
       )
 
+      setValue((prevValue) => prevValue + 25)
       setStep((prevStep) => prevStep + 1)
     } catch (err) {
       console.log(err)
