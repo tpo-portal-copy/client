@@ -11,11 +11,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
 import styles from './Header.module.scss'
-import { getDataFromLocalStorage, removeDataFromLocalStorage } from '../../utils/functions'
+import {
+  clearDataFromLocalStorage,
+  getDataFromLocalStorage,
+  removeDataFromLocalStorage,
+} from '../../utils/functions'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
@@ -33,17 +38,28 @@ function Header() {
   useOnOutsideClick(sidebarRef, closeSidebar)
   const { onOpen, onClose, isOpen } = useDisclosure()
 
-  const handleLogout = () => {
-    removeDataFromLocalStorage('access_token')
-    removeDataFromLocalStorage('refresh_token')
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        'https://sakhanithnith.pagekite.me/api/logout/',
+        {
+          refresh_token: getDataFromLocalStorage('refresh_token'),
+        },
+        { headers: { Authorization: `Bearer ${getDataFromLocalStorage('access_token')}` } },
+      )
+
+      clearDataFromLocalStorage()
+    } catch (err) {
+      console.log(err)
+    }
   }
 
+  const eligibility = getDataFromLocalStorage('eligible')
+
   let accessDecoded: any
-  if ('access_token' in localStorage) {
-    const accessToken = getDataFromLocalStorage('access_token')
-    if (accessToken) {
-      accessDecoded = jwt_decode(accessToken)
-    }
+  const accessToken = getDataFromLocalStorage('access_token')
+  if (accessToken) {
+    accessDecoded = jwt_decode(accessToken)
   }
 
   return (
@@ -65,7 +81,7 @@ function Header() {
         </div>
         <nav className={styles.nav_items}>
           {navItems.slice(0, -1).map((navItem) => {
-            if (accessDecoded.allowed_for === 'NA' && navItem.name === 'Drives') {
+            if (eligibility === 'NA' && navItem.name === 'Drives') {
               return ''
             }
             return (

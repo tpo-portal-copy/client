@@ -16,9 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 import styles from './StudentLoginForm.module.scss'
-import { setDataToLocalStorage } from '../../../utils/functions'
+import { getDataFromLocalStorage, setDataToLocalStorage } from '../../../utils/functions'
 import { studentLoginAPI } from '../../../utils/apis'
 
 export default function StudentLoginForm() {
@@ -45,8 +45,21 @@ export default function StudentLoginForm() {
         setDataToLocalStorage('access_token', access)
         setDataToLocalStorage('refresh_token', refresh)
 
-        const accessDecoded: any = jwt_decode(access)
-        if ('allowed_for' in accessDecoded) {
+        const eligibilityRes = await axios.get(
+          `https://sakhanithnith.pagekite.me/student/eligibility/${formik.values.username}`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+            },
+          },
+        )
+
+        setDataToLocalStorage('eligible', eligibilityRes.data.eligible)
+
+        const eligibility = getDataFromLocalStorage('eligible')
+
+        if (eligibility === 'placement' || eligibility === 'intern' || eligibility === 'NA') {
           navigate('/dashboard')
         } else {
           navigate('/student-details-form')

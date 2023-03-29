@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import Animation from '../../assets/animations/103081-yoga-2.json'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
-import { Input, Select } from '../../components'
+import { Input, Select, Error } from '../../components'
 import styles from './ExperienceForm.module.scss'
-import { companiesAPI, rolesAPI } from '../../utils/apis'
+import { companiesAPI, experiencesAPI, rolesAPI } from '../../utils/apis'
 import { Company } from '../../utils/types'
 import { getDataFromLocalStorage } from '../../utils/functions'
 
@@ -114,7 +114,7 @@ export default function ExperienceForm() {
           selected: decodeSelected(formik.values.selected),
           student: accessDecoded.roll,
         }
-        const res = await axios.post('https://sakhanithnith.pagekite.me/experiences/', objToSent)
+        const res = await experiencesAPI.post('/', objToSent)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {
@@ -208,11 +208,9 @@ export default function ExperienceForm() {
                       ))}
                     </div>
                   )}
+
                   {formik.touched.company && formik.errors.company ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.company}
-                    </Alert>
+                    <Error errorMessage={formik.errors.company} />
                   ) : null}
 
                   <Select
@@ -227,10 +225,7 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.difficulty && formik.errors.difficulty ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.difficulty}
-                    </Alert>
+                    <Error errorMessage={formik.errors.difficulty} />
                   ) : null}
 
                   <Input
@@ -261,10 +256,7 @@ export default function ExperienceForm() {
                     </div>
                   )}
                   {formik.touched.roles && formik.errors.roles ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.roles}
-                    </Alert>
+                    <Error errorMessage={formik.errors.roles} />
                   ) : null}
 
                   <Select
@@ -279,10 +271,7 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.jobtype && formik.errors.jobtype ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.jobtype}
-                    </Alert>
+                    <Error errorMessage={formik.errors.jobtype} />
                   ) : null}
                   <Input
                     onBlur={formik.handleBlur}
@@ -292,10 +281,7 @@ export default function ExperienceForm() {
                     value={formik.values.no_of_rounds}
                   />
                   {formik.touched.no_of_rounds && formik.errors.no_of_rounds ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.no_of_rounds}
-                    </Alert>
+                    <Error errorMessage={formik.errors.no_of_rounds} />
                   ) : null}
                   <Select
                     value={formik.values.selected}
@@ -309,10 +295,7 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.selected && formik.errors.selected ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.selected}
-                    </Alert>
+                    <Error errorMessage={formik.errors.selected} />
                   ) : null}
                   <Select
                     value={formik.values.anonymity}
@@ -326,10 +309,7 @@ export default function ExperienceForm() {
                     ))}
                   </Select>
                   {formik.touched.anonymity && formik.errors.anonymity ? (
-                    <Alert borderRadius={5} status="error">
-                      <AlertIcon />
-                      {formik.errors.anonymity}
-                    </Alert>
+                    <Error errorMessage={formik.errors.anonymity} />
                   ) : null}
 
                   <ReactQuill

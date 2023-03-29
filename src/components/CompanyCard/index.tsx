@@ -5,7 +5,7 @@ interface CompanyCardProps {
   link: string
   label: string
   value: string
-  type: string
+  type: string | null
 }
 
 export default function CompanyCard({ link, label, value, type }: CompanyCardProps) {

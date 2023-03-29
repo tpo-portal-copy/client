@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Text } from '@chakra-ui/react'
+import jwt_decode from 'jwt-decode'
 import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/136670-space.json'
@@ -11,7 +12,8 @@ import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/St
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 import { data } from '../../utils/Data/coursesAllowedData'
-import { getDataFromLocalStorage } from '../../utils/functions'
+import { getDataFromLocalStorage, setDataToLocalStorage } from '../../utils/functions'
+import { clustersAPI, studentAPI } from '../../utils/apis'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
@@ -131,11 +133,19 @@ export default function StudentDetailsForm() {
       })
       setStep((prevStep) => prevStep + 1)
 
-      await axios.post('http://sakhanithnith.pagekite.me/student/', {
+      let accessDecoded: any
+      const accessToken = getDataFromLocalStorage('access_token')
+      if (accessToken) {
+        accessDecoded = jwt_decode(accessToken)
+      }
+
+      const rollNo = accessDecoded.roll
+
+      await studentAPI.post('/', {
         ...formOneData,
         ...formTwoData,
         ...values,
-        roll: '193092',
+        roll: rollNo,
         gender: extractGender(formOneData.gender),
         disability_type: extractDisabilityType(formOneData.disability_type),
         course: parsedObj.id,
@@ -166,19 +176,29 @@ export default function StudentDetailsForm() {
     const clusterObj = {}
     let i = 1
     let j = 1
-    Object.entries(values).forEach(([key, entryValue]) => {
-      if (key.includes('cluster')) {
-        if (entryValue) {
-          Object.assign(clusterObj, { [`cluster_${j}`]: i })
-          j += 1
+    Object.entries(values)
+      .slice(1)
+      .forEach(([key, entryValue]) => {
+        if (key.includes('cluster')) {
+          if (entryValue) {
+            Object.assign(clusterObj, { [`cluster_${j}`]: i })
+            j += 1
+          }
+          i += 1
         }
-        i += 1
-      }
-    })
+      })
+
+    let accessDecoded: any
+    const accessToken = getDataFromLocalStorage('access_token')
+    if (accessToken) {
+      accessDecoded = jwt_decode(accessToken)
+    }
+
+    const rollNo = accessDecoded.roll
 
     const placementObj = {
-      roll: '193092',
-      student: '193092',
+      roll: rollNo,
+      student: rollNo,
       cluster: {
         ...clusterObj,
       },
@@ -187,39 +207,45 @@ export default function StudentDetailsForm() {
     }
 
     const internObj = {
-      roll: '21mcs001',
-      student: '21mcs001',
+      roll: rollNo,
+      student: rollNo,
       resume: values.resume,
     }
 
     const notSittingObj = {
-      roll: '21mcs004',
-      student: '21mcs004',
+      roll: rollNo,
+      student: rollNo,
       reason: values.reason,
     }
 
     try {
       if (data[idx].type_allowed === 'intern') {
-        await axios.post('https://sakhanithnith.pagekite.me/student/detailintern/', {
+        await studentAPI.post('/detailintern/', {
           ...internObj,
         })
       } else if (data[idx].type_allowed === 'placement') {
         if (values.interested === 'yes') {
-          await axios.post('https://sakhanithnith.pagekite.me/student/detailplacement/', {
+          await clustersAPI.post('/', {
             ...placementObj,
           })
         } else {
-          await axios.post('https://sakhanithnith.pagekite.me/student/detailnotsitting/', {
+          await studentAPI.post('/detailnotsitting/', {
             ...notSittingObj,
           })
         }
       }
 
-      const res = await axios.post('https://sakhanithnith.pagekite.me/api/login/refresh/', {
-        refresh: getDataFromLocalStorage('refresh_token'),
-      })
+      const res = await axios.get(
+        `https://sakhanithnith.pagekite.me/student/eligibility/${rollNo}`,
 
-      console.log(res)
+        {
+          headers: {
+            Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+          },
+        },
+      )
+
+      setDataToLocalStorage('eligible', res.data.eligible)
 
       setStep((prevStep) => prevStep + 1)
       setValue((prevValue) => prevValue + 25)

@@ -33,7 +33,7 @@ export default function CustomModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onCloseHandler}>
-      <ModalOverlay />
+      <ModalOverlay backgroundColor="blackAlpha.300" />
       <ModalContent className={styles.content}>
         <ModalHeader>
           <p>{title}</p>

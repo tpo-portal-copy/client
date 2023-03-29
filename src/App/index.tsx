@@ -21,6 +21,7 @@ import {
   ResultAnnouncement,
   Home,
 } from '../pages'
+import { getDataFromLocalStorage } from '../utils/functions'
 import Protected from '../utils/Protected'
 
 function App() {
@@ -49,30 +50,45 @@ function App() {
           </Protected>
         }
       />
-      <Route
-        path="/experience-form"
-        element={
-          <Protected>
-            <ExperienceForm />
-          </Protected>
-        }
-      />
-      <Route
-        path="/announcement-form"
-        element={
-          <Protected>
-            <AnnouncementForm />
-          </Protected>
-        }
-      />
-      <Route
-        path="/result-announcement"
-        element={
-          <Protected>
-            <ResultAnnouncement />
-          </Protected>
-        }
-      />
+
+      {getDataFromLocalStorage('eligible') !== 'NA' && (
+        <>
+          <Route
+            path="/drives"
+            element={
+              <Protected>
+                <HeaderLayout>
+                  <Drives />
+                </HeaderLayout>
+              </Protected>
+            }
+          />
+          <Route
+            path="/experience-form"
+            element={
+              <Protected>
+                <ExperienceForm />
+              </Protected>
+            }
+          />
+          <Route
+            path="/announcement-form"
+            element={
+              <Protected>
+                <AnnouncementForm />
+              </Protected>
+            }
+          />
+          <Route
+            path="/result-announcement"
+            element={
+              <Protected>
+                <ResultAnnouncement />
+              </Protected>
+            }
+          />{' '}
+        </>
+      )}
       <Route
         path="/home"
         element={
@@ -89,16 +105,6 @@ function App() {
           <Protected>
             <HeaderLayout>
               <Dashboard />
-            </HeaderLayout>
-          </Protected>
-        }
-      />
-      <Route
-        path="/drives"
-        element={
-          <Protected>
-            <HeaderLayout>
-              <Drives />
             </HeaderLayout>
           </Protected>
         }
@@ -134,7 +140,7 @@ function App() {
         }
       />
       <Route
-        path="/statistics-details/:company/:type/:sessionyear"
+        path="/statistics-details/:company/:type"
         element={
           <Protected>
             <HeaderLayout>

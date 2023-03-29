@@ -45,8 +45,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       passing_year: Yup.number()
         .integer('Passing year must be an integer.')
         .typeError('Passing year must be an integer.')
-        .min(2024, 'Minimum passing year required is 2024.')
-        .required('Passing is required.'),
+        .required('Passing year is required.'),
       current_year: Yup.string()
         .required('Current Year is required.')
         .min(1, 'Current Year is required.'),
@@ -70,6 +69,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
     setCourse(parsedObj)
 
     formik.setFieldValue('course', e.target.value)
+    const passingYear =
+      parsedObj.years == null || formik.values.batch_year == null
+        ? null
+        : parsedObj.years + formik.values.batch_year
+    formik.setFieldValue('passing_year', parseInt(passingYear, 10))
     const res = await branchesAPI.get(`/${parsedObj.id}`)
     setBranch(res.data)
   }
@@ -132,6 +136,11 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           value={formik.values.batch_year}
           onChange={(e) => {
             formik.setFieldValue('batch_year', parseInt(e.target.value, 10))
+            const passingYear =
+              course.years == null || formik.values.batch_year == null
+                ? parseInt(e.target.value, 10)
+                : parseInt(e.target.value, 10) + course.years
+            formik.setFieldValue('passing_year', parseInt(passingYear, 10))
           }}
           onBlur={formik.handleBlur}
         />
@@ -144,11 +153,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           name="passing_year"
           placeholder="Passing Year"
           type="number"
-          value={
-            course.years == null || formik.values.batch_year == null
-              ? formik.values.batch_year
-              : formik.values.batch_year + course.years
-          }
+          value={formik.values.passing_year}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           isDisabled

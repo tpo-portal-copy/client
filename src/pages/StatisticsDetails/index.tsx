@@ -9,11 +9,14 @@ import PageLoader from '../../components/PageLoader'
 function StatisticsDetails() {
   const date = new Date()
 
-  let { company, type, sessionyear } = useParams()
+  let { company, type } = useParams()
   type = type === 'intern' ? 'intern' : 'placement'
   company = company === undefined ? '' : company
-  sessionyear = sessionyear === undefined ? '' : sessionyear
-  const [session, setSession] = useState(sessionyear)
+  const [session, setSession] = useState(
+    date.getMonth() <= 5
+      ? `${(date.getFullYear() - 1).toString()}-${date.getFullYear().toString().slice(2)}`
+      : `${date.getFullYear().toString()}-${(date.getFullYear() + 1).toString().slice(2)}`,
+  )
 
   const { data, isError, isSuccess, isLoading } = useStatisticsDetailsData(company, type, session)
 

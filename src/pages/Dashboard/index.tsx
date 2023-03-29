@@ -83,7 +83,7 @@ function Dashboard() {
                     onClose={closeModal}
                     isCentered
                   >
-                    <ModalOverlay />
+                    <ModalOverlay backgroundColor="blackAlpha.300" />
                     <ModalContent>
                       <ModalHeader>{modelData.title}</ModalHeader>
                       <ModalCloseButton />

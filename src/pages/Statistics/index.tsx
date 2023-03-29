@@ -12,16 +12,21 @@ import Page500 from '../Page500'
 import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
 import CompaniesTable from '../../components/CompaniesTable'
+import { getDataFromLocalStorage } from '../../utils/functions'
 
 function Statistics() {
-  const [job, setJob] = useState('Placement')
+  const [job, setJob] = useState(
+    getDataFromLocalStorage('eligible') !== 'NA'
+      ? getDataFromLocalStorage('eligible')
+      : 'placement',
+  )
   const [session, setSession] = useState('2022-23')
 
   const [searchedCompany, setSearchedCompany] = useState('')
 
   const { data, isLoading, isSuccess, isError } = useStatisticsData(
-    { type: job.toLowerCase(), session },
-    job,
+    { type: job?.toLowerCase(), session },
+    job || '',
     session,
   )
 
@@ -64,7 +69,7 @@ function Statistics() {
   const { statsInfo, topCompanies, basicStats } = data
   const arr: any[] = []
   const fill: any[] = []
-  if (job !== 'PPO') {
+  if (job !== 'ppo') {
     basicStats.map((obj: BasicStats) => {
       const newObj = { ...obj, value: obj.offers, id: obj.branch.toLowerCase() }
 
@@ -88,13 +93,13 @@ function Statistics() {
             minWidth="150px"
             bgColor="white"
             w="100%"
-            value={job}
+            value={job || ''}
             placeholder="Job Type"
             onChange={(e) => handleJobChange(e)}
           >
             {jobType.map((type) => (
               <option value={type.value} key={type.id}>
-                {type.value}
+                {type.label}
               </option>
             ))}
           </Select>
@@ -128,7 +133,7 @@ function Statistics() {
             />
           ))}
         </div>
-        {job === 'PPO' ? null : (
+        {job === 'ppo' ? null : (
           <div className={styles.top_companies_container}>
             <Text className={styles.top_companies_heading}>Our Top Recruiting Partners</Text>
             <div className={styles.info_container_wrapper}>
@@ -140,7 +145,7 @@ function Statistics() {
                     key={companiesData.logo}
                     label={companiesData.name}
                     value={
-                      job.toLowerCase() === 'intern'
+                      job?.toLowerCase() === 'intern'
                         ? companiesData.max_stipend
                         : companiesData.max_ctc
                     }
