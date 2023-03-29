@@ -161,5 +161,19 @@
         cursor: pointer;
       }
     }
+
+    .btns_container {
+      display: flex;
+      gap: 1rem;
+
+      .btn {
+        color: #fff;
+        background: #0078ff;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 6px;
+      }
+    }
   }
 }

@@ -14,11 +14,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import styles from './SignupForm.module.scss'
+import styles from './StudentRegisterForm.module.scss'
 import { studentOtpAPI, studentRegisterAPI } from '../../../utils/apis'
 import Error from '../../Error'
 
-export default function SignupForm() {
+export default function StudentRegisterForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showOtp, setShowOtp] = useState(false)
   const navigate = useNavigate()
@@ -81,7 +81,7 @@ export default function SignupForm() {
   const handleRequestOTP = async () => {
     try {
       setIsLoading(true)
-      const res = await studentOtpAPI.post('/verify/', {
+      await studentOtpAPI.post('/verify/', {
         username: formik.values.username,
         otp: formik.values.otp,
       })
@@ -102,7 +102,7 @@ export default function SignupForm() {
   const handleResendOtp = async () => {
     try {
       setIsResending(true)
-      const res = await studentOtpAPI.post('/resend/', {
+      await studentOtpAPI.post('/resend/', {
         username: formik.values.username,
       })
       setIsResending(false)
@@ -113,7 +113,6 @@ export default function SignupForm() {
         isClosable: true,
       })
     } catch (err: any) {
-      console.log(err)
       toast({
         title: 'Resend OTP Failed....',
         status: 'error',

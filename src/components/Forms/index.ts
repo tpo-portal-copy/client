@@ -1,5 +1,5 @@
 export { default as StudentLoginForm } from './StudentLoginForm'
-export { default as StudentSignupForm } from './StudentSignupForm'
+export { default as StudentRegisterForm } from './StudentRegisterForm'
 export { default as TPOLoginForm } from './TPOLoginForm'
 export { default as TPRLoginForm } from './TPRLoginForm'
 export { default as OnCampusResultForm } from './ResultForms/OnCampusResultForm'

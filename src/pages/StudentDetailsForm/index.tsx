@@ -131,7 +131,6 @@ export default function StudentDetailsForm() {
         course: parsedObj.name,
         year: parseInt(values.current_year, 10),
       })
-      setStep((prevStep) => prevStep + 1)
 
       let accessDecoded: any
       const accessToken = getDataFromLocalStorage('access_token')
@@ -159,6 +158,8 @@ export default function StudentDetailsForm() {
           },
         },
       )
+
+      setStep((prevStep) => prevStep + 1)
     } catch (err) {
       console.log(err)
     }
