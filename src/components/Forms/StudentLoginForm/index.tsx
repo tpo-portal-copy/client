@@ -120,7 +120,7 @@ export default function StudentLoginForm() {
         ) : null}
         <Box className={styles.link_container}>
           <Text>Not Registered ?</Text>
-          <Links className={styles.link} to="/signup">
+          <Links className={styles.link} to="/register">
             Register Here
           </Links>
         </Box>

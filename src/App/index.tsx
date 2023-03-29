@@ -8,7 +8,6 @@ import {
   Experiences,
   StudentDetailsForm,
   Login,
-  Signup,
   Resources,
   Drives,
   Statistics,
@@ -20,6 +19,7 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  Register,
 } from '../pages'
 import { getDataFromLocalStorage } from '../utils/functions'
 import Protected from '../utils/Protected'
@@ -40,7 +40,15 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/home"
+        element={
+          <HeaderLayout>
+            <Home />
+          </HeaderLayout>
+        }
+      />
+      <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route
         path="/student-details-form"
@@ -50,7 +58,6 @@ function App() {
           </Protected>
         }
       />
-
       {getDataFromLocalStorage('eligible') !== 'NA' && (
         <>
           <Route
@@ -89,16 +96,6 @@ function App() {
           />{' '}
         </>
       )}
-      <Route
-        path="/home"
-        element={
-          <Protected>
-            <HeaderLayout>
-              <Home />
-            </HeaderLayout>
-          </Protected>
-        }
-      />
       <Route
         path="/dashboard"
         element={

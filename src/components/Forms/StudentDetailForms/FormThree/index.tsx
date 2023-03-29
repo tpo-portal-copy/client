@@ -18,18 +18,20 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
       course: Yup.string().required('Course is required.'),
       branch_write: Yup.string().required('Branch is required.'),
       cgpi: Yup.number()
-        .min(1)
-        .max(10)
+        .min(0, 'CGPI must be greater than or equal to 0.')
+        .max(10, 'CGPI must be less than or equal to 10.')
         .typeError('CGPI must be a number.')
         .required('CGPI is required.'),
       active_backlog: Yup.number()
         .integer('Active backlog must be an integer.')
         .typeError('Active backlog must be an integer.')
-        .required('Active backlog is required.'),
+        .required('Active backlog is required.')
+        .min(0, 'Active backlog must be greater than or equal to 0.'),
       total_backlog: Yup.number()
         .integer('Total backlog must be an integer.')
         .typeError('Total backlog must be an integer.')
-        .required('Total backlog is required.'),
+        .required('Total backlog is required.')
+        .min(0, 'Total backlog must be greater than or equal to 0.'),
       gate_score: Yup.number()
         .typeError('Gate score must be a number.')
         .max(100, "Gate score can't be greater than 100."),
@@ -80,6 +82,22 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
 
   const handleBranchChange = (e: any) => {
     formik.setFieldValue('branch_write', e.target.value)
+  }
+
+  const getCourseType = (courseName: string) => {
+    if (
+      courseName === 'M.Tech' ||
+      courseName === 'M.Arch' ||
+      courseName === 'MBA' ||
+      courseName === 'M.Sc.' ||
+      courseName === 'Ph.D.'
+    )
+      return 'PG'
+
+    if (courseName === 'B.Tech' || courseName === 'Dual Degree' || courseName === 'B.Arch')
+      return 'UG'
+
+    return null
   }
 
   return (
@@ -250,7 +268,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
         ) : null}
       </div>
       <div className={styles.field}>
-        {formik.values.course === 'B.Tech' ? (
+        {getCourseType(course.name) === 'UG' ? (
           <>
             <Input
               name="gap_12_ug"
@@ -267,9 +285,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
         ) : null}
       </div>
       <div className={styles.field}>
-        {formik.values.course === 'M.Tech' ||
-        formik.values.course === 'MBA' ||
-        formik.values.course === 'MSc' ? (
+        {getCourseType(course.name) === 'PG' ? (
           <>
             <Input
               name="gap_ug_pg"
