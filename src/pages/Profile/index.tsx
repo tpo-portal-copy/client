@@ -69,7 +69,11 @@ function Profile() {
 
   const getDetails = async (roll: string) => {
     try {
-      const response = await clustersAPI.get(`/${roll}`)
+      const response = await clustersAPI.get(`/${roll}`, {
+        headers: {
+          Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
+        },
+      })
       setPlacementData(response.data)
       return response.data
     } catch (error) {
