@@ -76,7 +76,7 @@ export const data = [
     id: 13,
     course: 'M.Tech',
     year: 2,
-    type_allowed: 'NA',
+    type_allowed: 'placement',
   },
   {
     id: 14,
