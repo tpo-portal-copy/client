@@ -397,7 +397,7 @@ export interface MultiSelectDropDownProps {
 
 export interface CompaniesTableProps {
   session: string
-  type: string
+  type: string | null | undefined
   company: string
 }
 
