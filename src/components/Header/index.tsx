@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import {
   Popover,
   PopoverArrow,
@@ -27,6 +27,7 @@ function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
   const sidebarRef = useRef(null)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const openSidebar = () => {
     setIsSidebarVisible(true)
@@ -40,11 +41,13 @@ function Header() {
   const { onOpen, onClose, isOpen } = useDisclosure()
 
   const handleLogout = async () => {
-    clearDataFromLocalStorage()
     try {
       await studentLogoutAPI.post('/', {
         refresh_token: getDataFromLocalStorage('refresh_token'),
       })
+
+      clearDataFromLocalStorage()
+      navigate('/home')
     } catch (err) {
       console.log(err)
     }
@@ -139,9 +142,9 @@ function Header() {
                   <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                     Placement Policy
                   </Link>
-                  <a href="/home" className={styles.option} onClick={handleLogout}>
+                  <button className={styles.option} onClick={handleLogout}>
                     Logout
-                  </a>
+                  </button>
                 </PopoverBody>
               </PopoverContent>
             </Popover>
