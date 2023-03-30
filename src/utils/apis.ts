@@ -19,6 +19,8 @@ import {
   STUDENT_LOGIN_API,
   STUDENT_REGISTER_API,
   STUDENT_OTP_API,
+  STUDENT_ELIGIBILITY_API,
+  STUDENT_LOGOUT_API,
 } from './constants'
 import { getDataFromLocalStorage } from './functions'
 
@@ -96,6 +98,14 @@ export const studentRegisterAPI = axios.create({
 
 export const studentOtpAPI = axios.create({
   baseURL: STUDENT_OTP_API,
+})
+
+export const studentLogoutAPI = axios.create({
+  baseURL: STUDENT_LOGOUT_API,
+})
+
+export const studentEligibilityAPI = axios.create({
+  baseURL: STUDENT_ELIGIBILITY_API,
 })
 
 studentAPI.interceptors.request.use((config) => {
@@ -183,6 +193,24 @@ rolesAPI.interceptors.request.use((config) => {
 })
 
 resourcesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+studentLogoutAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+recentNotificationsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+studentEligibilityAPI.interceptors.request.use((config) => {
   const newConfig = { ...config }
   newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
   return newConfig

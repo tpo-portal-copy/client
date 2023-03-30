@@ -17,3 +17,5 @@ export const STATISTICS_DETAILS_API = import.meta.env.VITE_STATISTICS_DETAILS_AP
 export const STUDENT_LOGIN_API = import.meta.env.VITE_STUDENT_LOGIN_API
 export const STUDENT_REGISTER_API = import.meta.env.VITE_STUDENT_REGISTER_API
 export const STUDENT_OTP_API = import.meta.env.VITE_STUDENT_OTP_API
+export const STUDENT_ELIGIBILITY_API = import.meta.env.VITE_STUDENT_ELIGIBILITY_API
+export const STUDENT_LOGOUT_API = import.meta.env.VITE_STUDENT_LOGOUT_API

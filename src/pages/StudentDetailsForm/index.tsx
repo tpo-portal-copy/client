@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { Text } from '@chakra-ui/react'
 import jwt_decode from 'jwt-decode'
 import Lottie from 'lottie-react'
@@ -13,7 +12,7 @@ import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 import { data } from '../../utils/Data/coursesAllowedData'
 import { getDataFromLocalStorage, setDataToLocalStorage } from '../../utils/functions'
-import { clustersAPI, studentAPI } from '../../utils/apis'
+import { clustersAPI, studentAPI, studentEligibilityAPI } from '../../utils/apis'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
@@ -140,24 +139,16 @@ export default function StudentDetailsForm() {
 
       const rollNo = accessDecoded.roll
 
-      await studentAPI.post(
-        '/',
-        {
-          ...formOneData,
-          ...formTwoData,
-          ...values,
-          roll: rollNo,
-          gender: extractGender(formOneData.gender),
-          disability_type: extractDisabilityType(formOneData.disability_type),
-          course: parsedObj.id,
-          current_year: parseInt(values.current_year, 10),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-          },
-        },
-      )
+      await studentAPI.post('/', {
+        ...formOneData,
+        ...formTwoData,
+        ...values,
+        roll: rollNo,
+        gender: extractGender(formOneData.gender),
+        disability_type: extractDisabilityType(formOneData.disability_type),
+        course: parsedObj.id,
+        current_year: parseInt(values.current_year, 10),
+      })
 
       setValue((prevValue) => prevValue + 25)
       setStep((prevStep) => prevStep + 1)
@@ -230,54 +221,22 @@ export default function StudentDetailsForm() {
 
     try {
       if (data[idx].type_allowed === 'intern') {
-        await studentAPI.post(
-          '/detailintern/',
-          {
-            ...internObj,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-            },
-          },
-        )
+        await studentAPI.post('/detailintern/', {
+          ...internObj,
+        })
       } else if (data[idx].type_allowed === 'placement') {
         if (values.interested === 'yes') {
-          await clustersAPI.post(
-            '/',
-            {
-              ...placementObj,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-              },
-            },
-          )
+          await clustersAPI.post('/', {
+            ...placementObj,
+          })
         } else {
-          await studentAPI.post(
-            '/detailnotsitting/',
-            {
-              ...notSittingObj,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-              },
-            },
-          )
+          await studentAPI.post('/detailnotsitting/', {
+            ...notSittingObj,
+          })
         }
       }
 
-      const res = await axios.get(
-        `https://sakhanithnith.pagekite.me/student/eligibility/${rollNo}`,
-
-        {
-          headers: {
-            Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-          },
-        },
-      )
+      const res = await studentEligibilityAPI.get(`/${rollNo}`)
 
       setDataToLocalStorage('eligibility', res.data.eligible)
 

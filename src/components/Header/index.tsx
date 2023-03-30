@@ -11,7 +11,6 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import jwt_decode from 'jwt-decode'
-import axios from 'axios'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
@@ -21,6 +20,7 @@ import {
   getDataFromLocalStorage,
   isStudentEligibleForPlacementOrIntern,
 } from '../../utils/functions'
+import { studentLogoutAPI } from '../../utils/apis'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
@@ -40,13 +40,9 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        'https://sakhanithnith.pagekite.me/api/logout/',
-        {
-          refresh_token: getDataFromLocalStorage('refresh_token'),
-        },
-        { headers: { Authorization: `Bearer ${getDataFromLocalStorage('access_token')}` } },
-      )
+      await studentLogoutAPI.post('/', {
+        refresh_token: getDataFromLocalStorage('refresh_token'),
+      })
 
       clearDataFromLocalStorage()
     } catch (err) {
