@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax */
-
+import jwtDecode from 'jwt-decode'
+import { NavigateFunction } from 'react-router-dom'
 import { TimeStamps } from './types'
 
 // sets data to local storage
@@ -57,18 +58,41 @@ export const getDifficulty = (difficultySymbol: string) => {
 export const isAuthenticated = () => {
   const userToken = getDataFromLocalStorage('access_token')
 
-  if (userToken == null || !userToken) return false
-  return true
+  if (userToken) return true
+  return false
 }
 
 export const isStudentDetailsFormFilled = () => {
   const eligibility = getDataFromLocalStorage('eligibility')
-  if (eligibility == null || eligibility === '') return false
-  return true
+  if (eligibility) return true
+  return false
 }
 
 export const isStudentEligibleForPlacementOrIntern = () => {
   const eligibility = getDataFromLocalStorage('eligibility')
   if (eligibility === 'NA') return false
   return true
+}
+
+export const setTimerForTokenExpiration = (
+  navigate: NavigateFunction,
+  onLogoutHandler: () => void,
+) => {
+  const accessToken = getDataFromLocalStorage('access_token')
+
+  // Check if access token exists in local storage
+  if (accessToken) {
+    // Set timer for access token expiration
+    const decodedToken = jwtDecode<any>(accessToken)
+    const currentTime = Date.now() / 1000
+    const timeToExpire = decodedToken.exp - currentTime
+
+    setTimeout(async () => {
+      // Access token has expired, log out user
+      onLogoutHandler()
+      clearDataFromLocalStorage()
+
+      navigate('/home')
+    }, timeToExpire * 1000)
+  }
 }

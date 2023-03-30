@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button, VStack, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
 import { useNavigate } from 'react-router-dom'
@@ -80,7 +80,7 @@ export default function ExperienceForm() {
   if ('access_token' in localStorage) {
     const accessToken = getDataFromLocalStorage('access_token')
     if (accessToken) {
-      accessDecoded = jwt_decode(accessToken)
+      accessDecoded = jwtDecode(accessToken)
     }
   }
 

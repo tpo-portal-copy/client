@@ -10,7 +10,7 @@ import {
   PopoverTrigger,
   useDisclosure,
 } from '@chakra-ui/react'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
@@ -53,7 +53,7 @@ function Header() {
   let accessDecoded = null
   const accessToken = getDataFromLocalStorage('access_token')
   if (accessToken) {
-    accessDecoded = jwt_decode<any>(accessToken)
+    accessDecoded = jwtDecode<any>(accessToken)
   }
 
   const isAuthenticated = accessDecoded != null

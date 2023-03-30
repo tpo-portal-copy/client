@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Text } from '@chakra-ui/react'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/136670-space.json'
@@ -134,7 +134,7 @@ export default function StudentDetailsForm() {
       let accessDecoded: any
       const accessToken = getDataFromLocalStorage('access_token')
       if (accessToken) {
-        accessDecoded = jwt_decode(accessToken)
+        accessDecoded = jwtDecode(accessToken)
       }
 
       const rollNo = accessDecoded.roll
@@ -192,7 +192,7 @@ export default function StudentDetailsForm() {
     let accessDecoded: any
     const accessToken = getDataFromLocalStorage('access_token')
     if (accessToken) {
-      accessDecoded = jwt_decode(accessToken)
+      accessDecoded = jwtDecode(accessToken)
     }
 
     const rollNo = accessDecoded.roll

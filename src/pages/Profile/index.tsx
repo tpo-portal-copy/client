@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Lottie from 'lottie-react'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 import styles from './Profile.module.scss'
 import { FieldInfo } from '../../components'
 import { studentStatData } from '../../utils/Data/profileData'
@@ -19,7 +19,7 @@ function Profile() {
   if ('access_token' in localStorage) {
     const accessToken = getDataFromLocalStorage('access_token')
     if (accessToken) {
-      accessDecoded = jwt_decode(accessToken)
+      accessDecoded = jwtDecode(accessToken)
     }
   }
 
