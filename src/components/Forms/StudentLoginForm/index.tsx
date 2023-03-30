@@ -16,14 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
 import styles from './StudentLoginForm.module.scss'
-import {
-  getDataFromLocalStorage,
-  isStudentDetailsFormFilled,
-  setDataToLocalStorage,
-} from '../../../utils/functions'
-import { studentLoginAPI } from '../../../utils/apis'
+import { isStudentDetailsFormFilled, setDataToLocalStorage } from '../../../utils/functions'
+import { studentEligibilityAPI, studentLoginAPI } from '../../../utils/apis'
 
 export default function StudentLoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -49,16 +44,9 @@ export default function StudentLoginForm() {
         setDataToLocalStorage('access_token', access)
         setDataToLocalStorage('refresh_token', refresh)
 
-        const eligibilityRes = await axios.get(
-          `https://sakhanithnith.pagekite.me/student/eligibility/${formik.values.username}`,
-
-          {
-            headers: {
-              Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-            },
-          },
-        )
+        const eligibilityRes = await studentEligibilityAPI.get(`/${formik.values.username}`)
         const eligibility = eligibilityRes.data.eligible
+
         setDataToLocalStorage('eligibility', eligibility)
 
         if (isStudentDetailsFormFilled() === true) {

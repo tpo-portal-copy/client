@@ -19,7 +19,7 @@ const typeData = [
 
 export default function AnnouncementForm() {
   const [value, setValue] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const date = new Date()
 
