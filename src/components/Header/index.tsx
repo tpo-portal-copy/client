@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import {
-  Button,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -17,7 +16,11 @@ import Sidebar from '../Sidebar'
 import useOnOutsideClick from '../../hooks/useOnOutsideClick'
 import navItems from '../../utils/Data/sidebarData'
 import styles from './Header.module.scss'
-import { clearDataFromLocalStorage, getDataFromLocalStorage } from '../../utils/functions'
+import {
+  clearDataFromLocalStorage,
+  getDataFromLocalStorage,
+  isStudentEligibleForPlacementOrIntern,
+} from '../../utils/functions'
 
 function Header() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
@@ -51,8 +54,6 @@ function Header() {
     }
   }
 
-  const eligibility = getDataFromLocalStorage('eligible')
-
   let accessDecoded = null
   const accessToken = getDataFromLocalStorage('access_token')
   if (accessToken) {
@@ -82,7 +83,10 @@ function Header() {
           <>
             <nav className={styles.nav_items}>
               {navItems.slice(0, -1).map((navItem) => {
-                if (eligibility === 'NA' && navItem.name === 'Drives') {
+                if (
+                  isStudentEligibleForPlacementOrIntern() === false &&
+                  navItem.name === 'Drives'
+                ) {
                   return ''
                 }
 
@@ -135,9 +139,6 @@ function Header() {
                 >
                   <Link to="/profile" className={styles.option} onClick={onClose}>
                     My Profile
-                  </Link>
-                  <Link to="/student-details-form" className={styles.option} onClick={onClose}>
-                    Student Details Form
                   </Link>
                   <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                     Placement Policy

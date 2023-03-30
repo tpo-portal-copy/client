@@ -48,7 +48,7 @@ export default function AnnouncementForm() {
           type: values.type.toLowerCase(),
           description: value,
         }
-        const res = await dashboardAPI.post('/', objToSend)
+        await dashboardAPI.post('/', objToSend)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {

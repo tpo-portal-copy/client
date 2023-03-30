@@ -21,8 +21,12 @@ import {
   Home,
   Register,
 } from '../pages'
-import { getDataFromLocalStorage } from '../utils/functions'
-import Protected from '../utils/Protected'
+import {
+  isAuthenticated,
+  isStudentDetailsFormFilled,
+  isStudentEligibleForPlacementOrIntern,
+} from '../utils/functions'
+import ProtectedRoute from '../Routes/ProtectedRoute'
 
 function App() {
   const { pathname } = useLocation()
@@ -50,48 +54,50 @@ function App() {
       />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route
-        path="/student-details-form"
-        element={
-          <Protected>
-            <StudentDetailsForm />
-          </Protected>
-        }
-      />
-      {getDataFromLocalStorage('eligible') !== 'NA' && (
+      {isStudentDetailsFormFilled() === false && (
+        <Route
+          path="/student-details-form"
+          element={
+            <ProtectedRoute>
+              <StudentDetailsForm />
+            </ProtectedRoute>
+          }
+        />
+      )}
+      {isStudentEligibleForPlacementOrIntern() === true && (
         <>
           <Route
             path="/drives"
             element={
-              <Protected>
+              <ProtectedRoute>
                 <HeaderLayout>
                   <Drives />
                 </HeaderLayout>
-              </Protected>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/experience-form"
             element={
-              <Protected>
+              <ProtectedRoute>
                 <ExperienceForm />
-              </Protected>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/announcement-form"
             element={
-              <Protected>
+              <ProtectedRoute>
                 <AnnouncementForm />
-              </Protected>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/result-announcement"
             element={
-              <Protected>
+              <ProtectedRoute>
                 <ResultAnnouncement />
-              </Protected>
+              </ProtectedRoute>
             }
           />{' '}
         </>
@@ -99,84 +105,88 @@ function App() {
       <Route
         path="/dashboard"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <Dashboard />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/experiences"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <Experiences />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/experiences-details/:id"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <ExperienceDetails />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/statistics"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <Statistics />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/statistics-details/:company/:type"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <StatisticsDetails />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/resources"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <Resources />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/resources-details/:branchName"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <ResourceDetails />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/profile"
         element={
-          <Protected>
+          <ProtectedRoute>
             <HeaderLayout>
               <Profile />
             </HeaderLayout>
-          </Protected>
+          </ProtectedRoute>
         }
       />
-      <Route path="/" element={<Navigate to="/home" />} />
+      {isAuthenticated() ? (
+        <Route path="/" element={<Navigate to="/dashboard" />} />
+      ) : (
+        <Route path="/" element={<Navigate to="/home" />} />
+      )}
       <Route path="*" element={<Page404 />} />
     </Routes>
   )

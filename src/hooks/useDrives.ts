@@ -1,13 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { drivesAPI } from '../utils/apis'
-import { getDataFromLocalStorage } from '../utils/functions'
 
 const getDrives = async (params: any) => {
   const response = await drivesAPI.get('/', {
     params,
-    headers: {
-      Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-    },
   })
   return response.data
 }

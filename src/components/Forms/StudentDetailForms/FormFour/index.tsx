@@ -67,7 +67,7 @@ export default function FormFour({ onSubmit, course, year }: FormFourProps) {
       if (Math.abs(selectedClusters) !== 3) return
     }
 
-    const res = await formik.handleSubmit()
+    await formik.handleSubmit()
   }
 
   return (

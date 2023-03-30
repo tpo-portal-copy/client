@@ -22,8 +22,7 @@ export const clearDataFromLocalStorage = () => {
   localStorage.clear()
 }
 
-// generates time stamp
-
+// returns time between input date and current time
 export function fromNow(input: Date) {
   const date = input instanceof Date ? input : new Date(input)
   const formatter = new Intl.RelativeTimeFormat('en')
@@ -53,4 +52,23 @@ export const getDifficulty = (difficultySymbol: string) => {
   if (difficultySymbol === 'E') return 'Easy'
   if (difficultySymbol === 'M') return 'Medium'
   return 'Hard'
+}
+
+export const isAuthenticated = () => {
+  const userToken = getDataFromLocalStorage('access_token')
+
+  if (userToken == null || !userToken) return false
+  return true
+}
+
+export const isStudentDetailsFormFilled = () => {
+  const eligibility = getDataFromLocalStorage('eligibility')
+  if (eligibility == null || eligibility === '') return false
+  return true
+}
+
+export const isStudentEligibleForPlacementOrIntern = () => {
+  const eligibility = getDataFromLocalStorage('eligibility')
+  if (eligibility === 'NA') return false
+  return true
 }

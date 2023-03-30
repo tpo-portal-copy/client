@@ -1,11 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { recentNotificationsAPI } from '../utils/apis'
-import { getDataFromLocalStorage } from '../utils/functions'
 
 const getNotifications = async () => {
-  const response = await recentNotificationsAPI.get('/', {
-    headers: { Authorization: `Bearer ${getDataFromLocalStorage('access_token')}` },
-  })
+  const response = await recentNotificationsAPI.get('/')
   return response.data
 }
 

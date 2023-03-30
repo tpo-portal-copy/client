@@ -12,12 +12,15 @@ import Page500 from '../Page500'
 import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
 import CompaniesTable from '../../components/CompaniesTable'
-import { getDataFromLocalStorage } from '../../utils/functions'
+import {
+  getDataFromLocalStorage,
+  isStudentEligibleForPlacementOrIntern,
+} from '../../utils/functions'
 
 function Statistics() {
   const [job, setJob] = useState(
-    getDataFromLocalStorage('eligible') !== 'NA'
-      ? getDataFromLocalStorage('eligible')
+    isStudentEligibleForPlacementOrIntern() === true
+      ? getDataFromLocalStorage('eligibility')
       : 'placement',
   )
   const [session, setSession] = useState('2022-23')

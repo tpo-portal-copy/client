@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react'
-import { Button, VStack, Text, Alert, AlertIcon, useToast } from '@chakra-ui/react'
+import { Button, VStack, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
@@ -114,7 +113,7 @@ export default function ExperienceForm() {
           selected: decodeSelected(formik.values.selected),
           student: accessDecoded.roll,
         }
-        const res = await experiencesAPI.post('/', objToSent)
+        await experiencesAPI.post('/', objToSent)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {

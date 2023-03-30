@@ -1,25 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-import { getDataFromLocalStorage } from './functions'
+import { isAuthenticated, isStudentDetailsFormFilled } from '../utils/functions'
 
 interface ProtectedRouteProps {
   children: ReactNode
 }
 
-export default function Protected({ children }: ProtectedRouteProps) {
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const location = useLocation()
-  const userToken = getDataFromLocalStorage('access_token')
 
-  if (!userToken || userToken == null) {
+  if (isAuthenticated() === false) {
     return <Navigate to="/login" state={{ from: location }} replace />
   }
 
-  const eligibility = getDataFromLocalStorage('eligible')
-
   if (location.pathname === '/student-details-form') return <> {children} </>
 
-  if (eligibility === '') {
+  if (isStudentDetailsFormFilled() === false) {
     return <Navigate to="/student-details-form" />
   }
 
