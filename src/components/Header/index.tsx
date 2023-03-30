@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -39,12 +40,11 @@ function Header() {
   const { onOpen, onClose, isOpen } = useDisclosure()
 
   const handleLogout = async () => {
+    clearDataFromLocalStorage()
     try {
       await studentLogoutAPI.post('/', {
         refresh_token: getDataFromLocalStorage('refresh_token'),
       })
-
-      clearDataFromLocalStorage()
     } catch (err) {
       console.log(err)
     }
@@ -139,9 +139,9 @@ function Header() {
                   <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                     Placement Policy
                   </Link>
-                  <Link to="/login" className={styles.option} onClick={handleLogout}>
+                  <a href="/home" className={styles.option} onClick={handleLogout}>
                     Logout
-                  </Link>
+                  </a>
                 </PopoverBody>
               </PopoverContent>
             </Popover>
