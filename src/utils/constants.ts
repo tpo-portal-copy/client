@@ -19,3 +19,4 @@ export const STUDENT_REGISTER_API = import.meta.env.VITE_STUDENT_REGISTER_API
 export const STUDENT_OTP_API = import.meta.env.VITE_STUDENT_OTP_API
 export const STUDENT_ELIGIBILITY_API = import.meta.env.VITE_STUDENT_ELIGIBILITY_API
 export const STUDENT_LOGOUT_API = import.meta.env.VITE_STUDENT_LOGOUT_API
+export const REFRESH_TOKEN_API = import.meta.env.VITE_REFRESH_TOKEN_API

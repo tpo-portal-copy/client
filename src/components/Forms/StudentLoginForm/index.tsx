@@ -17,13 +17,29 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from './StudentLoginForm.module.scss'
-import { isStudentDetailsFormFilled, setDataToLocalStorage } from '../../../utils/functions'
-import { studentEligibilityAPI, studentLoginAPI } from '../../../utils/apis'
+import {
+  clearDataFromLocalStorage,
+  getDataFromLocalStorage,
+  isStudentDetailsFormFilled,
+  setDataToLocalStorage,
+  setTimerForTokenExpiration,
+} from '../../../utils/functions'
+import { studentEligibilityAPI, studentLoginAPI, studentLogoutAPI } from '../../../utils/apis'
 
 export default function StudentLoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
   const toast = useToast()
+
+  const expireTokens = async () => {
+    try {
+      await studentLogoutAPI.post('/', {
+        refresh_token: getDataFromLocalStorage('refresh_token'),
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -51,6 +67,7 @@ export default function StudentLoginForm() {
 
         if (isStudentDetailsFormFilled() === true) {
           navigate('/dashboard')
+          setTimerForTokenExpiration(navigate, expireTokens)
         } else {
           navigate('/student-details-form')
         }

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import jwtDecode from 'jwt-decode'
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import { HeaderLayout } from '../components'
-
 import {
   Dashboard,
   Profile,
@@ -22,14 +22,65 @@ import {
   Register,
 } from '../pages'
 import {
+  clearDataFromLocalStorage,
+  getDataFromLocalStorage,
   isAuthenticated,
   isStudentDetailsFormFilled,
   isStudentEligibleForPlacementOrIntern,
+  setDataToLocalStorage,
+  setTimerForTokenExpiration,
 } from '../utils/functions'
 import ProtectedRoute from '../Routes/ProtectedRoute'
+import { refreshTokenAPI, studentLogoutAPI } from '../utils/apis'
 
 function App() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const expireTokens = async () => {
+      try {
+        await studentLogoutAPI.post('/', {
+          refresh_token: getDataFromLocalStorage('refresh_token'),
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    const checkAuthState = async () => {
+      // Check if access token is still valid
+      const accessToken = localStorage.getItem('access_token')
+
+      if (accessToken) {
+        const decodedToken = jwtDecode<any>(accessToken)
+        const currentTime = Date.now() / 1000
+
+        // token is valid, again start timer from now
+        if (decodedToken.exp > currentTime) {
+          const refreshToken = getDataFromLocalStorage('refresh_token')
+
+          try {
+            const response = await refreshTokenAPI.post('/', {
+              refresh: refreshToken,
+            })
+
+            // Store new access token in local storage
+            setDataToLocalStorage('access_token', response.data.access)
+            setTimerForTokenExpiration(navigate, expireTokens)
+          } catch (err: any) {
+            console.log(err)
+          }
+        }
+      } else {
+        // Access token has expired, logout user
+        clearDataFromLocalStorage()
+        Navigate({ to: '/home' })
+      }
+    }
+
+    checkAuthState()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const scrollToTop = () => {
