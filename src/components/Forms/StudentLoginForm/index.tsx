@@ -18,7 +18,11 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import styles from './StudentLoginForm.module.scss'
-import { getDataFromLocalStorage, setDataToLocalStorage } from '../../../utils/functions'
+import {
+  getDataFromLocalStorage,
+  isStudentDetailsFormFilled,
+  setDataToLocalStorage,
+} from '../../../utils/functions'
 import { studentLoginAPI } from '../../../utils/apis'
 
 export default function StudentLoginForm() {
@@ -54,18 +58,15 @@ export default function StudentLoginForm() {
             },
           },
         )
+        const eligibility = eligibilityRes.data.eligible
+        setDataToLocalStorage('eligibility', eligibility)
 
-        setDataToLocalStorage('eligible', eligibilityRes.data.eligible)
-
-        const eligibility = getDataFromLocalStorage('eligible')
-
-        if (eligibility === 'placement' || eligibility === 'intern' || eligibility === 'NA') {
+        if (isStudentDetailsFormFilled() === true) {
           navigate('/dashboard')
         } else {
           navigate('/student-details-form')
         }
       } catch (err: any) {
-        console.log(err)
         toast({
           title: 'Login Failed....',
           description: err.response.data.detail,

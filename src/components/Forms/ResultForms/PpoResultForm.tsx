@@ -37,7 +37,7 @@ export default function PpoResultForm() {
       session: Yup.string().required('Session is required'),
       ctc: Yup.number().required('CTC is required').moreThan(0, 'CTC must be greater than 0'),
     }),
-    onSubmit: (e, values) => {
+    onSubmit: () => {
       setIsLoading(!isLoading)
       setTimeout(() => {
         setIsLoading((prevState) => !prevState)

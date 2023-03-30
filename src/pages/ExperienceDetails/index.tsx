@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { interviewExperienceInfoList } from '../../utils/Data/interviewExperienceData'
 import { ExperienceCardProps } from '../../utils/types'
 import { RelatedExperienceCard } from '../../components/Cards'
 import styles from './ExperienceDetails.module.scss'

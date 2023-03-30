@@ -6,7 +6,6 @@ import Lottie from 'lottie-react'
 import { memo, useEffect, useState } from 'react'
 import { Text, useMediaQuery } from '@chakra-ui/react'
 import { Link, useSearchParams } from 'react-router-dom'
-import Animation from '../../assets/animations/98770-assistagro-loading-bars.json'
 import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 import { ExperienceCardProps } from '../../utils/types'
 import { ExperiencesSidebar, ExperiencesFilters, Paginator } from '../../components'
@@ -67,7 +66,7 @@ function Experiences() {
     <>
       <div className={styles.title_container}>
         <h1 className={styles.page_name}>Interview Experiences</h1>
-        {getDataFromLocalStorage('eligible') !== 'NA' && (
+        {getDataFromLocalStorage('eligibility') !== 'NA' && (
           <Link to="/experience-form" className={styles.post_exp_btn}>
             Post Your Experience
           </Link>

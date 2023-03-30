@@ -1,20 +1,11 @@
 import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { companiesListAPI, drivesAPI } from '../utils/apis'
-import { getDataFromLocalStorage } from '../utils/functions'
+import { useQuery } from 'react-query'
+import { companiesAPI, drivesAPI } from '../utils/apis'
 
 const getExperienceFilterOptionsList = async () => {
   const [response1, response2] = await axios.all([
-    companiesListAPI.get('/', {
-      headers: {
-        Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-      },
-    }),
-    drivesAPI.get('/getroles', {
-      headers: {
-        Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-      },
-    }),
+    companiesAPI.get('/'),
+    drivesAPI.get('/getroles'),
   ])
 
   return [response1.data, response2.data]

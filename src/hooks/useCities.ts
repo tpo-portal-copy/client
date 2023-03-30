@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/default-param-last */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { citiesAPI } from '../utils/apis'
-import { getDataFromLocalStorage } from '../utils/functions'
 
 const getCities = async (state: string) => {
-  const response = await citiesAPI.get(`/${state}`, {
-    headers: {
-      Authorization: `Bearer ${getDataFromLocalStorage('access_token')}`,
-    },
-  })
+  const response = await citiesAPI.get(`/${state}`)
   return response.data
 }
 

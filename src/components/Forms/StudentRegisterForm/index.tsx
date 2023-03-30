@@ -58,7 +58,7 @@ export default function StudentRegisterForm() {
     }),
     onSubmit: async () => {
       try {
-        const res = await studentRegisterAPI.post('/', { ...formik.values })
+        await studentRegisterAPI.post('/', { ...formik.values })
         setShowOtp(true)
       } catch (err: any) {
         toast({

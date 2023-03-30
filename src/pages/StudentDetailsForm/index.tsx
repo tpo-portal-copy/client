@@ -279,7 +279,7 @@ export default function StudentDetailsForm() {
         },
       )
 
-      setDataToLocalStorage('eligible', res.data.eligible)
+      setDataToLocalStorage('eligibility', res.data.eligible)
 
       setStep((prevStep) => prevStep + 1)
       setValue((prevValue) => prevValue + 25)
