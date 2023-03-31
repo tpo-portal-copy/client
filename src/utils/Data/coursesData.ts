@@ -32,7 +32,7 @@ const coursesData = [
     ],
   },
   {
-    id: 0,
+    id: 1,
     courseName: 'M.Tech',
     isChecked: false,
     batches: [

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { VStack, Alert, AlertIcon, Button } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { JNFFormOneProps } from '../../../../utils/types'
@@ -59,36 +59,30 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      companyName: Yup.string().required('*Required'),
-      session: Yup.string().required('*Required'),
+      companyName: Yup.string().required('Company Name is Required'),
+      session: Yup.string().required('Session is required'),
       isPlacement: Yup.string(),
       isIntern: Yup.string(),
-      modeOfHiring: Yup.string().required('*Required'),
+      modeOfHiring: Yup.string().required('Mode of hiring is required'),
       prePlacementTalk: Yup.string(),
       aptitudeTest: Yup.string(),
       technicalTest: Yup.string(),
       groupDiscussion: Yup.string(),
       personalInterview: Yup.string(),
-      noOfPersonVisiting: Yup.number().positive().required('*Required'),
-      jobLocation: Yup.string().required('*Required'),
-      tentativeDriveDate: Yup.date().required('Date is required'),
+      noOfPersonVisiting: Yup.number().positive('Number of person visiting should be positive'),
+      jobLocation: Yup.string().required('Job Location is required'),
+      tentativeDriveDate: Yup.date().required('Drive Date is required'),
     }),
     onSubmit: (values) => {
       onNext(values)
     },
   })
+
   return (
     <div className={styles.container}>
-      <form
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onSubmit={formik.handleSubmit}
-      >
-        <VStack w="100%" maxW="700px">
+      <h2 className={styles.title}>JNF Form</h2>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <div className={styles.field}>
           <Input
             name="companyName"
             placeholder="Company Name"
@@ -99,6 +93,8 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           {formik.touched.companyName && formik.errors.companyName ? (
             <Error errorMessage={formik.errors.companyName} />
           ) : null}
+        </div>
+        <div className={styles.field}>
           <Select
             value={formik.values.session}
             onBlur={formik.handleBlur}
@@ -113,7 +109,8 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           {formik.touched.session && formik.errors.session ? (
             <Error errorMessage={formik.errors.session} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <RadioSelect
             name="isPlacement"
             placeholder="Placement"
@@ -124,7 +121,8 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           {formik.touched.isPlacement && formik.errors.isPlacement ? (
             <Error errorMessage={formik.errors.isPlacement} />
           ) : null}
-
+        </div>
+        <div className={styles.field}>
           <RadioSelect
             name="isIntern"
             placeholder="Intern"
@@ -132,11 +130,12 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={handleInternRadioButton}
             onBlur={formik.handleBlur}
           />
-
           {formik.touched.isIntern && formik.errors.isIntern ? (
             <Error errorMessage={formik.errors.isIntern} />
           ) : null}
+        </div>
 
+        <div className={styles.field}>
           <Select
             value={formik.values.modeOfHiring}
             onBlur={formik.handleBlur}
@@ -148,11 +147,12 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
               <option key={ModeOfHiring.id}>{ModeOfHiring.value}</option>
             ))}
           </Select>
-
           {formik.touched.modeOfHiring && formik.errors.modeOfHiring ? (
             <Error errorMessage={formik.errors.modeOfHiring} />
           ) : null}
+        </div>
 
+        <div className={styles.field}>
           <RadioSelect
             name="prePlacementTalk"
             placeholder="Pre Placement Talk"
@@ -160,7 +160,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={handlePrePlacementTalkRadioButton}
             onBlur={formik.handleBlur}
           />
+        </div>
 
+        <div className={styles.field}>
           <RadioSelect
             name="aptitudeTest"
             placeholder="Aptitude Test"
@@ -168,7 +170,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={handleAptitudeRadioButton}
             onBlur={formik.handleBlur}
           />
+        </div>
 
+        <div className={styles.field}>
           <RadioSelect
             name="technicalTest"
             placeholder="Technical Test"
@@ -176,7 +180,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={handleTechnicalTestRadioButton}
             onBlur={formik.handleBlur}
           />
+        </div>
 
+        <div className={styles.field}>
           <RadioSelect
             name="groupDiscussion"
             placeholder="Group Disscusion"
@@ -184,7 +190,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={handleGroupDiscussionRadioButton}
             onBlur={formik.handleBlur}
           />
+        </div>
 
+        <div className={styles.field}>
           <RadioSelect
             name="personalInterview"
             placeholder="Personal Interview"
@@ -192,7 +200,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={handlePersonalInterviewRadioButton}
             onBlur={formik.handleBlur}
           />
+        </div>
 
+        <div className={styles.field}>
           <Input
             name="noOfPersonVisiting"
             placeholder="Number of person Visitng"
@@ -203,7 +213,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           {formik.touched.noOfPersonVisiting && formik.errors.noOfPersonVisiting ? (
             <Error errorMessage={formik.errors.noOfPersonVisiting} />
           ) : null}
+        </div>
 
+        <div className={styles.field}>
           <Input
             name="jobLocation"
             placeholder="Job Locations"
@@ -211,7 +223,9 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
+        </div>
 
+        <div className={styles.field}>
           <Input
             name="tentativeDriveDate"
             type="date"
@@ -220,29 +234,33 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <div className={styles.btn_container}>
-            <Button
-              background="linear-gradient(40deg,#45cafc,#303f9f)"
-              color="white"
-              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-              className={styles.btn}
-              isDisabled
-              type="submit"
-            >
-              Back
-            </Button>
-            <Button
-              background="linear-gradient(40deg,#45cafc,#303f9f)"
-              color="white"
-              _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-              className={styles.btn}
-              isDisabled={!formik.isValid}
-              type="submit"
-            >
-              Next
-            </Button>
-          </div>
-        </VStack>
+          {formik.touched.tentativeDriveDate && formik.errors.tentativeDriveDate ? (
+            <Error errorMessage={formik.errors.tentativeDriveDate} />
+          ) : null}
+        </div>
+
+        <div className={styles.btn_container}>
+          <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+            className={styles.btn}
+            isDisabled
+            type="submit"
+          >
+            Back
+          </Button>
+          <Button
+            background="linear-gradient(40deg,#45cafc,#303f9f)"
+            color="white"
+            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
+            className={styles.btn}
+            isDisabled={!formik.isValid}
+            type="submit"
+          >
+            Next
+          </Button>
+        </div>
       </form>
     </div>
   )

@@ -1,172 +1,223 @@
-import { VStack, Button, Table, Thead, Tbody, Tr, Th, Td, Checkbox } from '@chakra-ui/react'
+import { Button, Tag } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faClose } from '@fortawesome/free-solid-svg-icons'
 import { JNFFormThreeProps } from '../../../../utils/types'
 import coursesData from '../../../../utils/Data/coursesData'
 import styles from './JNFFormThree.module.scss'
-import { Input, RadioSelect } from '../../../index'
+import { Input, RadioSelect, Select, Error } from '../../../index'
 
 export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps) {
   const [ppo, setPPO] = useState('')
-  const [checkedBatches, setCheckedBatches] = useState([])
 
   const formik = useFormik({
     initialValues: {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      isPPO: Yup.string().required(),
-      tentativeStartDate: Yup.date().required('Date is required'),
-      jobProfile: Yup.string().required('job profile is required'),
-      stipend: Yup.number().required(),
-      duration: Yup.number().required('in months'),
-      ctc: Yup.number().required(),
-      jobDescription: Yup.string().required('job description is required'),
-      cgpi: Yup.number().required(),
+      isPPO: Yup.string(),
+      tentativeStartDate: Yup.string().required('Starting Date is required'),
+      jobProfile: Yup.string().required('Job profile required'),
+      stipend: Yup.number().required('stipend is required'),
+      duration: Yup.number(),
+      ctc: Yup.number(),
+      jobDescription: Yup.string().required('JD Link is required'),
+      cgpi: Yup.number().required('Cgpi is required'),
       eligibleBatches: Yup.string(),
+      course: Yup.string().required('Course is required'),
+      branch: Yup.string().required('Branch is required'),
     }),
     onSubmit: (values) => {
       onNext(values)
     },
   })
 
+  const [eligibleBatches, setEligibleBatches] = useState([
+    {
+      course_name: '',
+      branch_name: '',
+    },
+  ])
+
+  const uniqueList = eligibleBatches.filter(
+    (item, index, self) =>
+      index ===
+      self.findIndex(
+        (t) => t.branch_name === item.branch_name && t.course_name === item.course_name,
+      ),
+  )
+  const addBranch = () => {
+    if (formik.values.branch !== '' && formik.values.course !== '') {
+      setEligibleBatches([
+        ...uniqueList,
+        {
+          branch_name: formik.values.branch,
+          course_name: formik.values.course,
+        },
+      ])
+    }
+    formik.setFieldValue('', '')
+  }
+
+  const removeBranch = (index: number) => {
+    const list = [...uniqueList]
+    list.splice(index, 1)
+    setEligibleBatches(list)
+  }
+
   const handleIsPPOButton = (value: string) => {
     setPPO(value)
   }
+
   return (
-    <form
-      className={styles.container}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      onSubmit={formik.handleSubmit}
-    >
-      <VStack w="100%" maxW="700px">
-        <Input
-          name="tentativeStartDate"
-          type="date"
-          placeholder="Tentative Drive Date"
-          value={formik.values.tentativeStartDate}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+    <div className={styles.container}>
+      <h2 className={styles.title}>Intern Details</h2>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <div className={styles.field}>
+          <Input
+            name="tentativeStartDate"
+            type="date"
+            placeholder="Tentative Start Date"
+            value={formik.values.tentativeStartDate}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.tentativeStartDate && formik.errors.tentativeStartDate ? (
+            <Error errorMessage={formik.errors.tentativeStartDate} />
+          ) : null}
+        </div>
 
-        <Input
-          name="jobProfile"
-          placeholder="Job Profile"
-          value={formik.values.jobProfile}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <div className={styles.field}>
+          <Input
+            name="jobProfile"
+            placeholder="Job Profile"
+            value={formik.values.jobProfile}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.jobProfile && formik.errors.jobProfile ? (
+            <Error errorMessage={formik.errors.jobProfile} />
+          ) : null}
+        </div>
 
-        <Input
-          name="stipend"
-          placeholder="Stipend Offered"
-          value={formik.values.stipend || ''}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <div className={styles.field}>
+          <Input
+            name="stipend"
+            placeholder="Stipend Offered"
+            value={formik.values.stipend || ''}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.stipend && formik.errors.stipend ? (
+            <Error errorMessage={formik.errors.stipend} />
+          ) : null}
+        </div>
 
-        <RadioSelect
-          name="isPPO"
-          placeholder="PPO"
-          value={ppo}
-          onChange={handleIsPPOButton}
-          onBlur={formik.handleBlur}
-        />
+        <div className={styles.field}>
+          <RadioSelect
+            name="isPPO"
+            placeholder="Pre Placement Offer"
+            value={ppo}
+            onChange={handleIsPPOButton}
+            onBlur={formik.handleBlur}
+          />
+        </div>
 
-        <Input
-          name="ctc"
-          placeholder="CTC Offered"
-          value={formik.values.ctc || ''}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        {ppo === 'Yes' ? (
+          <div className={styles.field}>
+            <Input
+              name="ctc"
+              placeholder="CTC Offered"
+              value={formik.values.ctc || ''}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </div>
+        ) : null}
+        <div className={styles.field}>
+          <Input
+            name="duration"
+            placeholder="Duration(in months)"
+            value={formik.values.duration || ''}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.duration && formik.errors.duration ? (
+            <Error errorMessage={formik.errors.duration} />
+          ) : null}
+        </div>
 
-        <Input
-          name="duration"
-          placeholder="Duration"
-          value={formik.values.duration || ''}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <div className={styles.field}>
+          <Input
+            name="jobDescription"
+            placeholder="Job Description (JD) LINK"
+            value={formik.values.jobDescription}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.jobDescription && formik.errors.jobDescription ? (
+            <Error errorMessage={formik.errors.jobDescription} />
+          ) : null}
+        </div>
 
-        <Input
-          name="jobDescription"
-          placeholder="Job Description"
-          value={formik.values.jobDescription}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <div className={styles.field}>
+          <Input
+            name="cgpi"
+            placeholder="CGPI"
+            value={formik.values.cgpi || ''}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.cgpi && formik.errors.cgpi ? (
+            <Error errorMessage={formik.errors.cgpi} />
+          ) : null}
+        </div>
+        <div className={styles.field}>
+          <Select
+            value={formik.values.course}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            name="course"
+            placeholder="Eligible Courses"
+          >
+            {coursesData.map((cour) => (
+              <option key={cour.id}>{cour.courseName}</option>
+            ))}
+          </Select>
 
-        <Input
-          name="cgpi"
-          placeholder="CGPI"
-          value={formik.values.cgpi || ''}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
-        <div className={styles.label}>Eligible Batches</div>
-        {coursesData.map((course) => {
-          return (
-            <div key={course.id} className={styles.course_container}>
-              <Table variant="simple">
-                <Thead>
-                  <Tr>
-                    <Th className={styles.course_title}>{course.courseName}</Th>
-                    <Checkbox
-                      isChecked={
-                        setCheckedBatches.length ===
-                        course.batches.map((batch) => batch.batchName).length
-                      }
-                      onChange={() => {
-                        const checkBatches = course.batches.map((batch) => batch.batchName)
-                        if (checkedBatches.length === checkBatches.length) {
-                          setCheckedBatches([])
-                        } else {
-                          setCheckedBatches(checkBatches)
-                        }
-                      }}
-                    >
-                      Select All
-                    </Checkbox>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {course.batches.map((batch) => {
-                    return (
-                      <Tr key={batch.id}>
-                        <Td className={styles.batch_name}>{batch.batchName}</Td>
-                        <Td>
-                          <Checkbox
-                            isChecked={checkedBatches.includes(batch.batchName)}
-                            onChange={(event) => {
-                              event.stopPropagation()
-                              const index = checkedBatches.indexOf(batch.batchName)
-                              if (index > -1) {
-                                setCheckedBatches([
-                                  ...checkedBatches.slice(0, index),
-                                  ...checkedBatches.slice(index + 1),
-                                ])
-                              } else {
-                                setCheckedBatches([...checkedBatches, batch.batchName])
-                              }
-                            }}
-                          />
-                        </Td>
-                      </Tr>
-                    )
-                  })}
-                </Tbody>
-              </Table>
-            </div>
-          )
-        })}
+          <Select
+            value={formik.values.branch}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            name="branch"
+            placeholder="Eligible Branches"
+          >
+            {coursesData
+              .filter((cour) => cour.courseName === formik.values.course)
+              .map((cour) =>
+                cour.batches.map((batch) => <option key={batch.id}>{batch.batchName}</option>),
+              )}
+          </Select>
+          {formik.touched.eligibleBatches && formik.errors.eligibleBatches ? (
+            <Error errorMessage={formik.errors.eligibleBatches} />
+          ) : null}
 
+          <Button onClick={addBranch} className={styles.add_branches}>
+            <FontAwesomeIcon icon={faPlus} /> Add Branch
+          </Button>
+          <div className={styles.selected_branches_row}>
+            {uniqueList.slice(1).map((batches, idx: number) => (
+              <Tag className={styles.selected_branches} key={batches.branch_name}>
+                {batches.course_name} {batches.branch_name}
+                <Button size="xs" onClick={() => removeBranch(idx + 1)}>
+                  <FontAwesomeIcon icon={faClose} />
+                </Button>
+              </Tag>
+            ))}
+          </div>
+        </div>
         <div className={styles.btn_container}>
           <Button
             background="linear-gradient(40deg,#45cafc,#303f9f)"
@@ -189,7 +240,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
             Next
           </Button>
         </div>
-      </VStack>
-    </form>
+      </form>
+    </div>
   )
 }

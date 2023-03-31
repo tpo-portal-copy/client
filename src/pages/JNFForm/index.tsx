@@ -27,7 +27,7 @@ export default function JNFForm() {
     technicalTest: '',
     groupDiscussion: '',
     personalInterview: '',
-    noOfPersonVisiting: 0,
+    noOfPersonVisiting: undefined,
     jobLocation: '',
     tentativeDriveDate: '',
   })
@@ -35,29 +35,33 @@ export default function JNFForm() {
   const [jnfFormTwoData, setJNFFormTwoData] = useState({
     tentativeStartDate: '',
     jobProfile: '',
-    ctc: 0,
+    ctc: undefined,
     jobDescription: '',
-    cgpi: 0,
+    cgpi: undefined,
     eligibleBatches: '',
+    course: '',
+    branch: '',
   })
 
   const [jnfFormThreeData, setJNFFormThreeData] = useState({
-    isPPO: '',
+    isPPO: false,
     tentativeStartDate: '',
     jobProfile: '',
-    stipend: 0,
-    duration: 0,
-    ctc: 0,
+    stipend: undefined,
+    duration: undefined,
+    ctc: undefined,
     jobDescription: '',
-    cgpi: 0,
+    cgpi: undefined,
     eligibleBatches: '',
+    course: '',
+    branch: '',
   })
 
   const [jnfFormFourData, setJNFFormFourData] = useState({
-    type: '',
-    name: '',
-    mobileNumber: 0,
-    email: '',
+    type: undefined,
+    name: undefined,
+    mobileNumber: undefined,
+    email: undefined,
   })
 
   const [show, setShow] = useState(false)
@@ -80,12 +84,6 @@ export default function JNFForm() {
     setJNFFormThreeData(values)
   }
 
-  const handleFourNext = (values: JNFFormFourData) => {
-    setStep((prevStep) => prevStep + 1)
-    setValue((prevValue) => prevValue + 25)
-    setJNFFormFourData(values)
-  }
-
   const handleTwoBack = (values: JNFFormTwoData) => {
     setStep((prevStep) => prevStep - 1)
     setValue((prevValue) => prevValue - 25)
@@ -104,7 +102,7 @@ export default function JNFForm() {
     setJNFFormFourData({ ...values })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (values: any) => {
     setStep((prevStep) => prevStep + 1)
     setValue((prevValue) => prevValue + 25)
     setShow(true)
@@ -131,14 +129,14 @@ export default function JNFForm() {
           />
         )
 
-      // case 3:
-      //   return (
-      //     <JNFFormFour
-      //       data={jnfFormFourData}
-      //       onSubmit={() => handleSubmit()}}
-      //       onBack={(values) => handleFourBack(values)}
-      //     />
-      //   )
+      case 3:
+        return (
+          <JNFFormFour
+            data={jnfFormFourData}
+            onSubmit={(values) => handleSubmit(values)}
+            onBack={(values) => handleFourBack(values)}
+          />
+        )
       default:
         return null
     }

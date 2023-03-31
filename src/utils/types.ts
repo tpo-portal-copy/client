@@ -416,7 +416,7 @@ export interface JNFFormOneData {
   technicalTest: string
   groupDiscussion: string
   personalInterview: string
-  noOfPersonVisiting: number
+  noOfPersonVisiting: undefined
   jobLocation: string
   tentativeDriveDate: string
 }
@@ -437,10 +437,12 @@ export interface RadioSelectProps {
 export interface JNFFormTwoData {
   tentativeStartDate: string
   jobProfile: string
-  ctc: number
+  ctc: undefined
   jobDescription: string
-  cgpi: number
+  cgpi: undefined
   eligibleBatches: string
+  course: string
+  branch: string
 }
 
 export interface JNFFormTwoProps {
@@ -450,15 +452,17 @@ export interface JNFFormTwoProps {
 }
 
 export interface JNFFormThreeData {
-  isPPO: string
+  isPPO: boolean
   tentativeStartDate: string
   jobProfile: string
-  stipend: number
-  duration: number
-  ctc: number
+  stipend: undefined
+  duration: undefined
+  ctc: undefined
   jobDescription: string
-  cgpi: number
+  cgpi: undefined
   eligibleBatches: string
+  course: string
+  branch: string
 }
 
 export interface JNFFormThreeProps {
@@ -468,14 +472,21 @@ export interface JNFFormThreeProps {
 }
 
 export interface JNFFormFourData {
-  type: string
-  name: string
-  mobileNumber: number
-  email: string
+  type: undefined
+  name: undefined
+  mobileNumber: undefined
+  email: undefined
 }
 
 export interface JNFFormFourProps {
-  onSubmit: () => void
+  onSubmit: (values: JNFFormFourData) => void
   onBack: (values: JNFFormFourData) => void
   data: JNFFormFourData
+}
+
+export interface HRListProps {
+  hr_type: undefined
+  hr_name: undefined
+  hr_mobile_number: undefined
+  hr_email: undefined
 }
