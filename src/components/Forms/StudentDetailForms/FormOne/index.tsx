@@ -16,10 +16,11 @@ const genderData = [
 ]
 
 const categoryData = [
-  { id: 1, value: 'Gen' },
-  { id: 2, value: 'Gen-EWS' },
-  { id: 3, value: 'OBC' },
-  { id: 4, value: 'SC/ST' },
+  { id: 1, value: 'GEN' },
+  { id: 2, value: 'GEN-EWS' },
+  { id: 3, value: 'OBC-NCL' },
+  { id: 4, value: 'SC' },
+  { id: 5, value: 'ST' },
 ]
 
 const disabilityTypes = [

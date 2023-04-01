@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { drivesAPI } from '../utils/apis'
 
 const getDrives = async (params: any) => {

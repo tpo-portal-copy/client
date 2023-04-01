@@ -1,4 +1,4 @@
-export { default as Signup } from './Signup'
+export { default as Register } from './Register'
 export { default as Login } from './Login'
 export { default as StudentDetailsForm } from './StudentDetailsForm'
 export { default as Dashboard } from './Dashboard'

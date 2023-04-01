@@ -2,7 +2,7 @@
   background-color: var(--custom-white-v1);
   display: flex;
   flex-direction: column;
-  padding: 0.6rem 1.5rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   margin-bottom: 2rem;
   border-radius: 8px;
   width: 100%;
@@ -45,7 +45,7 @@
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         white-space: pre-wrap;
       }
     }

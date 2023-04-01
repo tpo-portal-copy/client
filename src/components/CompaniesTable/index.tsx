@@ -111,9 +111,7 @@ export default function CompaniesTable({ session, type, company }: CompaniesTabl
                     {data.results.map((datas: TopCompanies) => (
                       <Tr key={datas.name}>
                         <Td>
-                          <Link to={`/statistics-details/${datas.name}/${type}/${session}`}>
-                            {datas.name}
-                          </Link>
+                          <Link to={`/statistics-details/${datas.name}/${type}`}>{datas.name}</Link>
                         </Td>
                         <Td>{datas.offers}</Td>
                       </Tr>

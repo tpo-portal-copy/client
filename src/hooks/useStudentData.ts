@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { studentAPI } from '../utils/apis'
 
 const getStudentData = async (course?: string, branch?: string, cgpi?: number, page?: number) => {

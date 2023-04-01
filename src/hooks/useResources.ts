@@ -1,8 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { resourcesAPI } from '../utils/apis'
 
 const getResources = async (params: any, branch: string) => {
-  const response = await resourcesAPI.get(`/${branch}`, { params })
+  const response = await resourcesAPI.get(`/${branch}`, {
+    params,
+  })
   return response.data
 }
 

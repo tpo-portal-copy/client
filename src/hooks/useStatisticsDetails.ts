@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { statisticsDetailsAPI } from '../utils/apis'
 
 const getStatisticsDetailsData = async (company: string, jobType: string, session: string) => {
