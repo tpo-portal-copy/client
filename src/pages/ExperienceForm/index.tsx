@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react'
-import { Button, VStack, Text, Alert, AlertIcon, useToast } from '@chakra-ui/react'
+import { Button, VStack, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import jwtDecode from 'jwt-decode'
 import Lottie from 'lottie-react'
 import ReactQuill from 'react-quill'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +14,7 @@ import { Input, Select, Error } from '../../components'
 import styles from './ExperienceForm.module.scss'
 import { companiesAPI, experiencesAPI, rolesAPI } from '../../utils/apis'
 import { Company } from '../../utils/types'
+import { getDataFromLocalStorage } from '../../utils/functions'
 
 const typeData = [
   { id: 9, value: 'Internship' },
@@ -66,16 +68,21 @@ function decodeSelected(selected: string) {
 }
 
 export default function ExperienceForm() {
-  const [isLoading, setIsLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
-  const [search, setSearch] = useState('')
-  const toast = useToast()
   const [value, setValue] = useState('')
   const [company, setCompany] = useState([])
   const [roles, setRoles] = useState([])
   const [isClicked, setClicked] = useState(false)
 
   const navigate = useNavigate()
+
+  let accessDecoded: any
+  if ('access_token' in localStorage) {
+    const accessToken = getDataFromLocalStorage('access_token')
+    if (accessToken) {
+      accessDecoded = jwtDecode(accessToken)
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -104,9 +111,9 @@ export default function ExperienceForm() {
           difficulty: decodeDifficulty(formik.values.difficulty),
           anonymity: decodeAnonymity(formik.values.anonymity),
           selected: decodeSelected(formik.values.selected),
-          student: '191008',
+          student: accessDecoded.roll,
         }
-        const res = await experiencesAPI.post('/', objToSent)
+        await experiencesAPI.post('/', objToSent)
 
         setShowAnimation((state) => !state)
         setTimeout(() => {
@@ -322,9 +329,9 @@ export default function ExperienceForm() {
                     background="linear-gradient(40deg,#45cafc,#303f9f)"
                     color="white"
                     _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-                    isLoading={isLoading}
+                    isLoading={formik.isSubmitting}
                     type="submit"
-                    isDisabled={!formik.isValid || value.length < 50}
+                    isDisabled={!formik.isValid || value.length < 50 || formik.isSubmitting}
                   >
                     Submit Experience
                   </Button>

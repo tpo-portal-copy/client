@@ -18,7 +18,12 @@ import {
   EXPERIENCES_API,
   STUDENT_LOGIN_API,
   STUDENT_REGISTER_API,
+  STUDENT_OTP_API,
+  STUDENT_ELIGIBILITY_API,
+  STUDENT_LOGOUT_API,
+  REFRESH_TOKEN_API,
 } from './constants'
+import { getDataFromLocalStorage } from './functions'
 
 export const studentAPI = axios.create({
   baseURL: STUDENT_API,
@@ -30,10 +35,6 @@ export const drivesAPI = axios.create({
 
 export const experiencesAPI = axios.create({
   baseURL: EXPERIENCES_API,
-})
-
-export const companiesListAPI = axios.create({
-  baseURL: COMPANIES_API,
 })
 
 export const companiesDetailsAPI = axios.create({
@@ -94,4 +95,128 @@ export const studentLoginAPI = axios.create({
 
 export const studentRegisterAPI = axios.create({
   baseURL: STUDENT_REGISTER_API,
+})
+
+export const studentOtpAPI = axios.create({
+  baseURL: STUDENT_OTP_API,
+})
+
+export const studentLogoutAPI = axios.create({
+  baseURL: STUDENT_LOGOUT_API,
+})
+
+export const studentEligibilityAPI = axios.create({
+  baseURL: STUDENT_ELIGIBILITY_API,
+})
+
+export const refreshTokenAPI = axios.create({
+  baseURL: REFRESH_TOKEN_API,
+})
+
+studentAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+drivesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+dashboardAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+experiencesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+companiesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+clustersAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+companiesDetailsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+coursesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+statesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+statisticsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+statisticsDetailsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+citiesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+branchesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+rolesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+resourcesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+recentNotificationsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+studentEligibilityAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+refreshTokenAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
 })

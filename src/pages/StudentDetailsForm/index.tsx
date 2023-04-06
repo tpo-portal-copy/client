@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Text } from '@chakra-ui/react'
+import jwtDecode from 'jwt-decode'
 import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/136670-space.json'
@@ -10,7 +11,8 @@ import { FormFour, FormOne, FormThree, FormTwo } from '../../components/Forms/St
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import { FormOneData, FormThreeData, FormTwoData } from '../../utils/types'
 import { data } from '../../utils/Data/coursesAllowedData'
-import { clustersAPI, studentAPI } from '../../utils/apis'
+import { getDataFromLocalStorage, setDataToLocalStorage } from '../../utils/functions'
+import { clustersAPI, studentAPI, studentEligibilityAPI } from '../../utils/apis'
 
 export default function StudentDetailsForm() {
   const [value, setValue] = useState(0)
@@ -118,7 +120,7 @@ export default function StudentDetailsForm() {
     if (values.gap_ug_pg === undefined) {
       delete values.gap_ug_pg
     }
-    setValue((prevValue) => prevValue + 25)
+
     setFormThreeData(values)
 
     try {
@@ -128,18 +130,28 @@ export default function StudentDetailsForm() {
         course: parsedObj.name,
         year: parseInt(values.current_year, 10),
       })
-      setStep((prevStep) => prevStep + 1)
+
+      let accessDecoded: any
+      const accessToken = getDataFromLocalStorage('access_token')
+      if (accessToken) {
+        accessDecoded = jwtDecode(accessToken)
+      }
+
+      const rollNo = accessDecoded.roll
 
       await studentAPI.post('/', {
         ...formOneData,
         ...formTwoData,
         ...values,
-        roll: '193092',
+        roll: rollNo,
         gender: extractGender(formOneData.gender),
         disability_type: extractDisabilityType(formOneData.disability_type),
         course: parsedObj.id,
         current_year: parseInt(values.current_year, 10),
       })
+
+      setValue((prevValue) => prevValue + 25)
+      setStep((prevStep) => prevStep + 1)
     } catch (err) {
       console.log(err)
     }
@@ -165,19 +177,29 @@ export default function StudentDetailsForm() {
     const clusterObj = {}
     let i = 1
     let j = 1
-    Object.entries(values).forEach(([key, entryValue]) => {
-      if (key.includes('cluster')) {
-        if (entryValue) {
-          Object.assign(clusterObj, { [`cluster_${j}`]: i })
-          j += 1
+    Object.entries(values)
+      .slice(1)
+      .forEach(([key, entryValue]) => {
+        if (key.includes('cluster')) {
+          if (entryValue) {
+            Object.assign(clusterObj, { [`cluster_${j}`]: i })
+            j += 1
+          }
+          i += 1
         }
-        i += 1
-      }
-    })
+      })
+
+    let accessDecoded: any
+    const accessToken = getDataFromLocalStorage('access_token')
+    if (accessToken) {
+      accessDecoded = jwtDecode(accessToken)
+    }
+
+    const rollNo = accessDecoded.roll
 
     const placementObj = {
-      roll: '193092',
-      student: '193092',
+      roll: rollNo,
+      student: rollNo,
       cluster: {
         ...clusterObj,
       },
@@ -186,14 +208,14 @@ export default function StudentDetailsForm() {
     }
 
     const internObj = {
-      roll: '21mcs001',
-      student: '21mcs001',
+      roll: rollNo,
+      student: rollNo,
       resume: values.resume,
     }
 
     const notSittingObj = {
-      roll: '21mcs004',
-      student: '21mcs004',
+      roll: rollNo,
+      student: rollNo,
       reason: values.reason,
     }
 
@@ -213,6 +235,10 @@ export default function StudentDetailsForm() {
           })
         }
       }
+
+      const res = await studentEligibilityAPI.get(`/${rollNo}`)
+
+      setDataToLocalStorage('eligibility', res.data.eligible)
 
       setStep((prevStep) => prevStep + 1)
       setValue((prevValue) => prevValue + 25)

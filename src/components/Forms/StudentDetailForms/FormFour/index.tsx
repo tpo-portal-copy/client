@@ -67,7 +67,7 @@ export default function FormFour({ onSubmit, course, year }: FormFourProps) {
       if (Math.abs(selectedClusters) !== 3) return
     }
 
-    const res = await formik.handleSubmit()
+    await formik.handleSubmit()
   }
 
   return (
@@ -298,6 +298,8 @@ export default function FormFour({ onSubmit, course, year }: FormFourProps) {
           _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
           className={styles.btn}
           type="submit"
+          disabled={formik.isSubmitting || !formik.isValid}
+          isLoading={formik.isSubmitting}
         >
           Submit
         </Button>
