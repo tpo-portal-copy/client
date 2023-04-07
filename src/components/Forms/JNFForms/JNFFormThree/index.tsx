@@ -18,7 +18,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
     },
     validationSchema: Yup.object().shape({
       isPPO: Yup.string(),
-      tentativeStartDate: Yup.string().required('Starting Date is required'),
+      tentativeJoiningDate: Yup.string().required('Starting Date is required'),
       jobProfile: Yup.string().required('Job profile required'),
       stipend: Yup.number().required('stipend is required'),
       duration: Yup.number(),
@@ -77,15 +77,15 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <div className={styles.field}>
           <Input
-            name="tentativeStartDate"
+            name="tentativeJoiningDate"
             type="date"
-            placeholder="Tentative Start Date"
-            value={formik.values.tentativeStartDate}
+            placeholder="Tentative Joining Date"
+            value={formik.values.tentativeJoiningDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.tentativeStartDate && formik.errors.tentativeStartDate ? (
-            <Error errorMessage={formik.errors.tentativeStartDate} />
+          {formik.touched.tentativeJoiningDate && formik.errors.tentativeJoiningDate ? (
+            <Error errorMessage={formik.errors.tentativeJoiningDate} />
           ) : null}
         </div>
 

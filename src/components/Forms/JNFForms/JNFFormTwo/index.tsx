@@ -15,7 +15,7 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      tentativeStartDate: Yup.date().required('Date is required'),
+      tentativeJoiningDate: Yup.date().required('Date is required'),
       jobProfile: Yup.string().required('job profile is required'),
       ctc: Yup.number().required(),
       jobDescription: Yup.string().required('job description is required'),
@@ -69,15 +69,15 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <div className={styles.field}>
           <Input
-            name="tentativeStartDate"
+            name="tentativeJoiningDate"
             type="date"
-            placeholder="Tentative Start Date"
-            value={formik.values.tentativeStartDate}
+            placeholder="Tentative Joining Date"
+            value={formik.values.tentativeJoiningDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.tentativeStartDate && formik.errors.tentativeStartDate ? (
-            <Error errorMessage={formik.errors.tentativeStartDate} />
+          {formik.touched.tentativeJoiningDate && formik.errors.tentativeJoiningDate ? (
+            <Error errorMessage={formik.errors.tentativeJoiningDate} />
           ) : null}
         </div>
         <div className={styles.field}>

@@ -10,8 +10,8 @@ export default function RadioSelect({ name, placeholder, onChange, value }: Radi
       </label>
       <RadioGroup onChange={onChange} value={value}>
         <Stack direction="row" spacing={200}>
-          <Radio value="Yes">Yes</Radio>
-          <Radio value="No">No</Radio>
+          <Radio value="true">Yes</Radio>
+          <Radio value="false">No</Radio>
         </Stack>
       </RadioGroup>
     </div>

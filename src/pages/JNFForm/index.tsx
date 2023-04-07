@@ -12,15 +12,17 @@ import {
   JNFFormThreeData,
   JNFFormFourData,
 } from '../../utils/types'
+import { getCurrentSession } from '../../utils/functions'
 
 export default function JNFForm() {
   const [value, setValue] = useState(0)
   const [step, setStep] = useState(0)
   const [jnfFormOneData, setJNFFormOneData] = useState({
     companyName: '',
-    session: '',
+    session: getCurrentSession(),
     isPlacement: '',
-    isIntern: '',
+    isSummerIntern: '',
+    isSixMonIntern: '',
     modeOfHiring: '',
     prePlacementTalk: '',
     aptitudeTest: '',
@@ -33,7 +35,7 @@ export default function JNFForm() {
   })
 
   const [jnfFormTwoData, setJNFFormTwoData] = useState({
-    tentativeStartDate: '',
+    tentativeJoiningDate: '',
     jobProfile: '',
     ctc: undefined,
     jobDescription: '',
@@ -45,7 +47,7 @@ export default function JNFForm() {
 
   const [jnfFormThreeData, setJNFFormThreeData] = useState({
     isPPO: false,
-    tentativeStartDate: '',
+    tentativeJoiningDate: '',
     jobProfile: '',
     stipend: undefined,
     duration: undefined,
@@ -66,15 +68,37 @@ export default function JNFForm() {
 
   const [show, setShow] = useState(false)
 
+  const getProgressBarPercentageIncrease = () => {
+    let numOfFormsShowed = 0
+    if (jnfFormOneData.isPlacement === 'true') numOfFormsShowed += 1
+    if (jnfFormOneData.isSummerIntern === 'true') numOfFormsShowed += 1
+    if (jnfFormOneData.isSixMonIntern === 'true') numOfFormsShowed += 1
+    const percentageIncrease = 100 / numOfFormsShowed
+    return percentageIncrease
+  }
+
   const handleOneNext = (values: JNFFormOneData) => {
-    setStep((prevStep) => prevStep + 1)
-    setValue((prevValue) => prevValue + 25)
+    const percentageIncrease = getProgressBarPercentageIncrease()
+
+    if (jnfFormOneData.isPlacement === 'true') {
+      setStep((prevStep) => prevStep + 1)
+    } else {
+      setStep((prevStep) => prevStep + 2)
+    }
+    setValue((prevValue) => prevValue + percentageIncrease)
+
     setJNFFormOneData(values)
   }
 
   const handleTwoNext = (values: JNFFormTwoData) => {
-    setStep((prevStep) => prevStep + 1)
-    setValue((prevValue) => prevValue + 25)
+    const percentageIncrease = getProgressBarPercentageIncrease()
+
+    if (jnfFormOneData.isPlacement === 'true') {
+      setStep((prevStep) => prevStep + 1)
+    } else {
+      setStep((prevStep) => prevStep + 2)
+    }
+    setValue((prevValue) => prevValue + percentageIncrease)
     setJNFFormTwoData(values)
   }
 

@@ -74,6 +74,22 @@ export const isStudentEligibleForPlacementOrIntern = () => {
   return true
 }
 
+export const getCurrentSession = () => {
+  const currDate = new Date()
+
+  const yearSessionStartingDate = new Date('2000-07-01T00:00:00').setFullYear(
+    currDate.getFullYear(),
+  )
+
+  const currentYear = currDate.getFullYear()
+
+  if (yearSessionStartingDate - Number(currDate) > 0) {
+    return `${currentYear - 1}-${currentYear.toString().slice(2)}`
+  }
+
+  return `${currentYear}-${(currentYear + 1).toString().slice(2)}`
+}
+
 export const setTimerForTokenExpiration = (
   navigate: NavigateFunction,
   onLogoutHandler: () => void,

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -6,54 +5,13 @@ import { JNFFormOneProps } from '../../../../utils/types'
 import styles from './JNFFormOne.module.scss'
 import { Input, Select, RadioSelect, Error } from '../../../index'
 
-const sessionData = [
-  { id: 0, value: '2020 - 2021' },
-  { id: 1, value: '2021 - 2022' },
-  { id: 2, value: '2022 - 2023' },
-]
-
-const ModeOfHiringData = [
-  { id: 0, value: 'Virtual' },
-  { id: 1, value: 'On Site' },
+const modeOfHiringData = [
+  { id: 0, value: 'virtual', label: 'Virtual' },
+  { id: 1, value: 'onsite', label: 'On-Site' },
+  { id: 2, value: 'hybrid', label: 'Hybrid' },
 ]
 
 export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
-  const [placement, setPlacement] = useState('')
-  const [intern, setIntern] = useState('')
-  const [prePlacementTalk, setPrePlacementTalk] = useState('')
-  const [technicalTest, setTechnicalTest] = useState('')
-  const [aptitudeTest, setAptitudeTest] = useState('')
-  const [groupDiscussion, setGroupDiscussionTest] = useState('')
-  const [personalInterview, setPersonalInterview] = useState('')
-
-  const handlePlacementRadioButton = (value: string) => {
-    setPlacement(value)
-  }
-
-  const handleInternRadioButton = (value: string) => {
-    setIntern(value)
-  }
-
-  const handlePrePlacementTalkRadioButton = (value: string) => {
-    setPrePlacementTalk(value)
-  }
-
-  const handleAptitudeRadioButton = (value: string) => {
-    setAptitudeTest(value)
-  }
-
-  const handleTechnicalTestRadioButton = (value: string) => {
-    setTechnicalTest(value)
-  }
-
-  const handleGroupDiscussionRadioButton = (value: string) => {
-    setGroupDiscussionTest(value)
-  }
-
-  const handlePersonalInterviewRadioButton = (value: string) => {
-    setPersonalInterview(value)
-  }
-
   const formik = useFormik({
     initialValues: {
       ...data,
@@ -61,22 +19,56 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
     validationSchema: Yup.object().shape({
       companyName: Yup.string().required('Company Name is Required'),
       session: Yup.string().required('Session is required'),
-      isPlacement: Yup.string(),
-      isIntern: Yup.string(),
-      modeOfHiring: Yup.string().required('Mode of hiring is required'),
-      prePlacementTalk: Yup.string(),
-      aptitudeTest: Yup.string(),
-      technicalTest: Yup.string(),
-      groupDiscussion: Yup.string(),
-      personalInterview: Yup.string(),
+      isPlacement: Yup.string().required('Placement Info is required'),
+      isSummerIntern: Yup.string().required('Summer Intern Info is required'),
+      isSixMonIntern: Yup.string().required('Six Months Intern Info is required'),
+      modeOfHiring: Yup.string().required('Mode of Hiring is required'),
+      prePlacementTalk: Yup.string().required('Pre-Placement Talk Info is required'),
+      aptitudeTest: Yup.string().required('Aptitude Test Info is required'),
+      technicalTest: Yup.string().required('Technical Test Info is required'),
+      groupDiscussion: Yup.string().required('Group Discussion Info is required'),
+      personalInterview: Yup.string().required('Personal Interview Info is required'),
       noOfPersonVisiting: Yup.number().positive('Number of person visiting should be positive'),
+      // .required('Number of persons visiting the college is required'),
       jobLocation: Yup.string().required('Job Location is required'),
-      tentativeDriveDate: Yup.date().required('Drive Date is required'),
+      tentativeDriveDate: Yup.date().required('Tentative Drive Date is required'),
     }),
     onSubmit: (values) => {
       onNext(values)
     },
   })
+
+  const handlePlacementRadioButton = (value: string) => {
+    formik.setFieldValue('isPlacement', value)
+  }
+
+  const handleSummerInternRadioButton = (value: string) => {
+    formik.setFieldValue('isSummerIntern', value)
+  }
+
+  const handleSixMonInternRadioButton = (value: string) => {
+    formik.setFieldValue('isSixMonIntern', value)
+  }
+
+  const handlePrePlacementTalkRadioButton = (value: string) => {
+    formik.setFieldValue('prePlacementTalk', value)
+  }
+
+  const handleAptitudeRadioButton = (value: string) => {
+    formik.setFieldValue('aptitudeTest', value)
+  }
+
+  const handleTechnicalTestRadioButton = (value: string) => {
+    formik.setFieldValue('technicalTest', value)
+  }
+
+  const handleGroupDiscussionRadioButton = (value: string) => {
+    formik.setFieldValue('groupDiscussion', value)
+  }
+
+  const handlePersonalInterviewRadioButton = (value: string) => {
+    formik.setFieldValue('personalInterview', value)
+  }
 
   return (
     <div className={styles.container}>
@@ -95,26 +87,20 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           ) : null}
         </div>
         <div className={styles.field}>
-          <Select
-            value={formik.values.session}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
+          <Input
             name="session"
             placeholder="Session"
-          >
-            {sessionData.map((session) => (
-              <option key={session.id}>{session.value}</option>
-            ))}
-          </Select>
-          {formik.touched.session && formik.errors.session ? (
-            <Error errorMessage={formik.errors.session} />
-          ) : null}
+            value={formik.values.session}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            isDisabled
+          />
         </div>
         <div className={styles.field}>
           <RadioSelect
             name="isPlacement"
             placeholder="Placement"
-            value={placement}
+            value={formik.values.isPlacement}
             onChange={handlePlacementRadioButton}
             onBlur={formik.handleBlur}
           />
@@ -124,14 +110,27 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
         </div>
         <div className={styles.field}>
           <RadioSelect
-            name="isIntern"
-            placeholder="Intern"
-            value={intern}
-            onChange={handleInternRadioButton}
+            name="isSummerIntern"
+            placeholder="Summer Intern"
+            value={formik.values.isSummerIntern}
+            onChange={handleSummerInternRadioButton}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.isIntern && formik.errors.isIntern ? (
-            <Error errorMessage={formik.errors.isIntern} />
+          {formik.touched.isSummerIntern && formik.errors.isSummerIntern ? (
+            <Error errorMessage={formik.errors.isSummerIntern} />
+          ) : null}
+        </div>
+
+        <div className={styles.field}>
+          <RadioSelect
+            name="isSixMonIntern"
+            placeholder="6 Months Intern"
+            value={formik.values.isSixMonIntern}
+            onChange={handleSixMonInternRadioButton}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.isSixMonIntern && formik.errors.isSixMonIntern ? (
+            <Error errorMessage={formik.errors.isSixMonIntern} />
           ) : null}
         </div>
 
@@ -143,8 +142,10 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             name="modeOfHiring"
             placeholder="Mode of Hiring"
           >
-            {ModeOfHiringData.map((ModeOfHiring) => (
-              <option key={ModeOfHiring.id}>{ModeOfHiring.value}</option>
+            {modeOfHiringData.map((modeOfHiring) => (
+              <option key={modeOfHiring.id} value={modeOfHiring.value}>
+                {modeOfHiring.label}
+              </option>
             ))}
           </Select>
           {formik.touched.modeOfHiring && formik.errors.modeOfHiring ? (
@@ -156,73 +157,93 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           <RadioSelect
             name="prePlacementTalk"
             placeholder="Pre Placement Talk"
-            value={prePlacementTalk}
+            value={formik.values.prePlacementTalk}
             onChange={handlePrePlacementTalkRadioButton}
             onBlur={formik.handleBlur}
           />
+          {formik.touched.prePlacementTalk && formik.errors.prePlacementTalk ? (
+            <Error errorMessage={formik.errors.prePlacementTalk} />
+          ) : null}
         </div>
 
         <div className={styles.field}>
           <RadioSelect
             name="aptitudeTest"
             placeholder="Aptitude Test"
-            value={aptitudeTest}
+            value={formik.values.aptitudeTest}
             onChange={handleAptitudeRadioButton}
             onBlur={formik.handleBlur}
           />
+          {formik.touched.aptitudeTest && formik.errors.aptitudeTest ? (
+            <Error errorMessage={formik.errors.aptitudeTest} />
+          ) : null}
         </div>
 
         <div className={styles.field}>
           <RadioSelect
             name="technicalTest"
             placeholder="Technical Test"
-            value={technicalTest}
+            value={formik.values.technicalTest}
             onChange={handleTechnicalTestRadioButton}
             onBlur={formik.handleBlur}
           />
+          {formik.touched.technicalTest && formik.errors.technicalTest ? (
+            <Error errorMessage={formik.errors.technicalTest} />
+          ) : null}
         </div>
 
         <div className={styles.field}>
           <RadioSelect
             name="groupDiscussion"
             placeholder="Group Disscusion"
-            value={groupDiscussion}
+            value={formik.values.groupDiscussion}
             onChange={handleGroupDiscussionRadioButton}
             onBlur={formik.handleBlur}
           />
+          {formik.touched.groupDiscussion && formik.errors.groupDiscussion ? (
+            <Error errorMessage={formik.errors.groupDiscussion} />
+          ) : null}
         </div>
 
         <div className={styles.field}>
           <RadioSelect
             name="personalInterview"
             placeholder="Personal Interview"
-            value={personalInterview}
+            value={formik.values.personalInterview}
             onChange={handlePersonalInterviewRadioButton}
             onBlur={formik.handleBlur}
           />
-        </div>
-
-        <div className={styles.field}>
-          <Input
-            name="noOfPersonVisiting"
-            placeholder="Number of person Visitng"
-            value={formik.values.noOfPersonVisiting || ''}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.noOfPersonVisiting && formik.errors.noOfPersonVisiting ? (
-            <Error errorMessage={formik.errors.noOfPersonVisiting} />
+          {formik.touched.personalInterview && formik.errors.personalInterview ? (
+            <Error errorMessage={formik.errors.personalInterview} />
           ) : null}
         </div>
+
+        {(formik.values.modeOfHiring === 'onsite' || formik.values.modeOfHiring === 'hybrid') && (
+          <div className={styles.field}>
+            <Input
+              name="noOfPersonVisiting"
+              placeholder="Number of persons Visiting"
+              value={formik.values.noOfPersonVisiting || ''}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.noOfPersonVisiting && formik.errors.noOfPersonVisiting ? (
+              <Error errorMessage={formik.errors.noOfPersonVisiting} />
+            ) : null}
+          </div>
+        )}
 
         <div className={styles.field}>
           <Input
             name="jobLocation"
-            placeholder="Job Locations"
+            placeholder="Job Locations For ex. Delhi,Banglore"
             value={formik.values.jobLocation}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
+          {formik.touched.jobLocation && formik.errors.jobLocation ? (
+            <Error errorMessage={formik.errors.jobLocation} />
+          ) : null}
         </div>
 
         <div className={styles.field}>

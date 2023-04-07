@@ -410,7 +410,8 @@ export interface JNFFormOneData {
   companyName: string
   session: string
   isPlacement: string
-  isIntern: string
+  isSummerIntern: string
+  isSixMonIntern: string
   modeOfHiring: string
   prePlacementTalk: string
   aptitudeTest: string
@@ -436,7 +437,7 @@ export interface RadioSelectProps {
 }
 
 export interface JNFFormTwoData {
-  tentativeStartDate: string
+  tentativeJoiningDate: string
   jobProfile: string
   ctc: undefined
   jobDescription: string
@@ -454,7 +455,7 @@ export interface JNFFormTwoProps {
 
 export interface JNFFormThreeData {
   isPPO: boolean
-  tentativeStartDate: string
+  tentativeJoiningDate: string
   jobProfile: string
   stipend: undefined
   duration: undefined
