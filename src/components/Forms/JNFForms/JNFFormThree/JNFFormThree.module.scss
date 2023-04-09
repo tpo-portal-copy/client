@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  max-width: 582px;
   padding: 1.5rem 0;
 
   @media screen and (max-width: 525px) {
@@ -19,7 +18,6 @@
   }
 
   .form {
-    max-width: 600px;
     margin: auto;
 
     .field {

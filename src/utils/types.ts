@@ -418,7 +418,7 @@ export interface JNFFormOneData {
   technicalTest: string
   groupDiscussion: string
   personalInterview: string
-  noOfPersonVisiting: undefined
+  noOfPersonVisiting: number | undefined
   jobLocation: string
   tentativeDriveDate: string
 }
@@ -436,15 +436,21 @@ export interface RadioSelectProps {
   value: string
 }
 
+export interface EligibleBranch {
+  branch_name: string
+  course_name: string
+}
+
 export interface JNFFormTwoData {
   tentativeJoiningDate: string
   jobProfile: string
-  ctc: undefined
+  ctc: number | undefined
   jobDescription: string
-  cgpi: undefined
+  cgpi: number | undefined
   eligibleBatches: string
   course: string
   branch: string
+  hasIntern: boolean
 }
 
 export interface JNFFormTwoProps {
@@ -457,11 +463,11 @@ export interface JNFFormThreeData {
   isPPO: boolean
   tentativeJoiningDate: string
   jobProfile: string
-  stipend: undefined
-  duration: undefined
-  ctc: undefined
+  duration: number | undefined
+  stipend: number | undefined
+  ctc: number | undefined
   jobDescription: string
-  cgpi: undefined
+  cgpi: number | undefined
   eligibleBatches: string
   course: string
   branch: string
@@ -474,21 +480,39 @@ export interface JNFFormThreeProps {
 }
 
 export interface JNFFormFourData {
-  type: undefined
-  name: undefined
-  mobileNumber: undefined
-  email: undefined
+  tentativeJoiningDate: string
+  jobProfile: string
+  stipend: number | undefined
+  ctcAfterIntern: number | undefined
+  jobDescription: string
+  cgpi: number | undefined
+  eligibleBatches: string
+  course: string
+  branch: string
 }
 
 export interface JNFFormFourProps {
-  onSubmit: (values: JNFFormFourData) => void
+  onNext: (values: JNFFormFourData) => void
   onBack: (values: JNFFormFourData) => void
   data: JNFFormFourData
 }
 
+export interface JNFFormFiveData {
+  type: string
+  name: string
+  mobileNumber: number | undefined
+  email: string
+}
+
+export interface JNFFormFiveProps {
+  onSubmit: (values: JNFFormFiveData) => void
+  onBack: (values: JNFFormFiveData) => void
+  data: JNFFormFiveData
+}
+
 export interface HRListProps {
-  hr_type: undefined
-  hr_name: undefined
-  hr_mobile_number: undefined
-  hr_email: undefined
+  hr_type: string
+  hr_name: string
+  hr_mobile_number: number | undefined
+  hr_email: string
 }

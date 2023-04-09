@@ -1,16 +1,16 @@
-import { Button, Tag } from '@chakra-ui/react'
-import { useFormik } from 'formik'
+import { Button, Table, Tag, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { FormikState, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faClose } from '@fortawesome/free-solid-svg-icons'
-import { JNFFormThreeProps } from '../../../../utils/types'
+import { faPlus, faClose, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { EligibleBranch, JNFFormThreeData, JNFFormThreeProps } from '../../../../utils/types'
 import coursesData from '../../../../utils/Data/coursesData'
 import styles from './JNFFormThree.module.scss'
 import { Input, RadioSelect, Select, Error } from '../../../index'
 
 export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps) {
-  const [ppo, setPPO] = useState('')
+  const [internProfiles, setInternProfiles] = useState<Array<object>>([])
 
   const formik = useFormik({
     initialValues: {
@@ -34,12 +34,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
     },
   })
 
-  const [eligibleBatches, setEligibleBatches] = useState([
-    {
-      course_name: '',
-      branch_name: '',
-    },
-  ])
+  const [eligibleBatches, setEligibleBatches] = useState<Array<EligibleBranch>>([])
 
   const uniqueList = eligibleBatches.filter(
     (item, index, self) =>
@@ -48,6 +43,57 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
         (t) => t.branch_name === item.branch_name && t.course_name === item.course_name,
       ),
   )
+
+  const clearForm = () => {
+    const initialValues: JNFFormThreeData = {
+      isPPO: false,
+      tentativeJoiningDate: '',
+      jobProfile: '',
+      stipend: undefined,
+      duration: undefined,
+      ctc: undefined,
+      jobDescription: '',
+      cgpi: undefined,
+      eligibleBatches: '',
+      course: '',
+      branch: '',
+    }
+
+    const formikState: FormikState<JNFFormThreeData> = {
+      values: initialValues,
+      touched: {},
+      errors: {},
+      isSubmitting: false,
+      isValidating: false,
+      submitCount: 0,
+    }
+
+    formik.setFormikState(formikState)
+    setEligibleBatches([])
+  }
+
+  const addJobProfile = async () => {
+    const res = await formik.validateForm()
+
+    if (Object.values(res).length > 0) return
+
+    const newProfile = {
+      jobProfile: formik.values.jobProfile,
+      stipend: formik.values.stipend,
+      duration: formik.values.duration,
+      jdLink: formik.values.jobDescription,
+      cgpi: formik.values.cgpi,
+      eligibleBatches,
+      tentativeJoiningDate: formik.values.tentativeJoiningDate,
+      ctc: formik.values.ctc,
+      isPPO: formik.values.isPPO,
+    }
+
+    const newInternProfiles = [...internProfiles, newProfile]
+    setInternProfiles(newInternProfiles)
+    clearForm()
+  }
+
   const addBranch = () => {
     if (formik.values.branch !== '' && formik.values.course !== '') {
       setEligibleBatches([
@@ -58,7 +104,6 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
         },
       ])
     }
-    formik.setFieldValue('', '')
   }
 
   const removeBranch = (index: number) => {
@@ -68,7 +113,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
   }
 
   const handleIsPPOButton = (value: string) => {
-    setPPO(value)
+    formik.setFieldValue('isPPO', value === 'true')
   }
 
   return (
@@ -105,8 +150,9 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
         <div className={styles.field}>
           <Input
             name="stipend"
+            type="number"
             placeholder="Stipend Offered"
-            value={formik.values.stipend || ''}
+            value={formik.values.stipend}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -119,18 +165,19 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
           <RadioSelect
             name="isPPO"
             placeholder="Pre Placement Offer"
-            value={ppo}
+            value={formik.values.isPPO ? 'true' : 'false'}
             onChange={handleIsPPOButton}
             onBlur={formik.handleBlur}
           />
         </div>
 
-        {ppo === 'Yes' ? (
+        {formik.values.isPPO ? (
           <div className={styles.field}>
             <Input
               name="ctc"
-              placeholder="CTC Offered"
-              value={formik.values.ctc || ''}
+              type="number"
+              placeholder="CTC Offered After PPO"
+              value={formik.values.ctc}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
@@ -139,8 +186,9 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
         <div className={styles.field}>
           <Input
             name="duration"
+            type="number"
             placeholder="Duration(in months)"
-            value={formik.values.duration || ''}
+            value={formik.values.duration}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -165,8 +213,9 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
         <div className={styles.field}>
           <Input
             name="cgpi"
+            type="number"
             placeholder="CGPI"
-            value={formik.values.cgpi || ''}
+            value={formik.values.cgpi}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -208,16 +257,62 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
             <FontAwesomeIcon icon={faPlus} /> Add Branch
           </Button>
           <div className={styles.selected_branches_row}>
-            {uniqueList.slice(1).map((batches, idx: number) => (
+            {uniqueList.map((batches, idx: number) => (
               <Tag className={styles.selected_branches} key={batches.branch_name}>
                 {batches.course_name} {batches.branch_name}
-                <Button size="xs" onClick={() => removeBranch(idx + 1)}>
+                <Button size="xs" onClick={() => removeBranch(idx)}>
                   <FontAwesomeIcon icon={faClose} />
                 </Button>
               </Tag>
             ))}
           </div>
         </div>
+        <div className={styles.confirm_btn}>
+          <Button onClick={addJobProfile} isDisabled={!formik.isValid}>
+            <FontAwesomeIcon icon={faCheck} color="#54B435" />
+          </Button>
+          <Button onClick={clearForm}>
+            <FontAwesomeIcon icon={faTrash} color="#E64848" />
+          </Button>
+        </div>
+        <Table w="100%" className={styles.table_container}>
+          <Thead>
+            <Tr>
+              <Th>Job Profile</Th>
+              <Th>Stipend Offered</Th>
+              <Th>Duration (in Months)</Th>
+              <Th>JD Link</Th>
+              <Th>Min. CGPI</Th>
+              <Th>Eligible Branches</Th>
+              <Th>Tentative Joining Date</Th>
+              <Th>PPO Offered</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {internProfiles.map((internProfile: any) => {
+              return (
+                <Tr key={internProfile.jobProfile}>
+                  <Td>{internProfile.jobProfile}</Td>
+                  <Td>{internProfile.stipend}</Td>
+                  <Td>{internProfile.duration}</Td>
+                  <Td>{internProfile.jdLink}</Td>
+                  <Td>{internProfile.cgpi}</Td>
+                  <Td>
+                    {internProfile.eligibleBatches.map((batch: any) => {
+                      return (
+                        <li key={`${batch.course_name}: ${batch.branch_name}`}>
+                          {`${batch.course_name}: ${batch.branch_name}`}
+                        </li>
+                      )
+                    })}
+                  </Td>
+                  <Td>{internProfile.tentativeJoiningDate}</Td>
+                  <Td>{internProfile.isPPO ? `Expected CTC: ${internProfile.ctc} LPA` : 'No'}</Td>
+                </Tr>
+              )
+            })}
+          </Tbody>
+        </Table>
         <div className={styles.btn_container}>
           <Button
             background="linear-gradient(40deg,#45cafc,#303f9f)"

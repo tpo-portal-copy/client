@@ -4,12 +4,19 @@ import Lottie from 'lottie-react'
 import ProgressBar from '../../components/ProgressBar'
 import Animation from '../../assets/animations/136670-space.json'
 import styles from './JNFForm.module.scss'
-import { JNFFormOne, JNFFormTwo, JNFFormThree, JNFFormFour } from '../../components/Forms/JNFForms'
+import {
+  JNFFormOne,
+  JNFFormTwo,
+  JNFFormThree,
+  JNFFormFour,
+  JNFFormFive,
+} from '../../components/Forms/JNFForms'
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import {
   JNFFormOneData,
   JNFFormTwoData,
   JNFFormThreeData,
+  JNFFormFiveData,
   JNFFormFourData,
 } from '../../utils/types'
 import { getCurrentSession } from '../../utils/functions'
@@ -17,7 +24,7 @@ import { getCurrentSession } from '../../utils/functions'
 export default function JNFForm() {
   const [value, setValue] = useState(0)
   const [step, setStep] = useState(0)
-  const [jnfFormOneData, setJNFFormOneData] = useState({
+  const [jnfFormOneData, setJNFFormOneData] = useState<JNFFormOneData>({
     companyName: '',
     session: getCurrentSession(),
     isPlacement: '',
@@ -34,7 +41,7 @@ export default function JNFForm() {
     tentativeDriveDate: '',
   })
 
-  const [jnfFormTwoData, setJNFFormTwoData] = useState({
+  const [jnfFormTwoData, setJNFFormTwoData] = useState<JNFFormTwoData>({
     tentativeJoiningDate: '',
     jobProfile: '',
     ctc: undefined,
@@ -43,9 +50,10 @@ export default function JNFForm() {
     eligibleBatches: '',
     course: '',
     branch: '',
+    hasIntern: false,
   })
 
-  const [jnfFormThreeData, setJNFFormThreeData] = useState({
+  const [jnfFormThreeData, setJNFFormThreeData] = useState<JNFFormThreeData>({
     isPPO: false,
     tentativeJoiningDate: '',
     jobProfile: '',
@@ -59,11 +67,23 @@ export default function JNFForm() {
     branch: '',
   })
 
-  const [jnfFormFourData, setJNFFormFourData] = useState({
-    type: undefined,
-    name: undefined,
+  const [jnfFormFourData, setJNFFormFourData] = useState<JNFFormFourData>({
+    tentativeJoiningDate: '',
+    jobProfile: '',
+    stipend: undefined,
+    ctcAfterIntern: undefined,
+    jobDescription: '',
+    cgpi: undefined,
+    eligibleBatches: '',
+    course: '',
+    branch: '',
+  })
+
+  const [jnfFormFiveData, setJNFFormFiveData] = useState<JNFFormFiveData>({
+    type: '',
+    name: '',
     mobileNumber: undefined,
-    email: undefined,
+    email: '',
   })
 
   const [show, setShow] = useState(false)
@@ -108,6 +128,12 @@ export default function JNFForm() {
     setJNFFormThreeData(values)
   }
 
+  const handleFourNext = (values: JNFFormFourData) => {
+    setStep((prevStep) => prevStep + 1)
+    setValue((prevValue) => prevValue + 25)
+    setJNFFormFourData(values)
+  }
+
   const handleTwoBack = (values: JNFFormTwoData) => {
     setStep((prevStep) => prevStep - 1)
     setValue((prevValue) => prevValue - 25)
@@ -126,6 +152,12 @@ export default function JNFForm() {
     setJNFFormFourData({ ...values })
   }
 
+  const handleFiveBack = (values: JNFFormFiveData) => {
+    setStep((prevStep) => prevStep - 1)
+    setValue((prevValue) => prevValue - 25)
+    setJNFFormFiveData({ ...values })
+  }
+
   const handleSubmit = (values: any) => {
     setStep((prevStep) => prevStep + 1)
     setValue((prevValue) => prevValue + 25)
@@ -137,29 +169,18 @@ export default function JNFForm() {
       case 0:
         return <JNFFormOne data={jnfFormOneData} onNext={(values) => handleOneNext(values)} />
       case 1:
-        return (
-          <JNFFormTwo
-            data={jnfFormTwoData}
-            onNext={(values) => handleTwoNext(values)}
-            onBack={(values) => handleTwoBack(values)}
-          />
-        )
+        return <JNFFormTwo data={jnfFormTwoData} onNext={handleTwoNext} onBack={handleTwoBack} />
       case 2:
         return (
-          <JNFFormThree
-            data={jnfFormThreeData}
-            onNext={(values) => handleThreeNext(values)}
-            onBack={(values) => handleThreeBack(values)}
-          />
+          <JNFFormThree data={jnfFormThreeData} onNext={handleThreeNext} onBack={handleThreeBack} />
         )
-
       case 3:
         return (
-          <JNFFormFour
-            data={jnfFormFourData}
-            onSubmit={(values) => handleSubmit(values)}
-            onBack={(values) => handleFourBack(values)}
-          />
+          <JNFFormFour data={jnfFormFourData} onNext={handleFourNext} onBack={handleFourBack} />
+        )
+      case 4:
+        return (
+          <JNFFormFive data={jnfFormFiveData} onSubmit={handleSubmit} onBack={handleFiveBack} />
         )
       default:
         return null

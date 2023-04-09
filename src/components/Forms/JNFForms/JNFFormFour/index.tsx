@@ -1,193 +1,284 @@
-import { Button, Checkbox, Thead, Table, Th, Tr, Td, Tbody, TableContainer } from '@chakra-ui/react'
-import { useFormik } from 'formik'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Button, Table, Tag, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { FormikState, useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
-import { JNFFormFourProps, HRListProps } from '../../../../utils/types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faClose, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { EligibleBranch, JNFFormFourData, JNFFormFourProps } from '../../../../utils/types'
+import coursesData from '../../../../utils/Data/coursesData'
 import styles from './JNFFormFour.module.scss'
 import { Input, Select, Error } from '../../../index'
 
-const HrTypes = [
-  { id: 0, value: 'primary' },
-  { id: 1, value: 'secondary' },
-]
-
-export default function JNFFormFour({ onSubmit, onBack, data }: JNFFormFourProps) {
-  const [hrList, setHRList] = useState<Array<HRListProps>>([])
+export default function JNFFormFour({ onNext, onBack, data }: JNFFormFourProps) {
+  const [jobProfiles, setJobProfiles] = useState<Array<object>>([])
 
   const formik = useFormik({
     initialValues: {
       ...data,
     },
     validationSchema: Yup.object().shape({
-      type: Yup.string().required('Type is required'),
-      name: Yup.string().required('Full Name is required'),
-      mobileNumber: Yup.string()
-        .matches(/^(\+91)?[6-9]\d{9}$/, 'Invalid Phone Number')
-        .required('Phone number is required.'),
-      email: Yup.string().email('Enter a valid email').required('Personal Email is required.'),
+      tentativeJoiningDate: Yup.date().required('Date is required'),
+      jobProfile: Yup.string().required('job profile is required'),
+      stipend: Yup.number().required(),
+      ctcAfterIntern: Yup.number().required(),
+      jobDescription: Yup.string().required('job description is required'),
+      cgpi: Yup.string().required(),
+      eligibleBatches: Yup.string(),
+      course: Yup.string().required('Course is required'),
+      branch: Yup.string().required('Branch is required'),
     }),
     onSubmit: (values) => {
-      onSubmit(values)
+      onNext(values)
     },
   })
 
-  const uniqueList = hrList.filter(
+  const [eligibleBatches, setEligibleBatches] = useState<Array<EligibleBranch>>([])
+
+  const uniqueList = eligibleBatches.filter(
     (item, index, self) =>
       index ===
       self.findIndex(
-        (t) =>
-          t.hr_type === item.hr_type &&
-          t.hr_name === item.hr_name &&
-          t.hr_mobile_number === item.hr_mobile_number &&
-          t.hr_email === item.hr_email,
+        (t) => t.branch_name === item.branch_name && t.course_name === item.course_name,
       ),
   )
 
-  const addHR = async () => {
-    const res = await formik.validateForm()
-    if (
-      Object.values(res).length === 0 &&
-      (hrList.length === 0 || hrList.find((hr) => hr.hr_name === formik.values.name) == null)
-    ) {
-      setHRList([
+  const addBranch = () => {
+    if (formik.values.branch !== '' && formik.values.course !== '') {
+      setEligibleBatches([
         ...uniqueList,
         {
-          hr_type: formik.values.type,
-          hr_name: formik.values.name,
-          hr_mobile_number: formik.values.mobileNumber,
-          hr_email: formik.values.email,
+          branch_name: formik.values.branch,
+          course_name: formik.values.course,
         },
       ])
-
-      formik.setFieldValue('name', undefined)
-      formik.setFieldValue('mobileNumber', undefined)
-      formik.setFieldValue('type', undefined)
-      formik.setFieldValue('email', undefined)
     }
   }
 
-  const removeRow = (index: number) => {
-    const list = [...hrList]
+  const removeBranch = (index: number) => {
+    const list = [...uniqueList]
     list.splice(index, 1)
-    setHRList(list)
+    setEligibleBatches(list)
   }
+
+  const clearForm = () => {
+    const initialValues: JNFFormFourData = {
+      tentativeJoiningDate: '',
+      jobProfile: '',
+      stipend: undefined,
+      ctcAfterIntern: undefined,
+      jobDescription: '',
+      cgpi: undefined,
+      eligibleBatches: '',
+      course: '',
+      branch: '',
+    }
+
+    const formikState: FormikState<JNFFormFourData> = {
+      values: initialValues,
+      touched: {},
+      errors: {},
+      isSubmitting: false,
+      isValidating: false,
+      submitCount: 0,
+    }
+
+    formik.setFormikState(formikState)
+    setEligibleBatches([])
+  }
+
+  const addJobProfile = async () => {
+    const res = await formik.validateForm()
+
+    if (Object.values(res).length > 0) return
+
+    const newProfile = {
+      jobProfile: formik.values.jobProfile,
+      stipend: formik.values.stipend,
+      ctcAfterIntern: formik.values.ctcAfterIntern,
+      jdLink: formik.values.jobDescription,
+      cgpi: formik.values.cgpi,
+      eligibleBatches,
+      tentativeJoiningDate: formik.values.tentativeJoiningDate,
+    }
+
+    const newJobProfiles = [...jobProfiles, newProfile]
+    setJobProfiles(newJobProfiles)
+    clearForm()
+  }
+
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>6 Months Intern Details</h2>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
-        <h2 className={styles.title}>HR Details</h2>
+        <div className={styles.field}>
+          <Input
+            name="tentativeJoiningDate"
+            type="date"
+            placeholder="Tentative Joining Date"
+            value={formik.values.tentativeJoiningDate}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.tentativeJoiningDate && formik.errors.tentativeJoiningDate ? (
+            <Error errorMessage={formik.errors.tentativeJoiningDate} />
+          ) : null}
+        </div>
+        <div className={styles.field}>
+          <Input
+            name="jobProfile"
+            placeholder="Job Profile"
+            value={formik.values.jobProfile}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.jobProfile && formik.errors.jobProfile ? (
+            <Error errorMessage={formik.errors.jobProfile} />
+          ) : null}
+        </div>
+        <div className={styles.field}>
+          <Input
+            name="stipend"
+            placeholder="Stipend Offered"
+            value={formik.values.stipend || ''}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.stipend && formik.errors.stipend ? (
+            <Error errorMessage={formik.errors.stipend} />
+          ) : null}
+        </div>
+        <div className={styles.field}>
+          <Input
+            name="ctcAfterIntern"
+            placeholder="CTC Offered After Intern"
+            value={formik.values.ctcAfterIntern || ''}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.ctcAfterIntern && formik.errors.ctcAfterIntern ? (
+            <Error errorMessage={formik.errors.ctcAfterIntern} />
+          ) : null}
+        </div>
+        <div className={styles.field}>
+          <Input
+            name="jobDescription"
+            placeholder="Job Description (JD) LINK"
+            value={formik.values.jobDescription}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.jobDescription && formik.errors.jobDescription ? (
+            <Error errorMessage={formik.errors.jobDescription} />
+          ) : null}
+        </div>
+        <div className={styles.field}>
+          <Input
+            name="cgpi"
+            placeholder="CGPI"
+            value={formik.values.cgpi || ''}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.cgpi && formik.errors.cgpi ? (
+            <Error errorMessage={formik.errors.cgpi} />
+          ) : null}
+        </div>
         <div className={styles.field}>
           <Select
-            value={formik.values.type}
+            value={formik.values.course}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            name="type"
-            placeholder="HR Type"
+            name="course"
+            placeholder="Eligible Courses"
           >
-            {HrTypes.map((ty) => (
-              <option key={ty.id}>{ty.value}</option>
+            {coursesData.map((cour) => (
+              <option key={cour.id}>{cour.courseName}</option>
             ))}
           </Select>
-          {formik.touched.type && formik.errors.type ? (
-            <Error errorMessage={formik.errors.type} />
-          ) : null}
-        </div>
-        <div className={styles.field}>
-          <Input
-            name="name"
-            placeholder="Name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.name && formik.errors.name ? (
-            <Error errorMessage={formik.errors.name} />
-          ) : null}
-        </div>
-        <div className={styles.field}>
-          <Input
-            name="mobileNumber"
-            placeholder="Mobile Number"
-            value={formik.values.mobileNumber || ''}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.mobileNumber && formik.errors.mobileNumber ? (
-            <Error errorMessage={formik.errors.mobileNumber} />
-          ) : null}
-        </div>
-        <div className={styles.field}>
-          <Input
-            name="email"
-            placeholder="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <Error errorMessage={formik.errors.email} />
-          ) : null}
-        </div>
 
-        <div className={styles.add_hr_button}>
-          <Button onClick={addHR}>
-            <FontAwesomeIcon icon={faPlus} fixedWidth />
-            Add More HR
+          <Select
+            value={formik.values.branch}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            name="branch"
+            placeholder="Eligible Branches"
+          >
+            {coursesData
+              .filter((cour) => cour.courseName === formik.values.course)
+              .map((cour) =>
+                cour.batches.map((batch) => <option key={batch.id}>{batch.batchName}</option>),
+              )}
+          </Select>
+          {formik.touched.eligibleBatches && formik.errors.eligibleBatches ? (
+            <Error errorMessage={formik.errors.eligibleBatches} />
+          ) : null}
+
+          <Button onClick={addBranch} className={styles.add_branches}>
+            <FontAwesomeIcon icon={faPlus} /> Add Branch
+          </Button>
+          <div className={styles.selected_branches_row}>
+            {uniqueList.map((batches, idx: number) => (
+              <Tag className={styles.selected_branches} key={batches.branch_name}>
+                {batches.course_name} {batches.branch_name}
+                <Button size="xs" onClick={() => removeBranch(idx)}>
+                  <FontAwesomeIcon icon={faClose} />
+                </Button>
+              </Tag>
+            ))}
+          </div>
+        </div>
+        <div className={styles.confirm_btn}>
+          <Button onClick={addJobProfile} isDisabled={!formik.isValid}>
+            <FontAwesomeIcon icon={faCheck} color="#54B435" />
+          </Button>
+          <Button onClick={clearForm}>
+            <FontAwesomeIcon icon={faTrash} color="#E64848" />
           </Button>
         </div>
-        <div className={styles.field}>
-          {hrList.length !== 0 && (
-            <>
-              <h3 className={styles.heading}>List of HR</h3>
-              <TableContainer className={styles.table_container}>
-                <Table variant="simple">
-                  <Thead>
-                    <Th fontSize="16px" padding="0">
-                      Name
-                    </Th>
-                    <Th fontSize="16px">Type</Th>
-                    <Th fontSize="16px">Phone Number</Th>
-                    <Th fontSize="16px">Email</Th>
-                    <Th />
-                  </Thead>
-                  <Tbody>
-                    {hrList.map((hr, index) => {
+        <Table w="100%" className={styles.table_container}>
+          <Thead>
+            <Tr>
+              <Th>Job Profile</Th>
+              <Th>Stipend</Th>
+              <Th>CTC Offered After PPO</Th>
+              <Th>JD Link</Th>
+              <Th>Min. CGPI</Th>
+              <Th>Eligible Branches</Th>
+              <Th>Tentative Joining Date</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {jobProfiles.map((jobProfile: any) => {
+              return (
+                <Tr key={jobProfile.jobProfile}>
+                  <Td>{jobProfile.jobProfile}</Td>
+                  <Td>{jobProfile.stipend}</Td>
+                  <Td>{jobProfile.ctcAfterIntern}</Td>
+                  <Td>{jobProfile.jdLink}</Td>
+                  <Td>{jobProfile.cgpi}</Td>
+                  <Td>
+                    {jobProfile.eligibleBatches.map((batch: any) => {
                       return (
-                        <Tr key={hr.hr_mobile_number}>
-                          <Td padding="0">{hr.hr_name}</Td>
-                          <Td>{hr.hr_type}</Td>
-                          <Td>{hr.hr_mobile_number}</Td>
-                          <Td>{hr.hr_email}</Td>
-                          <Td>
-                            <Button size="sm" onClick={() => removeRow(index)}>
-                              <FontAwesomeIcon icon={faTrash} />
-                            </Button>
-                          </Td>
-                        </Tr>
+                        <li key={`${batch.course_name}: ${batch.branch_name}`}>
+                          {`${batch.course_name}: ${batch.branch_name}`}
+                        </li>
                       )
                     })}
-                  </Tbody>
-                </Table>
-              </TableContainer>{' '}
-            </>
-          )}
-        </div>
-
-        <div className={styles.checkbox}>
-          <Checkbox name="consent" onChange={formik.handleChange}>
-            I provide my consent to share my data with TPO for future oppurtunites. I also confirm
-            that the information entered by me is accurate and best of my knowledge.
-          </Checkbox>
-        </div>
+                  </Td>
+                  <Td>{jobProfile.tentativeJoiningDate}</Td>
+                </Tr>
+              )
+            })}
+          </Tbody>
+        </Table>
         <div className={styles.btn_container}>
           <Button
             background="linear-gradient(40deg,#45cafc,#303f9f)"
             color="white"
             _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            onClick={() => onBack(formik.values)}
             type="submit"
+            onClick={() => onBack(formik.values)}
           >
             Back
           </Button>
@@ -199,7 +290,7 @@ export default function JNFFormFour({ onSubmit, onBack, data }: JNFFormFourProps
             isDisabled={!formik.isValid}
             type="submit"
           >
-            Submit
+            Next
           </Button>
         </div>
       </form>
