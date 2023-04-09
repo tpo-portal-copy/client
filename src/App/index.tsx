@@ -21,6 +21,7 @@ import {
   Home,
   StudentData,
   Register,
+  TPODashboard,
 } from '../pages'
 import {
   clearDataFromLocalStorage,
@@ -104,6 +105,7 @@ function App() {
           </HeaderLayout>
         }
       />
+
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       {isStudentDetailsFormFilled() === false && (
@@ -190,6 +192,16 @@ function App() {
           <ProtectedRoute>
             <HeaderLayout>
               <Statistics />
+            </HeaderLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tpo-dashboard"
+        element={
+          <ProtectedRoute>
+            <HeaderLayout>
+              <TPODashboard />
             </HeaderLayout>
           </ProtectedRoute>
         }

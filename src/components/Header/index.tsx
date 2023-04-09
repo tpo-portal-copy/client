@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   useDisclosure,
+  Button,
 } from '@chakra-ui/react'
 import jwtDecode from 'jwt-decode'
 import Sidebar from '../Sidebar'
@@ -39,16 +40,21 @@ function Header() {
 
   useOnOutsideClick(sidebarRef, closeSidebar)
   const { onOpen, onClose, isOpen } = useDisclosure()
+  const [showLogoutLoader, setLogoutLoader] = useState(false)
 
   const handleLogout = async () => {
     try {
+      setLogoutLoader(true)
       await studentLogoutAPI.post('/', {
         refresh_token: getDataFromLocalStorage('refresh_token'),
       })
 
+      setLogoutLoader(false)
+
       clearDataFromLocalStorage()
       navigate('/home')
     } catch (err) {
+      setLogoutLoader(false)
       console.log(err)
     }
   }
@@ -142,9 +148,14 @@ function Header() {
                   <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                     Placement Policy
                   </Link>
-                  <button className={styles.option} onClick={handleLogout}>
+                  <Button
+                    backgroundColor="gray.300"
+                    className={styles.option}
+                    onClick={handleLogout}
+                    isLoading={showLogoutLoader}
+                  >
                     Logout
-                  </button>
+                  </Button>
                 </PopoverBody>
               </PopoverContent>
             </Popover>

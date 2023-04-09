@@ -22,6 +22,7 @@ import {
   STUDENT_ELIGIBILITY_API,
   STUDENT_LOGOUT_API,
   REFRESH_TOKEN_API,
+  TPO_STATS_API,
 } from './constants'
 import { getDataFromLocalStorage } from './functions'
 
@@ -43,6 +44,10 @@ export const companiesDetailsAPI = axios.create({
 
 export const statisticsAPI = axios.create({
   baseURL: STATISTICS_API,
+})
+
+export const TPOStatsAPI = axios.create({
+  baseURL: TPO_STATS_API,
 })
 
 export const recentNotificationsAPI = axios.create({
