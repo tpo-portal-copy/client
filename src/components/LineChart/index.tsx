@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-boolean-value */
 import { ResponsiveBar } from '@nivo/bar'
 
-export default function LineChart({ data }) {
+export default function LineChart({ data }: any) {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <ResponsiveBar
