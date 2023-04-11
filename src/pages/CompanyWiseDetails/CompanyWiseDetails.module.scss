@@ -1,0 +1,72 @@
+@use '../../index.scss' as main;
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  max-width: var(--max-w);
+  padding: calc(2rem + var(--nav-height)) 0.9rem 2.8rem 2rem;
+
+  @media screen and (max-width: 525px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(1.5rem + var(--nav-height)) 1rem 0.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .page_name {
+    font-size: var(--lg-heading);
+    font-weight: 600;
+  }
+
+  .filter_container {
+    display: flex;
+    gap: 0.5rem;
+    .filter {
+      background-color: white;
+      border-radius: 6px;
+      height: fit-content;
+
+      @media screen and (max-width: 525px) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.body_container {
+  max-width: var(--max-w);
+  padding: 0 0.9rem 2.8rem 2rem;
+  margin: auto;
+
+  @media screen and (max-width: 525px) {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  .data_container {
+    padding-bottom: 0.7rem;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 2rem;
+
+    @media screen and (max-width: 525px) {
+      font-size: 17px;
+    }
+    .table_container {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        border-radius: 1px;
+      }
+    }
+
+    .course_title {
+      padding: 0.7rem 0rem 0.7rem 1rem;
+      font-weight: 500;
+    }
+  }
+}
