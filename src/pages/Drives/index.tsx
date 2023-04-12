@@ -2,9 +2,18 @@
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react'
 import Lottie from 'lottie-react'
-import { Input, InputGroup, Text, Button } from '@chakra-ui/react'
+import {
+  Input,
+  InputGroup,
+  Text,
+  Button,
+  Select,
+  TagLabel,
+  Tag,
+  TagCloseButton,
+} from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { clusterOptions } from '../../utils/Data/formUIData'
 import NotFound from '../../assets/animations/94729-not-found.json'
 import { DrivesCard } from '../../components/Cards'
@@ -20,6 +29,7 @@ function Drives() {
   const [page, setPage] = useState(1)
   const [company, setCompany] = useState('')
   const [clusters, setClusters] = useState<Array<ClusterChosen>>([])
+  const [selectedCluster, setSelectedCluster] = useState('')
   const [search, setSearch] = useState('')
   const [clusterStr, setClusterStr] = useState('')
   const { data, isSuccess, isError, isLoading } = useDrives(
@@ -29,18 +39,11 @@ function Drives() {
     clusterStr,
   )
 
-  function extractCluster(clustersArr: Array<ClusterChosen>): string {
-    let str = ''
-    if (clustersArr.length !== 0) {
-      clustersArr.forEach((cluster, idx) => {
-        str += cluster.id
-        if (idx !== clustersArr.length - 1) {
-          str += ','
-        }
-      })
-    }
+  function extractCluster(clustersArr: Array<ClusterChosen>) {
+    const str = clustersArr.map((cluster) => cluster.value).join(',')
+    console.log(str, clustersArr)
+
     setClusterStr(str)
-    return str
   }
 
   const onSearch = () => {
@@ -53,17 +56,25 @@ function Drives() {
     setSearch(e.target.value)
   }
 
-  const handleMultiClick = (e: any) => {
-    if (e === '' || clusters.find((cluster) => cluster.id === e)) {
-      return
-    }
-    setClusters([...clusters, { id: e, value: e }])
+  const handleClusterChange = (e: any) => {
+    setSelectedCluster(e.target.value)
+    console.log(e.target.value)
   }
 
   const handleMultiDelete = (idx: number) => {
     const items = clusters.filter((item, index) => index !== idx)
     setClusters(items)
     extractCluster(items)
+  }
+
+  const addCluster = (e: any) => {
+    e.preventDefault()
+    if (e === '' || clusters.find((cluster) => cluster.id === selectedCluster)) {
+      return
+    }
+    const arr = [...clusters, { id: e, value: selectedCluster }]
+    setClusters(arr)
+    extractCluster(arr)
   }
 
   if (isLoading || !isSuccess) {
@@ -79,13 +90,38 @@ function Drives() {
         <h1 className={styles.page_name}>Drives</h1>
         <div className={styles.filter_container}>
           <div className={styles.dropdown}>
-            <MultiSelectDropDown
+            <Select
+              name="cluster"
               placeholder="Choose Clusters"
-              clusterData={clusterOptions}
-              choosenClusters={clusters}
-              onClick={(e) => handleMultiClick(e)}
-              onDelete={(idx) => handleMultiDelete(idx)}
-            />
+              onChange={handleClusterChange}
+              value={selectedCluster}
+              backgroundColor="white"
+            >
+              {clusterOptions.map((clust) => (
+                <option key={clust.value} value={clust.value}>
+                  {clust.label}
+                </option>
+              ))}
+            </Select>
+            <div className={styles.selected_clusters}>
+              {clusters.map((cluster: ClusterChosen, idx: number) => (
+                <Tag
+                  size="sm"
+                  key={cluster.value}
+                  borderRadius="full"
+                  variant="solid"
+                  justifySelf="center"
+                  colorScheme="gray"
+                >
+                  <TagLabel>Cluster {cluster.value}</TagLabel>
+                  <TagCloseButton onClick={() => handleMultiDelete(idx)} />
+                </Tag>
+              ))}
+            </div>
+
+            <Button onClick={addCluster} backgroundColor="white">
+              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
+            </Button>
           </div>
           <div className={styles.search_box}>
             <InputGroup>

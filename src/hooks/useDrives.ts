@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { drivesAPI } from '../utils/apis'
 
 const getDrives = async (params: any) => {
@@ -9,5 +9,7 @@ const getDrives = async (params: any) => {
 }
 
 export default function useDrives(params?: any, page?: number, company?: any, cluster?: string) {
+  console.log(params, page, company, cluster)
+
   return useQuery([`drives${page}${cluster}${company}${cluster}`], () => getDrives(params))
 }

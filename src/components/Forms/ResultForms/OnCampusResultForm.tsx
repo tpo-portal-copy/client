@@ -28,7 +28,7 @@ export default function OnCampusResultForm() {
       drive: Yup.string().required('Drive is required'),
       jobRole: Yup.string().required('Job Role is required'),
     }),
-    onSubmit: (e, values) => {
+    onSubmit: () => {
       setIsLoading(!isLoading)
       setTimeout(() => {
         setIsLoading((prevState) => !prevState)

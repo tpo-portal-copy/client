@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { experiencesAPI } from '../utils/apis'
 
 const getExperiences = async (pageNo: number, query: string) => {

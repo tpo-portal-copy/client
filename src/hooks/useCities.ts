@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/default-param-last */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { citiesAPI } from '../utils/apis'
 
 const getCities = async (state: string) => {
