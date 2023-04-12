@@ -19,6 +19,7 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  CreateDriveForm,
   TprDrives,
   StudentData,
   Register,
@@ -99,6 +100,13 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/student-details-form" element={<StudentDetailsForm />} />
+      <Route path="/experience-form" element={<ExperienceForm />} />
+      <Route path="/announcement-form" element={<AnnouncementForm />} />
+      <Route path="/result-announcement" element={<ResultAnnouncement />} />
+      <Route path="/create-drive" element={<CreateDriveForm />} />
       <Route
         path="/home"
         element={
@@ -107,9 +115,6 @@ function App() {
           </HeaderLayout>
         }
       />
-
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
       {isStudentDetailsFormFilled() === false && (
         <Route
           path="/student-details-form"
@@ -256,6 +261,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route
         path="/student-data"
         element={
