@@ -19,6 +19,7 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  TprDrives,
   StudentData,
   Register,
   TPODashboard,
@@ -165,6 +166,14 @@ function App() {
               <Dashboard />
             </HeaderLayout>
           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/drives/tpr"
+        element={
+          <HeaderLayout>
+            <TprDrives />
+          </HeaderLayout>
         }
       />
       <Route

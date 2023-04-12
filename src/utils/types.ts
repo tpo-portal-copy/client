@@ -154,7 +154,7 @@ export interface DrivesCardProps {
   isPpt: boolean
   jobLocation: string
   type: string
-  eligibleBatches: Array<EligibleBatchesObj>
+  eligibleBatches?: Array<EligibleBatchesObj>
   jobProfile: string
   cluster: number
 }

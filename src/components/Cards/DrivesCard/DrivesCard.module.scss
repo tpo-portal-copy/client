@@ -86,6 +86,9 @@
       text-decoration: none;
       place-self: start normal;
       margin-top: 0.5rem;
+      max-width: 135px;
+      display: flex;
+      flex-direction: column;
 
       .jd_link {
         text-decoration: none;
@@ -104,6 +107,7 @@
         font-weight: 500;
         font-size: 14px;
         border-radius: 4px;
+        flex-shrink: 1;
       }
       @media screen and (max-width: 525px) {
         place-self: center normal;
