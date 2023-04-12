@@ -21,6 +21,7 @@ import {
   Home,
   StudentData,
   Register,
+  TPODashboard,
   CompanyWiseDetails,
 } from '../pages'
 import {
@@ -105,6 +106,7 @@ function App() {
           </HeaderLayout>
         }
       />
+
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       {isStudentDetailsFormFilled() === false && (
@@ -191,6 +193,16 @@ function App() {
           <ProtectedRoute>
             <HeaderLayout>
               <Statistics />
+            </HeaderLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tpo-dashboard"
+        element={
+          <ProtectedRoute>
+            <HeaderLayout>
+              <TPODashboard />
             </HeaderLayout>
           </ProtectedRoute>
         }
