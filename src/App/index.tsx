@@ -22,6 +22,7 @@ import {
   StudentData,
   Register,
   TPODashboard,
+  CompanyWiseDetails,
 } from '../pages'
 import {
   clearDataFromLocalStorage,
@@ -252,6 +253,16 @@ function App() {
           <ProtectedRoute>
             <HeaderLayout>
               <StudentData />
+            </HeaderLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/company-wise-details"
+        element={
+          <ProtectedRoute>
+            <HeaderLayout>
+              <CompanyWiseDetails />
             </HeaderLayout>
           </ProtectedRoute>
         }

@@ -60,9 +60,32 @@
     gap: 1rem;
 
     .dropdown {
+      display: flex;
+      gap: 1rem;
       border-radius: 6px;
       height: fit-content;
       position: relative;
+
+      @media screen and (max-width: 525px) {
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .selected_clusters {
+        display: grid;
+        grid-template-columns: repeat(4, 100px);
+        top: 35px;
+        position: absolute;
+        max-width: 480px;
+        width: 100%;
+        left: -20px;
+        padding: 20px;
+        row-gap: 10px;
+
+        @media screen and (max-width: 525px) {
+          position: absolute;
+        }
+      }
     }
 
     .search_box {
