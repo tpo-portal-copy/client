@@ -17,26 +17,6 @@ export default function LineChart({ data }: any) {
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
         colors={{ scheme: 'nivo' }}
-        defs={[
-          {
-            id: 'dots',
-            type: 'patternDots',
-            background: 'inherit',
-            color: '#38bcb2',
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
-          {
-            id: 'lines',
-            type: 'patternLines',
-            background: 'inherit',
-            color: '#eed312',
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10,
-          },
-        ]}
         borderColor={{
           from: 'color',
           modifiers: [['darker', 1.6]],
@@ -47,7 +27,7 @@ export default function LineChart({ data }: any) {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'country',
+          legend: 'Months',
           legendPosition: 'middle',
           legendOffset: 32,
         }}
@@ -55,7 +35,7 @@ export default function LineChart({ data }: any) {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'food',
+          legend: 'Offers',
           legendPosition: 'middle',
           legendOffset: -40,
         }}
@@ -90,10 +70,6 @@ export default function LineChart({ data }: any) {
           },
         ]}
         role="application"
-        ariaLabel="Nivo bar chart demo"
-        barAriaLabel={function (e) {
-          return e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue
-        }}
       />
     </div>
   )

@@ -67,6 +67,8 @@ function Header() {
 
   const isAuthenticated = accessDecoded != null
 
+  console.log(accessDecoded)
+
   return (
     <header className={styles.header}>
       <div className={styles.content}>
@@ -112,7 +114,14 @@ function Header() {
             <Popover isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
               <PopoverTrigger>
                 <div className={styles.profile_img}>
-                  <img src={accessDecoded?.img_url} alt="User Profile" />
+                  {'img_url' in accessDecoded ? (
+                    <img src={accessDecoded?.img_url} alt="User Profile" />
+                  ) : (
+                    <img
+                      src={`https://icotar.com/initials/${accessDecoded.first_name}.png?s=100&bg=03C988`}
+                      alt="User Logo"
+                    />
+                  )}
                 </div>
               </PopoverTrigger>
               <PopoverContent
@@ -149,10 +158,12 @@ function Header() {
                     Placement Policy
                   </Link>
                   <Button
-                    backgroundColor="gray.300"
+                    backgroundColor="#FA9884"
+                    color="#F9F9F9"
                     className={styles.option}
                     onClick={handleLogout}
                     isLoading={showLogoutLoader}
+                    _hover={{ backgroundColor: '#E64848' }}
                   >
                     Logout
                   </Button>

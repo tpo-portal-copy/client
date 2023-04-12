@@ -8,7 +8,7 @@ export default function Page500() {
   return (
     <div className={styles.container}>
       <Text className={styles.heading}>Oops....</Text>
-      <Text className={styles.para}>Server Error</Text>
+      <Text className={styles.para}>Something Went Wrong</Text>
 
       <div className={styles.animation_container}>
         <Lottie animationData={Animation} />
