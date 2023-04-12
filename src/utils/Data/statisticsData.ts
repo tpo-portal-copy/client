@@ -10,7 +10,14 @@ import {
   faTwitter,
   faApple,
 } from '@fortawesome/free-brands-svg-icons'
-import { faUser, faFileInvoice, faIndustry, faSatellite } from '@fortawesome/free-solid-svg-icons'
+import {
+  faUser,
+  faFileInvoice,
+  faIndustry,
+  faSatellite,
+  faSignal,
+  faFilePen,
+} from '@fortawesome/free-solid-svg-icons'
 
 export const chartData = [
   {
@@ -103,9 +110,9 @@ export const offersWiseData = [
 ]
 
 export const jobType = [
-  { id: 1, value: 'Intern' },
-  { id: 2, value: 'Placement' },
-  { id: 3, value: 'PPO' },
+  { id: 1, value: 'intern', label: 'Intern' },
+  { id: 2, value: 'placement', label: 'Placement' },
+  { id: 3, value: 'ppo', label: 'PPO' },
 ]
 
 export const sessions = [
@@ -133,12 +140,24 @@ export const statsCardStyles = [
     bgColor: '#FFF7CD',
     color: 'linear-gradient(135deg, rgba(183, 129, 3, 0) 0%, rgba(183, 129, 3, 0.24) 100%)',
     iconColor: 'rgb(183, 129, 3)',
-    icon: faIndustry,
+    icon: faSignal,
   },
   {
     bgColor: '#FFE7D9',
     color: 'linear-gradient(135deg, rgba(183, 33, 54, 0) 0%, rgba(183, 33, 54, 0.24) 100%)',
     iconColor: 'rgb(183, 33, 54)',
     icon: faSatellite,
+  },
+  {
+    bgColor: '#F5EBEB',
+    color: 'linear-gradient(135deg, rgba(213, 180, 180, 0) 0%, rgba(213, 180, 180, 0.24) 100%)',
+    iconColor: 'rgb(213, 180, 180)',
+    icon: faIndustry,
+  },
+  {
+    bgColor: '#C5E8B7',
+    color: 'linear-gradient(135deg, rgba(8, 144, 0, 0) 0%, rgba(8, 144, 0, 0.24) 100%)',
+    iconColor: 'rgb(8, 144, 0)',
+    icon: faFilePen,
   },
 ]

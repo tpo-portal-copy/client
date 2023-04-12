@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/default-param-last */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { dashboardAPI } from '../utils/apis'
 
 const getAnnouncements = async (params: any) => {
-  const response = await dashboardAPI.get('/', { params })
+  const response = await dashboardAPI.get('/', {
+    params,
+  })
   return response.data
 }
 

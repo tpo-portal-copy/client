@@ -132,8 +132,27 @@
 
     .eligible_batches_list {
       display: flex;
-      gap: 6px;
-      height: fit-content;
+      justify-content: flex-start;
+      overflow-x: scroll;
+      gap: 0.5rem;
+      padding-right: 1.5rem;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tag {
+        margin: 10px 0;
+        width: max-content;
+
+        span {
+          padding: 2px 15px;
+          border-radius: 20px;
+          background-color: lightblue;
+          font-size: small;
+          white-space: nowrap;
+        }
+      }
     }
   }
   @media screen and (max-width: 525px) {

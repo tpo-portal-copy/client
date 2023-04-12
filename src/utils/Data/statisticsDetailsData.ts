@@ -8,7 +8,7 @@ export const statisticsdetailsData: StatisticsDetailsProps = {
   courses: [
     {
       id: 0,
-      courseName: 'B.tech',
+      courseName: 'B.Tech',
       totalCourseOffers: 30,
       roles: [
         {

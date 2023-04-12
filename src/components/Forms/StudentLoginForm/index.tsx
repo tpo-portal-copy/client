@@ -10,18 +10,35 @@ import {
   AlertIcon,
   InputGroup,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import styles from './StudentLoginForm.module.scss'
-import { setDataToLocalStorage } from '../../../utils/functions'
-import { studentLoginAPI } from '../../../utils/apis'
+import {
+  getDataFromLocalStorage,
+  isStudentDetailsFormFilled,
+  setDataToLocalStorage,
+  setTimerForTokenExpiration,
+} from '../../../utils/functions'
+import { studentEligibilityAPI, studentLoginAPI, studentLogoutAPI } from '../../../utils/apis'
 
 export default function StudentLoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+  const toast = useToast()
+
+  const expireTokens = async () => {
+    try {
+      await studentLogoutAPI.post('/', {
+        refresh_token: getDataFromLocalStorage('refresh_token'),
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -42,9 +59,25 @@ export default function StudentLoginForm() {
         setDataToLocalStorage('access_token', access)
         setDataToLocalStorage('refresh_token', refresh)
 
-        navigate('/dashboard')
-      } catch (err) {
-        console.log(err)
+        const eligibilityRes = await studentEligibilityAPI.get(`/${formik.values.username}`)
+        const eligibility = eligibilityRes.data.eligible
+
+        setDataToLocalStorage('eligibility', eligibility)
+
+        if (isStudentDetailsFormFilled() === true) {
+          navigate('/dashboard')
+          setTimerForTokenExpiration(navigate, expireTokens)
+        } else {
+          navigate('/student-details-form')
+        }
+      } catch (err: any) {
+        toast({
+          title: 'Login Failed....',
+          description: err.response.data.detail,
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        })
       }
     },
   })
@@ -92,7 +125,7 @@ export default function StudentLoginForm() {
         ) : null}
         <Box className={styles.link_container}>
           <Text>Not Registered ?</Text>
-          <Links className={styles.link} to="/signup">
+          <Links className={styles.link} to="/register">
             Register Here
           </Links>
         </Box>

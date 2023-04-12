@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-query'
 import { statesAPI } from '../utils/apis'
 
 const getStates = async () => {

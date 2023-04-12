@@ -277,6 +277,7 @@ type DataType = {
 
 export interface PieChartProps {
   data: Array<DataType>
+  fill: any
 }
 
 export interface PaginatorProps {
@@ -396,7 +397,7 @@ export interface MultiSelectDropDownProps {
 
 export interface CompaniesTableProps {
   session: string
-  type: string
+  type: string | null | undefined
   company: string
 }
 

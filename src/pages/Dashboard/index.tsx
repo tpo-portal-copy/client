@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { useState } from 'react'
 import {
   Modal,
@@ -18,7 +17,7 @@ import PageLoader from '../../components/PageLoader'
 import { ModelProps } from '../../utils/types'
 
 function Dashboard() {
-  const [type, setType] = useState('all')
+  const [type] = useState('all')
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [modelData, setModalData] = useState<ModelProps>({ title: '', description: '' })
   const {
