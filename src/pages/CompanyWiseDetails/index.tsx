@@ -1,9 +1,7 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Select } from '@chakra-ui/react'
 import { useState } from 'react'
 import styles from './CompanyWiseDetails.module.scss'
-import { companyWiseDetails } from '../../utils/Data/companyWiseDetails'
 import { clusterOptions } from '../../utils/Data/formUIData'
-import { statisticsdetailsData } from '../../utils/Data/statisticsDetailsData'
 import useCompanyWiseStatistics from '../../hooks/useCompanyWiseStatistics'
 import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
@@ -11,11 +9,9 @@ import useCourses from '../../hooks/useCourses'
 import useBranches from '../../hooks/useBranches'
 
 function CompanyWiseDetails() {
-  const [selectedCourse, setSelectedCourse] = useState('')
+  const [selectedCourse, setSelectedCourse] = useState({ id: 2, name: 'B.Tech' }) // default ID B.Tech Course
 
   const [selectedBranch, setSelectedBranch] = useState('')
-
-  const [companyData, setCompanyData] = useState(companyWiseDetails.selectedStudents)
 
   const [selectedCluster, setSelectedCluster] = useState('')
 
@@ -23,21 +19,31 @@ function CompanyWiseDetails() {
     'groww',
     'intern',
     selectedCluster,
-    selectedCourse,
+    selectedCourse?.name,
+    selectedBranch,
   )
 
-  const { data: coursesData, isSuccess: isCoursesSuccess } = useCourses()
+  const {
+    data: coursesData,
+    isSuccess: isCoursesSuccess,
+    isLoading: isCoursesLoading,
+  } = useCourses()
+
+  const { data: branchesData } = useBranches(selectedCourse?.id)
 
   if (isError) {
     return <Page500 />
   }
 
-  if (isLoading || !isSuccess) {
+  if (isCoursesLoading) {
     return <PageLoader />
   }
 
   function handleCourseChange(e: any) {
-    const course = e.target.value
+    const courseID = e.target.value
+    // eslint-disable-next-line eqeqeq
+    const course = coursesData.find((cour: any) => cour.id == courseID)
+
     setSelectedCourse(course)
   }
   function handleBranchChange(e: any) {
@@ -57,25 +63,23 @@ function CompanyWiseDetails() {
   ))
 
   const courses: any = coursesData.map((cours: any) => (
-    <option key={cours.id} value={cours.name}>
+    <option key={cours.id} value={cours.id}>
       {cours.name}
     </option>
   ))
 
-  const branches: any = statisticsdetailsData.courses
-    .find((item) => item.courseName === selectedCourse)
-    ?.branches.map((bran) => (
-      <option key={bran.id} value={bran.branchName}>
-        {bran.branchName}
-      </option>
-    ))
+  const branches: any = branchesData?.branches.map((bran: any) => (
+    <option key={bran.id} value={bran.branch_name}>
+      {bran.branch_name}
+    </option>
+  ))
 
   return (
     <>
       <div className={styles.header_container}>
         <div>
-          <h1 className={styles.page_name}>{data.company}</h1>
-          <h3>{`(${data.totaloffers} offers)`}</h3>
+          <h1 className={styles.page_name}>{data && data.company}</h1>
+          <h3>{`(${data && data.totaloffers} offers)`}</h3>
         </div>
         <div className={styles.filter_container}>
           <div className={styles.filter}>
@@ -97,38 +101,43 @@ function CompanyWiseDetails() {
           </div>
         </div>
       </div>
-      <div className={styles.body_container}>
-        <div className={styles.data_container}>
-          <TableContainer className={styles.table_container}>
-            <Table size="sm">
-              <Thead>
-                <Tr>
-                  <Th textAlign="center">Name</Th>
-                  <Th textAlign="center">Roll Number</Th>
-                  <Th textAlign="center">Branch</Th>
-                  <Th textAlign="center">Course</Th>
-                  <Th textAlign="center">CTC(LPA)</Th>
-                  <Th textAlign="center">Job Role</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {data.selectedStudents.map((student: any) => {
-                  return (
-                    <Tr key={student.id}>
-                      <Td textAlign="center">{student.name}</Td>
-                      <Td textAlign="center">{student.rollNumber}</Td>
-                      <Td textAlign="center">{student.branch}</Td>
-                      <Td textAlign="center">{student.course}</Td>
-                      <Td textAlign="center">{student.ctc_offered}</Td>
-                      <Td textAlign="center">{student.jobRole}</Td>
-                    </Tr>
-                  )
-                })}
-              </Tbody>
-            </Table>
-          </TableContainer>
+      {isLoading || !isSuccess ? (
+        <PageLoader />
+      ) : (
+        <div className={styles.body_container}>
+          <div className={styles.data_container}>
+            <TableContainer className={styles.table_container}>
+              <Table size="sm">
+                <Thead>
+                  <Tr>
+                    <Th textAlign="center">Name</Th>
+                    <Th textAlign="center">Roll Number</Th>
+                    <Th textAlign="center">Branch</Th>
+                    <Th textAlign="center">Course</Th>
+                    <Th textAlign="center">CTC(LPA)</Th>
+                    <Th textAlign="center">Job Role</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {data &&
+                    data.selectedStudents.map((student: any) => {
+                      return (
+                        <Tr key={student.id}>
+                          <Td textAlign="center">{student.name}</Td>
+                          <Td textAlign="center">{student.rollNumber}</Td>
+                          <Td textAlign="center">{student.branch}</Td>
+                          <Td textAlign="center">{student.course}</Td>
+                          <Td textAlign="center">{student.ctc_offered}</Td>
+                          <Td textAlign="center">{student.jobRole}</Td>
+                        </Tr>
+                      )
+                    })}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

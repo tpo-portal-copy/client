@@ -4,11 +4,12 @@ import { companyWiseStatisticsAPI } from '../utils/apis'
 const getcompanyWiseStatistics = async (
   company: string,
   type: string,
-  clusterc: string,
+  cluster: string,
   course: string,
+  branch: string,
 ) => {
   const response = await companyWiseStatisticsAPI.get(
-    `/?type=${type}&company=${company}&clusterc=${clusterc}`,
+    `/?type=${type}&company=${company}&cluster=${cluster}&course=${course}&branch=${branch}`,
   )
   return response.data
 }
@@ -16,10 +17,11 @@ const getcompanyWiseStatistics = async (
 export default function useCompanyWiseStatistics(
   company: string,
   type: string,
-  clusterc: string,
+  cluster: string,
   course: string,
+  branch: string,
 ) {
-  return useQuery(['selectedStudents', company, type, clusterc, course], () =>
-    getcompanyWiseStatistics(company, type, clusterc, course),
+  return useQuery(['selectedStudents', company, type, cluster, course, branch], () =>
+    getcompanyWiseStatistics(company, type, cluster, course, branch),
   )
 }
