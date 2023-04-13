@@ -23,6 +23,7 @@ import {
   STUDENT_LOGOUT_API,
   REFRESH_TOKEN_API,
   TPO_STATS_API,
+  RECENT_EXPERIENCE_API,
   COMPANY_WISE_STATS_API,
 } from './constants'
 import { getDataFromLocalStorage } from './functions'
@@ -119,8 +120,12 @@ export const refreshTokenAPI = axios.create({
   baseURL: REFRESH_TOKEN_API,
 })
 
+export const recentExperienceAPI = axios.create({
+  baseURL: RECENT_EXPERIENCE_API,
+  })
+  
 export const companyWiseStatisticsAPI = axios.create({
-  baseURL: COMPANY_WISE_STATS_API,
+  baseURL: COMPANY_WISE_STATS_API
 })
 
 studentAPI.interceptors.request.use((config) => {
@@ -142,6 +147,12 @@ dashboardAPI.interceptors.request.use((config) => {
 })
 
 experiencesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+recentExperienceAPI.interceptors.request.use((config) => {
   const newConfig = { ...config }
   newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
   return newConfig

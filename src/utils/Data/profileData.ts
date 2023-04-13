@@ -132,12 +132,12 @@ export const moreInfoData = [
 export const studentStatData = [
   {
     id: 1,
-    label: 'No. of interviews',
+    label: 'Interviews Attended',
     value: '5',
   },
   {
     id: 2,
-    label: 'No. of experiences shared',
+    label: 'Experiences Shared',
     value: '10',
   },
 ]
