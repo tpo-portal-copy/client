@@ -60,32 +60,9 @@
     gap: 1rem;
 
     .dropdown {
-      display: flex;
-      gap: 1rem;
       border-radius: 6px;
       height: fit-content;
       position: relative;
-
-      @media screen and (max-width: 525px) {
-        gap: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .selected_clusters {
-        display: grid;
-        grid-template-columns: repeat(4, 100px);
-        top: 35px;
-        position: absolute;
-        max-width: 480px;
-        width: 100%;
-        left: -20px;
-        padding: 20px;
-        row-gap: 10px;
-
-        @media screen and (max-width: 525px) {
-          position: absolute;
-        }
-      }
     }
 
     .search_box {
@@ -101,18 +78,53 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: auto;
+  padding: 3.5rem 0;
+  gap: 1rem;
+  align-items: center;
   max-width: var(--max-w);
-  padding: 3.5rem 2rem;
-  gap: 2rem;
+  margin: auto;
 
-  @media screen and (max-width: 525px) {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+  .drives {
+    display: flex;
+    gap: 2rem;
     width: 100%;
+    padding: 0 2rem 3rem;
+
+    .drive_card {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      @media screen and (max-width: 525px) {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        width: 100%;
+      }
+    }
+
+    .my_drives {
+      position: sticky;
+      top: calc(var(--nav-height) + 1.6rem);
+      overflow-y: auto;
+      max-height: calc((100vh - var(--nav-height) - 3rem));
+      flex-shrink: 0.2;
+      width: 600px;
+      background-color: rgb(254, 254, 254);
+      border-radius: 8px;
+
+      .heading {
+        font-size: 25px;
+        font-weight: 600;
+        padding: 1rem 2rem;
+      }
+
+      .separator {
+        height: 1px;
+        background-color: red;
+        border-radius: 5px;
+        margin-top: 1rem;
+      }
+    }
   }
 }

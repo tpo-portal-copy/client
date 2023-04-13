@@ -19,9 +19,12 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  CreateDriveForm,
+  TprDrives,
   StudentData,
   Register,
   TPODashboard,
+  CompanyWiseDetails,
 } from '../pages'
 import {
   clearDataFromLocalStorage,
@@ -97,6 +100,13 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/student-details-form" element={<StudentDetailsForm />} />
+      <Route path="/experience-form" element={<ExperienceForm />} />
+      <Route path="/announcement-form" element={<AnnouncementForm />} />
+      <Route path="/result-announcement" element={<ResultAnnouncement />} />
+      <Route path="/create-drive" element={<CreateDriveForm />} />
       <Route
         path="/home"
         element={
@@ -105,9 +115,6 @@ function App() {
           </HeaderLayout>
         }
       />
-
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
       {isStudentDetailsFormFilled() === false && (
         <Route
           path="/student-details-form"
@@ -164,6 +171,14 @@ function App() {
               <Dashboard />
             </HeaderLayout>
           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/drives/tpr"
+        element={
+          <HeaderLayout>
+            <TprDrives />
+          </HeaderLayout>
         }
       />
       <Route
@@ -246,12 +261,23 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route
         path="/student-data"
         element={
           <ProtectedRoute>
             <HeaderLayout>
               <StudentData />
+            </HeaderLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/company-wise-details"
+        element={
+          <ProtectedRoute>
+            <HeaderLayout>
+              <CompanyWiseDetails />
             </HeaderLayout>
           </ProtectedRoute>
         }
