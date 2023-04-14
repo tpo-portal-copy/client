@@ -8,6 +8,7 @@ import styles from './FormOne.module.scss'
 import { Error, Input, Select } from '../../../index'
 import useStates from '../../../../hooks/useStates'
 import { citiesAPI } from '../../../../utils/apis'
+import { BooleanValue } from '../../../../utils/constants'
 
 const genderData = [
   { id: 1, value: 'Male' },
@@ -244,7 +245,7 @@ export default function FormOne({ onNext, data }: FormOneProps) {
               setShowDisability(!showDisability)
             }}
             isChecked={formik.values.pwd}
-            value={formik.values.pwd ? 'true' : 'false'}
+            value={formik.values.pwd ? BooleanValue.TRUE : BooleanValue.FALSE}
             onBlur={formik.handleBlur}
           >
             Is PwD ?

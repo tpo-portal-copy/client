@@ -72,7 +72,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>JNF Form</h2>
+      <h2 className={styles.title}>Job Notification Form</h2>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <div className={styles.field}>
           <Input

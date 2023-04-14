@@ -13,6 +13,7 @@ import Page500 from '../Page500'
 import { clustersAPI } from '../../utils/apis'
 import { PlacementDataProps } from '../../utils/types'
 import { getDataFromLocalStorage } from '../../utils/functions'
+import { BASE_API_URL } from '../../utils/constants'
 
 function Profile() {
   let accessDecoded: any
@@ -141,8 +142,12 @@ function Profile() {
           <div className={styles.profile_header}>
             <div className={styles.profile_content}>
               <div style={{ background: getRandomCoverGradient() }} className={styles.cover_img} />
-              {'img_url' in data ? (
-                <img src={data.img_url} className={styles.profile_img} alt="user profile" />
+              {data.image_url !== null ? (
+                <img
+                  src={`${BASE_API_URL}${data.image_url}`}
+                  className={styles.profile_img}
+                  alt="user profile"
+                />
               ) : (
                 <Lottie
                   className={styles.profile_img}

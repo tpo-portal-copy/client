@@ -1,5 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
-import { DashboardIcon, PortalLogo } from '../../assets/svgs'
+import { PortalLogo } from '../../assets/svgs'
 import navItems from '../../utils/Data/sidebarData'
 import { RouteProps, SidebarProps } from '../../utils/types'
 import styles from './Sidebar.module.scss'
@@ -28,7 +29,7 @@ function Sidebar({ onLinkClickHandler }: SidebarProps) {
                 location.pathname.includes(navItem.url) ? styles.selected : ''
               }`}
             >
-              <img src={DashboardIcon} alt="Dashboard" />
+              <FontAwesomeIcon icon={navItem.icon} />
               <span>{navItem.name}</span>
             </NavLink>
           )

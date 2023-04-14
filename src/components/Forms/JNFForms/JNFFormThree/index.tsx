@@ -8,6 +8,7 @@ import { EligibleBranch, JNFFormThreeData, JNFFormThreeProps } from '../../../..
 import coursesData from '../../../../utils/Data/coursesData'
 import styles from './JNFFormThree.module.scss'
 import { Input, RadioSelect, Select, Error } from '../../../index'
+import { BooleanValue } from '../../../../utils/constants'
 
 export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps) {
   const [internProfiles, setInternProfiles] = useState<Array<object>>([])
@@ -113,7 +114,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
   }
 
   const handleIsPPOButton = (value: string) => {
-    formik.setFieldValue('isPPO', value === 'true')
+    formik.setFieldValue('isPPO', value === BooleanValue.TRUE)
   }
 
   return (
@@ -165,7 +166,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
           <RadioSelect
             name="isPPO"
             placeholder="Pre Placement Offer"
-            value={formik.values.isPPO ? 'true' : 'false'}
+            value={formik.values.isPPO ? BooleanValue.TRUE : BooleanValue.FALSE}
             onChange={handleIsPPOButton}
             onBlur={formik.handleBlur}
           />

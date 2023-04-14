@@ -8,6 +8,7 @@ import { EligibleBranch, JNFFormTwoData, JNFFormTwoProps } from '../../../../uti
 import coursesData from '../../../../utils/Data/coursesData'
 import styles from './JNFFormTwo.module.scss'
 import { Input, Select, Error, RadioSelect } from '../../../index'
+import { BooleanValue } from '../../../../utils/constants'
 
 export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
   const [jobProfiles, setJobProfiles] = useState<Array<object>>([])
@@ -106,7 +107,7 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
   }
 
   const handleHasInternChange = (hasIntern: string) => {
-    const isInternOffered = hasIntern === 'true'
+    const isInternOffered = hasIntern === BooleanValue.TRUE
     formik.setFieldValue('hasIntern', isInternOffered)
   }
 
@@ -118,7 +119,7 @@ export default function JNFFormTwo({ onNext, onBack, data }: JNFFormTwoProps) {
           <RadioSelect
             name="hasIntern"
             placeholder="Are your offering FTE + Intern"
-            value={formik.values.hasIntern ? 'true' : 'false'}
+            value={formik.values.hasIntern ? BooleanValue.TRUE : BooleanValue.FALSE}
             onChange={handleHasInternChange}
             onBlur={formik.handleBlur}
           />

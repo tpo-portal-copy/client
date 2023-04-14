@@ -20,6 +20,7 @@ import {
   JNFFormFourData,
 } from '../../utils/types'
 import { getCurrentSession } from '../../utils/functions'
+import { BooleanValue } from '../../utils/constants'
 
 export default function JNFForm() {
   const [value, setValue] = useState(0)
@@ -90,9 +91,9 @@ export default function JNFForm() {
 
   const getProgressBarPercentageIncrease = () => {
     let numOfFormsShowed = 0
-    if (jnfFormOneData.isPlacement === 'true') numOfFormsShowed += 1
-    if (jnfFormOneData.isSummerIntern === 'true') numOfFormsShowed += 1
-    if (jnfFormOneData.isSixMonIntern === 'true') numOfFormsShowed += 1
+    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) numOfFormsShowed += 1
+    if (jnfFormOneData.isSummerIntern === BooleanValue.TRUE) numOfFormsShowed += 1
+    if (jnfFormOneData.isSixMonIntern === BooleanValue.TRUE) numOfFormsShowed += 1
     const percentageIncrease = 100 / numOfFormsShowed
     return percentageIncrease
   }
@@ -100,7 +101,7 @@ export default function JNFForm() {
   const handleOneNext = (values: JNFFormOneData) => {
     const percentageIncrease = getProgressBarPercentageIncrease()
 
-    if (jnfFormOneData.isPlacement === 'true') {
+    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
       setStep((prevStep) => prevStep + 1)
     } else {
       setStep((prevStep) => prevStep + 2)
@@ -113,7 +114,7 @@ export default function JNFForm() {
   const handleTwoNext = (values: JNFFormTwoData) => {
     const percentageIncrease = getProgressBarPercentageIncrease()
 
-    if (jnfFormOneData.isPlacement === 'true') {
+    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
       setStep((prevStep) => prevStep + 1)
     } else {
       setStep((prevStep) => prevStep + 2)

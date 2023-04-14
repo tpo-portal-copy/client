@@ -1,6 +1,7 @@
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import styles from './RadioSelect.module.scss'
 import { RadioSelectProps } from '../../utils/types'
+import { BooleanValue } from '../../utils/constants'
 
 export default function RadioSelect({ name, placeholder, onChange, value }: RadioSelectProps) {
   return (
@@ -10,8 +11,8 @@ export default function RadioSelect({ name, placeholder, onChange, value }: Radi
       </label>
       <RadioGroup onChange={onChange} value={value}>
         <Stack direction="row" spacing={200}>
-          <Radio value="true">Yes</Radio>
-          <Radio value="false">No</Radio>
+          <Radio value={BooleanValue.TRUE}>Yes</Radio>
+          <Radio value={BooleanValue.FALSE}>No</Radio>
         </Stack>
       </RadioGroup>
     </div>

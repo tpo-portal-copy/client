@@ -105,6 +105,7 @@ function App() {
           </HeaderLayout>
         }
       />
+      <Route path="/jnf-form" element={<JNFForm />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       {isStudentDetailsFormFilled() === false && (
@@ -117,14 +118,6 @@ function App() {
           }
         />
       )}
-      <Route
-        path="/jnf-form"
-        element={
-          <ProtectedRoute>
-            <JNFForm />
-          </ProtectedRoute>
-        }
-      />
       {isStudentEligibleForPlacementOrIntern() === true && (
         <>
           <Route

@@ -1,10 +1,11 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
 
 export type RouteProps = {
   id: number
   name: string
   url: string
+  icon: IconDefinition
 }
 
 export interface SidebarLayoutProps {
