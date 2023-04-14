@@ -31,11 +31,12 @@
 
 .content {
   display: flex;
+  flex-direction: column;
   width: 100%;
   margin: auto;
   max-width: var(--max-w);
-  padding: 1rem 2rem;
-  gap: 1.6rem;
+  padding: 0rem 2rem 2rem;
+  gap: 2rem;
 
   @media screen and (max-width: 525px) {
     flex-direction: column;
@@ -44,56 +45,47 @@
     width: 100%;
   }
 
-  .table_container {
-    max-width: 70vw;
+  .form_container {
     padding: 1rem;
-    background-color: white;
 
-    @media screen and (max-width: 880px) {
-      max-width: 100vw;
+    @media screen and (max-width: 600px) {
+      padding-top: 0;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #282828;
+
+      @media screen and (max-width: 525px) {
+        padding: 0;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+
+    .apply_btn {
+      margin-top: 1rem;
     }
   }
 
-  .table {
+  .table_container {
     &::-webkit-scrollbar {
       display: none;
     }
-  }
 
-  .filter_container {
-    width: 270px;
-    flex-shrink: 0.2;
-    top: calc(var(--nav-height) + 1.6rem);
-    max-height: calc((100vh - var(--nav-height) - 3rem));
-    position: sticky;
-
-    @media screen and (max-width: 880px) {
-      display: none;
-    }
-  }
-
-  .filter_mobile_container {
-    display: none;
-
-    @media screen and (max-width: 880px) {
-      display: flex;
-      float: right;
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      border-radius: 100%;
-      justify-content: center;
-      bottom: 0;
-      right: 0;
-      margin: 0px 10px 20px;
-      background-color: var(--custom-white-v1);
-      padding-top: 15px;
-
-      &:hover {
-        color: #aaa;
-        text-decoration: none;
-        cursor: pointer;
-      }
+    &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      border-radius: 1px;
     }
   }
 }
