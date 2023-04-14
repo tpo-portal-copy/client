@@ -55,13 +55,17 @@ function DrivesCard({
         <div className={styles.eligible_batches_list}>
           {eligibleBatches.map((batch) => {
             return (
-              <Tag key={batch.id}>
-                {batch.course} {batch.branch_name}
-              </Tag>
+              <div className={styles.tag} key={batch.id}>
+                <span>
+                  {batch.course} {batch.branch_name}
+                </span>
+              </div>
             )
           })}
+          <div className={styles.tag}>
+            <span>{type}</span>
+          </div>
         </div>
-        <Tag>{type}</Tag>
       </div>
     </div>
   )

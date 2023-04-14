@@ -46,6 +46,7 @@
         margin: auto;
         top: 150px;
         border: 3px solid white;
+        object-fit: cover;
 
         @media only screen and (max-width: 456px) {
           width: 80px;
@@ -123,20 +124,6 @@
         }
       }
     }
-    .recent_experiences {
-      border-radius: 10px;
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--custom-white-v1);
-
-      .message {
-        font-size: var(--md-heading);
-        font-weight: 600;
-        color: var(--text-color-primary);
-      }
-    }
 
     .education {
       border-radius: 10px;
@@ -184,6 +171,7 @@
           flex-direction: column;
           justify-content: center;
           font-weight: 600;
+          text-align: center;
 
           @media screen and (max-width: 1225px) {
             padding: 10px 0px;
@@ -228,17 +216,6 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding: 10px;
-          border: 2px solid #0077b5;
-          border-radius: 40px;
-
-          &:hover {
-            color: white;
-            background-color: #0077b5;
-            .profile_link {
-              color: #fff;
-            }
-          }
 
           @media screen and (max-width: 1225px) {
             padding: 2px;
@@ -246,10 +223,17 @@
         }
         .profile_link {
           font-weight: 600;
-          text-decoration: underline;
           text-align: center;
-          color: #0077b5;
           transition: 0.5s;
+          text-decoration: none;
+          color: #0077b5;
+        }
+        .resume_link {
+          font-weight: 600;
+          text-align: center;
+          transition: 0.5s;
+          text-decoration: none;
+          color: rgb(98, 189, 52);
         }
       }
     }

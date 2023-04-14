@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import Lottie from 'lottie-react'
 import jwtDecode from 'jwt-decode'
 import styles from './Profile.module.scss'
 import { FieldInfo } from '../../components'
 import { studentStatData } from '../../utils/Data/profileData'
-import MAvatar from '../../assets/animations/131392-avatar.json'
-import FAvatar from '../../assets/animations/131393-avatar-female.json'
 import { ClusterCard } from '../../components/Cards'
 import useStudentDetails from '../../hooks/useStudentDetails'
 import PageLoader from '../../components/PageLoader'
@@ -14,6 +11,7 @@ import { clustersAPI } from '../../utils/apis'
 import { PlacementDataProps } from '../../utils/types'
 import { getDataFromLocalStorage } from '../../utils/functions'
 import { BASE_API_URL } from '../../utils/constants'
+import RecentExperience from '../../components/RecentExperience'
 
 function Profile() {
   let accessDecoded: any
@@ -25,6 +23,7 @@ function Profile() {
   }
 
   const { data, isSuccess, isError, isLoading } = useStudentDetails(accessDecoded.roll)
+
   const [placementData, setPlacementData] = useState<PlacementDataProps>({
     id: 0,
     student: '',
@@ -149,11 +148,10 @@ function Profile() {
                   alt="user profile"
                 />
               ) : (
-                <Lottie
+                <img
                   className={styles.profile_img}
-                  width="150px"
-                  height="150px"
-                  animationData={data.gender === 'm' ? MAvatar : FAvatar}
+                  src={`https://icotar.com/initials/${accessDecoded.first_name}.png?s=150&bg=03C988`}
+                  alt="User Logo"
                 />
               )}
             </div>
@@ -189,9 +187,7 @@ function Profile() {
               <FieldInfo label="Total Backlog(s)" value={data.total_backlog} />
             </div>
           </div>
-          <div className={styles.recent_experiences}>
-            <span className={styles.message}>No experience posted </span>
-          </div>
+          <RecentExperience />
           <div className={styles.education}>
             <p className={styles.education_title}>Education</p>
             <div>
@@ -256,7 +252,7 @@ function Profile() {
               )}
             </div>
             <div className={styles.stats_container}>
-              <p className={styles.user_stats_title}>Student&#39;s Stats</p>
+              <p className={styles.user_stats_title}>My Stats</p>
               <div className={styles.user_stats_fields_container}>
                 {studentStatData.map((info) => (
                   <FieldInfo key={info.id} label={info.label} value={info.value} />
@@ -264,9 +260,16 @@ function Profile() {
               </div>
               <div className={styles.profile}>
                 <a href={data.linkedin} className={styles.profile_link}>
-                  LinkedIn profile
+                  LinkedIn Profile
                 </a>
               </div>
+              {data.eligibility.allowed_for !== 'NA' ? (
+                <div className={styles.profile}>
+                  <a href={data.eligibility.resume} className={styles.resume_link}>
+                    View Resume
+                  </a>
+                </div>
+              ) : null}
             </div>
             <div className={styles.address_container}>
               <p className={styles.address_title}>Competitive Exams</p>

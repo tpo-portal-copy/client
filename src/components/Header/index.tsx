@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   useDisclosure,
+  Button,
 } from '@chakra-ui/react'
 import jwtDecode from 'jwt-decode'
 import Sidebar from '../Sidebar'
@@ -39,16 +40,21 @@ function Header() {
 
   useOnOutsideClick(sidebarRef, closeSidebar)
   const { onOpen, onClose, isOpen } = useDisclosure()
+  const [showLogoutLoader, setLogoutLoader] = useState(false)
 
   const handleLogout = async () => {
     try {
+      setLogoutLoader(true)
       await studentLogoutAPI.post('/', {
         refresh_token: getDataFromLocalStorage('refresh_token'),
       })
 
+      setLogoutLoader(false)
+
       clearDataFromLocalStorage()
       navigate('/home')
     } catch (err) {
+      setLogoutLoader(false)
       console.log(err)
     }
   }
@@ -60,6 +66,8 @@ function Header() {
   }
 
   const isAuthenticated = accessDecoded != null
+
+  console.log(accessDecoded)
 
   return (
     <header className={styles.header}>
@@ -106,7 +114,14 @@ function Header() {
             <Popover isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
               <PopoverTrigger>
                 <div className={styles.profile_img}>
-                  <img src={accessDecoded?.img_url} alt="User Profile" />
+                  {'img_url' in accessDecoded ? (
+                    <img src={accessDecoded?.img_url} alt="User Profile" />
+                  ) : (
+                    <img
+                      src={`https://icotar.com/initials/${accessDecoded.first_name}.png?s=100&bg=03C988`}
+                      alt="User Logo"
+                    />
+                  )}
                 </div>
               </PopoverTrigger>
               <PopoverContent
@@ -142,9 +157,16 @@ function Header() {
                   <Link to="/placement-policy" className={styles.option} onClick={onClose}>
                     Placement Policy
                   </Link>
-                  <button className={styles.option} onClick={handleLogout}>
+                  <Button
+                    backgroundColor="#FA9884"
+                    color="#F9F9F9"
+                    className={styles.option}
+                    onClick={handleLogout}
+                    isLoading={showLogoutLoader}
+                    _hover={{ backgroundColor: '#E64848' }}
+                  >
                     Logout
-                  </button>
+                  </Button>
                 </PopoverBody>
               </PopoverContent>
             </Popover>

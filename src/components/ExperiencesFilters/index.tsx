@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import Lottie from 'lottie-react'
 import CheckListItem from '../CheckListItem'
+import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 import Modal from '../Modal'
 import { ExperienceFilterProps } from '../../utils/types'
 import styles from './ExperiencesFilters.module.scss'
@@ -28,7 +30,7 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
   const { data, isLoading, isSuccess } = useExperienceFilterOptionsList()
 
   if (isLoading || !isSuccess) {
-    return <></>
+    return <Lottie animationData={Loader} />
   }
 
   const openCompaniesModal = () => {
