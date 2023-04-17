@@ -25,6 +25,8 @@ import {
   Register,
   TPODashboard,
   CompanyWiseDetails,
+  NextPlacementEligibilityPercentage,
+  UpdateClusters,
 } from '../pages'
 import {
   clearDataFromLocalStorage,
@@ -107,6 +109,8 @@ function App() {
       <Route path="/announcement-form" element={<AnnouncementForm />} />
       <Route path="/result-announcement" element={<ResultAnnouncement />} />
       <Route path="/create-drive" element={<CreateDriveForm />} />
+      <Route path="/eligibility-percentage" element={<NextPlacementEligibilityPercentage />} />
+      <Route path="/update-clusters" element={<UpdateClusters />} />
       <Route
         path="/home"
         element={

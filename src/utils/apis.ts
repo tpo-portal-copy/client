@@ -25,6 +25,7 @@ import {
   TPO_STATS_API,
   RECENT_EXPERIENCE_API,
   COMPANY_WISE_STATS_API,
+  PERCENTAGE_ELIGIBILITY_API,
 } from './constants'
 import { getDataFromLocalStorage } from './functions'
 
@@ -122,10 +123,14 @@ export const refreshTokenAPI = axios.create({
 
 export const recentExperienceAPI = axios.create({
   baseURL: RECENT_EXPERIENCE_API,
-  })
-  
+})
+
 export const companyWiseStatisticsAPI = axios.create({
-  baseURL: COMPANY_WISE_STATS_API
+  baseURL: COMPANY_WISE_STATS_API,
+})
+
+export const percentageEligibilityAPI = axios.create({
+  baseURL: PERCENTAGE_ELIGIBILITY_API,
 })
 
 studentAPI.interceptors.request.use((config) => {
