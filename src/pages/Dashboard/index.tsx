@@ -101,7 +101,6 @@ function Dashboard() {
               {isNotificationSuccess &&
                 notificationsData.Recent_Drive.map((listItem: any) => {
                   return (
-                    // <Link key={listItem.id} className={styles.list_item} to={listItem.link}>
                     <div key={listItem.Id} className={styles.list_item}>
                       <div className={styles.pic}>
                         <img alt="drives_image" src={listItem.Image_Url} width={40} height={40} />
@@ -111,7 +110,6 @@ function Dashboard() {
                         <p className={styles.date}>{listItem.Starting_Date}</p>
                       </div>
                     </div>
-                    // </Link>
                   )
                 })}
             </div>
@@ -123,7 +121,6 @@ function Dashboard() {
               {isNotificationSuccess &&
                 notificationsData.Recent_Experience.map((listItem: any) => {
                   return (
-                    // <Link key={listItem.id} className={styles.list_item} to={listItem.link}>
                     <div key={listItem.Id} className={styles.list_item}>
                       <div className={styles.pic}>
                         <img alt="users_image" src={listItem.Image_Url} width={40} height={40} />
@@ -133,7 +130,6 @@ function Dashboard() {
                         <p className={styles.date}>{listItem.Created_Date}</p>
                       </div>
                     </div>
-                    // </Link>
                   )
                 })}
             </div>

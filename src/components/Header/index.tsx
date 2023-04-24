@@ -67,8 +67,6 @@ function Header() {
 
   const isAuthenticated = accessDecoded != null
 
-  console.log(accessDecoded)
-
   return (
     <header className={styles.header}>
       <div className={styles.content}>

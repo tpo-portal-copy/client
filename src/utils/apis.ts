@@ -25,6 +25,7 @@ import {
   TPO_STATS_API,
   RECENT_EXPERIENCE_API,
   COMPANY_WISE_STATS_API,
+  ADD_JNF_API,
 } from './constants'
 import { getDataFromLocalStorage } from './functions'
 
@@ -126,6 +127,10 @@ export const recentExperienceAPI = axios.create({
 
 export const companyWiseStatisticsAPI = axios.create({
   baseURL: COMPANY_WISE_STATS_API,
+})
+
+export const addJnfAPI = axios.create({
+  baseURL: ADD_JNF_API,
 })
 
 studentAPI.interceptors.request.use((config) => {

@@ -1,5 +1,6 @@
 import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
+import { boolean } from 'yup'
 
 export type RouteProps = {
   id: number
@@ -439,14 +440,14 @@ export interface RadioSelectProps {
 
 export interface EligibleBranch {
   branch_name: string
-  course_name: string
+  course: string
 }
 
 export interface JNFFormTwoData {
   tentativeJoiningDate: string
   jobProfile: string
   ctc: number | undefined
-  jobDescription: string
+  jdLink: string
   cgpi: number | undefined
   eligibleBatches: string
   course: string
@@ -455,9 +456,41 @@ export interface JNFFormTwoData {
 }
 
 export interface JNFFormTwoProps {
-  onNext: (values: JNFFormTwoData) => void
-  onBack: (values: JNFFormTwoData) => void
-  data: JNFFormTwoData
+  onNext: (placementJobProfiles: Array<PlacementJobProfile>) => void
+  onBack: (placementJobProfiles: Array<PlacementJobProfile>) => void
+  data: Array<PlacementJobProfile>
+}
+
+export interface PlacementJobProfile {
+  jobProfile: string
+  ctc: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  tentativeJoiningDate: string
+  hasIntern: boolean
+}
+
+export interface SummerInternJobProfile {
+  jobProfile: string
+  stipend: number | undefined
+  duration: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  tentativeJoiningDate: string
+  ctc: number | undefined
+  isPPO: boolean
+}
+
+export interface SixMonInternJobProfile {
+  jobProfile: string
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  tentativeJoiningDate: string
+  stipend: number | undefined
+  ctcAfterIntern: number | undefined
 }
 
 export interface JNFFormThreeData {
@@ -467,7 +500,7 @@ export interface JNFFormThreeData {
   duration: number | undefined
   stipend: number | undefined
   ctc: number | undefined
-  jobDescription: string
+  jdLink: string
   cgpi: number | undefined
   eligibleBatches: string
   course: string
@@ -475,9 +508,9 @@ export interface JNFFormThreeData {
 }
 
 export interface JNFFormThreeProps {
-  onNext: (values: JNFFormThreeData) => void
-  onBack: (values: JNFFormThreeData) => void
-  data: JNFFormThreeData
+  onNext: (summerInternJobProfile: Array<SummerInternJobProfile>) => void
+  onBack: (summerInternJobProfile: Array<SummerInternJobProfile>) => void
+  data: Array<SummerInternJobProfile>
 }
 
 export interface JNFFormFourData {
@@ -485,7 +518,7 @@ export interface JNFFormFourData {
   jobProfile: string
   stipend: number | undefined
   ctcAfterIntern: number | undefined
-  jobDescription: string
+  jdLink: string
   cgpi: number | undefined
   eligibleBatches: string
   course: string
@@ -493,9 +526,9 @@ export interface JNFFormFourData {
 }
 
 export interface JNFFormFourProps {
-  onNext: (values: JNFFormFourData) => void
-  onBack: (values: JNFFormFourData) => void
-  data: JNFFormFourData
+  onNext: (summerInternJobProfile: Array<SixMonInternJobProfile>) => void
+  onBack: (summerInternJobProfile: Array<SixMonInternJobProfile>) => void
+  data: Array<SixMonInternJobProfile>
 }
 
 export interface JNFFormFiveData {
@@ -505,15 +538,14 @@ export interface JNFFormFiveData {
   email: string
 }
 
-export interface JNFFormFiveProps {
-  onSubmit: (values: JNFFormFiveData) => void
-  onBack: (values: JNFFormFiveData) => void
-  data: JNFFormFiveData
+export interface HR {
+  type: string
+  name: string
+  mobile: number | undefined
+  email: string
 }
-
-export interface HRListProps {
-  hr_type: string
-  hr_name: string
-  hr_mobile_number: number | undefined
-  hr_email: string
+export interface JNFFormFiveProps {
+  onSubmit: (values: Array<HR>) => void
+  onBack: (values: Array<HR>) => void
+  data: Array<HR>
 }

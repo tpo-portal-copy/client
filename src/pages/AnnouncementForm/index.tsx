@@ -39,8 +39,6 @@ export default function AnnouncementForm() {
       type: Yup.string().required('Type is required'),
     }),
     onSubmit: async (values) => {
-      console.log({ ...values, value })
-
       try {
         const objToSend = {
           title: values.title,

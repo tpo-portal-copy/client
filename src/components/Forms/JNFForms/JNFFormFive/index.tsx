@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import * as Yup from 'yup'
 import { useState } from 'react'
-import { JNFFormFiveProps, HRListProps } from '../../../../utils/types'
+import { JNFFormFiveProps, HR } from '../../../../utils/types'
 import styles from './JNFFormFive.module.scss'
 import { Input, Select, Error } from '../../../index'
 
@@ -14,11 +14,14 @@ const HrTypes = [
 ]
 
 export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps) {
-  const [hrList, setHRList] = useState<Array<HRListProps>>([])
+  const [hrList, setHRList] = useState<Array<HR>>(data)
 
   const formik = useFormik({
     initialValues: {
-      ...data,
+      type: '',
+      name: '',
+      mobileNumber: undefined,
+      email: '',
     },
     validationSchema: Yup.object().shape({
       type: Yup.string().required('Type is required'),
@@ -29,43 +32,42 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
       email: Yup.string().email('Enter a valid email').required('Personal Email is required.'),
     }),
     onSubmit: (values) => {
-      onSubmit(values)
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      addHR()
     },
   })
+
+  const handleSubmit = () => {
+    onSubmit(hrList)
+  }
 
   const uniqueList = hrList.filter(
     (item, index, self) =>
       index ===
       self.findIndex(
         (t) =>
-          t.hr_type === item.hr_type &&
-          t.hr_name === item.hr_name &&
-          t.hr_mobile_number === item.hr_mobile_number &&
-          t.hr_email === item.hr_email,
+          t.type === item.type &&
+          t.name === item.name &&
+          t.mobile === item.mobile &&
+          t.email === item.email,
       ),
   )
 
   const addHR = async () => {
-    const res = await formik.validateForm()
-    if (
-      Object.values(res).length === 0 &&
-      (hrList.length === 0 || hrList.find((hr) => hr.hr_name === formik.values.name) == null)
-    ) {
-      setHRList([
-        ...uniqueList,
-        {
-          hr_type: formik.values.type,
-          hr_name: formik.values.name,
-          hr_mobile_number: formik.values.mobileNumber,
-          hr_email: formik.values.email,
-        },
-      ])
+    setHRList([
+      ...uniqueList,
+      {
+        type: formik.values.type,
+        name: formik.values.name,
+        mobile: formik.values.mobileNumber,
+        email: formik.values.email,
+      },
+    ])
 
-      formik.setFieldValue('name', undefined)
-      formik.setFieldValue('mobileNumber', undefined)
-      formik.setFieldValue('type', undefined)
-      formik.setFieldValue('email', undefined)
-    }
+    formik.setFieldValue('name', '')
+    formik.setFieldValue('mobileNumber', undefined)
+    formik.setFieldValue('type', '')
+    formik.setFieldValue('email', '')
   }
 
   const removeRow = (index: number) => {
@@ -73,6 +75,7 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
     list.splice(index, 1)
     setHRList(list)
   }
+
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
@@ -108,6 +111,7 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
         <div className={styles.field}>
           <Input
             name="mobileNumber"
+            type="number"
             placeholder="Mobile Number"
             value={formik.values.mobileNumber || ''}
             onChange={formik.handleChange}
@@ -131,7 +135,7 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
         </div>
 
         <div className={styles.add_hr_button}>
-          <Button onClick={addHR}>
+          <Button type="submit">
             <FontAwesomeIcon icon={faPlus} fixedWidth />
             Add More HR
           </Button>
@@ -154,11 +158,11 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
                   <Tbody>
                     {hrList.map((hr, index) => {
                       return (
-                        <Tr key={hr.hr_mobile_number}>
-                          <Td padding="0">{hr.hr_name}</Td>
-                          <Td>{hr.hr_type}</Td>
-                          <Td>{hr.hr_mobile_number}</Td>
-                          <Td>{hr.hr_email}</Td>
+                        <Tr key={hr.mobile}>
+                          <Td padding="0">{hr.name}</Td>
+                          <Td>{hr.type}</Td>
+                          <Td>{hr.mobile}</Td>
+                          <Td>{hr.email}</Td>
                           <Td>
                             <Button size="sm" onClick={() => removeRow(index)}>
                               <FontAwesomeIcon icon={faTrash} />
@@ -186,8 +190,7 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
             color="white"
             _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            onClick={() => onBack(formik.values)}
-            type="submit"
+            onClick={() => onBack(hrList)}
           >
             Back
           </Button>
@@ -196,8 +199,8 @@ export default function JNFFormFive({ onSubmit, onBack, data }: JNFFormFiveProps
             color="white"
             _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            isDisabled={!formik.isValid}
-            type="submit"
+            isDisabled={hrList.length <= 0}
+            onClick={handleSubmit}
           >
             Submit
           </Button>

@@ -1,21 +1,37 @@
 import { Button, Table, Tag, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
-import { FormikState, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faClose, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { EligibleBranch, JNFFormThreeData, JNFFormThreeProps } from '../../../../utils/types'
+import { faPlus, faClose, faTrash } from '@fortawesome/free-solid-svg-icons'
+import {
+  EligibleBranch,
+  JNFFormThreeData,
+  JNFFormThreeProps,
+  SummerInternJobProfile,
+} from '../../../../utils/types'
 import coursesData from '../../../../utils/Data/coursesData'
 import styles from './JNFFormThree.module.scss'
 import { Input, RadioSelect, Select, Error } from '../../../index'
 import { BooleanValue } from '../../../../utils/constants'
 
 export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps) {
-  const [internProfiles, setInternProfiles] = useState<Array<object>>([])
+  const [summerInternJobProfiles, setSummerInternJobProfiles] =
+    useState<Array<SummerInternJobProfile>>(data)
 
   const formik = useFormik({
     initialValues: {
-      ...data,
+      isPPO: false,
+      tentativeJoiningDate: '',
+      jobProfile: '',
+      stipend: undefined,
+      duration: undefined,
+      ctc: undefined,
+      jdLink: '',
+      cgpi: undefined,
+      eligibleBatches: '',
+      course: '',
+      branch: '',
     },
     validationSchema: Yup.object().shape({
       isPPO: Yup.string(),
@@ -24,14 +40,15 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
       stipend: Yup.number().required('stipend is required'),
       duration: Yup.number(),
       ctc: Yup.number(),
-      jobDescription: Yup.string().required('JD Link is required'),
+      jdLink: Yup.string().required('JD Link is required'),
       cgpi: Yup.number().required('Cgpi is required'),
       eligibleBatches: Yup.string(),
       course: Yup.string().required('Course is required'),
       branch: Yup.string().required('Branch is required'),
     }),
     onSubmit: (values) => {
-      onNext(values)
+      /* eslint-disable-next-line @typescript-eslint/no-use-before-define */
+      addJobProfile(values)
     },
   })
 
@@ -40,58 +57,37 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
   const uniqueList = eligibleBatches.filter(
     (item, index, self) =>
       index ===
-      self.findIndex(
-        (t) => t.branch_name === item.branch_name && t.course_name === item.course_name,
-      ),
+      self.findIndex((t) => t.branch_name === item.branch_name && t.course === item.course),
   )
 
   const clearForm = () => {
-    const initialValues: JNFFormThreeData = {
-      isPPO: false,
-      tentativeJoiningDate: '',
-      jobProfile: '',
-      stipend: undefined,
-      duration: undefined,
-      ctc: undefined,
-      jobDescription: '',
-      cgpi: undefined,
-      eligibleBatches: '',
-      course: '',
-      branch: '',
-    }
-
-    const formikState: FormikState<JNFFormThreeData> = {
-      values: initialValues,
-      touched: {},
-      errors: {},
-      isSubmitting: false,
-      isValidating: false,
-      submitCount: 0,
-    }
-
-    formik.setFormikState(formikState)
-    setEligibleBatches([])
+    formik.resetForm()
   }
 
-  const addJobProfile = async () => {
-    const res = await formik.validateForm()
-
-    if (Object.values(res).length > 0) return
-
+  const addJobProfile = async ({
+    jobProfile,
+    stipend,
+    duration,
+    jdLink,
+    ctc,
+    isPPO,
+    tentativeJoiningDate,
+    cgpi,
+  }: JNFFormThreeData) => {
     const newProfile = {
-      jobProfile: formik.values.jobProfile,
-      stipend: formik.values.stipend,
-      duration: formik.values.duration,
-      jdLink: formik.values.jobDescription,
-      cgpi: formik.values.cgpi,
+      jobProfile,
+      stipend,
+      duration,
+      jdLink,
+      cgpi,
       eligibleBatches,
-      tentativeJoiningDate: formik.values.tentativeJoiningDate,
-      ctc: formik.values.ctc,
-      isPPO: formik.values.isPPO,
+      tentativeJoiningDate,
+      ctc,
+      isPPO,
     }
 
-    const newInternProfiles = [...internProfiles, newProfile]
-    setInternProfiles(newInternProfiles)
+    const newInternProfiles = [...summerInternJobProfiles, newProfile]
+    setSummerInternJobProfiles(newInternProfiles)
     clearForm()
   }
 
@@ -101,7 +97,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
         ...uniqueList,
         {
           branch_name: formik.values.branch,
-          course_name: formik.values.course,
+          course: formik.values.course,
         },
       ])
     }
@@ -115,6 +111,20 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
 
   const handleIsPPOButton = (value: string) => {
     formik.setFieldValue('isPPO', value === BooleanValue.TRUE)
+  }
+
+  const handleFormSubmit = () => {
+    onNext(summerInternJobProfiles)
+  }
+
+  const handleFormBack = () => {
+    onBack(summerInternJobProfiles)
+  }
+
+  const deleteJobProfile = (index: number) => {
+    const newJobProfiles = [...summerInternJobProfiles]
+    newJobProfiles.splice(index, 1)
+    setSummerInternJobProfiles(newJobProfiles)
   }
 
   return (
@@ -200,14 +210,14 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
 
         <div className={styles.field}>
           <Input
-            name="jobDescription"
-            placeholder="Job Description (JD) LINK"
-            value={formik.values.jobDescription}
+            name="jdLink"
+            placeholder="Job Description Link"
+            value={formik.values.jdLink}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.jobDescription && formik.errors.jobDescription ? (
-            <Error errorMessage={formik.errors.jobDescription} />
+          {formik.touched.jdLink && formik.errors.jdLink ? (
+            <Error errorMessage={formik.errors.jdLink} />
           ) : null}
         </div>
 
@@ -254,13 +264,13 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
             <Error errorMessage={formik.errors.eligibleBatches} />
           ) : null}
 
-          <Button onClick={addBranch} className={styles.add_branches}>
+          <Button onClick={addBranch} className={styles.add_btn} marginTop="4">
             <FontAwesomeIcon icon={faPlus} /> Add Branch
           </Button>
           <div className={styles.selected_branches_row}>
             {uniqueList.map((batches, idx: number) => (
               <Tag className={styles.selected_branches} key={batches.branch_name}>
-                {batches.course_name} {batches.branch_name}
+                {batches.course} {batches.branch_name}
                 <Button size="xs" onClick={() => removeBranch(idx)}>
                   <FontAwesomeIcon icon={faClose} />
                 </Button>
@@ -269,12 +279,11 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
           </div>
         </div>
         <div className={styles.confirm_btn}>
-          <Button onClick={addJobProfile} isDisabled={!formik.isValid}>
-            <FontAwesomeIcon icon={faCheck} color="#54B435" />
+          <Button type="submit" isDisabled={!formik.isValid} className={styles.add_btn}>
+            <FontAwesomeIcon icon={faPlus} />
+            <span>Add Profile</span>
           </Button>
-          <Button onClick={clearForm}>
-            <FontAwesomeIcon icon={faTrash} color="#E64848" />
-          </Button>
+          <Button onClick={clearForm}>Clear Form</Button>
         </div>
         <Table w="100%" className={styles.table_container}>
           <Thead>
@@ -290,7 +299,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
             </Tr>
           </Thead>
           <Tbody>
-            {internProfiles.map((internProfile: any) => {
+            {summerInternJobProfiles.map((internProfile: SummerInternJobProfile, index) => {
               return (
                 <Tr key={internProfile.jobProfile}>
                   <Td>{internProfile.jobProfile}</Td>
@@ -301,14 +310,19 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
                   <Td>
                     {internProfile.eligibleBatches.map((batch: any) => {
                       return (
-                        <li key={`${batch.course_name}: ${batch.branch_name}`}>
-                          {`${batch.course_name}: ${batch.branch_name}`}
+                        <li key={`${batch.course}: ${batch.branch}`}>
+                          {`${batch.course}: ${batch.branch_name}`}
                         </li>
                       )
                     })}
                   </Td>
                   <Td>{internProfile.tentativeJoiningDate}</Td>
                   <Td>{internProfile.isPPO ? `Expected CTC: ${internProfile.ctc} LPA` : 'No'}</Td>
+                  <Td>
+                    <Button onClick={() => deleteJobProfile(index)}>
+                      <FontAwesomeIcon icon={faTrash} color="#E64848" />
+                    </Button>
+                  </Td>
                 </Tr>
               )
             })}
@@ -320,8 +334,7 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
             color="white"
             _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            type="submit"
-            onClick={() => onBack(formik.values)}
+            onClick={handleFormBack}
           >
             Back
           </Button>
@@ -330,8 +343,8 @@ export default function JNFFormThree({ onNext, onBack, data }: JNFFormThreeProps
             color="white"
             _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
             className={styles.btn}
-            isDisabled={!formik.isValid}
-            type="submit"
+            isDisabled={summerInternJobProfiles.length <= 0}
+            onClick={handleFormSubmit}
           >
             Next
           </Button>

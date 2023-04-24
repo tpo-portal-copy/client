@@ -5,6 +5,7 @@
   @media screen and (max-width: 525px) {
     padding: 0;
   }
+
   .title {
     font-size: 24px;
     font-weight: 600;
@@ -33,9 +34,8 @@
       }
     }
 
-    .add_branches {
+    .add_btn {
       gap: 0.5rem;
-      margin: 1rem 0;
     }
 
     .selected_branches_row {
@@ -52,6 +52,12 @@
         display: flex;
         gap: 0.5rem;
       }
+    }
+
+    .confirm_btn {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
     }
 
     .btn {

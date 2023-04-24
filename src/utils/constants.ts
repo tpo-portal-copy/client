@@ -26,6 +26,7 @@ export const REFRESH_TOKEN_API = import.meta.env.VITE_REFRESH_TOKEN_API
 export const TPO_STATS_API = import.meta.env.VITE_TPO_STATS_API
 export const RECENT_EXPERIENCE_API = import.meta.env.VITE_RECENT_EXPERIENCE_API
 export const COMPANY_WISE_STATS_API = import.meta.env.VITE_COMPANY_WISE_STATS_API
+export const ADD_JNF_API = import.meta.env.VITE_ADD_JNF_API
 
 // Boolean enum
 export const enum BooleanValue {

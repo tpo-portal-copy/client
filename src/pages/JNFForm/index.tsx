@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import { Text } from '@chakra-ui/react'
+import { Text, useToast } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
-import ProgressBar from '../../components/ProgressBar'
-import Animation from '../../assets/animations/136670-space.json'
 import styles from './JNFForm.module.scss'
 import {
   JNFFormOne,
@@ -14,17 +12,18 @@ import {
 import Loading from '../../assets/animations/81544-rolling-check-mark.json'
 import {
   JNFFormOneData,
-  JNFFormTwoData,
-  JNFFormThreeData,
-  JNFFormFiveData,
-  JNFFormFourData,
+  PlacementJobProfile,
+  SummerInternJobProfile,
+  SixMonInternJobProfile,
+  HR,
 } from '../../utils/types'
 import { getCurrentSession } from '../../utils/functions'
 import { BooleanValue } from '../../utils/constants'
+import { addJnfAPI } from '../../utils/apis'
 
 export default function JNFForm() {
-  const [value, setValue] = useState(0)
   const [step, setStep] = useState(0)
+  const toast = useToast()
   const [jnfFormOneData, setJNFFormOneData] = useState<JNFFormOneData>({
     companyName: '',
     session: getCurrentSession(),
@@ -37,152 +36,233 @@ export default function JNFForm() {
     technicalTest: '',
     groupDiscussion: '',
     personalInterview: '',
-    noOfPersonVisiting: undefined,
+    noOfPersonVisiting: 0,
     jobLocation: '',
     tentativeDriveDate: '',
   })
 
-  const [jnfFormTwoData, setJNFFormTwoData] = useState<JNFFormTwoData>({
-    tentativeJoiningDate: '',
-    jobProfile: '',
-    ctc: undefined,
-    jobDescription: '',
-    cgpi: undefined,
-    eligibleBatches: '',
-    course: '',
-    branch: '',
-    hasIntern: false,
-  })
+  const [placementJobProfiles, setPlacementJobProfiles] = useState<Array<PlacementJobProfile>>([])
+  const [summerInternJobProfiles, setSummerInternJobProfiles] = useState<
+    Array<SummerInternJobProfile>
+  >([])
+  const [sixMonInternJobProfiles, setSixMonInternJobProfiles] = useState<
+    Array<SixMonInternJobProfile>
+  >([])
 
-  const [jnfFormThreeData, setJNFFormThreeData] = useState<JNFFormThreeData>({
-    isPPO: false,
-    tentativeJoiningDate: '',
-    jobProfile: '',
-    stipend: undefined,
-    duration: undefined,
-    ctc: undefined,
-    jobDescription: '',
-    cgpi: undefined,
-    eligibleBatches: '',
-    course: '',
-    branch: '',
-  })
-
-  const [jnfFormFourData, setJNFFormFourData] = useState<JNFFormFourData>({
-    tentativeJoiningDate: '',
-    jobProfile: '',
-    stipend: undefined,
-    ctcAfterIntern: undefined,
-    jobDescription: '',
-    cgpi: undefined,
-    eligibleBatches: '',
-    course: '',
-    branch: '',
-  })
-
-  const [jnfFormFiveData, setJNFFormFiveData] = useState<JNFFormFiveData>({
-    type: '',
-    name: '',
-    mobileNumber: undefined,
-    email: '',
-  })
+  const [hrList, setHrList] = useState<Array<HR>>([])
 
   const [show, setShow] = useState(false)
 
-  const getProgressBarPercentageIncrease = () => {
-    let numOfFormsShowed = 0
-    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) numOfFormsShowed += 1
-    if (jnfFormOneData.isSummerIntern === BooleanValue.TRUE) numOfFormsShowed += 1
-    if (jnfFormOneData.isSixMonIntern === BooleanValue.TRUE) numOfFormsShowed += 1
-    const percentageIncrease = 100 / numOfFormsShowed
-    return percentageIncrease
-  }
-
   const handleOneNext = (values: JNFFormOneData) => {
-    const percentageIncrease = getProgressBarPercentageIncrease()
-
-    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
+    if (values.isPlacement === BooleanValue.TRUE) {
       setStep((prevStep) => prevStep + 1)
-    } else {
+    } else if (values.isSummerIntern === BooleanValue.TRUE) {
       setStep((prevStep) => prevStep + 2)
+    } else if (values.isSixMonIntern === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep + 3)
+    } else {
+      setStep((prevStep) => prevStep + 4)
     }
-    setValue((prevValue) => prevValue + percentageIncrease)
 
     setJNFFormOneData(values)
   }
 
-  const handleTwoNext = (values: JNFFormTwoData) => {
-    const percentageIncrease = getProgressBarPercentageIncrease()
+  const handleTwoNext = (jobProfilesData: PlacementJobProfile[]) => {
+    if (jnfFormOneData.isSummerIntern === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep + 1)
+    } else if (jnfFormOneData.isSixMonIntern === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep + 2)
+    } else {
+      setStep((prevStep) => prevStep + 3)
+    }
 
-    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
+    setPlacementJobProfiles(jobProfilesData)
+  }
+
+  const handleThreeNext = (jobProfilesData: SummerInternJobProfile[]) => {
+    if (jnfFormOneData.isSixMonIntern === BooleanValue.TRUE) {
       setStep((prevStep) => prevStep + 1)
     } else {
       setStep((prevStep) => prevStep + 2)
     }
-    setValue((prevValue) => prevValue + percentageIncrease)
-    setJNFFormTwoData(values)
+
+    setSummerInternJobProfiles(jobProfilesData)
   }
 
-  const handleThreeNext = (values: JNFFormThreeData) => {
+  const handleFourNext = (jobProfilesData: SixMonInternJobProfile[]) => {
     setStep((prevStep) => prevStep + 1)
-    setValue((prevValue) => prevValue + 25)
-    setJNFFormThreeData(values)
+
+    setSixMonInternJobProfiles(jobProfilesData)
   }
 
-  const handleFourNext = (values: JNFFormFourData) => {
-    setStep((prevStep) => prevStep + 1)
-    setValue((prevValue) => prevValue + 25)
-    setJNFFormFourData(values)
-  }
-
-  const handleTwoBack = (values: JNFFormTwoData) => {
+  const handleTwoBack = (jobProfilesData: PlacementJobProfile[]) => {
     setStep((prevStep) => prevStep - 1)
-    setValue((prevValue) => prevValue - 25)
-    setJNFFormTwoData({ ...values })
+
+    setPlacementJobProfiles(jobProfilesData)
   }
 
-  const handleThreeBack = (values: JNFFormThreeData) => {
-    setStep((prevStep) => prevStep - 1)
-    setValue((prevValue) => prevValue - 25)
-    setJNFFormThreeData({ ...values })
+  const handleThreeBack = (jobProfilesData: SummerInternJobProfile[]) => {
+    if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep - 1)
+    } else {
+      setStep((prevStep) => prevStep - 2)
+    }
+
+    setSummerInternJobProfiles(jobProfilesData)
   }
 
-  const handleFourBack = (values: JNFFormFourData) => {
-    setStep((prevStep) => prevStep - 1)
-    setValue((prevValue) => prevValue - 25)
-    setJNFFormFourData({ ...values })
+  const handleFourBack = (jobProfilesData: SixMonInternJobProfile[]) => {
+    if (jnfFormOneData.isSummerIntern === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep - 1)
+    } else if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep - 2)
+    } else {
+      setStep((prevStep) => prevStep - 3)
+    }
+
+    setSixMonInternJobProfiles(jobProfilesData)
   }
 
-  const handleFiveBack = (values: JNFFormFiveData) => {
-    setStep((prevStep) => prevStep - 1)
-    setValue((prevValue) => prevValue - 25)
-    setJNFFormFiveData({ ...values })
+  const handleFiveBack = (hrListDetails: Array<HR>) => {
+    if (jnfFormOneData.isSixMonIntern === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep - 1)
+    } else if (jnfFormOneData.isSummerIntern === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep - 2)
+    } else if (jnfFormOneData.isPlacement === BooleanValue.TRUE) {
+      setStep((prevStep) => prevStep - 3)
+    } else {
+      setStep((prevStep) => prevStep - 4)
+    }
+
+    setHrList(hrListDetails)
   }
 
-  const handleSubmit = (values: any) => {
-    setStep((prevStep) => prevStep + 1)
-    setValue((prevValue) => prevValue + 25)
-    setShow(true)
+  const handleSubmit = async (hrListDetails: Array<HR>) => {
+    const jnfFormObject = {
+      company: jnfFormOneData.companyName,
+      session: jnfFormOneData.session,
+      is_placement: jnfFormOneData.isPlacement,
+      is_intern: jnfFormOneData.isSummerIntern,
+      is_six_months_intern: jnfFormOneData.isSixMonIntern,
+      pre_placement_talk: jnfFormOneData.prePlacementTalk,
+      aptitude_test: jnfFormOneData.aptitudeTest,
+      technical_test: jnfFormOneData.technicalTest,
+      group_discussion: jnfFormOneData.groupDiscussion,
+      presonal_interview: jnfFormOneData.personalInterview,
+      mode_of_hiring: jnfFormOneData.modeOfHiring,
+      job_location: jnfFormOneData.jobLocation,
+      tentative_drive_date: jnfFormOneData.tentativeDriveDate,
+      no_of_persons_visiting: jnfFormOneData.noOfPersonVisiting,
+    }
+
+    if (jnfFormOneData.isPlacement) {
+      const newPlacementProfiles = placementJobProfiles.map((profile) => {
+        return {
+          job_profile: profile.jobProfile,
+          tentative_start: profile.tentativeJoiningDate,
+          job_desc_pdf: null,
+          cgpi: profile.cgpi,
+          ctc: profile.ctc,
+          eligible_batches: profile.eligibleBatches,
+          has_intern: profile.hasIntern,
+        }
+      })
+
+      const placementObject = {
+        jnf_placement: newPlacementProfiles,
+      }
+
+      Object.assign(jnfFormObject, placementObject)
+    }
+
+    if (jnfFormOneData.isSummerIntern) {
+      const newsummerInternProfiles = summerInternJobProfiles.map((profile) => {
+        return {
+          job_profile: profile.jobProfile,
+          tentative_start: profile.tentativeJoiningDate,
+          job_desc_pdf: null,
+          cgpi: profile.cgpi,
+          ctc_after_ppo: profile.ctc,
+          eligible_batches: profile.eligibleBatches,
+          stipend: profile.stipend,
+          has_ppo: profile.isPPO,
+          duration: profile.duration,
+        }
+      })
+
+      const summerInternProfilesObject = {
+        jnf_intern: newsummerInternProfiles,
+      }
+
+      Object.assign(jnfFormObject, summerInternProfilesObject)
+    }
+
+    if (jnfFormOneData.isSixMonIntern) {
+      const newSixMonInternProfiles = sixMonInternJobProfiles.map((profile) => {
+        return {
+          job_profile: profile.jobProfile,
+          tentative_start: profile.tentativeJoiningDate,
+          job_desc_pdf: null,
+          cgpi: profile.cgpi,
+          stipend: profile.stipend,
+          ctc_after_intern: profile.ctcAfterIntern,
+          eligible_batches: profile.eligibleBatches,
+        }
+      })
+
+      const sixMonInternObject = {
+        jnf_six_months_intern: newSixMonInternProfiles,
+      }
+
+      Object.assign(jnfFormObject, sixMonInternObject)
+    }
+
+    const hrDetails = {
+      hr_details: hrListDetails,
+    }
+
+    Object.assign(jnfFormObject, hrDetails)
+
+    try {
+      await addJnfAPI.post('/', jnfFormObject)
+      setStep((prevStep) => prevStep + 1)
+      setShow(true)
+    } catch (err) {
+      toast({
+        title: 'Something went wrong...',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
   }
 
   const getFormContent = (currStep: number) => {
     switch (currStep) {
       case 0:
-        return <JNFFormOne data={jnfFormOneData} onNext={(values) => handleOneNext(values)} />
+        return <JNFFormOne data={jnfFormOneData} onNext={handleOneNext} />
       case 1:
-        return <JNFFormTwo data={jnfFormTwoData} onNext={handleTwoNext} onBack={handleTwoBack} />
+        return (
+          <JNFFormTwo data={placementJobProfiles} onNext={handleTwoNext} onBack={handleTwoBack} />
+        )
       case 2:
         return (
-          <JNFFormThree data={jnfFormThreeData} onNext={handleThreeNext} onBack={handleThreeBack} />
+          <JNFFormThree
+            data={summerInternJobProfiles}
+            onNext={handleThreeNext}
+            onBack={handleThreeBack}
+          />
         )
       case 3:
         return (
-          <JNFFormFour data={jnfFormFourData} onNext={handleFourNext} onBack={handleFourBack} />
+          <JNFFormFour
+            data={sixMonInternJobProfiles}
+            onNext={handleFourNext}
+            onBack={handleFourBack}
+          />
         )
       case 4:
-        return (
-          <JNFFormFive data={jnfFormFiveData} onSubmit={handleSubmit} onBack={handleFiveBack} />
-        )
+        return <JNFFormFive data={hrList} onSubmit={handleSubmit} onBack={handleFiveBack} />
       default:
         return null
     }
@@ -190,11 +270,6 @@ export default function JNFForm() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.section}>
-        <h2 className={styles.heading}>Fill Your Details Here</h2>
-        <Lottie animationData={Animation} />
-        <ProgressBar step={step} completed={value} />
-      </div>
       <div className={styles.content}>
         {show ? (
           <div className={styles.animation_container}>
@@ -204,7 +279,7 @@ export default function JNFForm() {
               animationData={Loading}
               className={styles.animation}
             />
-            <Text className={styles.tag_line}>You have successfully submitted your details</Text>{' '}
+            <Text className={styles.tag_line}>You have successfully submitted your details</Text>
           </div>
         ) : (
           <>

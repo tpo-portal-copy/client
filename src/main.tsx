@@ -18,6 +18,20 @@ const theme = extendTheme({
       },
     }),
   },
+  components: {
+    Button: {
+      baseStyle: {
+        colorScheme: 'blue',
+      },
+      variants: {
+        solid: {
+          bg: '#2D6187',
+          color: 'white',
+          _hover: { bg: '#0A458E' },
+        },
+      },
+    },
+  },
 })
 const queryClient = new QueryClient()
 

@@ -1,29 +1,6 @@
 .container {
   display: flex;
-  background-color: #fff;
   min-height: 100vh;
-
-  .section {
-    width: 100%;
-    max-width: 480px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: var(--card-shadow);
-    padding: 1rem;
-    height: 100vh;
-    position: fixed;
-
-    .heading {
-      font-size: 38px;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    @media only screen and (max-width: 1040px) {
-      display: none;
-    }
-  }
 
   .content {
     margin-left: auto;
@@ -31,8 +8,8 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: calc(100% - 480px);
-    padding: 0 1rem;
+    width: 100%;
+    padding: 1rem;
 
     @media screen and (max-width: 1040px) {
       width: 100%;

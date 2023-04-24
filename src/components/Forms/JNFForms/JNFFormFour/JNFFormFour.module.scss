@@ -33,9 +33,14 @@
       }
     }
 
-    .add_branches {
+    .confirm_btn {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .add_btn {
       gap: 0.5rem;
-      margin: 1rem 0;
     }
 
     .selected_branches_row {
