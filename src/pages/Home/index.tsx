@@ -40,6 +40,7 @@ function Home() {
           </div>
         </div>
         <img
+          className={styles.campus_picture}
           src="https://lh3.googleusercontent.com/p/AF1QipMwP8WbSt0o8bxeiLI6McIo_apJEq1LCKpyQUmy=s1360-w1360-h1020"
           alt="campus_picture"
         />

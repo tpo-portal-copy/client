@@ -21,7 +21,6 @@ import styles from './Drives.module.scss'
 import useDrives from '../../hooks/useDrives'
 import Page500 from '../Page500'
 import { Paginator } from '../../components'
-import MultiSelectDropDown from '../../components/MultiSelectDropDown'
 import { ClusterChosen } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
 
@@ -41,7 +40,6 @@ function Drives() {
 
   function extractCluster(clustersArr: Array<ClusterChosen>) {
     const str = clustersArr.map((cluster) => cluster.value).join(',')
-    console.log(str, clustersArr)
 
     setClusterStr(str)
   }
@@ -58,7 +56,6 @@ function Drives() {
 
   const handleClusterChange = (e: any) => {
     setSelectedCluster(e.target.value)
-    console.log(e.target.value)
   }
 
   const handleMultiDelete = (idx: number) => {

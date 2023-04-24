@@ -39,11 +39,6 @@ export interface ResourcesCardProps {
   imgUrl: string
 }
 
-export type NameObject = {
-  name: string
-  logo: string
-}
-
 export interface ExperienceCardProps {
   id: number
   company: string
@@ -51,11 +46,12 @@ export interface ExperienceCardProps {
   imgUrl?: string
   jobtype: string
   selected: boolean
-  name?: NameObject
+  name?: string
   difficulty: string
   roles: string
   created_at: string
   anonymity: boolean
+  company_image_url: string
 }
 
 export type InputProps = {

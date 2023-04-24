@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Button, VStack, Text, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react'
 import { useFormik } from 'formik'
+import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import Lottie from 'lottie-react'
@@ -10,17 +11,17 @@ import Loading from '../../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
 import { Error, Input, Select } from '../..'
 import styles from './ResultForms.module.scss'
-import { allStudentData } from '../../../utils/Data/resultAnnouncementData'
-import { companiesAPI, rolesAPI } from '../../../utils/apis'
+import { companiesAPI, rolesAPI, ppoAPI } from '../../../utils/apis'
 import { Company } from '../../../utils/types'
 
 export default function PpoResultForm() {
-  const [isLoading, setIsLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const [company, setCompany] = useState([])
   const [roles, setRoles] = useState([])
   const [isClicked, setClicked] = useState(false)
+  const [uniqueList, setUniqueList] = useState([])
   const date = new Date()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -37,12 +38,24 @@ export default function PpoResultForm() {
       session: Yup.string().required('Session is required'),
       ctc: Yup.number().required('CTC is required').moreThan(0, 'CTC must be greater than 0'),
     }),
-    onSubmit: () => {
-      setIsLoading(!isLoading)
-      setTimeout(() => {
-        setIsLoading((prevState) => !prevState)
-        setShowAnimation((state) => !state)
-      }, 3000)
+    onSubmit: async () => {
+      const objToSend = {
+        company: formik.values.company,
+        profile: formik.values.profile,
+        session: formik.values.session,
+        ctc: formik.values.ctc,
+        selected_students: uniqueList,
+      }
+
+      try {
+        const res = await ppoAPI.post('/', objToSend)
+        setShowAnimation(!showAnimation)
+        setTimeout(() => {
+          navigate('/tpo-dashboard')
+        }, 2000)
+      } catch (err) {
+        console.log(err)
+      }
     },
   })
 
@@ -88,44 +101,27 @@ export default function PpoResultForm() {
     setRoles([])
   }
 
-  const [rowData, setRowData] = useState([
-    {
-      stuName: allStudentData
-        .filter((data) => data.rollNo === formik.values.studentRollNo)
-        .map((data) => data.name)[0],
-      stuRollNo: formik.values.studentRollNo,
-      stuCompany: formik.values.company,
-    },
-  ])
-
-  const uniqueList = rowData.filter(
-    (item, index, self) =>
-      index ===
-      self.findIndex(
-        (t) =>
-          t.stuRollNo === item.stuRollNo &&
-          t.stuCompany === item.stuCompany &&
-          t.stuName === item.stuName,
-      ),
-  )
-
   const addRow = () => {
-    setRowData([
-      ...uniqueList,
-      {
-        stuName: allStudentData
-          .filter((data) => data.rollNo === formik.values.studentRollNo)
-          .map((data) => data.name)[0],
-        stuRollNo: formik.values.studentRollNo,
-        stuCompany: formik.values.company,
-      },
-    ])
+    if (uniqueList.find((student) => student.roll_number === formik.values.studentRollNo)) {
+      return ''
+    }
+
+    const obj = {
+      roll_number: formik.values.studentRollNo,
+      company: formik.values.company,
+      compensation: formik.values.ctc,
+      profile: formik.values.profile,
+      session: formik.values.session,
+    }
+
+    setUniqueList([...uniqueList, obj])
+
+    return ''
   }
 
   const removeRow = (index: number) => {
-    const list = [...uniqueList]
-    list.splice(index, 1)
-    setRowData(list)
+    const list = [...uniqueList].filter((item, idx) => idx !== index - 1)
+    setUniqueList([...list])
   }
 
   return (
@@ -265,39 +261,41 @@ export default function PpoResultForm() {
                 </Button>
               </div>
 
-              <div className={styles.table}>
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>Roll Number</Th>
-                      <Th>Student</Th>
-                      <Th>Company</Th>
-                      <Th> </Th>
-                    </Tr>
-                  </Thead>
-                  {uniqueList.slice(1).map((row, index) => (
-                    <Tbody key={row.stuRollNo}>
+              {uniqueList.length > 0 && (
+                <div className={styles.table}>
+                  <Table variant="simple">
+                    <Thead>
                       <Tr>
-                        <Td>{row.stuRollNo}</Td>
-                        <Td>{row.stuName}</Td>
-                        <Td>{row.stuCompany}</Td>
-                        <Td>
-                          <Button size="sm" onClick={() => removeRow(index + 1)}>
-                            <FontAwesomeIcon icon={faUserMinus} />
-                          </Button>
-                        </Td>
+                        <Th>Roll Number</Th>
+                        <Th>Company</Th>
+                        <Th>Role</Th>
+                        <Th> </Th>
                       </Tr>
-                    </Tbody>
-                  ))}
-                </Table>
-              </div>
+                    </Thead>
+                    {uniqueList.map((row, index) => (
+                      <Tbody key={row.roll_number}>
+                        <Tr>
+                          <Td>{row.roll_number}</Td>
+                          <Td>{row.company}</Td>
+                          <Td>{row.profile}</Td>
+                          <Td>
+                            <Button size="sm" onClick={() => removeRow(index + 1)}>
+                              <FontAwesomeIcon icon={faUserMinus} />
+                            </Button>
+                          </Td>
+                        </Tr>
+                      </Tbody>
+                    ))}
+                  </Table>
+                </div>
+              )}
               <Button
                 background="linear-gradient(40deg,#45cafc,#303f9f)"
                 color="white"
                 _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-                isLoading={isLoading}
+                isLoading={formik.isSubmitting}
                 type="submit"
-                isDisabled={!formik.isValid || uniqueList.length < 2}
+                isDisabled={!formik.isValid || uniqueList.length === 0}
               >
                 Post
               </Button>

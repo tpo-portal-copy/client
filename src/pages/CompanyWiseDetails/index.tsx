@@ -1,5 +1,6 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Select } from '@chakra-ui/react'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styles from './CompanyWiseDetails.module.scss'
 import { clusterOptions } from '../../utils/Data/formUIData'
 import useCompanyWiseStatistics from '../../hooks/useCompanyWiseStatistics'
@@ -15,9 +16,13 @@ function CompanyWiseDetails() {
 
   const [selectedCluster, setSelectedCluster] = useState('')
 
+  let { company, type } = useParams()
+  type = type === 'intern' ? 'intern' : 'placement'
+  company = company === undefined ? '' : company
+
   const { data, isError, isSuccess, isLoading } = useCompanyWiseStatistics(
-    'groww',
-    'intern',
+    company,
+    type,
     selectedCluster,
     selectedCourse?.name,
     selectedBranch,
@@ -33,10 +38,6 @@ function CompanyWiseDetails() {
 
   if (isError) {
     return <Page500 />
-  }
-
-  if (isCoursesLoading) {
-    return <PageLoader />
   }
 
   function handleCourseChange(e: any) {
@@ -79,7 +80,7 @@ function CompanyWiseDetails() {
       <div className={styles.header_container}>
         <div>
           <h1 className={styles.page_name}>{data && data.company}</h1>
-          <h3>{`(${data && data.totaloffers} offers)`}</h3>
+          {isSuccess && <h3>{`(${data && data.totaloffers} offers)`}</h3>}
         </div>
         <div className={styles.filter_container}>
           <div className={styles.filter}>

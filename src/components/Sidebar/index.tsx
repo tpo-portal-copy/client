@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { DashboardIcon, PortalLogo } from '../../assets/svgs'
-import navItems from '../../utils/Data/sidebarData'
+import { navItemsStudent } from '../../utils/Data/sidebarData'
 import { RouteProps, SidebarProps } from '../../utils/types'
 import styles from './Sidebar.module.scss'
 
@@ -18,7 +18,7 @@ function Sidebar({ onLinkClickHandler }: SidebarProps) {
         <h1>NITH</h1>
       </div>
       <div className={styles.nav_items}>
-        {navItems.map((navItem: RouteProps) => {
+        {navItemsStudent.map((navItem: RouteProps) => {
           return (
             <NavLink
               to={navItem.url}

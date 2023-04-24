@@ -15,6 +15,10 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (location.pathname === '/student-details-form') return <> {children} </>
 
+  if ('role' in localStorage) {
+    return <>{children} </>
+  }
+
   if (isStudentDetailsFormFilled() === false) {
     return <Navigate to="/student-details-form" />
   }
