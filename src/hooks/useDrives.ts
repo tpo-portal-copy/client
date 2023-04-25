@@ -8,8 +8,12 @@ const getDrives = async (params: any) => {
   return response.data
 }
 
-export default function useDrives(params?: any, page?: number, company?: any, cluster?: string) {
-  console.log(params, page, company, cluster)
-
-  return useQuery([`drives${page}${cluster}${company}${cluster}`], () => getDrives(params))
+export default function useDrives(
+  params?: any,
+  page?: number,
+  company?: any,
+  cluster?: string,
+  type?: string,
+) {
+  return useQuery([`drives${page}${cluster}${company}${cluster}${type}`], () => getDrives(params))
 }

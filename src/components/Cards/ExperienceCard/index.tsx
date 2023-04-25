@@ -14,6 +14,7 @@ function ExperienceCard({
   name,
   difficulty,
   created_at,
+  company_image_url,
   anonymity,
 }: ExperienceCardProps) {
   return (
@@ -24,11 +25,8 @@ function ExperienceCard({
     >
       <div className={styles.card}>
         <div className={styles.main_container}>
-          {anonymity ? (
-            <img className={styles.anonymous_img} src="/anonymous_pic.jpg" alt="Anonymous" />
-          ) : (
-            <img src={name?.logo} className={styles.img} alt="profileDp" />
-          )}
+          <img className={styles.anonymous_img} src={company_image_url} alt="Company" />
+
           <div className={styles.info_container}>
             <p className={styles.title}>{company}</p>
             <p className={styles.role}>{roles}</p>
@@ -51,7 +49,7 @@ function ExperienceCard({
             </div>
           ) : (
             <div className={styles.tag}>
-              <span>{name?.name}</span>
+              <span>{name}</span>
             </div>
           )}
           <div className={styles.tag}>

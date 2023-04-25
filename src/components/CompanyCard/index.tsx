@@ -14,7 +14,7 @@ export default function CompanyCard({ link, label, value, type }: CompanyCardPro
       <div className={styles.icon_container}>
         <img
           className={styles.icon}
-          src={`https://sakhanithnith.pagekite.me/media/${link}`}
+          src={`https://tpoportal.pagekite.me/media/${link}`}
           width={40}
           height={40}
           alt="icon"
