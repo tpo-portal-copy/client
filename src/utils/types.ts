@@ -46,7 +46,7 @@ export interface ExperienceCardProps {
   imgUrl?: string
   jobtype: string
   selected: boolean
-  name?: string
+  name?: any
   difficulty: string
   roles: string
   created_at: string

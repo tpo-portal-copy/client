@@ -9,7 +9,7 @@ import Loading from '../../../assets/animations/81544-rolling-check-mark.json'
 import 'react-quill/dist/quill.snow.css'
 import { Error, Select } from '../..'
 import styles from './ResultForms.module.scss'
-import { studentData, typeData } from '../../../utils/Data/resultAnnouncementData'
+import { typeData } from '../../../utils/Data/resultAnnouncementData'
 import useTPODrives from '../../../hooks/useTPODrives'
 import { drivesAPI, eligibleStudentsAPI, onCampusAPI } from '../../../utils/apis'
 
@@ -18,8 +18,8 @@ export default function OnCampusResultForm() {
   const [showAnimation, setShowAnimation] = useState(false)
   const [type, setType] = useState('')
   const [jobRoles, setJobRoles] = useState([])
-  const [rolls, setRolls] = useState([])
-  const [uniqueList, setUniqueList] = useState([])
+  const [rolls, setRolls] = useState<any>([])
+  const [uniqueList, setUniqueList] = useState<any>([])
 
   let driveArr = []
 
@@ -60,29 +60,24 @@ export default function OnCampusResultForm() {
 
   const { isSuccess: isDriveSuccess, data: driveData } = useTPODrives({ type }, type)
 
-  const [rowData, setRowData] = useState([])
-
   const addRow = () => {
     const idx = rolls.findIndex(
       (student: any) => student.roll_number === formik.values.studentRollNo,
     )
 
-    if (uniqueList.find((student) => student.roll_number === formik.values.studentRollNo)) {
+    if (uniqueList.find((student: any) => student.roll_number === formik.values.studentRollNo)) {
       return ''
     }
 
     const obj = {
       roll_number: rolls[idx].roll_number,
       name: rolls[idx].name,
-      company: formik.values.drive,
       compensation: formik.values.type === 'Placement' ? rolls[idx].ctc : rolls[idx].stipend,
       role: rolls[idx].role,
       company: rolls[idx].company,
     }
 
     setUniqueList([...uniqueList, obj])
-
-    console.log(obj)
     return ''
   }
 
@@ -96,7 +91,7 @@ export default function OnCampusResultForm() {
     setType(e.target.value.toLowerCase())
   }
 
-  const handleDriveChange = async (e) => {
+  const handleDriveChange = async (e: any) => {
     const parsedObj = JSON.parse(e.target.value)
     formik.setFieldValue('drive', e.target.value)
 
@@ -104,7 +99,7 @@ export default function OnCampusResultForm() {
     setJobRoles(res.data.job_roles)
   }
 
-  const handleJobRoleChange = async (e) => {
+  const handleJobRoleChange = async (e: any) => {
     const parsedObj = JSON.parse(e.target.value)
     formik.setFieldValue('jobRole', e.target.value)
 
@@ -113,7 +108,6 @@ export default function OnCampusResultForm() {
         job_role: parsedObj.id,
       },
     })
-    console.log(res)
     setRolls(res.data)
   }
 
@@ -162,7 +156,7 @@ export default function OnCampusResultForm() {
                 name="drive"
                 placeholder="Drive"
               >
-                {driveArr.map((data) => (
+                {driveArr.map((data: any) => (
                   <option value={`{"id":${data.id}}`} key={data.id}>
                     {data.name}
                   </option>
@@ -231,7 +225,7 @@ export default function OnCampusResultForm() {
                         <Th>Role</Th>
                       </Tr>
                     </Thead>
-                    {uniqueList.map((row: any, index) => (
+                    {uniqueList.map((row: any, index: number) => (
                       <Tbody key={row.roll_number}>
                         <Tr>
                           <Td>{row.roll_number}</Td>

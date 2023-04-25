@@ -20,7 +20,7 @@ export default function OffCampusResultForm() {
   const [company, setCompany] = useState([])
   const [roles, setRoles] = useState([])
   const [isClicked, setClicked] = useState(false)
-  const [uniqueList, setUniqueList] = useState([])
+  const [uniqueList, setUniqueList] = useState<any>([])
   const date = new Date()
 
   const navigate = useNavigate()
@@ -107,7 +107,7 @@ export default function OffCampusResultForm() {
   }
 
   const addRow = () => {
-    if (uniqueList.find((student) => student.roll_number === formik.values.studentRollNo)) {
+    if (uniqueList.find((student: any) => student.roll_number === formik.values.studentRollNo)) {
       return ''
     }
 
@@ -292,7 +292,7 @@ export default function OffCampusResultForm() {
                         <Th>Role</Th>
                       </Tr>
                     </Thead>
-                    {uniqueList.map((row, index) => (
+                    {uniqueList.map((row: any, index: any) => (
                       <Tbody key={row.roll_number}>
                         <Tr>
                           <Td>{row.roll_number}</Td>
