@@ -56,7 +56,7 @@ export interface ExperienceCardProps {
 
 export type InputProps = {
   name: string
-  placeholder: string
+  placeholder?: string
   value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void

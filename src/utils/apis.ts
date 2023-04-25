@@ -25,6 +25,7 @@ import {
   TPO_STATS_API,
   RECENT_EXPERIENCE_API,
   COMPANY_WISE_STATS_API,
+  PERCENTAGE_ELIGIBILITY_API,
   TPO_DRIVES_API,
   ELIGIBLE_STUDENTS_API,
   ON_CAMPUS_API,
@@ -151,6 +152,10 @@ export const recentExperienceAPI = axios.create({
 
 export const companyWiseStatisticsAPI = axios.create({
   baseURL: COMPANY_WISE_STATS_API,
+})
+
+export const percentageEligibilityAPI = axios.create({
+  baseURL: PERCENTAGE_ELIGIBILITY_API,
 })
 
 studentAPI.interceptors.request.use((config) => {
