@@ -1,5 +1,5 @@
 export const typeData = [
-  { id: 0, value: 'Internship' },
+  { id: 0, value: 'Intern' },
   { id: 1, value: 'Placement' },
 ]
 

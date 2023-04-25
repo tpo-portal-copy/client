@@ -142,7 +142,7 @@ function Profile() {
               <div style={{ background: getRandomCoverGradient() }} className={styles.cover_img} />
               {data.image_url !== null ? (
                 <img
-                  src={`https://sakhanithnith.pagekite.me/${data.image_url}`}
+                  src={`https://tpoportal.pagekite.me/${data.image_url}`}
                   className={styles.profile_img}
                   alt="user profile"
                 />
