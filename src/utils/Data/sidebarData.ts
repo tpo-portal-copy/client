@@ -7,7 +7,7 @@ import {
   faUserNinja,
 } from '@fortawesome/free-solid-svg-icons'
 
-const navItems = [
+export const navItemsStudent = [
   { id: 0, name: 'Dashboard', url: '/dashboard', icon: faHome },
   {
     id: 1,
@@ -40,4 +40,32 @@ const navItems = [
     icon: faUserNinja,
   },
 ]
-export default navItems
+
+export const navItemsTPO = [
+  { id: 0, name: 'Dashboard', url: '/tpo-dashboard' },
+  {
+    id: 1,
+    name: 'Drives',
+    url: '/drives',
+  },
+  {
+    id: 2,
+    name: 'Experiences',
+    url: '/experiences',
+  },
+  {
+    id: 3,
+    name: 'Student Data',
+    url: '/student-data',
+  },
+  {
+    id: 4,
+    name: 'Resources',
+    url: '/resources',
+  },
+  {
+    id: 5,
+    name: 'Profile',
+    url: '/profile',
+  },
+]

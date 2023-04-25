@@ -26,6 +26,12 @@ import {
   RECENT_EXPERIENCE_API,
   COMPANY_WISE_STATS_API,
   ADD_JNF_API,
+  PERCENTAGE_ELIGIBILITY_API,
+  TPO_DRIVES_API,
+  ELIGIBLE_STUDENTS_API,
+  ON_CAMPUS_API,
+  OFF_CAMPUS_API,
+  PPO_API,
 } from './constants'
 import { getDataFromLocalStorage } from './functions'
 
@@ -41,8 +47,16 @@ export const experiencesAPI = axios.create({
   baseURL: EXPERIENCES_API,
 })
 
+export const eligibleStudentsAPI = axios.create({
+  baseURL: ELIGIBLE_STUDENTS_API,
+})
+
 export const companiesDetailsAPI = axios.create({
   baseURL: COMPANIES_ORDERWISE_API,
+})
+
+export const TPODrivesAPI = axios.create({
+  baseURL: TPO_DRIVES_API,
 })
 
 export const statisticsAPI = axios.create({
@@ -81,6 +95,14 @@ export const statesAPI = axios.create({
   baseURL: STATES_API,
 })
 
+export const onCampusAPI = axios.create({
+  baseURL: ON_CAMPUS_API,
+})
+
+export const offCampusAPI = axios.create({
+  baseURL: OFF_CAMPUS_API,
+})
+
 export const citiesAPI = axios.create({
   baseURL: CITIES_API,
 })
@@ -103,6 +125,10 @@ export const studentLoginAPI = axios.create({
 
 export const studentRegisterAPI = axios.create({
   baseURL: STUDENT_REGISTER_API,
+})
+
+export const ppoAPI = axios.create({
+  baseURL: PPO_API,
 })
 
 export const studentOtpAPI = axios.create({
@@ -133,6 +159,10 @@ export const addJnfAPI = axios.create({
   baseURL: ADD_JNF_API,
 })
 
+export const percentageEligibilityAPI = axios.create({
+  baseURL: PERCENTAGE_ELIGIBILITY_API,
+})
+
 studentAPI.interceptors.request.use((config) => {
   const newConfig = { ...config }
   newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
@@ -140,6 +170,18 @@ studentAPI.interceptors.request.use((config) => {
 })
 
 drivesAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+eligibleStudentsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+TPODrivesAPI.interceptors.request.use((config) => {
   const newConfig = { ...config }
   newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
   return newConfig
@@ -248,6 +290,30 @@ refreshTokenAPI.interceptors.request.use((config) => {
 })
 
 companyWiseStatisticsAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+offCampusAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+onCampusAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+ppoAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+percentageEligibilityAPI.interceptors.request.use((config) => {
   const newConfig = { ...config }
   newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
   return newConfig

@@ -11,19 +11,12 @@ import Page500 from '../Page500'
 import { BasicStats, StatsInfo, TopCompanies } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
 import CompaniesTable from '../../components/CompaniesTable'
-import {
-  getDataFromLocalStorage,
-  isStudentEligibleForPlacementOrIntern,
-} from '../../utils/functions'
+
 import LineChart from '../../components/LineChart'
 import useTPOStats from '../../hooks/useTPOStats'
 
 function TPODashboard() {
-  const [job, setJob] = useState(
-    isStudentEligibleForPlacementOrIntern() === true
-      ? getDataFromLocalStorage('eligibility')
-      : 'placement',
-  )
+  const [job, setJob] = useState('placement')
   const [session, setSession] = useState('2022-23')
 
   const [searchedCompany, setSearchedCompany] = useState('')

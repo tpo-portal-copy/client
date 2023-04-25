@@ -17,6 +17,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Loader from '../../assets/animations/72411-simple-grey-spinner.json'
 import useCompaniesDetails from '../../hooks/useCompaniesDetails'
+import { Role } from '../../utils/constants'
+import { getRole } from '../../utils/functions'
 import { CompaniesTableProps, TopCompanies } from '../../utils/types'
 import Paginator from '../Paginator'
 import styles from './CompaniesTable.module.scss'
@@ -55,6 +57,11 @@ export default function CompaniesTable({ session, type, company }: CompaniesTabl
     )
   }
 
+  const linkString = (name: string) =>
+    getRole() === Role.STUDENT
+      ? `/statistics-details/${name}/${type}/${session}`
+      : `/company-wise-details/${name}/${type}/${session}`
+
   return (
     <>
       <Tabs onChange={handleTabChange} colorScheme="blackAlpha" isLazy>
@@ -83,7 +90,7 @@ export default function CompaniesTable({ session, type, company }: CompaniesTabl
                     {data.results.map((datas: TopCompanies) => (
                       <Tr key={datas.name}>
                         <Td>
-                          <Link to={`/statistics-details/${datas.name}/${type}`}>{datas.name}</Link>
+                          <Link to={linkString(datas.name)}>{datas.name}</Link>
                         </Td>
                         <Td>{type === 'intern' ? datas.max_stipend : datas.max_ctc}</Td>
                       </Tr>
@@ -111,7 +118,7 @@ export default function CompaniesTable({ session, type, company }: CompaniesTabl
                     {data.results.map((datas: TopCompanies) => (
                       <Tr key={datas.name}>
                         <Td>
-                          <Link to={`/statistics-details/${datas.name}/${type}`}>{datas.name}</Link>
+                          <Link to={linkString(datas.name)}>{datas.name}</Link>
                         </Td>
                         <Td>{datas.offers}</Td>
                       </Tr>

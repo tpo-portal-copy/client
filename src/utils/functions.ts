@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import jwtDecode from 'jwt-decode'
 import { NavigateFunction } from 'react-router-dom'
+import { Role } from './constants'
 import { TimeStamps } from './types'
 
 // sets data to local storage
@@ -88,6 +89,12 @@ export const getCurrentSession = () => {
   }
 
   return `${currentYear}-${(currentYear + 1).toString().slice(2)}`
+}
+
+export const getRole = () => {
+  const role = getDataFromLocalStorage('role')
+  if (role == null) return Role.STUDENT
+  return role
 }
 
 export const setTimerForTokenExpiration = (

@@ -26,10 +26,13 @@ import {
   Register,
   TPODashboard,
   CompanyWiseDetails,
+  NextPlacementEligibilityPercentage,
+  UpdateClusters,
 } from '../pages'
 import {
   clearDataFromLocalStorage,
   getDataFromLocalStorage,
+  getRole,
   isAuthenticated,
   isStudentDetailsFormFilled,
   isStudentEligibleForPlacementOrIntern,
@@ -38,6 +41,7 @@ import {
 } from '../utils/functions'
 import ProtectedRoute from '../Routes/ProtectedRoute'
 import { refreshTokenAPI, studentLogoutAPI } from '../utils/apis'
+import { Role } from '../utils/constants'
 
 function App() {
   const { pathname } = useLocation()
@@ -109,6 +113,8 @@ function App() {
       <Route path="/result-announcement" element={<ResultAnnouncement />} />
       <Route path="/create-drive" element={<CreateDriveForm />} />
       <Route path="/jnf-form" element={<JNFForm />} />
+      <Route path="/eligibility-percentage" element={<NextPlacementEligibilityPercentage />} />
+      <Route path="/update-clusters" element={<UpdateClusters />} />
       <Route
         path="/home"
         element={
@@ -117,18 +123,158 @@ function App() {
           </HeaderLayout>
         }
       />
-      {isStudentDetailsFormFilled() === false && (
-        <Route
-          path="/student-details-form"
-          element={
-            <ProtectedRoute>
-              <StudentDetailsForm />
-            </ProtectedRoute>
-          }
-        />
-      )}
-      {isStudentEligibleForPlacementOrIntern() === true && (
+      {getRole() === Role.STUDENT && (
         <>
+          <Route
+            path="/create-drive"
+            element={
+              <ProtectedRoute>
+                <CreateDriveForm />
+              </ProtectedRoute>
+            }
+          />
+
+          {isStudentDetailsFormFilled() === false && (
+            <Route
+              path="/student-details-form"
+              element={
+                <ProtectedRoute>
+                  <StudentDetailsForm />
+                </ProtectedRoute>
+              }
+            />
+          )}
+          {isStudentEligibleForPlacementOrIntern() === true && (
+            <>
+              <Route
+                path="/drives"
+                element={
+                  <ProtectedRoute>
+                    <HeaderLayout>
+                      <Drives />
+                    </HeaderLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/experience-form"
+                element={
+                  <ProtectedRoute>
+                    <ExperienceForm />
+                  </ProtectedRoute>
+                }
+              />
+            </>
+          )}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <Dashboard />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/drives/tpr"
+            element={
+              <HeaderLayout>
+                <TprDrives />
+              </HeaderLayout>
+            }
+          />
+          <Route
+            path="/experiences"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <Experiences />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/experiences-details/:id"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <ExperienceDetails />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/statistics"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <Statistics />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/statistics-details/:company/:type/:session"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <StatisticsDetails />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/resources"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <Resources />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/resources-details/:branchName"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <ResourceDetails />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <Profile />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {isAuthenticated() ? (
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+          ) : (
+            <Route path="/" element={<Navigate to="/home" />} />
+          )}
+        </>
+      )}
+      {getRole() === Role.TPO && (
+        <>
+          <Route
+            path="/tpo-dashboard"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <TPODashboard />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/drives"
             element={
@@ -140,10 +286,32 @@ function App() {
             }
           />
           <Route
-            path="/experience-form"
+            path="/experiences"
             element={
               <ProtectedRoute>
-                <ExperienceForm />
+                <HeaderLayout>
+                  <Experiences />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/student-data"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <StudentData />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/company-wise-details/:company/:type/:session"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <CompanyWiseDetails />
+                </HeaderLayout>
               </ProtectedRoute>
             }
           />
@@ -162,134 +330,19 @@ function App() {
                 <ResultAnnouncement />
               </ProtectedRoute>
             }
-          />{' '}
+          />
+          {isAuthenticated() ? (
+            <Route path="/" element={<Navigate to="/tpo-dashboard" />} />
+          ) : (
+            <Route path="/" element={<Navigate to="/home" />} />
+          )}
         </>
       )}
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <Dashboard />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/drives/tpr"
-        element={
-          <HeaderLayout>
-            <TprDrives />
-          </HeaderLayout>
-        }
-      />
-      <Route
-        path="/experiences"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <Experiences />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/experiences-details/:id"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <ExperienceDetails />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/statistics"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <Statistics />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/tpo-dashboard"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <TPODashboard />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/statistics-details/:company/:type"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <StatisticsDetails />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/resources"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <Resources />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/resources-details/:branchName"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <ResourceDetails />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <Profile />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/" element={<Navigate to="/home" />} />
-      <Route
-        path="/student-data"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <StudentData />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/company-wise-details"
-        element={
-          <ProtectedRoute>
-            <HeaderLayout>
-              <CompanyWiseDetails />
-            </HeaderLayout>
-          </ProtectedRoute>
-        }
-      />
       {isAuthenticated() ? (
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="*" element={<Page404 />} />
       ) : (
-        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="*" element={<Navigate to="/login" />} />
       )}
-      <Route path="*" element={<Page404 />} />
     </Routes>
   )
 }

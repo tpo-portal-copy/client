@@ -1,9 +1,8 @@
 import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FormikErrors } from 'formik'
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
-import { boolean } from 'yup'
 
-export type RouteProps = {
+export type NavItem = {
   id: number
   name: string
   url: string
@@ -42,11 +41,6 @@ export interface ResourcesCardProps {
   imgUrl: string
 }
 
-export type NameObject = {
-  name: string
-  logo: string
-}
-
 export interface ExperienceCardProps {
   id: number
   company: string
@@ -54,16 +48,17 @@ export interface ExperienceCardProps {
   imgUrl?: string
   jobtype: string
   selected: boolean
-  name?: NameObject
+  name?: any
   difficulty: string
   roles: string
   created_at: string
   anonymity: boolean
+  company_image_url: string
 }
 
 export type InputProps = {
   name: string
-  placeholder: string
+  placeholder?: string
   value: string | number | undefined
   onChange: (e: ChangeEvent<any>) => void
   onBlur: (e: ChangeEvent<any>) => void
