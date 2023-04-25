@@ -70,9 +70,6 @@ export default function UpdateClusters() {
 
   const addRow = () => {}
 
-  console.log(formik.values.Offcampus)
-  console.log(formik.values.Oncampus)
-
   return (
     <div className={styles.container}>
       <div className={styles.section}>
@@ -121,14 +118,7 @@ export default function UpdateClusters() {
 
               <Button>Add New Cluster</Button>
 
-              <Button
-                background="linear-gradient(40deg,#45cafc,#303f9f)"
-                color="white"
-                _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-                isLoading={isLoading}
-                type="submit"
-                isDisabled={!formik.isValid}
-              >
+              <Button isLoading={isLoading} type="submit" isDisabled={!formik.isValid}>
                 Post
               </Button>
             </>

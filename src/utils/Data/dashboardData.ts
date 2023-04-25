@@ -73,12 +73,6 @@ export const pastExperienceData = [
     date: '1-1-2023',
     link: '/Aditya',
   },
-  // {
-  //   studentName: 'Aditya',
-  //   id: 4,
-  //   date: '1-1-2023',
-  //   link: '/Aditya',
-  // },
 ]
 
 export const upcomingDriveData = [
@@ -106,10 +100,4 @@ export const upcomingDriveData = [
     date: '10-8-2022',
     link: '/Amazon',
   },
-  // {
-  //   companyName: 'Amazon',
-  //   id: 4,
-  //   date: '10-8-2022',
-  //   link: '/Amazon',
-  // },
 ]

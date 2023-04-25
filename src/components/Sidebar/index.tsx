@@ -1,7 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
-import { DashboardIcon, PortalLogo } from '../../assets/svgs'
+import { PortalLogo } from '../../assets/svgs'
 import { navItemsStudent } from '../../utils/Data/sidebarData'
-import { RouteProps, SidebarProps } from '../../utils/types'
+import { NavItem, SidebarProps } from '../../utils/types'
 import styles from './Sidebar.module.scss'
 
 function Sidebar({ onLinkClickHandler }: SidebarProps) {
@@ -18,7 +19,7 @@ function Sidebar({ onLinkClickHandler }: SidebarProps) {
         <h1>NITH</h1>
       </div>
       <div className={styles.nav_items}>
-        {navItemsStudent.map((navItem: RouteProps) => {
+        {navItemsStudent.map((navItem: NavItem) => {
           return (
             <NavLink
               to={navItem.url}
@@ -28,7 +29,7 @@ function Sidebar({ onLinkClickHandler }: SidebarProps) {
                 location.pathname.includes(navItem.url) ? styles.selected : ''
               }`}
             >
-              <img src={DashboardIcon} alt="Dashboard" />
+              <FontAwesomeIcon icon={navItem.icon} />
               <span>{navItem.name}</span>
             </NavLink>
           )

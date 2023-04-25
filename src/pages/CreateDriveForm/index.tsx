@@ -30,7 +30,7 @@ export default function DrivesForm() {
   const [eligibleBatches, setEligibleBatches] = useState([
     {
       branch_id: branchDetails.id,
-      branch_name: branchDetails.name,
+      branchName: branchDetails.name,
       course_id: course.id,
       course_name: course.name,
     },
@@ -160,7 +160,7 @@ export default function DrivesForm() {
       ...uniqueList,
       {
         branch_id: branchDetails.id,
-        branch_name: branchDetails.name,
+        branchName: branchDetails.name,
         course_id: course.id,
         course_name: course.name,
       },
@@ -185,7 +185,7 @@ export default function DrivesForm() {
     setEligibleBatches([
       {
         branch_id: 0,
-        branch_name: '',
+        branchName: '',
         course_id: 0,
         course_name: '',
       },
@@ -202,7 +202,7 @@ export default function DrivesForm() {
     setEligibleBatches([
       {
         branch_id: 0,
-        branch_name: '',
+        branchName: '',
         course_id: 0,
         course_name: '',
       },
@@ -488,10 +488,10 @@ export default function DrivesForm() {
                     {branch.length !== 0 &&
                       branch.branches.map((datas: any) => (
                         <option
-                          value={`{"id":${datas.id},"name":"${datas.branch_name}"}`}
+                          value={`{"id":${datas.id},"name":"${datas.branchName}"}`}
                           key={datas.id}
                         >
-                          {datas.branch_name}
+                          {datas.branchName}
                         </option>
                       ))}
                   </Select>
@@ -514,7 +514,7 @@ export default function DrivesForm() {
                           key={`${batches.branch_id}${batches.course_id}`}
                         >
                           <span style={{ padding: '5px' }}>
-                            {batches.course_name} {batches.branch_name}
+                            {batches.course_name} {batches.branchName}
                           </span>
                           <Button size="xs" onClick={() => removeBranch(idx + 1)}>
                             X
@@ -554,7 +554,7 @@ export default function DrivesForm() {
                               <Td>
                                 {row.jobEligibleBatches.slice(1).map((batches: any) => (
                                   <li key={batches.branch_id}>
-                                    {batches.course_name} {batches.branch_name}
+                                    {batches.course_name} {batches.branchName}
                                   </li>
                                 ))}
                               </Td>

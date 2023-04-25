@@ -1,10 +1,12 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
+import { FormikErrors } from 'formik'
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
 
-export type RouteProps = {
+export type NavItem = {
   id: number
   name: string
   url: string
+  icon: IconDefinition
 }
 
 export interface SidebarLayoutProps {
@@ -135,7 +137,7 @@ export interface PastExperienceSummary {
 }
 
 interface EligibleBatchesObj {
-  branch_name: string
+  branchName: string
   course: string
   id: number
 }
@@ -320,7 +322,7 @@ export interface StatisticsDetailsOffersRoleWiseProps {
 }
 
 export interface ErrorProps {
-  errorMessage: string
+  errorMessage: string | string[] | FormikErrors<EligibleBranch>[]
 }
 
 export interface TopCompanies {
@@ -400,4 +402,147 @@ export interface CompaniesTableProps {
 export interface ModelProps {
   title: string
   description: string
+}
+
+export interface JNFFormOneData {
+  companyName: string
+  session: string
+  isPlacement: string
+  isSummerIntern: string
+  isSixMonIntern: string
+  modeOfHiring: string
+  prePlacementTalk: string
+  aptitudeTest: string
+  technicalTest: string
+  groupDiscussion: string
+  personalInterview: string
+  noOfPersonVisiting: number | undefined
+  jobLocation: string
+  tentativeDriveDate: string
+}
+
+export interface JNFFormOneProps {
+  onNext: (values: JNFFormOneData) => void
+  data: JNFFormOneData
+}
+
+export interface RadioSelectProps {
+  name: string
+  placeholder: string
+  onChange: (e: any) => void
+  onBlur: (e: ChangeEvent<any>) => void
+  value: string
+}
+
+export interface EligibleBranch {
+  branchName: string
+  course: string
+}
+
+export interface JNFFormTwoData {
+  tentativeJoiningDate: string
+  jobProfile: string
+  ctc: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  course: string
+  branch: string
+  hasIntern: string
+}
+
+export interface JNFFormTwoProps {
+  onNext: (placementJobProfiles: Array<PlacementJobProfile>) => void
+  onBack: (placementJobProfiles: Array<PlacementJobProfile>) => void
+  data: Array<PlacementJobProfile>
+}
+
+export interface PlacementJobProfile {
+  jobProfile: string
+  ctc: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  tentativeJoiningDate: string
+  hasIntern: string
+}
+
+export interface SummerInternJobProfile {
+  jobProfile: string
+  stipend: number | undefined
+  duration: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  tentativeJoiningDate: string
+  ctcAfterPpo: number | undefined
+  hasPPO: string
+  jobDescPdf: null | BinaryData
+}
+
+export interface SixMonInternJobProfile {
+  jobProfile: string
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  tentativeJoiningDate: string
+  stipend: number | undefined
+  ctcAfterIntern: number | undefined
+}
+
+export interface JNFFormThreeData {
+  hasPPO: string
+  tentativeJoiningDate: string
+  jobProfile: string
+  duration: number | undefined
+  stipend: number | undefined
+  ctcAfterPpo: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  course: string
+  branch: string
+}
+
+export interface JNFFormThreeProps {
+  onNext: (summerInternJobProfile: Array<SummerInternJobProfile>) => void
+  onBack: (summerInternJobProfile: Array<SummerInternJobProfile>) => void
+  data: Array<SummerInternJobProfile>
+}
+
+export interface JNFFormFourData {
+  tentativeJoiningDate: string
+  jobProfile: string
+  stipend: number | undefined
+  ctcAfterIntern: number | undefined
+  jdLink: string
+  cgpi: number | undefined
+  eligibleBatches: Array<EligibleBranch>
+  course: string
+  branch: string
+}
+
+export interface JNFFormFourProps {
+  onNext: (summerInternJobProfile: Array<SixMonInternJobProfile>) => void
+  onBack: (summerInternJobProfile: Array<SixMonInternJobProfile>) => void
+  data: Array<SixMonInternJobProfile>
+}
+
+export interface JNFFormFiveData {
+  type: string
+  name: string
+  mobileNumber: number | undefined
+  email: string
+}
+
+export interface HR {
+  type: string
+  name: string
+  mobile: number | undefined
+  email: string
+}
+export interface JNFFormFiveProps {
+  onSubmit: (values: Array<HR>) => void
+  onBack: (values: Array<HR>) => void
+  data: Array<HR>
 }

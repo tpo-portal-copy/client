@@ -25,6 +25,7 @@ import {
   TPO_STATS_API,
   RECENT_EXPERIENCE_API,
   COMPANY_WISE_STATS_API,
+  ADD_JNF_API,
   PERCENTAGE_ELIGIBILITY_API,
   TPO_DRIVES_API,
   ELIGIBLE_STUDENTS_API,
@@ -152,6 +153,10 @@ export const recentExperienceAPI = axios.create({
 
 export const companyWiseStatisticsAPI = axios.create({
   baseURL: COMPANY_WISE_STATS_API,
+})
+
+export const addJnfAPI = axios.create({
+  baseURL: ADD_JNF_API,
 })
 
 export const percentageEligibilityAPI = axios.create({
@@ -303,6 +308,12 @@ onCampusAPI.interceptors.request.use((config) => {
 })
 
 ppoAPI.interceptors.request.use((config) => {
+  const newConfig = { ...config }
+  newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
+  return newConfig
+})
+
+percentageEligibilityAPI.interceptors.request.use((config) => {
   const newConfig = { ...config }
   newConfig.headers.Authorization = `Bearer ${getDataFromLocalStorage('access_token')}`
   return newConfig

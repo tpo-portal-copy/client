@@ -11,6 +11,7 @@ import Modal from '../Modal'
 import { ExperienceFilterProps } from '../../utils/types'
 import styles from './ExperiencesFilters.module.scss'
 import useExperienceFilterOptionsList from '../../hooks/useExperienceFilterOptionsList'
+import { BooleanValue } from '../../utils/constants'
 
 function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
   const [isCompaniesModalOpen, setIsCompaniesModalOpen] = useState(false)
@@ -228,8 +229,8 @@ function ExperiencesFilters({ isMobile = false }: ExperienceFilterProps) {
         <div>
           <RadioGroup onChange={setSelectionStatus} value={selectionStatus}>
             <Stack direction="column">
-              <Radio value="true">Selected</Radio>
-              <Radio value="false">Not Selected</Radio>
+              <Radio value={BooleanValue.TRUE}>Selected</Radio>
+              <Radio value={BooleanValue.FALSE}>Not Selected</Radio>
               <Radio value="">All</Radio>
             </Stack>
           </RadioGroup>

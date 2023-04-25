@@ -10,6 +10,7 @@ import Page500 from '../Page500'
 import { clustersAPI } from '../../utils/apis'
 import { PlacementDataProps } from '../../utils/types'
 import { getDataFromLocalStorage } from '../../utils/functions'
+import { BASE_API_URL } from '../../utils/constants'
 import RecentExperience from '../../components/RecentExperience'
 
 function Profile() {
@@ -142,7 +143,7 @@ function Profile() {
               <div style={{ background: getRandomCoverGradient() }} className={styles.cover_img} />
               {data.image_url !== null ? (
                 <img
-                  src={`https://tpoportal.pagekite.me/${data.image_url}`}
+                  src={`${BASE_API_URL}${data.image_url}`}
                   className={styles.profile_img}
                   alt="user profile"
                 />

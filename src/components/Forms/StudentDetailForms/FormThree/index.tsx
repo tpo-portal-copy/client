@@ -137,7 +137,7 @@ export default function FormThree({ onNext, onBack, data }: FormThreeProps) {
           {branch.length !== 0 &&
             branch.branches.map((datas: any) => (
               <option value={datas.id} key={datas.id}>
-                {datas.branch_name}
+                {datas.branchName}
               </option>
             ))}
         </Select>

@@ -40,7 +40,6 @@ function Drives() {
 
   function extractCluster(clustersArr: Array<ClusterChosen>) {
     const str = clustersArr.map((cluster) => cluster.value).join(',')
-
     setClusterStr(str)
   }
 

@@ -70,8 +70,8 @@ function CompanyWiseDetails() {
   ))
 
   const branches: any = branchesData?.branches.map((bran: any) => (
-    <option key={bran.id} value={bran.branch_name}>
-      {bran.branch_name}
+    <option key={bran.id} value={bran.branchName}>
+      {bran.branchName}
     </option>
   ))
 

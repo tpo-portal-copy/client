@@ -19,9 +19,10 @@ import {
   StatisticsDetails,
   ResultAnnouncement,
   Home,
+  JNFForm,
+  StudentData,
   CreateDriveForm,
   TprDrives,
-  StudentData,
   Register,
   TPODashboard,
   CompanyWiseDetails,
@@ -111,6 +112,7 @@ function App() {
       <Route path="/announcement-form" element={<AnnouncementForm />} />
       <Route path="/result-announcement" element={<ResultAnnouncement />} />
       <Route path="/create-drive" element={<CreateDriveForm />} />
+      <Route path="/jnf-form" element={<JNFForm />} />
       <Route path="/eligibility-percentage" element={<NextPlacementEligibilityPercentage />} />
       <Route path="/update-clusters" element={<UpdateClusters />} />
       <Route

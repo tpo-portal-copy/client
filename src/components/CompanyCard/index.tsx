@@ -1,4 +1,5 @@
 import { Text } from '@chakra-ui/react'
+import { BASE_API_URL } from '../../utils/constants'
 import styles from './CompanyCard.module.scss'
 
 interface CompanyCardProps {
@@ -14,7 +15,7 @@ export default function CompanyCard({ link, label, value, type }: CompanyCardPro
       <div className={styles.icon_container}>
         <img
           className={styles.icon}
-          src={`https://tpoportal.pagekite.me/media/${link}`}
+          src={`${BASE_API_URL}/media/${link}`}
           width={40}
           height={40}
           alt="icon"
