@@ -1,10 +1,12 @@
 .container {
   width: 100%;
-  max-width: 582px;
-  padding: 1.5rem 0;
+  max-width: var(--form-max-w);
+  padding: 0.5rem 0 1.2rem 0;
+  background-color: #fff;
+  border-radius: 0.5rem;
 
   @media screen and (max-width: 525px) {
-    padding: 0;
+    padding: 1rem;
   }
 
   .title {
@@ -12,10 +14,12 @@
     font-weight: 600;
     padding: 1rem 1rem 6px 1rem;
     color: #282828;
+    margin: 0 1rem;
+    border-bottom: 1.5px solid var(--text-color-primary);
 
     @media screen and (max-width: 525px) {
-      padding: 0;
-      padding-bottom: 0.5rem;
+      padding: 0 0 0.5rem 0;
+      margin: 0;
     }
   }
 
@@ -41,59 +45,35 @@
           padding-bottom: 0.5rem;
         }
       }
-
-      .table_container {
-        &::-webkit-scrollbar {
-          display: none;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background-color: rgb(132, 25, 25);
-          border-radius: 1px;
-        }
-      }
-
-      @media screen and (max-width: 525px) {
-        padding: 0;
-      }
-    }
-
-    .checkbox {
-      padding: 2.5rem 1rem 0rem 1rem;
-      @media screen and (max-width: 525px) {
-        padding: 1rem 0;
-      }
-    }
-
-    .btn {
-      width: 100%;
-    }
-
-    .add_hr_button {
-      padding: 2rem 1rem;
-      @media screen and (max-width: 525px) {
-        padding: 1rem 0;
-      }
-    }
-
-    .btn_container {
-      display: flex;
-      flex-direction: row;
-      gap: 1.5rem;
-      padding: 2rem 1rem;
-      width: 100%;
-    }
-
-    .is_disabled {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      justify-content: flex-start;
-      padding: 1.2rem 1rem 0rem 1rem;
-
-      @media screen and (max-width: 525px) {
-        padding: 1.2rem 0 0 0;
-      }
     }
   }
+}
+
+.table_container {
+  background-color: #fff;
+  margin-top: 1.5rem;
+  max-width: 100%;
+  padding: 0 1rem;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.checkbox {
+  max-width: var(--form-max-w);
+  background-color: #fff;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: var(--form-max-w);
+  justify-content: flex-end;
 }

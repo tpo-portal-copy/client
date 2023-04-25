@@ -29,7 +29,6 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
       groupDiscussion: Yup.string().required('Group Discussion Info is required'),
       personalInterview: Yup.string().required('Personal Interview Info is required'),
       noOfPersonVisiting: Yup.number().positive('Number of person visiting should be positive'),
-      // .required('Number of persons visiting the college is required'),
       jobLocation: Yup.string().required('Job Location is required'),
       tentativeDriveDate: Yup.date().required('Tentative Drive Date is required'),
     }),
@@ -275,10 +274,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
           Back
         </Button>
         <Button
-          // background="linear-gradient(40deg,#45cafc,#303f9f)"
-          // color="white"
           variant="solid"
-          // _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
           className={styles.btn}
           isDisabled={!formik.isValid}
           onClick={handleSubmit}

@@ -138,87 +138,34 @@ export default function JNFForm() {
   }
 
   const handleSubmit = async (hrListDetails: Array<HR>) => {
-    const jnfFormObject = {
-      company: jnfFormOneData.companyName,
-      session: jnfFormOneData.session,
-      is_placement: jnfFormOneData.isPlacement,
-      is_intern: jnfFormOneData.isSummerIntern,
-      is_six_months_intern: jnfFormOneData.isSixMonIntern,
-      pre_placement_talk: jnfFormOneData.prePlacementTalk,
-      aptitude_test: jnfFormOneData.aptitudeTest,
-      technical_test: jnfFormOneData.technicalTest,
-      group_discussion: jnfFormOneData.groupDiscussion,
-      presonal_interview: jnfFormOneData.personalInterview,
-      mode_of_hiring: jnfFormOneData.modeOfHiring,
-      job_location: jnfFormOneData.jobLocation,
-      tentative_drive_date: jnfFormOneData.tentativeDriveDate,
-      no_of_persons_visiting: jnfFormOneData.noOfPersonVisiting,
-    }
+    const jnfFormObject = { ...jnfFormOneData }
 
     if (jnfFormOneData.isPlacement) {
-      const newPlacementProfiles = placementJobProfiles.map((profile) => {
-        return {
-          job_profile: profile.jobProfile,
-          tentative_start: profile.tentativeJoiningDate,
-          job_desc_pdf: null,
-          cgpi: profile.cgpi,
-          ctc: profile.ctc,
-          eligible_batches: profile.eligibleBatches,
-          has_intern: profile.hasIntern,
-        }
-      })
-
       const placementObject = {
-        jnf_placement: newPlacementProfiles,
+        jnfPlacement: placementJobProfiles,
       }
 
       Object.assign(jnfFormObject, placementObject)
     }
 
     if (jnfFormOneData.isSummerIntern) {
-      const newsummerInternProfiles = summerInternJobProfiles.map((profile) => {
-        return {
-          job_profile: profile.jobProfile,
-          tentative_start: profile.tentativeJoiningDate,
-          job_desc_pdf: null,
-          cgpi: profile.cgpi,
-          ctc_after_ppo: profile.ctc,
-          eligible_batches: profile.eligibleBatches,
-          stipend: profile.stipend,
-          has_ppo: profile.isPPO,
-          duration: profile.duration,
-        }
-      })
-
       const summerInternProfilesObject = {
-        jnf_intern: newsummerInternProfiles,
+        jnfIntern: summerInternJobProfiles,
       }
 
       Object.assign(jnfFormObject, summerInternProfilesObject)
     }
 
     if (jnfFormOneData.isSixMonIntern) {
-      const newSixMonInternProfiles = sixMonInternJobProfiles.map((profile) => {
-        return {
-          job_profile: profile.jobProfile,
-          tentative_start: profile.tentativeJoiningDate,
-          job_desc_pdf: null,
-          cgpi: profile.cgpi,
-          stipend: profile.stipend,
-          ctc_after_intern: profile.ctcAfterIntern,
-          eligible_batches: profile.eligibleBatches,
-        }
-      })
-
       const sixMonInternObject = {
-        jnf_six_months_intern: newSixMonInternProfiles,
+        jnfSixMonthsIntern: sixMonInternJobProfiles,
       }
 
       Object.assign(jnfFormObject, sixMonInternObject)
     }
 
     const hrDetails = {
-      hr_details: hrListDetails,
+      hrDetails: hrListDetails,
     }
 
     Object.assign(jnfFormObject, hrDetails)
@@ -282,10 +229,7 @@ export default function JNFForm() {
             <Text className={styles.tag_line}>You have successfully submitted your details</Text>
           </div>
         ) : (
-          <>
-            <h2 className={styles.heading}>Fill Your Details Here</h2>
-            {getFormContent(step)}
-          </>
+          <>{getFormContent(step)}</>
         )}
       </div>
     </div>

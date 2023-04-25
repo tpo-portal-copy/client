@@ -57,7 +57,7 @@ function DrivesCard({
             return (
               <div className={styles.tag} key={batch.id}>
                 <span>
-                  {batch.course} {batch.branch_name}
+                  {batch.course} {batch.branchName}
                 </span>
               </div>
             )

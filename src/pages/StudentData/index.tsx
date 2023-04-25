@@ -121,8 +121,8 @@ function StudentData() {
             >
               {branch.length !== 0 &&
                 branch.branches.map((datas: any) => (
-                  <option value={`{"id":${datas.id},"name":"${datas.branch_name}"}`} key={datas.id}>
-                    {datas.branch_name}
+                  <option value={`{"id":${datas.id},"name":"${datas.branchName}"}`} key={datas.id}>
+                    {datas.branchName}
                   </option>
                 ))}
             </Select>

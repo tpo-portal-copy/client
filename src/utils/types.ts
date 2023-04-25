@@ -1,4 +1,5 @@
 import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
+import { FormikErrors } from 'formik'
 import { ChangeEvent, MouseEventHandler, ReactNode } from 'react'
 import { boolean } from 'yup'
 
@@ -141,7 +142,7 @@ export interface PastExperienceSummary {
 }
 
 interface EligibleBatchesObj {
-  branch_name: string
+  branchName: string
   course: string
   id: number
 }
@@ -326,7 +327,7 @@ export interface StatisticsDetailsOffersRoleWiseProps {
 }
 
 export interface ErrorProps {
-  errorMessage: string
+  errorMessage: string | string[] | FormikErrors<EligibleBranch>[]
 }
 
 export interface TopCompanies {
@@ -439,7 +440,7 @@ export interface RadioSelectProps {
 }
 
 export interface EligibleBranch {
-  branch_name: string
+  branchName: string
   course: string
 }
 
@@ -449,10 +450,10 @@ export interface JNFFormTwoData {
   ctc: number | undefined
   jdLink: string
   cgpi: number | undefined
-  eligibleBatches: string
+  eligibleBatches: Array<EligibleBranch>
   course: string
   branch: string
-  hasIntern: boolean
+  hasIntern: string
 }
 
 export interface JNFFormTwoProps {
@@ -468,7 +469,7 @@ export interface PlacementJobProfile {
   cgpi: number | undefined
   eligibleBatches: Array<EligibleBranch>
   tentativeJoiningDate: string
-  hasIntern: boolean
+  hasIntern: string
 }
 
 export interface SummerInternJobProfile {
@@ -479,8 +480,9 @@ export interface SummerInternJobProfile {
   cgpi: number | undefined
   eligibleBatches: Array<EligibleBranch>
   tentativeJoiningDate: string
-  ctc: number | undefined
-  isPPO: boolean
+  ctcAfterPpo: number | undefined
+  hasPPO: string
+  jobDescPdf: null | BinaryData
 }
 
 export interface SixMonInternJobProfile {
@@ -494,15 +496,15 @@ export interface SixMonInternJobProfile {
 }
 
 export interface JNFFormThreeData {
-  isPPO: boolean
+  hasPPO: string
   tentativeJoiningDate: string
   jobProfile: string
   duration: number | undefined
   stipend: number | undefined
-  ctc: number | undefined
+  ctcAfterPpo: number | undefined
   jdLink: string
   cgpi: number | undefined
-  eligibleBatches: string
+  eligibleBatches: Array<EligibleBranch>
   course: string
   branch: string
 }
@@ -520,7 +522,7 @@ export interface JNFFormFourData {
   ctcAfterIntern: number | undefined
   jdLink: string
   cgpi: number | undefined
-  eligibleBatches: string
+  eligibleBatches: Array<EligibleBranch>
   course: string
   branch: string
 }
