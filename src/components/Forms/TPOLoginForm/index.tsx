@@ -62,10 +62,10 @@ export default function TPOLoginForm() {
         }
       } catch (err: any) {
         toast({
-          title: 'Login Failed....',
+          title: 'Login Failed...',
           description: err.response.data.detail,
           status: 'error',
-          duration: 4000,
+          duration: 3000,
           isClosable: true,
         })
       }
