@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react'
+import { Button, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { JNFFormOneProps } from '../../../../utils/types'
@@ -12,6 +12,7 @@ const modeOfHiringData = [
 ]
 
 export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
+  const toast = useToast()
   const formik = useFormik({
     initialValues: {
       ...data,
@@ -28,7 +29,13 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
       technicalTest: Yup.string().required('Technical Test Info is required'),
       groupDiscussion: Yup.string().required('Group Discussion Info is required'),
       personalInterview: Yup.string().required('Personal Interview Info is required'),
-      noOfPersonVisiting: Yup.number().positive('Number of person visiting should be positive'),
+      noOfPersonVisiting: Yup.number().when('modeOfHiring', ([modeOfHiring], schema) => {
+        return modeOfHiring === 'onsite' || modeOfHiring === 'hybrid'
+          ? schema
+              .required('Number of persons vising is required')
+              .positive('Number of persons vising should be positive')
+          : schema
+      }),
       jobLocation: Yup.string().required('Job Location is required'),
       tentativeDriveDate: Yup.date().required('Tentative Drive Date is required'),
     }),
@@ -69,12 +76,21 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
-    const res = await formik.validateForm()
-    await formik.submitForm()
+    try {
+      const res = await formik.validateForm()
+      await formik.submitForm()
 
-    if (Object.keys(res).length > 0) return
+      if (Object.keys(res).length > 0) return
 
-    onNext(formik.values)
+      onNext(formik.values)
+    } catch (err) {
+      toast({
+        title: 'Something went wrong...',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
   }
 
   return (
@@ -230,7 +246,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
             <div className={styles.field}>
               <Input
                 name="noOfPersonVisiting"
-                placeholder="Number of persons Visiting"
+                placeholder="Number of persons visiting"
                 value={formik.values.noOfPersonVisiting || ''}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -270,15 +286,7 @@ export default function JNFFormOne({ onNext, data }: JNFFormOneProps) {
         </form>
       </div>
       <div className={styles.btn_container}>
-        <Button className={styles.btn} variant="solid" isDisabled>
-          Back
-        </Button>
-        <Button
-          variant="solid"
-          className={styles.btn}
-          isDisabled={!formik.isValid}
-          onClick={handleSubmit}
-        >
+        <Button variant="solid" className={styles.btn} onClick={handleSubmit}>
           Next
         </Button>
       </div>
