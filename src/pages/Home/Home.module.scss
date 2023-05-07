@@ -5,22 +5,18 @@
   max-width: var(--max-w);
   margin: auto;
   padding: calc(2rem + var(--nav-height)) 2rem 2rem 2rem;
-  gap: 7.6rem;
+  gap: 3rem;
 
   @media screen and (max-width: 525px) {
     flex-direction: column;
   }
 
   .campus_picture {
-    transform: perspective(400px) rotateY(-8deg);
+    width: calc(50% - 1.5rem);
     transition: transform 1s ease 0s;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 0px 0px,
       rgba(0, 0, 0, 0.03) 0px 0px 8px 0px, rgba(0, 0, 0, 0.1) 0px 20px 30px 0px;
-
-    &:hover {
-      transform: perspective(800px) rotateY(-4deg);
-    }
   }
 
   .heading {
@@ -51,6 +47,10 @@
       .button {
         display: flex;
         gap: 1.5rem;
+
+        a:hover {
+          text-decoration: none;
+        }
       }
     }
   }

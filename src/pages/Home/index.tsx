@@ -1,12 +1,13 @@
-import { Button, Link } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import styles from './Home.module.scss'
 import recruitData from '../../utils/Data/recruitData'
 import { RecruitCard } from '../../components/Cards'
 import { Footer } from '../../components'
 import landingPageData from '../../utils/Data/landingPageData'
 import LandingCompanyCard from '../../components/Cards/LandingCompanyCard'
+import styles from './Home.module.scss'
 
 function Home() {
   return (
@@ -26,12 +27,10 @@ function Home() {
               placements.
             </p>
             <div className={styles.button}>
-              <Link href="/jnf-form">
-                <Button colorScheme="messenger" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
-                  JNF FORM
-                </Button>
-              </Link>
-              <Link href="/login">
+              <Button variant="solid" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
+                <Link to="/jnf-form">JNF FORM</Link>
+              </Button>
+              <Link to="/login">
                 <Button variant="outline" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
                   STUDENT PORTAL
                 </Button>
@@ -39,11 +38,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <img
-          className={styles.campus_picture}
-          src="https://lh3.googleusercontent.com/p/AF1QipMwP8WbSt0o8bxeiLI6McIo_apJEq1LCKpyQUmy=s1360-w1360-h1020"
-          alt="campus_picture"
-        />
+        <img className={styles.campus_picture} src="/nitHamirpur.webp" alt="campus_picture" />
       </div>
       <div className={styles.recruit_container}>
         <h1 className={styles.recruit_heading}>Why Recruit from NIT Hamirpur?</h1>
@@ -75,7 +70,7 @@ function Home() {
               national integration, industry interaction, and basic and applied research.
             </p>
             <div>
-              <Link href="https://nith.ac.in/training-placement">
+              <Link to="https://nith.ac.in/training-placement">
                 <Button colorScheme="messenger">READ MORE</Button>
               </Link>
             </div>
@@ -100,7 +95,7 @@ function Home() {
               International Organizations and Industries.
             </p>
             <div>
-              <Link href="https://nith.ac.in/uploads/topics/tpo-placement-brochure202316641646754035.pdf">
+              <Link to="https://nith.ac.in/uploads/topics/tpo-placement-brochure202316641646754035.pdf">
                 <Button colorScheme="messenger">READ MORE</Button>
               </Link>
             </div>
