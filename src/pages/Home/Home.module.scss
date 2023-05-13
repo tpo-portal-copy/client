@@ -12,6 +12,10 @@
     flex-direction: column;
   }
 
+  @media screen and (max-width: 525px) {
+    padding: calc(2rem + var(--nav-height)) 1rem 2rem 1rem;
+  }
+
   .campus_picture {
     width: calc(50% - 1.5rem);
     height: max-content;
@@ -35,9 +39,11 @@
       font-size: 28px;
     }
   }
+
   .container {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .content {
       display: flex;
