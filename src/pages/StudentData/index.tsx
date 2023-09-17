@@ -7,6 +7,7 @@ import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
 import useStudentData from '../../hooks/useStudentData'
 import { Input, Paginator, Select } from '../../components'
+
 import { branchesAPI } from '../../utils/apis'
 import useCourses from '../../hooks/useCourses'
 
@@ -31,13 +32,13 @@ function StudentData() {
     initialValues: {
       course: '',
       branch: '',
-      category: '',
+      Gender: '',
       cgpi: 0,
     },
     validationSchema: Yup.object().shape({
       course: Yup.string(),
       branch: Yup.string(),
-      category: Yup.string(),
+      Gender: Yup.string(),
       cgpi: Yup.number(),
     }),
     onSubmit: () => {
@@ -128,17 +129,15 @@ function StudentData() {
             </Select>
 
             <Select
-              value={formik.values.category}
+              value={formik.values.Gender}
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              name="category"
-              placeholder="Category"
+              name="Gender"
+              placeholder="Gender"
             >
-              <option>GEN</option>
-              <option>GEN-EWS</option>
-              <option>OBC-NCL</option>
-              <option>SC</option>
-              <option>ST</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
             </Select>
 
             <Input
@@ -150,15 +149,30 @@ function StudentData() {
             />
           </div>
 
-          <Button
-            className={styles.apply_btn}
-            type="submit"
-            background="linear-gradient(40deg,#45cafc,#303f9f)"
-            color="white"
-            _hover={{ background: 'linear-gradient(90deg,#45cafc,#303f9f)' }}
-          >
-            Apply
-          </Button>
+          <div className={styles.buttonArea}>
+            <Button
+              className={styles.apply_btn}
+              type="submit"
+              background="linear-gradient(40deg,#45cafc,#303f9f)"
+              // blue bgGradient
+              color="white"
+              _hover={{ background: 'linear-gradient(to bottom, #4682B4, #5F9EA0)' }} // grey gradient
+            >
+              Apply
+            </Button>
+
+            <Button
+              className={styles.apply_btn}
+              type="button"
+              onClick={() => {}}
+              background="#808080"
+              color="white"
+              _hover={{ background: 'linear-gradient(90deg, #ffffff, #333333)' }}
+            >
+              <span className={styles.icons8MicrosoftExcel} />
+              <span>download as Exel</span>
+            </Button>
+          </div>
         </form>
 
         <TableContainer className={styles.table_container}>
@@ -171,7 +185,7 @@ function StudentData() {
                 <Th>Branch</Th>
                 <Th>CGPI</Th>
                 <Th>Gender</Th>
-                <Th>Category</Th>
+                {/* <Th>Gender</Th> */}
                 <Th>Address</Th>
                 <Th>Pin Code</Th>
               </Tr>
@@ -186,7 +200,7 @@ function StudentData() {
                     <Td>{datas.branch}</Td>
                     <Td>{datas.cgpi}</Td>
                     <Td>{getGender(datas.gender)}</Td>
-                    <Td>{datas.category}</Td>
+                    {/* <Td>{datas.Gender}</Td> */}
                     <Td>{`${datas.city}, ${datas.state}`}</Td>
                     <Td>{datas.pincode}</Td>
                   </Tr>

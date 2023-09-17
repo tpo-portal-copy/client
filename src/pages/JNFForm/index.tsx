@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import StepperComponent from '../../components/JNFcomponents/stepper/index'
+import DrivesCard from '../../components/Cards/DrivesCard/index'
+import MultiSelectDropDown from '../../components/MultiSelectDropDown'
 
 function JNFForm() {
-  const [currStep, setCurrStep] = useState(1)
+  const [currStep, setCurrStep] = useState(0)
 
   return (
     <div>
       {/* <JnfDrive /> */}
-      <StepperComponent activeStep={currStep} setCurrStep={setCurrStep} />
+      <MultiSelectDropDown />
+      {/* <StepperComponent activeStep={currStep} setCurrStep={setCurrStep} /> */}
     </div>
   )
 }
