@@ -146,7 +146,7 @@ function Placement() {
         {/** */}
 
         <div id="Recruitment process">
-          <h1 className="label">Recruitment Process</h1>
+          <h2 className="label">Recruitment Process</h2>
           <div className="Recruitment-process">
             <div className="Recruitment-process-item">
               <label className="label" htmlFor="prePlacementTalk">

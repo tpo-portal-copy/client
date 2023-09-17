@@ -2,6 +2,7 @@ import './index.scss'
 import { Stepper, Step, StepLabel } from '@material-ui/core'
 import { Internship, Placement } from '../RecruitmentProcess/index'
 import JnfHome from '../First'
+import Dekstop1 from '../JNFForm'
 
 type Steps = {
   label: string
@@ -27,7 +28,7 @@ export default function StepperComponent({
       case 0:
         return <JnfHome />
       case 1:
-        return <JnfHome />
+        return <Dekstop1 />
       case 2:
         return <Placement />
       case 3:

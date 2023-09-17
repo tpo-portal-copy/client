@@ -1,0 +1,62 @@
+.row_1,
+.row_2,
+.row_3,
+.row_4,
+.row_5,
+.row_6,
+.row_7 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col_1 {
+  max-width: 100px;
+}
+.col_3 {
+  display: block;
+  margin: 20px 20px;
+}
+.col {
+  margin: 20px 20px;
+  width: 310px;
+  display: block;
+}
+.dept_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 20px 0px;
+  font-size: large;
+  text-decoration: underline;
+}
+.form_comp {
+  margin: 10px 300px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.radio {
+  display: block;
+}
+.col_3_1,
+.col_3_2 {
+  display: block;
+}
+.col_3_1 {
+  min-width: 350px;
+}
+.row {
+  display: flex;
+}
+.main_heading {
+  background-color: #333333;
+  color: white;
+}
+.odd {
+  background-color: #f2f2f2;
+}
+.even {
+  background-color: #ffffff;
+}

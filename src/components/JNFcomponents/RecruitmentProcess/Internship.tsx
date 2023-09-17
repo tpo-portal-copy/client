@@ -41,8 +41,8 @@ type RecruitmentData = {
 const defaultData: RecruitmentData = {
   companyName: '',
   session: '2024-25',
-  isPlacement: true,
-  isIntern: false,
+  isPlacement: false,
+  isIntern: true,
   JobDescription: '',
   modeOfHiring: '',
   prePlacementTalk: '',
