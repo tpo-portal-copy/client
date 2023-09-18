@@ -3,6 +3,7 @@ import { Stepper, Step, StepLabel } from '@material-ui/core'
 import { Internship, Placement } from '../RecruitmentProcess/index'
 import JnfHome from '../First'
 import Dekstop1 from '../JNFForm'
+import NavbarJNF from '../Navbar_JNF'
 
 type Steps = {
   label: string
@@ -54,7 +55,8 @@ export default function StepperComponent({
   }
 
   return (
-    <div className="">
+    <>
+      <NavbarJNF />
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((step) => (
           <Step key={step.id}>
@@ -85,6 +87,6 @@ export default function StepperComponent({
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

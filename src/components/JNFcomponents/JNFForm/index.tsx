@@ -35,6 +35,14 @@ export default function Dekstop1() {
               </div>
             </div>
           </div>
+          <div className={`${styles.row}`}>
+            <div className={`${styles.col_3_1}`}>Material Science & Engineering</div>
+            <div className={`${styles.col_3_2}`}>
+              <div>
+                <input type="checkbox" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
