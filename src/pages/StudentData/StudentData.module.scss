@@ -71,6 +71,33 @@
         flex-direction: column;
         width: 100%;
       }
+
+      .dropdown {
+        border-radius: 6px;
+        height: fit-content;
+        position: relative;
+      }
+    }
+
+    .buttonArea {
+      display: flex;
+      justify-content: space-between;
+      // align-items: center;
+      width: 100%;
+      margin-top: 1rem;
+
+      .icons8MicrosoftExcel {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiI+CjxwYXRoIGQ9Ik0gMTUuODc1IDQgTCAxNS43ODEyNSA0LjAzMTI1IEwgNC43ODEyNSA2LjQ2ODc1IEwgNCA2LjY1NjI1IEwgNCAyNS4zNDM3NSBMIDQuNzgxMjUgMjUuNTMxMjUgTCAxNS43ODEyNSAyNy45Njg3NSBMIDE1Ljg3NSAyOCBMIDE4IDI4IEwgMTggMjUgTCAyOCAyNSBMIDI4IDcgTCAxOCA3IEwgMTggNCBaIE0gMTYgNi4wMzEyNSBMIDE2IDI1Ljk2ODc1IEwgNiAyMy43ODEyNSBMIDYgOC4yMTg3NSBaIE0gMTggOSBMIDI2IDkgTCAyNiAyMyBMIDE4IDIzIEwgMTggMjEgTCAyMCAyMSBMIDIwIDE5IEwgMTggMTkgTCAxOCAxOCBMIDIwIDE4IEwgMjAgMTYgTCAxOCAxNiBMIDE4IDE1IEwgMjAgMTUgTCAyMCAxMyBMIDE4IDEzIEwgMTggMTIgTCAyMCAxMiBMIDIwIDEwIEwgMTggMTAgWiBNIDIxIDEwIEwgMjEgMTIgTCAyNSAxMiBMIDI1IDEwIFogTSAxNC4xNTYyNSAxMSBMIDExLjg3NSAxMS4yODEyNSBMIDEwLjYyNSAxMy45Njg3NSBDIDEwLjQ5MjE4OCAxNC4zNTU0NjkgMTAuMzk0NTMxIDE0LjY0ODQzOCAxMC4zNDM3NSAxNC44NDM3NSBMIDEwLjMxMjUgMTQuODQzNzUgQyAxMC4yMzQzNzUgMTQuNTE5NTMxIDEwLjE2MDE1NiAxNC4yMzgyODEgMTAuMDYyNSAxNCBMIDkuNDM3NSAxMS42ODc1IEwgNy4zMTI1IDExLjkzNzUgTCA3LjIxODc1IDEyIEwgOSAxNiBMIDcgMjAgTCA5LjE1NjI1IDIwLjI1IEwgMTAuMDMxMjUgMTcuNzgxMjUgQyAxMC4xMzY3MTkgMTcuNDY4NzUgMTAuMjIyNjU2IDE3LjIxNDg0NCAxMC4yNSAxNy4wNjI1IEwgMTAuMjgxMjUgMTcuMDYyNSBDIDEwLjMzOTg0NCAxNy4zODY3MTkgMTAuMzc4OTA2IDE3LjYyODkwNiAxMC40Mzc1IDE3Ljc1IEwgMTEuNzgxMjUgMjAuNjg3NSBMIDE0LjIxODc1IDIxIEwgMTEuNTYyNSAxNS45Njg3NSBaIE0gMjEgMTMgTCAyMSAxNSBMIDI1IDE1IEwgMjUgMTMgWiBNIDIxIDE2IEwgMjEgMTggTCAyNSAxOCBMIDI1IDE2IFogTSAyMSAxOSBMIDIxIDIxIEwgMjUgMjEgTCAyNSAxOSBaIj48L3BhdGg+Cjwvc3ZnPg==')
+          50% 50% no-repeat;
+        background-size: 100%;
+
+        :hover {
+          scale: 1.1;
+        }
+      }
     }
 
     .apply_btn {

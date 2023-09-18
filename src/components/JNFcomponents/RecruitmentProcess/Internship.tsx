@@ -161,7 +161,7 @@ function Placement() {
                       id="ppt-1"
                       {...form.register('prePlacementTalk')}
                     />
-                    Yes
+                    <span>Yes</span>
                   </label>
 
                   <label htmlFor="ppt-2">
@@ -171,7 +171,7 @@ function Placement() {
                       id="ppt-2"
                       {...form.register('prePlacementTalk')}
                     />
-                    No
+                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -179,16 +179,16 @@ function Placement() {
               </label>
 
               <label className="label" htmlFor="aptitude">
-                aptitude Test
+                Aptitude Test
                 <div id="aptitude">
                   <label htmlFor="ap1">
                     <input type="radio" value="Yes" id="ap1" {...form.register('aptitudeTest')} />
-                    Yes
+                    <span>Yes</span>
                   </label>
 
                   <label htmlFor="ap2">
                     <input type="radio" value="No" id="ap2" {...form.register('aptitudeTest')} />
-                    No
+                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -200,12 +200,12 @@ function Placement() {
                 <div id="technical-test">
                   <label htmlFor="tt1">
                     <input type="radio" value="Yes" id="tt1" {...form.register('technicalTest')} />
-                    Yes
+                    <span>Yes</span>
                   </label>
 
                   <label htmlFor="tt2">
                     <input type="radio" value="No" id="tt2" {...form.register('technicalTest')} />
-                    No
+                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -222,12 +222,12 @@ function Placement() {
                       id="gd1"
                       {...form.register('groupDiscussion')}
                     />
-                    Yes
+                    <span>Yes</span>
                   </label>
 
                   <label htmlFor="gd2 ">
                     <input type="radio" value="No" id="gd2" {...form.register('groupDiscussion')} />
-                    No
+                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -244,7 +244,7 @@ function Placement() {
                       id="pi1"
                       {...form.register('personalInterview')}
                     />
-                    Yes
+                    <span>Yes</span>
                   </label>
 
                   <label htmlFor="pi2">
@@ -254,7 +254,7 @@ function Placement() {
                       id="pi2"
                       {...form.register('personalInterview')}
                     />
-                    No
+                    <span>No</span>
                   </label>
 
                   {/**/}
