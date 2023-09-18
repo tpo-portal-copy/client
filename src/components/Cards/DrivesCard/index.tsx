@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
 import { Tag, Button } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLink, faSearch, faPen, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { DrivesCardProps } from '../../../utils/types'
 import styles from './DrivesCard.module.scss'
 

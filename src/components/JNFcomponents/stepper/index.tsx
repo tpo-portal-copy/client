@@ -1,8 +1,12 @@
 import './index.scss'
 import { Stepper, Step, StepLabel } from '@material-ui/core'
+import react, { useState } from 'react'
 import { Internship, Placement } from '../RecruitmentProcess/index'
 import JnfHome from '../First'
 import Dekstop1 from '../JNFForm'
+import NavbarJNF from '../Navbar_JNF'
+import HRForm from '../HRForm'
+import { HR } from '../../../utils/types'
 
 type Steps = {
   label: string
@@ -21,8 +25,11 @@ export default function StepperComponent({
     { label: 'Streams offered', id: 2 },
     { label: 'Placements', id: 3 },
     { label: 'Internships', id: 4 },
+    { label: 'HR Form', id: 5 },
   ]
-
+  const [hrList, setHrList] = useState<Array<HR>>([])
+  const handleSubmit = () => {}
+  const handleFiveBack = () => {}
   const getFormContent = () => {
     switch (activeStep) {
       case 0:
@@ -33,6 +40,8 @@ export default function StepperComponent({
         return <Placement />
       case 3:
         return <Internship />
+      case 4:
+        return <HRForm data={hrList} onSubmit={handleSubmit} onBack={handleFiveBack} />
       default:
         return null
     }
@@ -54,7 +63,8 @@ export default function StepperComponent({
   }
 
   return (
-    <div className="">
+    <>
+      <NavbarJNF />
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((step) => (
           <Step key={step.id}>
@@ -85,6 +95,6 @@ export default function StepperComponent({
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
