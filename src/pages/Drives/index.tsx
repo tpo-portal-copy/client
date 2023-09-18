@@ -85,40 +85,6 @@ function Drives() {
       <div className={styles.container}>
         <h1 className={styles.page_name}>Drives</h1>
         <div className={styles.filter_container}>
-          <div className={styles.dropdown}>
-            <Select
-              name="cluster"
-              placeholder="Choose Clusters"
-              onChange={handleClusterChange}
-              value={selectedCluster}
-              backgroundColor="white"
-            >
-              {clusterOptions.map((clust) => (
-                <option key={clust.value} value={clust.value}>
-                  {clust.label}
-                </option>
-              ))}
-            </Select>
-            <div className={styles.selected_clusters}>
-              {clusters.map((cluster: ClusterChosen, idx: number) => (
-                <Tag
-                  size="sm"
-                  key={cluster.value}
-                  borderRadius="full"
-                  variant="solid"
-                  justifySelf="center"
-                  colorScheme="gray"
-                >
-                  <TagLabel>Cluster {cluster.value}</TagLabel>
-                  <TagCloseButton onClick={() => handleMultiDelete(idx)} />
-                </Tag>
-              ))}
-            </div>
-
-            <Button onClick={addCluster}>
-              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
-            </Button>
-          </div>
           <div className={styles.search_box}>
             <InputGroup>
               <Input value={search} onChange={handleSearch} placeholder="Company" type="input" />
