@@ -380,11 +380,29 @@ export interface MultiSelectDropDownData {
   value: string
   label: string
 }
+export interface CourseData {
+  id: string
+  name: string
+  year: number
+}
+export interface BranchData {
+  id: string
+  name: string
+}
 
 export interface ClusterChosen {
   id: string | number
   value: string | number
 }
+export interface CourseChosen {
+  id: string | number
+  value: string
+}
+export interface BranchChosen {
+  id: string | number
+  value: string
+}
+
 export interface MultiSelectDropDownProps {
   placeholder: string
   clusterData: Array<MultiSelectDropDownData>

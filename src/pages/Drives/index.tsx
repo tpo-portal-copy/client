@@ -86,7 +86,7 @@ function Drives() {
         <h1 className={styles.page_name}>Drives</h1>
         <div className={styles.filter_container}>
           <div className={styles.dropdown}>
-            <Select
+            {/* <Select
               name="cluster"
               placeholder="Choose Clusters"
               onChange={handleClusterChange}
@@ -113,11 +113,11 @@ function Drives() {
                   <TagCloseButton onClick={() => handleMultiDelete(idx)} />
                 </Tag>
               ))}
-            </div>
-
+            </div> 
+            
             <Button onClick={addCluster}>
               <FontAwesomeIcon cursor="pointer" icon={faPlus} />
-            </Button>
+            </Button> */}
           </div>
           <div className={styles.search_box}>
             <InputGroup>

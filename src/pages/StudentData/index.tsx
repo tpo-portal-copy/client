@@ -1,125 +1,154 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useEffect, useState } from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button } from '@chakra-ui/react'
+import { useState } from 'react'
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Button,
+  Input,
+  Select,
+  TagLabel,
+  Tag,
+  TagCloseButton,
+} from '@chakra-ui/react'
+import { nanoid } from 'nanoid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import styles from './StudentData.module.scss'
+import { CourseData, CourseChosen, BranchChosen, BranchData } from '../../utils/types'
+
 import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
 import useStudentData from '../../hooks/useStudentData'
-import { Input, Paginator, Select } from '../../components'
-import { MultiSelectDropDownData } from '../../utils/types'
+import { Paginator } from '../../components'
 import { branchesAPI } from '../../utils/apis'
 import useCourses from '../../hooks/useCourses'
-import MultiSelectDropDown from '../../components/MultiSelectDropDown'
 
 function StudentData() {
   const [page, setPage] = useState(1)
   const { data: courseData, isSuccess: courseIsSuccess } = useCourses()
-  const [course, setCourse] = useState({ id: 0, years: 0, name: '' })
-  const [branch, setBranch] = useState<any>([])
+  // const [course, setCourse] = useState({ id: 0, years: 0, name: '' })
+  const branchData: Array<BranchData> = [
+    // dummy data
+    { id: '0', name: 'Computer Science' },
+    { id: '1', name: 'Electrical' },
+    { id: '2', name: 'Mechanical' },
+  ]
+  const [courses, setCourses] = useState<Array<CourseChosen>>([])
+  const [branches, setBranches] = useState<Array<BranchChosen>>([])
+
   const [branchDetails, setBranchDetails] = useState({ id: 0, name: '' })
   const [filterCourse, setFilterCourse] = useState('')
   const [filterBranch, setFilterBranch] = useState('')
   const [filterCgpi, setFilterCgpi] = useState(0)
+  const [selectedCourse, setSelectedCourse] = useState('')
+  const [courseStr, setCourseStr] = useState('')
+  const [selectedBranch, setSelectedBranch] = useState('')
+  const [branchStr, setBranchStr] = useState('')
+
+  // useEffect(() => {
+  //   if (courseIsSuccess) {
+  //     setCourses(courseData)
+  //   }
+  // }, [courseIsSuccess, courseData])
 
   /// //////////////
-  // course options
-  const [courseOptions, setCourseOptions] = useState<Array<MultiSelectDropDownData>>([])
-  // course chosen
-  const [coursesChose, setCoursesChose] = useState<Array<any>>([])
-
-  const GetCourceOptions = () => {
-    const CD = courseData
-    const isCD = courseIsSuccess
-
-    const courseOptionArray: Array<MultiSelectDropDownData> = []
-    // courseOptionArray.push({ value: CD[0].id, label: CD[0].name })
-    if (isCD && CD.length >= 0) {
-      for (let i = 0; i < CD.length; i += 1) {
-        courseOptionArray.push({ value: CD[i].id, label: CD[i].name })
-      }
-    }
-    console.log(courseOptionArray)
-    setCourseOptions(courseOptionArray)
-    return courseOptionArray
+  function extractCourse(clustersArr: Array<CourseChosen>) {
+    const str = clustersArr.map((cluster) => cluster.value).join(',')
+    setCourseStr(str)
   }
 
-  useEffect(() => {
-    GetCourceOptions()
-  })
+  const onSearch = () => {
+    setPage(1)
+    extractCourse(courses)
+  }
 
-  // const getCourceOptions = useEffect(() => {
-  //   const courseOptionArray: Array<MultiSelectDropDownData> = []
-  //   if (courseIsSuccess && courseData.length !== 0) {
-  //     courseData.map = (P: any) => {
-  //       courseOptionArray.push({ value: P.id as string, label: P.name })
-  //     }
-  //   }
-  //   console.log(courseOptionArray)
-  //   setCourseOptions(courseOptionArray)
-  //   return courseOptionArray
-  // }, [courseData, courseIsSuccess])
+  const handleMultiDelete = (idx: number) => {
+    const items = courses.filter((item, index) => index !== idx)
+    setCourses(items)
+    extractCourse(items)
+  }
 
-  const handleCourseClick = (e: any) => {
-    if (e === '' || coursesChose.find((C) => C.id === e)) {
+  const addCourse = (e: any) => {
+    e.preventDefault()
+    if (e === '' || courses.find((C) => C.id === selectedCourse)) {
       return
     }
-    setCoursesChose([...coursesChose, { id: e, value: e }])
+    if (selectedCourse === '') {
+      return
+    }
+    const arr = [...courses, { id: e, value: selectedCourse }]
+    setCourses(arr)
+    extractCourse(arr)
+  }
+  const handleCourseChange = (e: any) => {
+    if (e.target.value === '') {
+      return
+    }
+    setSelectedCourse(e.target.value)
   }
 
-  const handleCourseDelete = (idx: number) => {
-    const items = coursesChose.filter((item, index) => index !== idx)
-    setCoursesChose(items)
+  /// /////////////////
+  function extractBranch(clustersArr: Array<BranchChosen>) {
+    const str = clustersArr.map((cluster) => cluster.value).join(',')
+    setBranchStr(str)
   }
+
+  const handleMultiDeleteBranch = (idx: number) => {
+    const items = branches.filter((item, index) => index !== idx)
+    setBranches(items)
+    extractBranch(items)
+  }
+
+  const addBranch = (e: any) => {
+    e.preventDefault()
+    if (e === '' || branches.find((C) => C.id === selectedBranch)) {
+      return
+    }
+    if (e.target.value === selectedBranch) {
+      return
+    }
+    if (selectedBranch === '') {
+      return
+    }
+    const arr = [...branches, { id: e, value: selectedBranch }]
+    setBranches(arr)
+    extractBranch(arr)
+  }
+  const handleBranchChange = (e: any) => {
+    setSelectedBranch(e.target.value)
+  }
+
+  // course options
+  // const [courseOptions, setCourseOptions] = useState<Array<MultiSelectDropDownData>>([])
+  // // course chosen
+  // const [coursesChose, setCoursesChose] = useState<Array<any>>([])
+
+  // const handleCourseClick = (e: any) => {
+  //   if (e === '' || coursesChose.find((C) => C.id === e)) {
+  //     return
+  //   }
+  //   setCoursesChose([
+  //     ...coursesChose,
+  //     { id: e, value: courseOptions.find((C) => C.value === e)?.label },
+  //   ])
+  // }
+
+  // const handleCourseDelete = (idx: number) => {
+  //   const items = coursesChose.filter((item, index) => index !== idx)
+  //   setCoursesChose(items)
+  // }
 
   /// //////////////
   // branch options
-  const [branchOptions, setBranchOptions] = useState<Array<MultiSelectDropDownData>>([])
-  // branch chosen
-  const [branchesChose, setBranchesChose] = useState<Array<any>>([])
-  // // // branch chosen
-  // // const [selectedBranch, setSelectedBranch] = useState('')
-  // // // branch chosen
-  // // const [branchStr, setBranchStr] = useState('')
-  // // // branch chosen
-  // // const [branchId, setBranchId] = useState(0)
-
-  const GetBranchOptions = () => {
-    const BD = branch
-    const isBD = branch.length !== 0
-
-    const branchOptionArray: Array<MultiSelectDropDownData> = []
-    // branchOptionArray.push({ value: CD[0].id, label: CD[0].name })
-    if (isBD) {
-      for (let i = 0; i < BD.branches.length; i += 1) {
-        branchOptionArray.push({ value: BD.branches[i].id, label: BD.branches[i].branchName })
-      }
-    }
-    console.log(branchOptionArray)
-    setBranchOptions(branchOptionArray)
-    return branchOptionArray
-  }
-
-  useEffect(() => {
-    GetBranchOptions()
-
-    // cleanup
-    return () => {
-      setBranchOptions([])
-    }
-  })
-
-  const handleBranchClick = (e: any) => {
-    if (e === '' || branchesChose.find((C) => C.id === e)) {
-      return
-    }
-    setBranchesChose([...branchesChose, { id: e, value: e }])
-  }
-
-  const handleBranchDelete = (idx: number) => {
-    const items = branchesChose.filter((item, index) => index !== idx)
-    setBranchesChose(items)
-  }
+  // const [branchOptions, setBranchOptions] = useState<Array<MultiSelectDropDownData>>([])
+  // // branch chosen
+  // const [branchesChose, setBranchesChose] = useState<Array<any>>([])
 
   const {
     data,
@@ -144,25 +173,25 @@ function StudentData() {
     onSubmit: () => {
       setFilterBranch(branchDetails.name)
       setFilterCgpi(formik.values.cgpi)
-      setFilterCourse(course.name)
+      setFilterCourse(courses[0].value)
     },
   })
 
-  const handleCourseChange = async (e: any) => {
-    const parsedObj = JSON.parse(e.target.value)
-    setCourse(parsedObj)
+  // const handleCourseChange = async (e: any) => {
+  //   const parsedObj = JSON.parse(e.target.value)
+  //   setCourse(parsedObj)
 
-    formik.setFieldValue('course', e.target.value)
+  //   formik.setFieldValue('course', e.target.value)
 
-    const res = await branchesAPI.get(`/${parsedObj.id}`)
-    setBranch(res.data)
-  }
+  //   const res = await branchesAPI.get(`/${parsedObj.id}`)
+  //   setBranch(res.data)
+  // }
 
-  const handleBranchChange = (e: any) => {
-    const parsedObj = JSON.parse(e.target.value)
-    setBranchDetails(parsedObj)
-    formik.setFieldValue('branch', e.target.value)
-  }
+  // const handleBranchChange = (e: any) => {
+  //   const parsedObj = JSON.parse(e.target.value)
+  //   setBranchDetails(parsedObj)
+  //   formik.setFieldValue('branch', e.target.value)
+  // }
 
   const getGender = (x: string) => {
     switch (x) {
@@ -193,59 +222,53 @@ function StudentData() {
       <div className={styles.content}>
         <form onSubmit={formik.handleSubmit} className={styles.form_container}>
           <h2 className={styles.title}>Filters</h2>
+          {/* course component started */}
           <div className={styles.filters}>
-            {courseIsSuccess && (
-              <div className={styles.dropdown}>
-                <MultiSelectDropDown
-                  placeholder="Choose Course"
-                  clusterData={courseOptions}
-                  choosenClusters={coursesChose}
-                  onClick={(e) => {
-                    handleCourseClick(e)
-                  }}
-                  onDelete={(idx) => {
-                    handleCourseDelete(idx)
-                  }}
-                />
-              </div>
-            )}
-            {courseIsSuccess && (
-              <div className={styles.dropdown}>
-                <MultiSelectDropDown
-                  placeholder="Choose Branch"
-                  clusterData={branchOptions}
-                  choosenClusters={branchesChose}
-                  onClick={(e) => {
-                    handleBranchClick(e)
-                  }}
-                  onDelete={(idx) => {
-                    handleBranchDelete(idx)
-                  }}
-                />
-              </div>
-            )}
-
-            {/* <Select
-              value={formik.values.branch}
-              onChange={(e) => handleBranchChange(e)}
-              onBlur={formik.handleBlur}
-              name="branch"
-              placeholder="Branch"
+            <Select
+              name="Course"
+              placeholder="Choose Courses"
+              onChange={handleCourseChange}
+              value={selectedCourse}
+              backgroundColor="white"
             >
-              {branch.length !== 0 &&
-                branch.branches.map((datas: any) => (
-                  <option value={`{"id":${datas.id},"name":"${datas.branchName}"}`} key={datas.id}>
-                    {datas.branchName}
+              {courseIsSuccess &&
+                courseData.map((clust: CourseData) => (
+                  <option key={clust.id} value={clust.name}>
+                    {clust.name}
                   </option>
                 ))}
-            </Select> */}
+            </Select>
+
+            <Button onClick={addCourse} title="Select and Add multiple Courses">
+              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
+            </Button>
+
+            {/* course component ended */}
+            {/* branch component started */}
+            <Select
+              name="Branch"
+              placeholder="Choose Branch"
+              onChange={handleBranchChange}
+              value={selectedBranch}
+              backgroundColor="white"
+            >
+              {branchData.map((clust: BranchData) => (
+                <option key={clust.id} value={clust.name}>
+                  {clust.name}
+                </option>
+              ))}
+            </Select>
+
+            <Button onClick={addBranch} title="Select and Add multiple Branches">
+              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
+            </Button>
 
             <Select
-              value={formik.values.Gender}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
               name="Gender"
-              placeholder="Gender"
+              placeholder="Choose Gender"
+              onChange={formik.handleChange}
+              value={formik.values.Gender}
+              backgroundColor="white"
             >
               <option>Male</option>
               <option>Female</option>
@@ -258,7 +281,41 @@ function StudentData() {
               onChange={formik.handleChange}
               name="cgpi"
               placeholder="CGPI"
+              background="white"
             />
+          </div>
+          <div className={styles.filterArea}>
+            <div className={styles.selected_clusters}>
+              {courses.map((cluster: CourseChosen, idx: number) => (
+                <Tag
+                  size="sm"
+                  key={nanoid()}
+                  borderRadius="full"
+                  variant="solid"
+                  justifySelf="center"
+                  colorScheme="blackAlpha"
+                >
+                  <TagLabel className={styles.tl}>{cluster.value}</TagLabel>
+                  <TagCloseButton onClick={() => handleMultiDelete(idx)} />
+                </Tag>
+              ))}
+            </div>
+
+            <div className={styles.selected_clusters}>
+              {branches.map((cluster: BranchChosen, idx: number) => (
+                <Tag
+                  size="sm"
+                  key={nanoid()}
+                  borderRadius="full"
+                  variant="solid"
+                  justifySelf="center"
+                  colorScheme="blackAlpha"
+                >
+                  <TagLabel className={styles.tl}>{cluster.value}</TagLabel>
+                  <TagCloseButton onClick={() => handleMultiDeleteBranch(idx)} />
+                </Tag>
+              ))}
+            </div>
           </div>
 
           <div className={styles.buttonArea}>
@@ -270,7 +327,7 @@ function StudentData() {
               color="white"
               _hover={{ background: 'linear-gradient(to bottom, #4682B4, #5F9EA0)' }} // grey gradient
             >
-              Apply
+              Apply filters
             </Button>
 
             <Button
@@ -338,3 +395,80 @@ function StudentData() {
 }
 
 export default StudentData
+
+//  {courseIsSuccess && (
+//               <div className={styles.dropdown}>
+//                 <MultiSelectDropDown
+//                   placeholder="Choose Course"
+//                   clusterData={courseOptions}
+//                   choosenClusters={coursesChose}
+//                   onClick={(e) => {
+//                     // console.log(e)
+//                     GetCourceOptions()
+//                     handleCourseClick(e)
+//                   }}
+//                   onDelete={(idx) => {
+//                     handleCourseDelete(idx)
+//                   }}
+//                 />
+//               </div>
+//             )}
+//             {courseIsSuccess && (
+//               <div className={styles.dropdown}>
+//                 <MultiSelectDropDown
+//                   placeholder="Choose Branch"
+//                   clusterData={branchOptions}
+//                   choosenClusters={branchesChose}
+//                   onClick={(e) => {
+//                     setSelectedCourse(branchOptions[0].label)
+//                     GetBranchOptions()
+//                     handleBranchClick(e)
+//                   }}
+//                   onDelete={(idx) => {
+//                     handleBranchDelete(idx)
+//                   }}
+//                 />
+//               </div>
+//             )}
+
+/// //////////////////
+
+// const GetCourceOptions = () => {
+//   const CD = courseData
+//   const isCD = courseIsSuccess
+
+//   const courseOptionArray: Array<MultiSelectDropDownData> = []
+//   // courseOptionArray.push({ value: CD[0].id, label: CD[0].name })
+//   if (isCD && CD.length >= 0) {
+//     for (let i = 0; i < CD.length; i += 1) {
+//       courseOptionArray.push({ value: CD[i].id, label: CD[i].name })
+//     }
+//   }
+//   console.log(courseOptionArray)
+//   setCourseOptions(courseOptionArray)
+//   return courseOptionArray
+// }
+
+/// //////////////
+// // // branch chosen
+// // const [selectedBranch, setSelectedBranch] = useState('')
+// // // branch chosen
+// // const [branchStr, setBranchStr] = useState('')
+// // // branch chosen
+// // const [branchId, setBranchId] = useState(0)
+
+// const GetBranchOptions = () => {
+//   const BD = branch
+//   const isBD = branch.length !== 0
+
+//   const branchOptionArray: Array<MultiSelectDropDownData> = []
+//   // branchOptionArray.push({ value: CD[0].id, label: CD[0].name })
+//   if (isBD) {
+//     for (let i = 0; i < BD.branches.length; i += 1) {
+//       branchOptionArray.push({ value: BD.branches[i].id, label: BD.branches[i].branchName })
+//     }
+//   }
+//   console.log(branchOptionArray)
+//   setBranchOptions(branchOptionArray)
+//   return branchOptionArray
+// }
