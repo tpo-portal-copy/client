@@ -50,8 +50,8 @@ export const navItemsTPO = [
   },
   {
     id: 2,
-    name: 'Experiences',
-    url: '/experiences',
+    name: 'Announcements',
+    url: '/drives',
   },
   {
     id: 3,
@@ -60,16 +60,16 @@ export const navItemsTPO = [
   },
   {
     id: 4,
+    name: 'Experiences',
+    url: '/experiences',
+  },
+  {
+    id: 5,
     name: 'Resources',
     url: '/resources',
   },
   {
     id: 6,
-    name: 'Announcements',
-    url: '/drives',
-  },
-  {
-    id: 5,
     name: 'Profile',
     url: '/profile',
   },
