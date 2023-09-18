@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   border-radius: 8px;
   width: 100%;
+  position: relative;
 
   .container {
     display: flex;
@@ -18,6 +19,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      width: 40rem;
 
       @media screen and (max-width: 525px) {
         flex-direction: column;
@@ -89,7 +91,9 @@
       margin-top: 0.5rem;
       max-width: 135px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
 
       .jd_link {
         text-decoration: none;
@@ -101,15 +105,42 @@
         }
       }
 
-      .past_exp_btn {
+      .upcoming {
         color: #fff;
-        background: linear-gradient(40deg, #45cafc, #303f9f);
+        background: linear-gradient(40deg, #45cafc, #324098);
         padding: 0.5rem 1rem;
         font-weight: 500;
         font-size: 14px;
         border-radius: 4px;
         flex-shrink: 1;
+        position: absolute;
       }
+
+      .ongoing {
+        color: #fff;
+        background: linear-gradient(45deg, #ffc04b, #ff6347);
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 4px;
+        flex-shrink: 1;
+        position: absolute;
+      }
+
+      @keyframes pulse {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 100% 0;
+        }
+      }
+
+      .ongoing {
+        background-size: 200% 100%; /* Horizontal gradient */
+        animation: pulse 1s linear infinite;
+      }
+
       @media screen and (max-width: 525px) {
         place-self: center normal;
         margin-top: 0.5rem;
@@ -167,5 +198,11 @@
   }
 }
 
-.button-area {
+.buttonArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }

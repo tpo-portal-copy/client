@@ -71,6 +71,12 @@
         flex-direction: column;
         width: 100%;
       }
+
+      .dropdown {
+        border-radius: 6px;
+        height: fit-content;
+        position: relative;
+      }
     }
 
     .buttonArea {

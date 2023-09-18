@@ -40,12 +40,12 @@ function DrivesCard({
           </div>
         </div>
         <div className={styles.link}>
-          <div className={styles.past_exp_btn}>
+          <div className={driveStatus === 'Upcoming' ? styles.upcoming : styles.ongoing}>
             <span> {driveStatus}</span>
           </div>
         </div>
 
-        <div className={styles.company_info_1}>
+        <div className={styles.buttonArea}>
           <Button>
             <FontAwesomeIcon cursor="pointer" icon={faPen} />
           </Button>
