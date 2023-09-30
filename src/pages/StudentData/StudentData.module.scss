@@ -20,8 +20,9 @@
 
   .page_name {
     font-size: var(--lg-heading);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-color-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     @media screen and (max-width: 525px) {
       font-size: 28px;
@@ -58,6 +59,8 @@
       font-size: 20px;
       font-weight: 600;
       color: #282828;
+      margin-bottom: 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
       @media screen and (max-width: 525px) {
         padding: 0;
@@ -90,6 +93,18 @@
       @media screen and (max-width: 600px) {
         flex-direction: column;
         width: 100%;
+      }
+      .sortElement {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 1rem;
+
+        @media screen and (max-width: 600px) {
+          flex-direction: column;
+          width: 100%;
+        }
       }
 
       .dropdown {

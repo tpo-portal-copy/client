@@ -1,4 +1,4 @@
-import { useFormik } from 'formik'
+import { useFormik, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import {
@@ -22,13 +22,14 @@ import { nanoid } from 'nanoid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { sort } from 'd3'
+import { isNonNullExpression } from 'typescript'
+import { Error, CheckListItem, Paginator } from '../../components/index'
 import styles from './StudentData.module.scss'
 import { CourseData, CourseChosen, BranchChosen, BranchData } from '../../utils/types'
 
 import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
 import useStudentData from '../../hooks/useStudentData'
-import { CheckListItem, Paginator } from '../../components'
 import { branchesAPI } from '../../utils/apis'
 import useCourses from '../../hooks/useCourses'
 
@@ -49,12 +50,16 @@ function StudentData() {
   const [filterCourse, setFilterCourse] = useState('')
   const [filterBranch, setFilterBranch] = useState('')
   const [filterCgpi, setFilterCgpi] = useState<number | undefined>()
+  const [filter10percentage, setfilter10percentage] = useState<number | undefined>()
+  const [filter12percentage, setfilter12percentage] = useState<number | undefined>()
+  const [filterJEEscore, setfilterJEEscore] = useState<number | undefined>()
   const [selectedCourse, setSelectedCourse] = useState('')
   const [courseStr, setCourseStr] = useState('')
   const [selectedBranch, setSelectedBranch] = useState('')
   const [branchStr, setBranchStr] = useState('')
-  const [selectedSortingFactors, setSelectedSortingFactors] = useState<string[]>([])
-  const SortingFactorsData = ['CGPI', '10th Results', '12th results', 'JEE Result']
+
+  // const [selectedSortingFactors, setSelectedSortingFactors] = useState<string[]>([])
+  // const SortingFactorsData = ['CGPI', '10th Results', '12th results', 'JEE Result']
   // useEffect(() => {
   //   if (courseIsSuccess) {
   //     setCourses(courseData)
@@ -169,37 +174,49 @@ function StudentData() {
       branch: '',
       Gender: '',
       cgpi: undefined,
+      JeeRank: undefined,
+      tenth: undefined,
+      twelth: undefined,
     },
     validationSchema: Yup.object().shape({
       course: Yup.string(),
       branch: Yup.string(),
       Gender: Yup.string(),
-      cgpi: Yup.number(),
+      cgpi: Yup.number()
+        .typeError('CGPI must be a number')
+        .positive()
+        .min(0, 'CGPI should be positive')
+        .max(10, 'CGPI should be 10 or less'),
+
+      JeeRank: Yup.number()
+        .typeError('Jee rank must be a number')
+        .positive()
+        .min(0, 'JEE Rank should be positive'),
+      tenth: Yup.number()
+        .typeError('percentage must be a number')
+        .positive()
+        .min(0, ' percentage must be positive')
+        .max(100, ' percentage should be between 0 and 100'),
+      twelth: Yup.number()
+        .typeError('percentage must be a number')
+        .positive()
+        .min(0, ' percentage must be positive')
+        .max(100, ' percentage should be between 0 and 100'),
     }),
+    validateOnChange: true,
     onSubmit: () => {
       setFilterBranch(branchDetails.name)
       setFilterCgpi(formik.values.cgpi)
       setFilterCourse(courses[0].value)
+      setfilter10percentage(formik.values.tenth)
+      setfilter12percentage(formik.values.twelth)
+      setfilterJEEscore(formik.values.JeeRank)
     },
   })
 
   /// /////////////////////////////
 
   // Sorting execution
-
-  const onSortingToggle = (factor: string) => {
-    // If factor alrealy selected, then remove it from selected SortingFactors list
-    if (selectedSortingFactors.includes(factor)) {
-      const SortingFactors = [...selectedSortingFactors]
-      const factorIdx = selectedSortingFactors.findIndex((factorName) => factorName === factor)
-      SortingFactors.splice(factorIdx, 1)
-      setSelectedSortingFactors(SortingFactors)
-      return
-    }
-
-    // Else add factor to selected SortingFactors list
-    setSelectedSortingFactors([...selectedSortingFactors, factor])
-  }
 
   const getGender = (x: string) => {
     switch (x) {
@@ -284,40 +301,67 @@ function StudentData() {
               <option>Female</option>
               <option>Other</option>
             </Select>
-
-            {/* cgpi cuttoffP
-             */}
-
-            <Input
-              value={formik.values.cgpi}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              name="cgpi"
-              placeholder="CGPI"
-              background="white"
-            />
           </div>
 
           {/* sort data ?  view */}
           <div className={styles.filters}>
-            <div className={styles.sortForm}>
-              <h2 className={styles.title}>Sort Data</h2>
-              <div>
-                {SortingFactorsData.map((factor) => (
-                  <CheckListItem
-                    key={factor}
-                    label={factor}
-                    isMobile={false}
-                    onClick={onSortingToggle}
-                    isChecked={selectedSortingFactors.includes(factor)}
-                  />
-                ))}
-              </div>
-            </div>
+            <span className={styles.sortElement}>
+              <Input
+                value={formik.values.cgpi}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                name="cgpi"
+                placeholder="CGPI"
+                background="white"
+              />
+              {formik.touched.cgpi && formik.errors.cgpi ? (
+                <Error errorMessage={formik.errors.cgpi} />
+              ) : null}
+            </span>
+            <span className={styles.sortElement}>
+              <Input
+                value={formik.values.JeeRank}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                name="JeeRank"
+                placeholder="JEE Rank"
+                background="white"
+              />
+              {formik.touched.JeeRank && formik.errors.JeeRank ? (
+                <Error errorMessage={formik.errors.JeeRank} />
+              ) : null}
+            </span>
+            <span className={styles.sortElement}>
+              <Input
+                value={formik.values.tenth}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                name="tenth"
+                placeholder="10th Percentage"
+                background="white"
+              />
+
+              {formik.touched.tenth && formik.errors.tenth ? (
+                <Error errorMessage={formik.errors.tenth} />
+              ) : null}
+            </span>
+            <span className={styles.sortElement}>
+              <Input
+                value={formik.values.twelth}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                name="twelth"
+                placeholder="12th Percentage"
+                background="white"
+              />
+              {formik.touched.twelth && formik.errors.twelth ? (
+                <Error errorMessage={formik.errors.twelth} />
+              ) : null}
+            </span>
           </div>
 
           {/* filter data or sort data  ?  show Tags */}
-          {courses.length !== 0 || branches.length !== 0 || selectedSortingFactors.length !== 0 ? (
+          {courses.length !== 0 || branches.length !== 0 ? (
             <div className={styles.filterArea}>
               <div className={styles.selected_clusters}>
                 {courses.map((cource: CourseChosen, idx: number) => (
@@ -347,20 +391,6 @@ function StudentData() {
                   >
                     <TagLabel className={styles.tl}>{branch.value}</TagLabel>
                     <TagCloseButton onClick={() => handleMultiDeleteBranch(idx)} />
-                  </Tag>
-                ))}
-              </div>
-              <div className={styles.selected_clusters}>
-                {selectedSortingFactors.map((factor) => (
-                  <Tag
-                    size="sm"
-                    key={nanoid()}
-                    borderRadius="full"
-                    variant="solid"
-                    justifySelf="center"
-                    colorScheme="blackAlpha"
-                  >
-                    <TagLabel className={styles.tl}>sort : {factor}</TagLabel>
                   </Tag>
                 ))}
               </div>
