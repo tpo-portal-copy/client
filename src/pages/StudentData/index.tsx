@@ -316,8 +316,8 @@ function StudentData() {
             </div>
           </div>
 
-          {/* filter data ?  view */}
-          {courses.length !== 0 || branches.length !== 0 ? (
+          {/* filter data or sort data  ?  show Tags */}
+          {courses.length !== 0 || branches.length !== 0 || selectedSortingFactors.length !== 0 ? (
             <div className={styles.filterArea}>
               <div className={styles.selected_clusters}>
                 {courses.map((cource: CourseChosen, idx: number) => (
@@ -419,7 +419,6 @@ function StudentData() {
                     <Td>{datas.branch}</Td>
                     <Td>{datas.cgpi}</Td>
                     <Td>{getGender(datas.gender)}</Td>
-                    <Td>{datas.Gender}</Td>
                     <Td>{`${datas.city}, ${datas.state}`}</Td>
                     <Td>{datas.pincode}</Td>
                   </Tr>
