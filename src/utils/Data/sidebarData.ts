@@ -58,7 +58,7 @@ export const navItemsTPO = [
   {
     id: 2,
     name: 'Announcements',
-    url: '/drives',
+    url: '/announcements',
   },
   {
     id: 3,

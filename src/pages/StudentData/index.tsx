@@ -15,17 +15,20 @@ import {
   TagLabel,
   Tag,
   TagCloseButton,
+  Radio,
+  RadioGroup,
 } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { sort } from 'd3'
 import styles from './StudentData.module.scss'
 import { CourseData, CourseChosen, BranchChosen, BranchData } from '../../utils/types'
 
 import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
 import useStudentData from '../../hooks/useStudentData'
-import { Paginator } from '../../components'
+import { CheckListItem, Paginator } from '../../components'
 import { branchesAPI } from '../../utils/apis'
 import useCourses from '../../hooks/useCourses'
 
@@ -45,12 +48,13 @@ function StudentData() {
   const [branchDetails, setBranchDetails] = useState({ id: 0, name: '' })
   const [filterCourse, setFilterCourse] = useState('')
   const [filterBranch, setFilterBranch] = useState('')
-  const [filterCgpi, setFilterCgpi] = useState(0)
+  const [filterCgpi, setFilterCgpi] = useState<number | undefined>()
   const [selectedCourse, setSelectedCourse] = useState('')
   const [courseStr, setCourseStr] = useState('')
   const [selectedBranch, setSelectedBranch] = useState('')
   const [branchStr, setBranchStr] = useState('')
-
+  const [selectedSortingFactors, setSelectedSortingFactors] = useState<string[]>([])
+  const SortingFactorsData = ['CGPI', '10th Results', '12th results', 'JEE Result']
   // useEffect(() => {
   //   if (courseIsSuccess) {
   //     setCourses(courseData)
@@ -76,7 +80,7 @@ function StudentData() {
 
   const addCourse = (e: any) => {
     e.preventDefault()
-    if (e === '' || courses.find((C) => C.id === selectedCourse)) {
+    if (e === '' || courses.find((C) => C.value === selectedCourse)) {
       return
     }
     if (selectedCourse === '') {
@@ -85,6 +89,7 @@ function StudentData() {
     const arr = [...courses, { id: e, value: selectedCourse }]
     setCourses(arr)
     extractCourse(arr)
+    setSelectedCourse('')
   }
   const handleCourseChange = (e: any) => {
     if (e.target.value === '') {
@@ -107,7 +112,7 @@ function StudentData() {
 
   const addBranch = (e: any) => {
     e.preventDefault()
-    if (e === '' || branches.find((C) => C.id === selectedBranch)) {
+    if (e === '' || branches.find((C) => C.value === selectedBranch)) {
       return
     }
     if (e.target.value === selectedBranch) {
@@ -119,6 +124,7 @@ function StudentData() {
     const arr = [...branches, { id: e, value: selectedBranch }]
     setBranches(arr)
     extractBranch(arr)
+    setSelectedBranch('')
   }
   const handleBranchChange = (e: any) => {
     setSelectedBranch(e.target.value)
@@ -162,7 +168,7 @@ function StudentData() {
       course: '',
       branch: '',
       Gender: '',
-      cgpi: 0,
+      cgpi: undefined,
     },
     validationSchema: Yup.object().shape({
       course: Yup.string(),
@@ -177,21 +183,23 @@ function StudentData() {
     },
   })
 
-  // const handleCourseChange = async (e: any) => {
-  //   const parsedObj = JSON.parse(e.target.value)
-  //   setCourse(parsedObj)
+  /// /////////////////////////////
 
-  //   formik.setFieldValue('course', e.target.value)
+  // Sorting execution
 
-  //   const res = await branchesAPI.get(`/${parsedObj.id}`)
-  //   setBranch(res.data)
-  // }
+  const onSortingToggle = (factor: string) => {
+    // If factor alrealy selected, then remove it from selected SortingFactors list
+    if (selectedSortingFactors.includes(factor)) {
+      const SortingFactors = [...selectedSortingFactors]
+      const factorIdx = selectedSortingFactors.findIndex((factorName) => factorName === factor)
+      SortingFactors.splice(factorIdx, 1)
+      setSelectedSortingFactors(SortingFactors)
+      return
+    }
 
-  // const handleBranchChange = (e: any) => {
-  //   const parsedObj = JSON.parse(e.target.value)
-  //   setBranchDetails(parsedObj)
-  //   formik.setFieldValue('branch', e.target.value)
-  // }
+    // Else add factor to selected SortingFactors list
+    setSelectedSortingFactors([...selectedSortingFactors, factor])
+  }
 
   const getGender = (x: string) => {
     switch (x) {
@@ -262,6 +270,8 @@ function StudentData() {
             <Button onClick={addBranch} title="Select and Add multiple Branches">
               <FontAwesomeIcon cursor="pointer" icon={faPlus} />
             </Button>
+            {/* branch component ended */}
+            {/* select gender */}
 
             <Select
               name="Gender"
@@ -275,6 +285,9 @@ function StudentData() {
               <option>Other</option>
             </Select>
 
+            {/* cgpi cuttoffP
+             */}
+
             <Input
               value={formik.values.cgpi}
               onBlur={formik.handleBlur}
@@ -284,40 +297,77 @@ function StudentData() {
               background="white"
             />
           </div>
-          <div className={styles.filterArea}>
-            <div className={styles.selected_clusters}>
-              {courses.map((cluster: CourseChosen, idx: number) => (
-                <Tag
-                  size="sm"
-                  key={nanoid()}
-                  borderRadius="full"
-                  variant="solid"
-                  justifySelf="center"
-                  colorScheme="blackAlpha"
-                >
-                  <TagLabel className={styles.tl}>{cluster.value}</TagLabel>
-                  <TagCloseButton onClick={() => handleMultiDelete(idx)} />
-                </Tag>
-              ))}
-            </div>
 
-            <div className={styles.selected_clusters}>
-              {branches.map((cluster: BranchChosen, idx: number) => (
-                <Tag
-                  size="sm"
-                  key={nanoid()}
-                  borderRadius="full"
-                  variant="solid"
-                  justifySelf="center"
-                  colorScheme="blackAlpha"
-                >
-                  <TagLabel className={styles.tl}>{cluster.value}</TagLabel>
-                  <TagCloseButton onClick={() => handleMultiDeleteBranch(idx)} />
-                </Tag>
-              ))}
+          {/* sort data ?  view */}
+          <div className={styles.filters}>
+            <div className={styles.sortForm}>
+              <h2 className={styles.title}>Sort Data</h2>
+              <div>
+                {SortingFactorsData.map((factor) => (
+                  <CheckListItem
+                    key={factor}
+                    label={factor}
+                    isMobile={false}
+                    onClick={onSortingToggle}
+                    isChecked={selectedSortingFactors.includes(factor)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
+          {/* filter data ?  view */}
+          {courses.length !== 0 || branches.length !== 0 ? (
+            <div className={styles.filterArea}>
+              <div className={styles.selected_clusters}>
+                {courses.map((cource: CourseChosen, idx: number) => (
+                  <Tag
+                    size="sm"
+                    key={nanoid()}
+                    borderRadius="full"
+                    variant="solid"
+                    justifySelf="center"
+                    colorScheme="blackAlpha"
+                  >
+                    <TagLabel className={styles.tl}>{cource.value}</TagLabel>
+                    <TagCloseButton onClick={() => handleMultiDelete(idx)} />
+                  </Tag>
+                ))}
+              </div>
+
+              <div className={styles.selected_clusters}>
+                {branches.map((branch: BranchChosen, idx: number) => (
+                  <Tag
+                    size="sm"
+                    key={nanoid()}
+                    borderRadius="full"
+                    variant="solid"
+                    justifySelf="center"
+                    colorScheme="blackAlpha"
+                  >
+                    <TagLabel className={styles.tl}>{branch.value}</TagLabel>
+                    <TagCloseButton onClick={() => handleMultiDeleteBranch(idx)} />
+                  </Tag>
+                ))}
+              </div>
+              <div className={styles.selected_clusters}>
+                {selectedSortingFactors.map((factor) => (
+                  <Tag
+                    size="sm"
+                    key={nanoid()}
+                    borderRadius="full"
+                    variant="solid"
+                    justifySelf="center"
+                    colorScheme="blackAlpha"
+                  >
+                    <TagLabel className={styles.tl}>sort : {factor}</TagLabel>
+                  </Tag>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {/* button Area view */}
           <div className={styles.buttonArea}>
             <Button
               className={styles.apply_btn}
@@ -339,7 +389,7 @@ function StudentData() {
               _hover={{ background: 'linear-gradient(90deg, #ffffff, #333333)' }}
             >
               <span className={styles.icons8MicrosoftExcel} />
-              <span>download as Exel</span>
+              <span>Download as Excel</span>
             </Button>
           </div>
         </form>
