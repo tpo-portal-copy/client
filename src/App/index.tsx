@@ -117,7 +117,6 @@ function App() {
       <Route path="/eligibility-percentage" element={<NextPlacementEligibilityPercentage />} />
       <Route path="/update-clusters" element={<UpdateClusters />} />
       <Route path="/upload_jd" element={<UploadJD />} />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route
         path="/home"
         element={
@@ -268,7 +267,7 @@ function App() {
       )}
       {getRole() === Role.TPO && (
         <>
-          {/* <Route
+          <Route
             path="/tpo-dashboard"
             element={
               <ProtectedRoute>
@@ -277,7 +276,7 @@ function App() {
                 </HeaderLayout>
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/dashboard"
             element={

@@ -71,7 +71,7 @@ function Dashboard() {
                       postedOn={fromNow(post.created_at)}
                       key={post.id}
                       id={post.id}
-                      imageUrl={post.image_url}
+                      imageUrl="/nithLogo.png"
                     />
 
                     <Modal
