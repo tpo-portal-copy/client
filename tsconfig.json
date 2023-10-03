@@ -19,5 +19,9 @@
   },
   "include": [".eslintrc.json", "src", "vite.config.ts"],
   "exclude": ["src/assets/svgs", "serviceWorker"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
