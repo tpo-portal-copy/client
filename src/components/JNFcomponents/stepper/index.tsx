@@ -1,9 +1,9 @@
 import './index.scss'
 import { Stepper, Step, StepLabel } from '@material-ui/core'
-import react, { useState } from 'react'
+import { useState } from 'react'
 import { Internship, Placement } from '../RecruitmentProcess/index'
 import JnfHome from '../First'
-import Dekstop1 from '../JNFForm'
+import EligibleBatches from '../EligibleBatches'
 import NavbarJNF from '../Navbar_JNF'
 import HRForm from '../HRForm'
 import { HR } from '../../../utils/types'
@@ -35,7 +35,7 @@ export default function StepperComponent({
       case 0:
         return <JnfHome />
       case 1:
-        return <Dekstop1 />
+        return <EligibleBatches />
       case 2:
         return <Placement />
       case 3:
@@ -77,21 +77,17 @@ export default function StepperComponent({
         <div>{getFormContent()}</div>
         <div className="stepper-footer">
           <div className="button-wrap">
-            <div className="back">
-              <button
-                type="button"
-                disabled={activeStep === 0}
-                className="btn"
-                onClick={() => Back()}
-              >
-                Back
-              </button>
-            </div>
-            <div className="next">
-              <button className="btn" onClick={() => Next()}>
-                {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-              </button>
-            </div>
+            <button
+              type="button"
+              disabled={activeStep === 0}
+              className="btn"
+              onClick={() => Back()}
+            >
+              Back
+            </button>
+            <button className="btn" onClick={() => Next()}>
+              {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+            </button>
           </div>
         </div>
       </div>

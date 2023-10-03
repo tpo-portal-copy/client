@@ -32,8 +32,8 @@ type RecruitmentData = {
   personalInterview: string
   noOfPersonVisiting: number | undefined
   jobLocation: string
-  tentativeDriveDate: Date | string
-  Pay: string
+  tentativeDriveDate: Date | undefined
+  Package_Offer: string
   Cuttoff: number
 }
 
@@ -51,8 +51,8 @@ const defaultData: RecruitmentData = {
   personalInterview: '',
   noOfPersonVisiting: undefined,
   jobLocation: '',
-  tentativeDriveDate: new Date(),
-  Pay: '',
+  tentativeDriveDate: undefined,
+  Package_Offer: '',
   Cuttoff: 0.0,
 }
 
@@ -77,9 +77,10 @@ const validationSchema = Yup.object().shape({
   }),
   jobLocation: Yup.string().required('Job Location is required'),
   tentativeDriveDate: Yup.date()
+    .typeError('Tentative Drive Date is required')
     .required('Tentative Drive Date is required')
-    .min(new Date(), 'Tentative Drive Date should be greater than today'),
-  Pay: Yup.string().required('Pay is required'),
+    .min(new Date(), 'Tentative Drive Date should be later than today'),
+  Package_Offer: Yup.string().required('Package_Offer is required'),
   Cuttoff: Yup.number()
     .required('Cuttoff is required')
     .min(0.0, 'Cuttoff should be greater than 0.0')
@@ -93,9 +94,9 @@ function Placement() {
     mode: 'onBlur',
   })
 
-  const { handleSubmit, formState, getFieldState } = form
+  const { handleSubmit, formState, watch } = form
+  const mode = watch('modeOfHiring', '')
 
-  const isPlacement = form.watch('isPlacement')
   // const isIntern = form.watch('isIntern')
   const { errors } = formState
 
@@ -106,8 +107,8 @@ function Placement() {
   return (
     <div className="root">
       <form onSubmit={handleSubmit((d) => onSubmit(d))} noValidate className="form-group">
-        <div>
-          {isPlacement ? <h1> Placement detail Form</h1> : <h1> Internship detail Form</h1>}
+        <div className="title">
+          <h1> Placement Detail Form</h1>
         </div>
 
         <label className="label" htmlFor="companyName">
@@ -121,11 +122,11 @@ function Placement() {
         </label>
         {errors.companyName && <Error errorMessage={errors.companyName.message as string} />}
 
-        <label className="label" htmlFor="session">
+        <label className="label rigid" htmlFor="session">
           Session
           <input
             type="text"
-            className="form-control"
+            className="form-control rigid"
             id="session"
             {...form.register('session', { disabled: true })}
           />
@@ -142,6 +143,19 @@ function Placement() {
             ))}
           </select>
         </label>
+        {(mode === 'hybrid' || mode === 'onsite') && (
+          <label className="label" htmlFor="noOfPersonVisiting">
+            Number of persons visiting
+            <input
+              type="number"
+              className="form-control"
+              id="noOfPersonVisiting"
+              {...form.register('noOfPersonVisiting', {
+                valueAsNumber: true,
+              })}
+            />
+          </label>
+        )}
 
         {/** */}
 
@@ -261,23 +275,17 @@ function Placement() {
             </div>
           </div>
         </div>
-        <label className="label" htmlFor="Pay">
-          Pay
-          <input type="text" className="form-control" id="Pay" {...form.register('Pay')} />
-        </label>
-        {errors.Pay && <Error errorMessage={errors.Pay.message as string} />}
-
-        <label className="label" htmlFor="noOfPersonVisiting">
-          Number of persons visiting
+        <label className="label" htmlFor="Package_Offer">
+          Package Offered
           <input
-            type="number"
+            type="text"
             className="form-control"
-            id="noOfPersonVisiting"
-            {...form.register('noOfPersonVisiting', {
-              valueAsNumber: true,
-            })}
+            id="Package_Offer"
+            {...form.register('Package_Offer')}
           />
         </label>
+        {errors.Package_Offer && <Error errorMessage={errors.Package_Offer.message as string} />}
+
         {errors.noOfPersonVisiting && (
           <Error errorMessage={errors.noOfPersonVisiting.message as string} />
         )}
