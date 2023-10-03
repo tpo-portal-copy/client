@@ -42,6 +42,7 @@ import {
 import ProtectedRoute from '../Routes/ProtectedRoute'
 import { refreshTokenAPI, studentLogoutAPI } from '../utils/apis'
 import { Role } from '../utils/constants'
+import UploadJD from '../pages/UploadJD'
 
 function App() {
   const { pathname } = useLocation()
@@ -115,6 +116,7 @@ function App() {
       <Route path="/jnf-form" element={<JNFForm />} />
       <Route path="/eligibility-percentage" element={<NextPlacementEligibilityPercentage />} />
       <Route path="/update-clusters" element={<UpdateClusters />} />
+      <Route path="/upload_jd" element={<UploadJD />} />
       <Route
         path="/home"
         element={

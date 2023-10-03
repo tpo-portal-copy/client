@@ -30,9 +30,9 @@ function Home() {
               <Button variant="solid" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
                 <Link to="/jnf-form">JNF FORM</Link>
               </Button>
-              <Link to="/login">
+              <Link to="/upload_jd">
                 <Button variant="outline" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
-                  STUDENT PORTAL
+                  UPLOAD JD
                 </Button>
               </Link>
             </div>
