@@ -163,110 +163,81 @@ function Placement() {
           <h2 className="label">Recruitment Process</h2>
           <div className="Recruitment-process">
             <div className="Recruitment-process-item">
-              <label className="label" htmlFor="prePlacementTalk">
-                Pre-Placement Talk
+              <label className="label flex" htmlFor="prePlacementTalk">
+                <div className="Recruitment-process-item-heading">Pre-Placement Talk</div>
                 <div id="prePlacementTalk">
                   <label htmlFor="ppt-1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="ppt-1"
                       {...form.register('prePlacementTalk')}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="ppt-2">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="ppt-2"
-                      {...form.register('prePlacementTalk')}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}
                 </div>
               </label>
 
-              <label className="label" htmlFor="aptitude">
-                Aptitude Test
+              <label className="label flex" htmlFor="aptitude">
+                <div className="Recruitment-process-item-heading">Aptitude test</div>
                 <div id="aptitude">
                   <label htmlFor="ap1">
-                    <input type="radio" value="Yes" id="ap1" {...form.register('aptitudeTest')} />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="ap2">
-                    <input type="radio" value="No" id="ap2" {...form.register('aptitudeTest')} />
-                    <span>No</span>
+                    <input
+                      type="checkbox"
+                      value="Yes"
+                      id="ap1"
+                      {...form.register('aptitudeTest')}
+                    />
                   </label>
 
                   {/**/}
                 </div>
               </label>
 
-              <label className="label" htmlFor="technical-test">
-                Technical test
+              <label className="label flex" htmlFor="technical-test">
+                <div className="Recruitment-process-item-heading">Technical test</div>
+
                 <div id="technical-test">
                   <label htmlFor="tt1">
-                    <input type="radio" value="Yes" id="tt1" {...form.register('technicalTest')} />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="tt2">
-                    <input type="radio" value="No" id="tt2" {...form.register('technicalTest')} />
-                    <span>No</span>
+                    <input
+                      type="checkbox"
+                      value="Yes"
+                      id="tt1"
+                      {...form.register('technicalTest')}
+                    />
                   </label>
 
                   {/**/}
                 </div>
               </label>
 
-              <label className="label" htmlFor="groupDiscussion">
-                Group Discussion
+              <label className="label flex" htmlFor="groupDiscussion">
+                <div className="Recruitment-process-item-heading">Group Discussion</div>
                 <div id="groupDiscussion">
                   <label htmlFor="gd1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="gd1"
                       {...form.register('groupDiscussion')}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="gd2 ">
-                    <input type="radio" value="No" id="gd2" {...form.register('groupDiscussion')} />
-                    <span>No</span>
                   </label>
 
                   {/**/}
                 </div>
               </label>
 
-              <label className="label" htmlFor="personalInterview">
-                Personal Interview
+              <label className="label flex" htmlFor="personalInterview">
+                <div className="Recruitment-process-item-heading">Personal Interview</div>
                 <div id="personalInterview">
                   <label htmlFor="pi1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="pi1"
                       {...form.register('personalInterview')}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="pi2">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="pi2"
-                      {...form.register('personalInterview')}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}

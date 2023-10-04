@@ -25,7 +25,13 @@
     font-weight: 600;
   }
 }
-
+.flex {
+  display: flex !important;
+  justify-content: space-between;
+}
+.Recruitment-process-item-heading {
+  width: 100%;
+}
 .form-group {
   // flex items-center gap-2 mb-2
   display: flex;
