@@ -10,9 +10,7 @@ function Util({ branchName }: UtilProps) {
     <div className={`${styles.row}`}>
       <div className={`${styles.col_3_1}`}>{branchName}</div>
       <div className={`${styles.col_3_2}`}>
-        <div>
-          <input type="checkbox" />
-        </div>
+        <input type="checkbox" />
       </div>
     </div>
   )
