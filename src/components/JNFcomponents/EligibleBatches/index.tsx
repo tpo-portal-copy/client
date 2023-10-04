@@ -4,47 +4,71 @@ import Util from './Util'
 
 export default function EligibleBatches() {
   const BTechBranches = [
-    'Computer Science & Engineering',
-    'Electronics & Communication Engineering',
-    'Electrical Engineering',
-    'Mechanical Engineering',
-    'Civil Engineering',
-    'Chemical Engineering',
-    'Engineering Physics',
-    'Engineering Chemistry',
-    'Engineering Mathematics',
+    { fullName: 'Computer Science & Engineering', shortName: 'cse' },
+    { fullName: 'Electronics & Communication Engineering', shortName: 'ece' },
+    { fullName: 'Electrical Engineering', shortName: 'ee' },
+    { fullName: 'Mechanical Engineering', shortName: 'me' },
+    { fullName: 'Civil Engineering', shortName: 'ce' },
+    { fullName: 'Chemical Engineering', shortName: 'che' },
+    { fullName: 'Engineering Physics', shortName: 'ep' },
+    { fullName: 'Engineering Chemistry', shortName: 'ec' },
+    { fullName: 'Engineering Mathematics', shortName: 'em' },
   ]
+
   const DualDegreeBranches = [
-    'Computer Science & Engineering',
-    'Electronics & Communication Engineering',
+    { fullName: 'Computer Science & Engineering', shortName: 'cse' },
+    { fullName: 'Electronics & Communication Engineering', shortName: 'ece' },
   ]
-  const BArchBranches = ['Architecture']
-  const MArchBranches = ['Sustainable Architecture']
+
+  const BArchBranches = [{ fullName: 'Architecture', shortName: 'arch' }]
+
+  const MArchBranches = [{ fullName: 'Sustainable Architecture', shortName: 'sustarch' }]
+
   const MTechBranches = {
     CivilEngineering: [
-      'Environment',
-      'Geotechnical',
-      'Structures',
-      'Transportation',
-      'Water Resources',
+      { fullName: 'Environment', shortName: 'env' },
+      { fullName: 'Geotechnical', shortName: 'geo' },
+      { fullName: 'Structures', shortName: 'str' },
+      { fullName: 'Transportation', shortName: 'trans' },
+      { fullName: 'Water Resources', shortName: 'water' },
     ],
     ComputerScienceEngineering: [
-      'Computer Science & Engineering (Artificial Intelligence)',
-      'Computer Science & Engineering',
+      { fullName: 'Computer Science & Engineering (Artificial Intelligence)', shortName: 'cse-ai' },
+      { fullName: 'Computer Science & Engineering', shortName: 'cse' },
     ],
-    CenterforEnergyStudies: ['Energy Technology'],
-    ChemicalEngineering: ['Chemical Engineering'],
+    CenterforEnergyStudies: [{ fullName: 'Energy Technology', shortName: 'energy' }],
+    ChemicalEngineering: [{ fullName: 'Chemical Engineering', shortName: 'chem' }],
     ElectricalEngineering: [
-      'Condition Monitoring of Power Apparatus',
-      'Power System',
-      'Signal Processing & Control',
+      { fullName: 'Condition Monitoring of Power Apparatus', shortName: 'power-condition' },
+      { fullName: 'Power System', shortName: 'power-system' },
+      { fullName: 'Signal Processing & Control', shortName: 'signal-control' },
     ],
-    ElectronicsCommunicationEngineering: ['Communication System & Networks', 'VLSI Design'],
-    MaterialScienceEngineering: ['Material Science & Engineering'],
-    MechanicalEngineering: ['Design', 'Manufacturing', 'Thermal'],
+    ElectronicsCommunicationEngineering: [
+      { fullName: 'Communication System & Networks', shortName: 'commsys' },
+      { fullName: 'VLSI Design', shortName: 'vlsi' },
+    ],
+    MaterialScienceEngineering: [
+      { fullName: 'Material Science & Engineering', shortName: 'material' },
+    ],
+    MechanicalEngineering: [
+      { fullName: 'Design', shortName: 'design' },
+      { fullName: 'Manufacturing', shortName: 'manufacturing' },
+      { fullName: 'Thermal', shortName: 'thermal' },
+    ],
   }
-  const MBA = ['Marketing Mgmt.', 'Operations Mgmt.', 'Financial Mgmt.', 'HR Mgmt.']
-  const MSc = ['Mathematics & Computing', 'Physics & Photonics Science']
+
+  const MBA = [
+    { fullName: 'Marketing Management', shortName: 'marketing' },
+    { fullName: 'Operations Management', shortName: 'operations' },
+    { fullName: 'Financial Management', shortName: 'financial' },
+    { fullName: 'Human Resource Management', shortName: 'hr' },
+  ]
+
+  const MSc = [
+    { fullName: 'Mathematics & Computing', shortName: 'math-comp' },
+    { fullName: 'Physics & Photonics Science', shortName: 'phy-photonics' },
+  ]
+
   return (
     <div className={styles.form_comp}>
       <div className={styles.center}>Select Eligible Branches for Recruitment</div>
@@ -67,7 +91,7 @@ export default function EligibleBatches() {
         <div className={styles.col}>B. Tech. disciplines to be considered (4-year course)</div>
         <div className={`${styles.col_3}`}>
           {BTechBranches.map((branch) => (
-            <Util key={branch} branchName={branch} />
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
       </div>
@@ -77,7 +101,7 @@ export default function EligibleBatches() {
         <div className={styles.col}>Dual Degree (5-year course)</div>
         <div className={`${styles.col_3}`}>
           {DualDegreeBranches.map((branch) => (
-            <Util key={branch} branchName={branch} />
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
       </div>
@@ -87,7 +111,7 @@ export default function EligibleBatches() {
         <div className={styles.col}>B.Arch (5-year course)</div>
         <div className={`${styles.col_3}`}>
           {BArchBranches.map((branch) => (
-            <Util key={branch} branchName={branch} />
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
       </div>
@@ -97,7 +121,7 @@ export default function EligibleBatches() {
         <div className={styles.col}>M.Arch (2-year course)</div>
         <div className={`${styles.col_3}`}>
           {MArchBranches.map((branch) => (
-            <Util key={branch} branchName={branch} />
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
       </div>
@@ -111,7 +135,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.CivilEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
 
@@ -120,7 +148,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.ComputerScienceEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
           <div className={`${styles.row}`}>
@@ -128,7 +160,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.CenterforEnergyStudies.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
           <div className={`${styles.row}`}>
@@ -136,7 +172,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.ChemicalEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
           <div className={`${styles.row}`}>
@@ -144,7 +184,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.ElectricalEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
 
@@ -153,7 +197,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.ElectronicsCommunicationEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
           <div className={`${styles.row}`}>
@@ -161,7 +209,11 @@ export default function EligibleBatches() {
           </div>
           <div>
             {MTechBranches.MaterialScienceEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
           <div className={`${styles.row}`}>
@@ -170,7 +222,11 @@ export default function EligibleBatches() {
 
           <div>
             {MTechBranches.MechanicalEngineering.map((branch) => (
-              <Util key={branch} branchName={branch} />
+              <Util
+                key={branch.fullName}
+                branchName={branch.fullName}
+                shortName={branch.shortName}
+              />
             ))}
           </div>
         </div>
@@ -182,7 +238,7 @@ export default function EligibleBatches() {
 
         <div className={`${styles.col_3}`}>
           {MBA.map((branch) => (
-            <Util key={branch} branchName={branch} />
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
       </div>
@@ -192,7 +248,7 @@ export default function EligibleBatches() {
 
         <div className={`${styles.col_3}`}>
           {MSc.map((branch) => (
-            <Util key={branch} branchName={branch} />
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
       </div>
