@@ -23,7 +23,7 @@
 }
 .button-wrap {
   width: 35rem;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -51,7 +51,9 @@
   outline: none !important;
   cursor: pointer;
   &:hover {
-    scale: 1.1;
-    background-color: #5d5f609a;
+    scale: 1.05;
+    background-color: whitesmoke;
+    border: #6469ff 1px solid;
+    color: rgb(52, 50, 50);
   }
 }

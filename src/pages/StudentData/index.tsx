@@ -15,15 +15,11 @@ import {
   TagLabel,
   Tag,
   TagCloseButton,
-  Radio,
-  RadioGroup,
 } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { sort } from 'd3'
-import { isNonNullExpression } from 'typescript'
-import { Error, CheckListItem, Paginator } from '../../components/index'
+import { Error, Paginator } from '../../components/index'
 import styles from './StudentData.module.scss'
 import { CourseData, CourseChosen, BranchChosen, BranchData } from '../../utils/types'
 
@@ -372,6 +368,7 @@ function StudentData() {
                     variant="solid"
                     justifySelf="center"
                     colorScheme="blackAlpha"
+                    className={styles.tag}
                   >
                     <TagLabel className={styles.tl}>{cource.value}</TagLabel>
                     <TagCloseButton onClick={() => handleMultiDelete(idx)} />
@@ -388,6 +385,7 @@ function StudentData() {
                     variant="solid"
                     justifySelf="center"
                     colorScheme="blackAlpha"
+                    className={styles.tag}
                   >
                     <TagLabel className={styles.tl}>{branch.value}</TagLabel>
                     <TagCloseButton onClick={() => handleMultiDeleteBranch(idx)} />
