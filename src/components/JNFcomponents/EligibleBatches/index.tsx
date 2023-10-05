@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './JNFForm.module.scss'
 import Util from './Util'
 
-export default function EligibleBatches() {
+export default function EligibleBatches({ parentState, handleParentStateChange }) {
   const BTechBranches = [
     'Computer Science & Engineering',
     'Electronics & Communication Engineering',

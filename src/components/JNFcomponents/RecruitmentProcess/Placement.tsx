@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
+import react from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Error } from '../../index'
 import './index.scss'
 // import {R} from react;
 
@@ -87,40 +87,43 @@ const validationSchema = Yup.object().shape({
     .max(10.0, 'Cuttoff should be less than 10.0'),
 })
 
-function Placement() {
+function Placement({ parentState, handleParentStateChange }) {
   const form = useForm<any>({
     defaultValues: defaultData,
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
   })
 
-  const { handleSubmit, formState, watch } = form
-  const mode = watch('modeOfHiring', '')
+  const handleJobProfileChange = (e: any) => {
+    handleParentStateChange({
+      ...parentState,
+      jobProfile: e.target.value,
+    })
+  }
 
-  // const isIntern = form.watch('isIntern')
-  const { errors } = formState
-
-  const onSubmit = (data: RecruitmentData) => {
-    console.log(data)
+  const handleMOR = (e: any) => {
+    handleParentStateChange({
+      ...parentState,
+      modeOfHiring: e,
+    })
   }
 
   return (
     <div className="root">
-      <form onSubmit={handleSubmit((d) => onSubmit(d))} noValidate className="form-group">
+      <form noValidate className="form-group">
         <div className="title">
           <h1> Placement Detail Form</h1>
         </div>
-
         <label className="label" htmlFor="companyName">
-          Company Name
+          Job Profile
           <input
             type="text"
             className="form-control"
             id="companyName"
-            {...form.register('companyName')}
+            onChange={handleJobProfileChange}
           />
         </label>
-        {errors.companyName && <Error errorMessage={errors.companyName.message as string} />}
+        {/* {errors.companyName && <Error errorMessage={errors.companyName.message as string} />} */}
 
         <label className="label rigid" htmlFor="session">
           Session
@@ -134,7 +137,11 @@ function Placement() {
 
         <label className="label" htmlFor="modeOfHiring">
           Mode of Hiring
-          <select className="form-control" id="modeOfHiring" {...form.register('modeOfHiring')}>
+          <select
+            className="form-control"
+            id="modeOfHiring"
+            onChange={(e) => handleMOR(e.target.value)}
+          >
             <option value="">Select Mode of Hiring</option>
             {modeOfHiringData.map((modeOfHiring) => (
               <option key={modeOfHiring.id} value={modeOfHiring.value}>
@@ -143,16 +150,19 @@ function Placement() {
             ))}
           </select>
         </label>
-        {(mode === 'hybrid' || mode === 'onsite') && (
+        {(parentState.modeOfHiring === 'hybrid' || parentState.modeOfHiring === 'onsite') && (
           <label className="label" htmlFor="noOfPersonVisiting">
             Number of persons visiting
             <input
               type="number"
               className="form-control"
               id="noOfPersonVisiting"
-              {...form.register('noOfPersonVisiting', {
-                valueAsNumber: true,
-              })}
+              onChange={(e) =>
+                handleParentStateChange({
+                  ...parentState,
+                  noOfPersonVisiting: e.target.value,
+                })
+              }
             />
           </label>
         )}
@@ -171,7 +181,12 @@ function Placement() {
                       type="radio"
                       value="Yes"
                       id="ppt-1"
-                      {...form.register('prePlacementTalk')}
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          prePlacementTalk: true,
+                        })
+                      }}
                     />
                     <span>Yes</span>
                   </label>
@@ -181,7 +196,12 @@ function Placement() {
                       type="radio"
                       value="No"
                       id="ppt-2"
-                      {...form.register('prePlacementTalk')}
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          prePlacementTalk: false,
+                        })
+                      }}
                     />
                     <span>No</span>
                   </label>
@@ -194,12 +214,32 @@ function Placement() {
                 Aptitude Test
                 <div id="aptitude">
                   <label htmlFor="ap1">
-                    <input type="radio" value="Yes" id="ap1" {...form.register('aptitudeTest')} />
+                    <input
+                      type="radio"
+                      value="Yes"
+                      id="ap1"
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          aptitudeTest: true,
+                        })
+                      }}
+                    />
                     <span>Yes</span>
                   </label>
 
                   <label htmlFor="ap2">
-                    <input type="radio" value="No" id="ap2" {...form.register('aptitudeTest')} />
+                    <input
+                      type="radio"
+                      value="No"
+                      id="ap2"
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          aptitudeTest: false,
+                        })
+                      }}
+                    />
                     <span>No</span>
                   </label>
 
@@ -211,12 +251,32 @@ function Placement() {
                 Technical test
                 <div id="technical-test">
                   <label htmlFor="tt1">
-                    <input type="radio" value="Yes" id="tt1" {...form.register('technicalTest')} />
+                    <input
+                      type="radio"
+                      value="Yes"
+                      id="tt1"
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          technicalTest: true,
+                        })
+                      }}
+                    />
                     <span>Yes</span>
                   </label>
 
                   <label htmlFor="tt2">
-                    <input type="radio" value="No" id="tt2" {...form.register('technicalTest')} />
+                    <input
+                      type="radio"
+                      value="No"
+                      id="tt2"
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          technicalTest: false,
+                        })
+                      }}
+                    />
                     <span>No</span>
                   </label>
 
@@ -232,13 +292,28 @@ function Placement() {
                       type="radio"
                       value="Yes"
                       id="gd1"
-                      {...form.register('groupDiscussion')}
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          groupDiscussion: true,
+                        })
+                      }}
                     />
                     <span>Yes</span>
                   </label>
 
                   <label htmlFor="gd2 ">
-                    <input type="radio" value="No" id="gd2" {...form.register('groupDiscussion')} />
+                    <input
+                      type="radio"
+                      value="No"
+                      id="gd2"
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          groupDiscussion: false,
+                        })
+                      }}
+                    />
                     <span>No</span>
                   </label>
 
@@ -254,7 +329,12 @@ function Placement() {
                       type="radio"
                       value="Yes"
                       id="pi1"
-                      {...form.register('personalInterview')}
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          personalInterview: true,
+                        })
+                      }}
                     />
                     <span>Yes</span>
                   </label>
@@ -264,7 +344,12 @@ function Placement() {
                       type="radio"
                       value="No"
                       id="pi2"
-                      {...form.register('personalInterview')}
+                      onChange={() => {
+                        handleParentStateChange({
+                          ...parentState,
+                          personalInterview: false,
+                        })
+                      }}
                     />
                     <span>No</span>
                   </label>
@@ -275,20 +360,20 @@ function Placement() {
             </div>
           </div>
         </div>
-        <label className="label" htmlFor="Package_Offer">
+        <label className="label" htmlFor="Pay">
           Package Offered
           <input
             type="text"
             className="form-control"
-            id="Package_Offer"
-            {...form.register('Package_Offer')}
+            id="noOfPersonVisiting"
+            onChange={(e) => {
+              handleParentStateChange({
+                ...parentState,
+                placementPackage: e.target.value,
+              })
+            }}
           />
         </label>
-        {errors.Package_Offer && <Error errorMessage={errors.Package_Offer.message as string} />}
-
-        {errors.noOfPersonVisiting && (
-          <Error errorMessage={errors.noOfPersonVisiting.message as string} />
-        )}
 
         <label className="label" htmlFor="jobLocation">
           Job Location
@@ -296,10 +381,15 @@ function Placement() {
             type="text"
             className="form-control"
             id="jobLocation"
-            {...form.register('jobLocation')}
+            onChange={(e) => {
+              handleParentStateChange({
+                ...parentState,
+                jobLocation: e.target.value,
+              })
+            }}
           />
         </label>
-        {errors.jobLocation && <Error errorMessage={errors.jobLocation.message as string} />}
+        {/* {errors.jobLocation && <Error errorMessage={errors.jobLocation.message as string} />} */}
 
         <label className="label" htmlFor="tentativeDriveDate">
           Tentative Drive Date
@@ -307,14 +397,17 @@ function Placement() {
             type="date"
             className="form-control"
             id="tentativeDriveDate"
-            {...form.register('tentativeDriveDate', {
-              valueAsDate: true,
-            })}
+            onChange={(e) => {
+              handleParentStateChange({
+                ...parentState,
+                tentativeDriveDate: e.target.value,
+              })
+            }}
           />
         </label>
-        {errors.tentativeDriveDate && (
+        {/*  {errors.tentativeDriveDate && (
           <Error errorMessage={errors.tentativeDriveDate.message as string} />
-        )}
+        )} */}
       </form>
     </div>
   )

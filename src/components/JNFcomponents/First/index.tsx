@@ -5,21 +5,14 @@ import FileUploader from './FileUploader'
 // import FileUploader from './FileUploader'
 import './App.scss'
 
-function App() {
-  const [organizationName, setOrganizationName] = useState<string>('')
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
-
+function App({ parentState, setParentState }) {
   const handleNameChange = (name: string) => {
-    setOrganizationName(name)
-  }
-
-  const handleFilesChange = (files: File[]) => {
-    setSelectedFiles(files)
+    setParentState({ ...parentState, companyName: name })
   }
 
   return (
     <div className="app">
-      <FileUploader onNameChange={handleNameChange} onFilesChange={handleFilesChange} />
+      <FileUploader data={parentState} onNameChange={handleNameChange} />
     </div>
   )
 }

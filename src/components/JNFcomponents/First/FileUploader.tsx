@@ -1,48 +1,9 @@
 import React, { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
-import { nanoid } from 'nanoid'
 import './FileUploader.scss'
 
-interface FileUploaderProps {
-  onNameChange: (name: string) => void
-  onFilesChange: (files: File[]) => void
-}
-
-function FileUploader({
-  onNameChange,
-  onFilesChange,
-}: {
-  onNameChange: (name: string) => void
-  onFilesChange: (files: File[]) => void
-}) {
-  const [organizationName, setOrganizationName] = useState<string>('')
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
-
-  const onDrop = (acceptedFiles: File[]) => {
-    setSelectedFiles((prev) => [...prev, ...acceptedFiles])
-    onFilesChange(selectedFiles)
-  }
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-  })
-
+function FileUploader({ data, onNameChange }) {
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOrganizationName(event.target.value)
     onNameChange(event.target.value)
-  }
-  const handleFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const Files: File[] = []
-    const fileList = event.target.files
-    if (!fileList) return
-
-    for (let i = 0; i < fileList.length; i += 1) {
-      Files.push(fileList[i])
-    }
-
-    setSelectedFiles((prev) => [...prev, ...Files])
-    onFilesChange(selectedFiles)
-    // onFilesChange(event.target.files as File[]);
   }
 
   return (
@@ -56,7 +17,7 @@ function FileUploader({
             name="input-name"
             className="input1"
             placeholder="enter company name here"
-            value={organizationName}
+            value={data.CompanyName}
             onChange={handleNameChange}
             required
           />
