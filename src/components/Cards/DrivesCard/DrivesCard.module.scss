@@ -8,6 +8,22 @@
   width: 100%;
   position: relative;
 
+  box-shadow: 0 2px 30px 0 rgba(31, 38, 135, 0.07);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(124, 121, 121, 0.18);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    // background: linear-gradient(45deg, #d4a299, #dab87a);
+    background: rgba(250, 250, 250, 0.972);
+    box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.07);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px rgba(110, 108, 108, 0.434);
+  }
+
   .container {
     display: flex;
     gap: 1.5rem;
@@ -131,13 +147,15 @@
         0% {
           background-position: 0 0;
         }
+
         100% {
           background-position: 100% 0;
         }
       }
 
       .ongoing {
-        background-size: 200% 100%; /* Horizontal gradient */
+        background-size: 200% 100%;
+        /* Horizontal gradient */
         animation: pulse 1s linear infinite;
       }
 
@@ -187,6 +205,7 @@
       }
     }
   }
+
   @media screen and (max-width: 525px) {
     padding: 1rem;
     min-width: 100%;
