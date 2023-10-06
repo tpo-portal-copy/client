@@ -278,6 +278,16 @@ function App() {
             }
           />
           <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <HeaderLayout>
+                  <Dashboard />
+                </HeaderLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/drives"
             element={
               <ProtectedRoute>

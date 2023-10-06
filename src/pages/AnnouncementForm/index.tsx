@@ -14,7 +14,7 @@ import { dashboardAPI } from '../../utils/apis'
 
 const typeData = [
   { id: 16, value: 'General' },
-  { id: 17, value: 'Company' },
+  // { id: 17, value: 'Company' },
 ]
 
 export default function AnnouncementForm() {
