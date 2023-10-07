@@ -9,6 +9,22 @@ export type NavItem = {
   icon: IconDefinition
 }
 
+export type Steps = {
+  label: string
+  id: number
+  isValid: boolean
+}
+
+export interface OfferedDrive {
+  offerPlacement: boolean
+  offerInternship: boolean
+}
+
+export interface ActiveStep {
+  id: number
+  label: string
+}
+
 export interface SidebarLayoutProps {
   children: ReactNode
 }

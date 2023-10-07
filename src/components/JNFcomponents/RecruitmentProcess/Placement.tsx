@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Error } from '../../index'
-import './index.scss'
+import '../index.scss'
 // import {R} from react;
 
 const modeOfHiringData = [
