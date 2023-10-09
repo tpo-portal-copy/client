@@ -47,9 +47,17 @@ function DrivesCard({
           </div>
         </div>
         <div className={styles.link}>
-          <button className={driveStatus === 'Upcoming' ? styles.upcoming : styles.ongoing}>
-            <span> {driveStatus}</span>
-          </button>
+          {driveStatus === 'Upcoming' ? (
+            <button className={styles.upcoming}>
+              <span> Approve</span>
+            </button>
+          ) : (
+            driveStatus === 'Ongoing' && (
+              <div className={styles.ongoing}>
+                <span>Approved</span>
+              </div>
+            )
+          )}
         </div>
 
         <div className={styles.dropdown}>
