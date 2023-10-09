@@ -1,12 +1,16 @@
 import { Tag, Button } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faCircleXmark, faEllipsisH, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
 import { DrivesCardProps } from '../../../utils/types'
 import styles from './DrivesCard.module.scss'
 
+const logo = '/nithLogo.png'
+
 function DrivesCard({
+  onClick,
   companyName,
-  imgUrl,
+  // imgUrl,
   ctcOffered,
   startingDate,
   modeOfHiring,
@@ -17,11 +21,15 @@ function DrivesCard({
   jobProfile,
   driveStatus,
 }: DrivesCardProps) {
+  const [isEditOpen, setIsEditOpen] = useState(false)
+  const toggleEditBar = () => {
+    setIsEditOpen(!isEditOpen)
+  }
   return (
     <div className={styles.card}>
       <div className={styles.container}>
-        <div className={styles.main_container}>
-          <img className={styles.company_image} src={imgUrl} alt="company Logo" />
+        <div className={styles.main_container} onClick={onClick}>
+          <img className={styles.company_image} src={logo} alt="company Logo" />
           <div className={styles.content}>
             <h2 className={styles.company_name}>{companyName}</h2>
             <div className={styles.company_details}>
@@ -39,18 +47,25 @@ function DrivesCard({
           </div>
         </div>
         <div className={styles.link}>
-          <div className={driveStatus === 'Upcoming' ? styles.upcoming : styles.ongoing}>
+          <button className={driveStatus === 'Upcoming' ? styles.upcoming : styles.ongoing}>
             <span> {driveStatus}</span>
-          </div>
+          </button>
         </div>
 
-        <div className={styles.buttonArea}>
-          <Button>
-            <FontAwesomeIcon cursor="pointer" icon={faPen} />
-          </Button>
-          <Button>
-            <FontAwesomeIcon cursor="pointer" icon={faCircleXmark} />
-          </Button>
+        <div className={styles.dropdown}>
+          <button type="button" onClick={toggleEditBar}>
+            <FontAwesomeIcon cursor="pointer" icon={isEditOpen ? faEllipsisH : faEllipsisV} />
+          </button>
+          {isEditOpen ? (
+            <div className={styles.buttonArea}>
+              <Button background="blue.500">
+                <FontAwesomeIcon cursor="pointer" icon={faPen} />
+              </Button>
+              <Button background="red.500">
+                <FontAwesomeIcon cursor="pointer" icon={faCircleXmark} />
+              </Button>
+            </div>
+          ) : null}
         </div>
       </div>
       {/* <div className={styles.separator} /> */}

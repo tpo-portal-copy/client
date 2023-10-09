@@ -158,19 +158,21 @@ interface EligibleBatchesObj {
   id: number
 }
 export interface DrivesCardProps {
+  onClick: () => void
   id: number
   companyName: string
-  imgUrl: string
+  // imgUrl: string
   ctcOffered: number
   startingDate: string
   modeOfHiring: string
-  isAptitudeTest: boolean
+  // isAptitudeTest: boolean
   isPpt: boolean
   jobLocation: string
   type: string
   eligibleBatches?: Array<EligibleBatchesObj>
   jobProfile: string
   cluster: number
+  driveStatus: string
 }
 
 export interface ClusterType {
