@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import '../index.scss'
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { Error } from '../../index'
+
 import { OfferedDrive } from '../../../utils/types'
 
 const offeredDriveData = [
@@ -27,20 +27,28 @@ const validationSchema = Yup.object().shape({
   offeredDrive: Yup.string().required('Job Type is Required'),
 })
 
-function App({ setOfferedDrive }: { setOfferedDrive: (offeredDrive: OfferedDrive) => void }) {
-  const form = useForm<any>({
-    defaultValues: defaultData,
-    resolver: yupResolver(validationSchema),
-    mode: 'onBlur',
-  })
-  const { handleSubmit, formState, watch } = form
-  const { errors } = formState
-  const onSubmit = (data: OrganizationData) => {
-    console.log(data)
-  }
+function App({
+  setOfferedDrive,
+  parentState,
+  setParentState,
+}: {
+  setOfferedDrive: (offeredDrive: OfferedDrive) => void
+  parentState: any
+  setParentState: React.Dispatch<any>
+}) {
+  // const form = useForm<any>({
+  //   defaultValues: defaultData,
+  //   resolver: yupResolver(validationSchema),
+  //   mode: 'onBlur',
+  // })
+  // const { handleSubmit, formState, watch } = form
+  // const { errors } = formState
+  // const onSubmit = (data: OrganizationData) => {
+  //   console.log(data)
+  // }
 
   /// ////
-  const JobType = watch('offeredDrive')
+  const [JobType, setJobType] = React.useState('')
   useEffect(() => {
     if (JobType) {
       console.log('JobType:', JobType)
@@ -54,9 +62,13 @@ function App({ setOfferedDrive }: { setOfferedDrive: (offeredDrive: OfferedDrive
     }
   }, [JobType, setOfferedDrive])
 
+  const handleType = (e: any) => {
+    setJobType(e.target.value)
+  }
+
   return (
     <div className="root">
-      <form onSubmit={handleSubmit((d) => onSubmit(d))} noValidate className="form-group">
+      <form noValidate className="form-group">
         <div className="title">
           <h1> Organization details </h1>
         </div>
@@ -67,14 +79,22 @@ function App({ setOfferedDrive }: { setOfferedDrive: (offeredDrive: OfferedDrive
             type="text"
             className="form-control"
             id="companyName"
-            {...form.register('companyName')}
+            //     {...form.register('companyName')}
+            //   />
+            // </label>
+            // {errors.companyName && <Error errorMessage={errors.companyName.message as string} />}
+
+            // <label className="label" htmlFor="offeredDrive">
+            //   Job Type
+            //   <select className="form-control" id="offeredDrive" {...form.register('offeredDrive')}>
+            //     onChange={(e) => setParentState({ ...parentState, companyName: e.target.value })}
           />
         </label>
-        {errors.companyName && <Error errorMessage={errors.companyName.message as string} />}
+        {/*  {errors.companyName && <Error errorMessage={errors.companyName.message as string} />} */}
 
         <label className="label" htmlFor="offeredDrive">
           Job Type
-          <select className="form-control" id="offeredDrive" {...form.register('offeredDrive')}>
+          <select className="form-control" id="offeredDrive" onChange={handleType}>
             <option value="">Select Job Type</option>
             {offeredDriveData.map((offeredDrive) => (
               <option key={offeredDrive.id} value={offeredDrive.value}>

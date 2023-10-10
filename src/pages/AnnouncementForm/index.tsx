@@ -12,7 +12,7 @@ import { Error, Input, Select } from '../../components'
 import styles from './AnnouncementForm.module.scss'
 import { dashboardAPI } from '../../utils/apis'
 import useCompanies from '../../hooks/useCompanyList'
-
+// const { data, isSuccess, isError, isLoading } = useCompanies() // hook call for company details
 const typeData = [
   { id: 16, value: 'General' },
   // { id: 17, value: 'Company' },

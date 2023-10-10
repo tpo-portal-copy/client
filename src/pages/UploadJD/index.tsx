@@ -5,7 +5,7 @@ import NavbarJNF from '../../components/JNFcomponents/Navbar_JNF'
 function App() {
   return (
     <>
-      <NavbarJNF />
+      <NavbarJNF Title="Job Description Form" />
       <FileUploader />
     </>
   )

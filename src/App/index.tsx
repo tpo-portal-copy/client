@@ -55,7 +55,7 @@ function App() {
           refresh_token: getDataFromLocalStorage('refresh_token'),
         })
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     }
     const checkAuthState = async () => {
@@ -79,7 +79,7 @@ function App() {
             setDataToLocalStorage('access_token', response.data.access)
             setTimerForTokenExpiration(navigate, expireTokens)
           } catch (err: any) {
-            console.log(err)
+            // console.log(err)
           }
         }
       } else {
