@@ -50,7 +50,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
       <div className={styles.center}>Select Eligible Branches for Recruitment</div>
       <div className={`${styles.row_1} ${styles.main_heading}`}>
         <div className={`${styles.col} ${styles.col_1}`}>Sr No.</div>
-        <div className={styles.col}>Programs offered</div>
+        <div className={`${styles.col} ${styles.width}`}>Programs offered</div>
         <div className={`${styles.col_3}`}>
           <div className={`${styles.row}`}>
             <div className={styles.col_3_1}>Specialisation</div>
@@ -106,7 +106,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
           <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Civil Engineering</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.CivilEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -115,7 +115,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
           <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Computer Science & Engineering</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.ComputerScienceEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -123,15 +123,15 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
           <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Center for Energy Studies</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.CenterforEnergyStudies.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
           </div>
-          <div className={`${styles.row}`}>
+          <div>
             <div className={`${styles.dept_heading}`}>Chemical Engineering</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.ChemicalEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -139,7 +139,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
           <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Electrical Engineering</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.ElectricalEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -148,7 +148,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
           <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Electronics & Communication Engineering</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.ElectronicsCommunicationEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -156,7 +156,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
           <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Material Science & Engineering</div>
           </div>
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.MaterialScienceEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -165,7 +165,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
             <div className={`${styles.dept_heading}`}>Mechanical Engineering</div>
           </div>
 
-          <div className={`${styles.col_3}`}>
+          <div>
             {MTechBranches.MechanicalEngineering.map((branch) => (
               <Util key={branch} branchName={branch} />
             ))}
@@ -173,11 +173,11 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
         </div>
       </div>
 
-      <div className={`${styles.row_1} ${styles.odd}`}>
+      <div className={`${styles.row_1} ${styles.even}`}>
         <div className={`${styles.col} ${styles.col_1}`}>6</div>
         <div className={styles.col}>Master of Business Administration</div>
 
-        <div className={`${styles.col_3}`}>
+        <div>
           {MBA.map((branch) => (
             <Util key={branch} branchName={branch} />
           ))}
@@ -187,7 +187,7 @@ export default function EligibleBatches({ parentState, handleParentStateChange }
         <div className={`${styles.col} ${styles.col_1}`}>7</div>
         <div className={styles.col}>M. Sc(2-year course)</div>
 
-        <div className={`${styles.col_3}`}>
+        <div>
           {MSc.map((branch) => (
             <Util key={branch} branchName={branch} />
           ))}

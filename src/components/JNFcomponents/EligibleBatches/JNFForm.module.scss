@@ -10,14 +10,18 @@
   align-items: center;
 }
 .col_1 {
-  max-width: 100px;
+  // max-width: 100px;
+  padding-left: 20px;
 }
 .col_3 {
   display: block;
-  margin: 20px 20px;
+  // margin: 20px 20px;
+  padding: 20px 20px;
+  border-left: 2px solid black;
+  min-width: 515px;
 }
 .col {
-  margin: 20px 20px;
+  margin: 0px 0px;
   width: 310px;
   display: block;
 }
@@ -45,7 +49,7 @@
   display: block;
 }
 .col_3_1 {
-  min-width: 350px;
+  min-width: 400px;
 }
 .row {
   display: flex;
@@ -53,12 +57,18 @@
 .main_heading {
   background-color: #333333;
   color: white;
+  border-top: 4px solid black;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
 }
 .odd {
   background-color: #f2f2f2;
+  border: 2px solid black;
 }
 .even {
   background-color: #ffffff;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .center {

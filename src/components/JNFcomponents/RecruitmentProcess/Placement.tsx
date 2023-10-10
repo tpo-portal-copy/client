@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 import react from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import './index.scss'
+import '../index.scss'
 // import {R} from react;
 
 const modeOfHiringData = [
@@ -178,32 +178,16 @@ function Placement({ parentState, handleParentStateChange }) {
                 <div id="prePlacementTalk">
                   <label htmlFor="ppt-1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="ppt-1"
                       onChange={() => {
                         handleParentStateChange({
                           ...parentState,
-                          prePlacementTalk: true,
+                          prePlacementTalk: !parentState.prePlacementTalk,
                         })
                       }}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="ppt-2">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="ppt-2"
-                      onChange={() => {
-                        handleParentStateChange({
-                          ...parentState,
-                          prePlacementTalk: false,
-                        })
-                      }}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -215,32 +199,16 @@ function Placement({ parentState, handleParentStateChange }) {
                 <div id="aptitude">
                   <label htmlFor="ap1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="ap1"
                       onChange={() => {
                         handleParentStateChange({
                           ...parentState,
-                          aptitudeTest: true,
+                          aptitudeTest: !parentState.aptitudeTest,
                         })
                       }}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="ap2">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="ap2"
-                      onChange={() => {
-                        handleParentStateChange({
-                          ...parentState,
-                          aptitudeTest: false,
-                        })
-                      }}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -252,32 +220,16 @@ function Placement({ parentState, handleParentStateChange }) {
                 <div id="technical-test">
                   <label htmlFor="tt1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="tt1"
                       onChange={() => {
                         handleParentStateChange({
                           ...parentState,
-                          technicalTest: true,
+                          technicalTest: !parentState.technicalTest,
                         })
                       }}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="tt2">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="tt2"
-                      onChange={() => {
-                        handleParentStateChange({
-                          ...parentState,
-                          technicalTest: false,
-                        })
-                      }}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -289,32 +241,16 @@ function Placement({ parentState, handleParentStateChange }) {
                 <div id="groupDiscussion">
                   <label htmlFor="gd1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="gd1"
                       onChange={() => {
                         handleParentStateChange({
                           ...parentState,
-                          groupDiscussion: true,
+                          groupDiscussion: !parentState.groupDiscussion,
                         })
                       }}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="gd2 ">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="gd2"
-                      onChange={() => {
-                        handleParentStateChange({
-                          ...parentState,
-                          groupDiscussion: false,
-                        })
-                      }}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}
@@ -326,7 +262,7 @@ function Placement({ parentState, handleParentStateChange }) {
                 <div id="personalInterview">
                   <label htmlFor="pi1">
                     <input
-                      type="radio"
+                      type="checkbox"
                       value="Yes"
                       id="pi1"
                       onChange={() => {
@@ -336,22 +272,6 @@ function Placement({ parentState, handleParentStateChange }) {
                         })
                       }}
                     />
-                    <span>Yes</span>
-                  </label>
-
-                  <label htmlFor="pi2">
-                    <input
-                      type="radio"
-                      value="No"
-                      id="pi2"
-                      onChange={() => {
-                        handleParentStateChange({
-                          ...parentState,
-                          personalInterview: false,
-                        })
-                      }}
-                    />
-                    <span>No</span>
                   </label>
 
                   {/**/}

@@ -83,10 +83,10 @@ function Dashboard() {
                       isCentered
                     >
                       <ModalOverlay backgroundColor="blackAlpha.300" />
-                      <ModalContent>
-                        <ModalHeader>{modelData.title}</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>{modelData.description}</ModalBody>
+                      <ModalContent className={styles.model_content}>
+                        <ModalHeader className={styles.modal_title}>{modelData.title}</ModalHeader>
+                        <ModalCloseButton className={styles.modal_close} />
+                        <ModalBody className={styles.modal_desc}>{modelData.description}</ModalBody>
                       </ModalContent>
                     </Modal>
                   </>

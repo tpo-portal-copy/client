@@ -9,6 +9,7 @@ import styles from './HRForm.module.scss'
 import Input from '../../Input'
 import Select from '../../Select'
 import Error from '../../Error'
+import { jobType } from '../../../utils/Data/statisticsData'
 
 const hrTypes = [
   { id: 0, value: 'primary' },
@@ -39,34 +40,59 @@ export default function HRForm({ parentState, setParentState }) {
     },
   })
 
-  const handleSubmit = () => {
-    console.log('hello')
-  }
-
-  const addHR = async () => {
-    setHRList([
-      ...hrList,
-      {
-        type: formik.values.type,
-        name: formik.values.name,
-        mobile: formik.values.mobileNumber,
-        email: formik.values.email,
+  const handleSubmit = async () => {
+    const cData = {
+      name: parentState.companyName,
+    }
+    await fetch(`http://localhost:8000/companies/`, {
+      method: 'POST',
+      body: JSON.stringify(cData),
+      headers: {
+        'Content-Type': 'application/json',
       },
-    ])
-
-    formik.resetForm()
-  }
-
-  const removeRow = (index: number) => {
-    const list = [...hrList]
-    list.splice(index, 1)
-    setHRList(list)
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        const fData = {
+          company: data.name,
+          courses: ['B.Tech'],
+          branches: ['cse'],
+          modeOfHiring: parentState.modeOfHiring,
+          prePlacementTalk: parentState.prePlacementTalk,
+          aptitudeTest: parentState.aptitudeTest,
+          technicalTest: parentState.technicalTest,
+          groupDiscussion: parentState.groupDiscussion,
+          personalInterview: parentState.personalInterview,
+          noOfPersonVisiting: parentState.noOfPersonVisiting,
+          jobLocation: parentState.jobLocation,
+          starting_date: parentState.tentativeDriveDate,
+          cgpi: 7,
+          allowStudents: true,
+          jobProfile: parentState.jobProfile,
+          drive_status: 'Upcoming',
+          created_at: Date.now(),
+          updated_at: Date.now(),
+          ctc: parentState.placementPackage,
+          session: '2023-24',
+          job_type: 'placement',
+          closed_date: null,
+        }
+        await fetch(`http://localhost:8000/drives/`, {
+          method: 'POST',
+          body: JSON.stringify(fData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((res) => res.json())
+          .then()
+      })
   }
 
   return (
     <div className={styles.HRForm}>
       <div className={styles.container}>
-        <form className={styles.form} onSubmit={formik.handleSubmit}>
+        <form className={styles.form}>
           <h2 className={styles.title}>HR Details</h2>
           <div className={styles.field} />
           <div className={styles.field}>
