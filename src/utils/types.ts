@@ -161,13 +161,14 @@ export interface DrivesCardProps {
   onClick: () => void
   id: number
   companyName: string
+  driveID: number
   // imgUrl: string
   ctcOffered: number
   startingDate: string
   modeOfHiring: string
   // isAptitudeTest: boolean
   isPpt: boolean
-  jobLocation: string
+  JobLocation: string
   type: string
   eligibleBatches?: Array<EligibleBatchesObj>
   jobProfile: string
@@ -405,7 +406,8 @@ export interface CourseData {
 }
 export interface BranchData {
   id: string
-  name: string
+  branchName: string
+  branchFullname: string
 }
 
 export interface ClusterChosen {

@@ -17,8 +17,8 @@ export default function EligibleBatches({
     { fullName: 'Civil Engineering', shortName: 'ce' },
     { fullName: 'Chemical Engineering', shortName: 'che' },
     { fullName: 'Engineering Physics', shortName: 'ep' },
-    { fullName: 'Engineering Chemistry', shortName: 'ec' },
-    { fullName: 'Engineering Mathematics', shortName: 'em' },
+    { fullName: 'Material Science and Engineering', shortName: 'material' },
+    { fullName: 'Mathematics and Computing', shortName: 'math' },
   ]
 
   const DualDegreeBranches = [

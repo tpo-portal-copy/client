@@ -2,7 +2,7 @@ import { useFormik, ErrorMessage } from 'formik'
 import axios, { AxiosRequestConfig } from 'axios'
 import fs from 'fs'
 import * as Yup from 'yup'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Table,
   Thead,
@@ -30,17 +30,21 @@ import PageLoader from '../../components/PageLoader'
 import useStudentData from '../../hooks/useStudentData'
 import { branchesAPI } from '../../utils/apis'
 import useCourses from '../../hooks/useCourses'
+import useBranches from '../../hooks/useBranches'
 
 function StudentData() {
   const [page, setPage] = useState(1)
   const { data: courseData, isSuccess: courseIsSuccess } = useCourses()
-  // const [course, setCourse] = useState({ id: 0, years: 0, name: '' })
-  const branchData: Array<BranchData> = [
-    // dummy data
-    { id: '0', name: 'Computer Science' },
-    { id: '1', name: 'Electrical' },
-    { id: '2', name: 'Mechanical' },
-  ]
+  const [selectedCourse, setSelectedCourse] = useState('')
+  const [branchData, setbranchData] = useState<Array<BranchData>>(useBranches(1).data)
+  const btechData = useBranches(1).data
+  const mtechData = useBranches(2).data
+  const DualData = useBranches(3).data
+  const barchData = useBranches(4).data
+  const marchData = useBranches(5).data
+  const MBAData = useBranches(6).data
+  const mscData = useBranches(7).data
+
   const [courses, setCourses] = useState<Array<CourseChosen>>([])
   const [branches, setBranches] = useState<Array<BranchChosen>>([])
 
@@ -51,10 +55,10 @@ function StudentData() {
   const [filter10percentage, setfilter10percentage] = useState<number | undefined>()
   const [filter12percentage, setfilter12percentage] = useState<number | undefined>()
   const [filterJEEscore, setfilterJEEscore] = useState<number | undefined>()
-  const [selectedCourse, setSelectedCourse] = useState('')
   const [courseStr, setCourseStr] = useState('')
   const [selectedBranch, setSelectedBranch] = useState('')
   const [branchStr, setBranchStr] = useState('')
+  const [gender, setGender] = useState('')
 
   // const [selectedSortingFactors, setSelectedSortingFactors] = useState<string[]>([])
   // const SortingFactorsData = ['CGPI', '10th Results', '12th results', 'JEE Result']
@@ -65,6 +69,13 @@ function StudentData() {
   // }, [courseIsSuccess, courseData])
 
   /// //////////////
+
+  useEffect(() => {
+    if (branchData) {
+      setBranchDetails({ id: branchData[0].id, name: branchData[0].branchName })
+    }
+  }, [branchData])
+
   function extractCourse(clustersArr: Array<CourseChosen>) {
     const str = clustersArr.map((cluster) => cluster.value).join(',')
     setCourseStr(str)
@@ -94,11 +105,37 @@ function StudentData() {
     extractCourse(arr)
     setSelectedCourse('')
   }
-  const handleCourseChange = (e: any) => {
+  const HandleCourseChange = (e: any) => {
     if (e.target.value === '') {
       return
     }
     setSelectedCourse(e.target.value)
+    const id = Number(e.target.selectedOptions[0].getAttribute('altValue'))
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    switch (id) {
+      case 1:
+        setbranchData(btechData)
+        break
+      case 2:
+        setbranchData(mtechData)
+        break
+      case 3:
+        setbranchData(DualData)
+        break
+      case 4:
+        setbranchData(barchData)
+        break
+      case 5:
+        setbranchData(marchData)
+        break
+      case 6:
+        setbranchData(MBAData)
+        break
+      case 7:
+        setbranchData(mscData)
+        break
+      default:
+    }
   }
 
   /// /////////////////
@@ -133,48 +170,24 @@ function StudentData() {
     setSelectedBranch(e.target.value)
   }
 
-  // course options
-  // const [courseOptions, setCourseOptions] = useState<Array<MultiSelectDropDownData>>([])
-  // // course chosen
-  // const [coursesChose, setCoursesChose] = useState<Array<any>>([])
+  const [courseOptions, setCourseOptions] = useState<Array<MultiSelectDropDownData>>([])
+  // course chosen
+  const [coursesChose, setCoursesChose] = useState<Array<any>>([])
 
-  // const handleCourseClick = (e: any) => {
-  //   if (e === '' || coursesChose.find((C) => C.id === e)) {
-  //     return
-  //   }
-  //   setCoursesChose([
-  //     ...coursesChose,
-  //     { id: e, value: courseOptions.find((C) => C.value === e)?.label },
-  //   ])
-  // }
+  const handleCourseClick = (e: any) => {
+    if (e === '' || coursesChose.find((C) => C.id === e)) {
+      return
+    }
+    setCoursesChose([
+      ...coursesChose,
+      { id: e, value: courseOptions.find((C) => C.value === e)?.label },
+    ])
+  }
 
-  // const handleCourseDelete = (idx: number) => {
-  //   const items = coursesChose.filter((item, index) => index !== idx)
-  //   setCoursesChose(items)
-  // }
-
-  /// //////////////
-  // branch options
-  // const [branchOptions, setBranchOptions] = useState<Array<MultiSelectDropDownData>>([])
-  // // branch chosen
-  // const [branchesChose, setBranchesChose] = useState<Array<any>>([])
-
-  // const handleExportToExcel = () => {
-  //   fetch('http://127.0.0.1:8000/student/excel/', {
-  //     method: 'GET',
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       // Trigger the download
-  //       const url = window.URL.createObjectURL(new Blob([response.data]))
-  //       const link = document.createElement('a')
-  //       link.href = url
-  //       link.setAttribute('download', `${Date.now()}.xlsx`)
-  //       document.body.appendChild(link)
-  //       link.click();
-  //     })
-  //     .catch((error) => console.error('Error exporting to Excel:', error))
-  // }
+  const handleCourseDelete = (idx: number) => {
+    const items = coursesChose.filter((item, index) => index !== idx)
+    setCoursesChose(items)
+  }
 
   const downloadXLSFile = async () => {
     // Its important to set the 'Content-Type': 'blob' and responseType:'arraybuffer'.
@@ -207,7 +220,7 @@ function StudentData() {
     isError,
     isSuccess,
     isLoading: studentIsLoading,
-  } = useStudentData(filterCourse, filterBranch, filterCgpi, page)
+  } = useStudentData(filterCourse, filterBranch, filterCgpi, page, gender)
 
   const formik = useFormik({
     initialValues: {
@@ -269,7 +282,9 @@ function StudentData() {
         return 'Other'
     }
   }
-
+  const handleGenderChange = (e: any) => {
+    setGender(e.target.value)
+  }
   if (isError) {
     return <Page500 />
   }
@@ -293,7 +308,7 @@ function StudentData() {
             <Select
               name="Course"
               placeholder="Choose Courses"
-              onChange={handleCourseChange}
+              onChange={HandleCourseChange}
               value={selectedCourse}
               backgroundColor="white"
             >
@@ -319,8 +334,8 @@ function StudentData() {
               backgroundColor="white"
             >
               {branchData.map((clust: BranchData) => (
-                <option key={clust.id} value={clust.name}>
-                  {clust.name}
+                <option key={clust.id} value={clust.branchName}>
+                  {clust.branchName}
                 </option>
               ))}
             </Select>
@@ -334,13 +349,13 @@ function StudentData() {
             <Select
               name="Gender"
               placeholder="Choose Gender"
-              onChange={formik.handleChange}
-              value={formik.values.Gender}
+              onChange={handleGenderChange}
+              value={getGender(gender)}
               backgroundColor="white"
             >
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
+              <option value="m">Male</option>
+              <option value="f">Female</option>
+              <option value="o">Other</option>
             </Select>
           </div>
 

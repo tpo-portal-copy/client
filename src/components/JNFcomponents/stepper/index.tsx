@@ -34,8 +34,7 @@ export default function StepperComponent({
   const [Ddata, setDdata] = useState<any>({
     companyName: '',
     session: getCurrentSession(),
-    isPlacement: '',
-    isIntern: '',
+    jobType: '',
     modeOfHiring: '',
     placementPackage: 0,
     internstipend: 0,

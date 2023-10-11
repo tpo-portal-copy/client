@@ -22,6 +22,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { nanoid } from 'nanoid'
+import { string } from 'yup'
 import { clusterOptions } from '../../utils/Data/formUIData'
 import NotFound from '../../assets/animations/94729-not-found.json'
 import { DrivesCard } from '../../components/Cards'
@@ -165,6 +166,7 @@ function Drives() {
               <DrivesCard
                 onClick={() => openModal(drive)}
                 key={drive.id}
+                driveID={drive.id}
                 companyName={drive.company}
                 id={drive.id}
                 // imgUrl={drive.image_url}
@@ -172,7 +174,7 @@ function Drives() {
                 startingDate={drive.starting_date}
                 modeOfHiring={drive.modeOfHiring}
                 isPpt={drive.pre_placement_talk}
-                jobLocation={drive.jobLocation}
+                JobLocation={drive.jobLocation}
                 type={drive.job_type}
                 eligibleBatches={drive.branches}
                 jobProfile={drive.jobProfile}

@@ -53,14 +53,14 @@ function App({
     if (JobType) {
       console.log('JobType:', JobType)
       if (JobType === 'Placement') {
-        setOfferedDrive({ offerPlacement: true, offerInternship: false })
+        setParentState({ ...parentState, job_type: 'Placement' })
       } else if (JobType === 'Internship') {
-        setOfferedDrive({ offerPlacement: false, offerInternship: true })
+        setParentState({ ...parentState, job_type: 'Internship' })
       } else {
-        setOfferedDrive({ offerPlacement: true, offerInternship: true })
+        setParentState({ ...parentState, job_type: 'Internship+Placement' })
       }
     }
-  }, [JobType, setOfferedDrive])
+  }, [JobType, parentState, setParentState])
 
   const handleType = (e: any) => {
     setJobType(e.target.value)
@@ -87,7 +87,7 @@ function App({
             // <label className="label" htmlFor="offeredDrive">
             //   Job Type
             //   <select className="form-control" id="offeredDrive" {...form.register('offeredDrive')}>
-            //     onChange={(e) => setParentState({ ...parentState, companyName: e.target.value })}
+            onChange={(e) => setParentState({ ...parentState, companyName: e.target.value })}
           />
         </label>
         {/*  {errors.companyName && <Error errorMessage={errors.companyName.message as string} />} */}

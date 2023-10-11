@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import * as Yup from 'yup'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { JNFFormFiveProps, HR } from '../../../utils/types'
 import styles from './HRForm.module.scss'
 import Input from '../../Input'
@@ -18,7 +19,7 @@ const hrTypes = [
 
 export default function HRForm({ parentState, setParentState }) {
   const [hrList, setHRList] = useState<Array<HR>>({})
-
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       type: '',
@@ -44,7 +45,7 @@ export default function HRForm({ parentState, setParentState }) {
     const cData = {
       name: parentState.companyName,
     }
-    await fetch(`http://localhost:8000/companies/`, {
+    await fetch(`http://127.0.0.1:8000/companies/`, {
       method: 'POST',
       body: JSON.stringify(cData),
       headers: {
@@ -69,7 +70,7 @@ export default function HRForm({ parentState, setParentState }) {
           cgpi: 7,
           allowStudents: true,
           jobProfile: parentState.jobProfile,
-          drive_status: 'Upcoming',
+          drive_status: 'Pending',
           created_at: Date.now(),
           updated_at: Date.now(),
           ctc: parentState.placementPackage,
@@ -85,7 +86,7 @@ export default function HRForm({ parentState, setParentState }) {
           },
         })
           .then((res) => res.json())
-          .then()
+          .then(navigate('/home'))
       })
   }
 

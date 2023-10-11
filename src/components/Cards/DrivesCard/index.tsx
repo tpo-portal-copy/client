@@ -12,10 +12,11 @@ function DrivesCard({
   companyName,
   // imgUrl,
   ctcOffered,
-  // startingDate,
+  startingDate,
   modeOfHiring,
+  driveID,
   isPpt,
-  jobLocation,
+  JobLocation,
   type,
   // eligibleBatches = [],
   jobProfile,
@@ -24,6 +25,25 @@ function DrivesCard({
   const [isEditOpen, setIsEditOpen] = useState(false)
   const toggleEditBar = () => {
     setIsEditOpen(!isEditOpen)
+  }
+  const handleStatusChange = async () => {
+    const fData = {
+      drive_status: driveStatus === 'Approved' ? 'Pending' : 'Approved',
+      company: companyName,
+      courses: ['B.Tech'],
+      branches: ['cse'],
+      jobLocation: JobLocation,
+      starting_date: startingDate,
+      session: '2023-24',
+      job_type: type,
+    }
+    await fetch(`http://localhost:8000/drives/${driveID}`, {
+      method: 'PUT',
+      body: JSON.stringify(fData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((data) => console.log(data))
   }
   return (
     <div className={styles.card}>
@@ -41,23 +61,15 @@ function DrivesCard({
               </div>
               <div className={styles.company_info_2}>
                 {isPpt && <Tag className={styles.tag}>PPT</Tag>}
-                <Tag className={styles.tag}>Job Location: {jobLocation}</Tag>
+                <Tag className={styles.tag}>Job Location: {JobLocation}</Tag>
               </div>
             </div>
           </div>
         </div>
         <div className={styles.link}>
-          {driveStatus === 'Upcoming' ? (
-            <button className={styles.upcoming}>
-              <span> Approve</span>
-            </button>
-          ) : (
-            driveStatus === 'Ongoing' && (
-              <div className={styles.ongoing}>
-                <span>Approved</span>
-              </div>
-            )
-          )}
+          <button className={styles.upcoming} onClick={handleStatusChange}>
+            <span> {driveStatus === 'Pending' ? 'Approve' : 'Approved'}</span>
+          </button>
         </div>
 
         <div className={styles.dropdown}>
