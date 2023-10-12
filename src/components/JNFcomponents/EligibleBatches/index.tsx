@@ -1,6 +1,15 @@
 import React from 'react'
 import styles from './JNFForm.module.scss'
 import Util from './Util'
+import {
+  BTechBranches,
+  DualDegreeBranches,
+  BArchBranches,
+  MArchBranches,
+  MBABranches,
+  MScBranches,
+  MTechBranches,
+} from '../../../utils/Data/eligibleBranchData'
 
 export default function EligibleBatches({
   parentState,
@@ -9,72 +18,6 @@ export default function EligibleBatches({
   parentState: any
   handleParentStateChange: React.Dispatch<any>
 }) {
-  const BTechBranches = [
-    { fullName: 'Computer Science & Engineering', shortName: 'cse' },
-    { fullName: 'Electronics & Communication Engineering', shortName: 'ece' },
-    { fullName: 'Electrical Engineering', shortName: 'ee' },
-    { fullName: 'Mechanical Engineering', shortName: 'me' },
-    { fullName: 'Civil Engineering', shortName: 'ce' },
-    { fullName: 'Chemical Engineering', shortName: 'che' },
-    { fullName: 'Engineering Physics', shortName: 'ep' },
-    { fullName: 'Engineering Chemistry', shortName: 'ec' },
-    { fullName: 'Engineering Mathematics', shortName: 'em' },
-  ]
-
-  const DualDegreeBranches = [
-    { fullName: 'Computer Science & Engineering', shortName: 'cse' },
-    { fullName: 'Electronics & Communication Engineering', shortName: 'ece' },
-  ]
-
-  const BArchBranches = [{ fullName: 'Architecture', shortName: 'arch' }]
-
-  const MArchBranches = [{ fullName: 'Sustainable Architecture', shortName: 'sustarch' }]
-
-  const MTechBranches = {
-    CivilEngineering: [
-      { fullName: 'Environment', shortName: 'env' },
-      { fullName: 'Geotechnical', shortName: 'geo' },
-      { fullName: 'Structures', shortName: 'str' },
-      { fullName: 'Transportation', shortName: 'trans' },
-      { fullName: 'Water Resources', shortName: 'water' },
-    ],
-    ComputerScienceEngineering: [
-      { fullName: 'Computer Science & Engineering (Artificial Intelligence)', shortName: 'cse-ai' },
-      { fullName: 'Computer Science & Engineering', shortName: 'cse' },
-    ],
-    CenterforEnergyStudies: [{ fullName: 'Energy Technology', shortName: 'energy' }],
-    ChemicalEngineering: [{ fullName: 'Chemical Engineering', shortName: 'chem' }],
-    ElectricalEngineering: [
-      { fullName: 'Condition Monitoring of Power Apparatus', shortName: 'power-condition' },
-      { fullName: 'Power System', shortName: 'power-system' },
-      { fullName: 'Signal Processing & Control', shortName: 'signal-control' },
-    ],
-    ElectronicsCommunicationEngineering: [
-      { fullName: 'Communication System & Networks', shortName: 'commsys' },
-      { fullName: 'VLSI Design', shortName: 'vlsi' },
-    ],
-    MaterialScienceEngineering: [
-      { fullName: 'Material Science & Engineering', shortName: 'material' },
-    ],
-    MechanicalEngineering: [
-      { fullName: 'Design', shortName: 'design' },
-      { fullName: 'Manufacturing', shortName: 'manufacturing' },
-      { fullName: 'Thermal', shortName: 'thermal' },
-    ],
-  }
-
-  const MBA = [
-    { fullName: 'Marketing Management', shortName: 'marketing' },
-    { fullName: 'Operations Management', shortName: 'operations' },
-    { fullName: 'Financial Management', shortName: 'financial' },
-    { fullName: 'Human Resource Management', shortName: 'hr' },
-  ]
-
-  const MSc = [
-    { fullName: 'Mathematics & Computing', shortName: 'math-comp' },
-    { fullName: 'Physics & Photonics Science', shortName: 'phy-photonics' },
-  ]
-
   return (
     <div className={styles.form_comp}>
       <div className={styles.center}>Select Eligible Branches for Recruitment</div>
@@ -238,12 +181,12 @@ export default function EligibleBatches({
         </div>
       </div>
 
-      <div className={`${styles.row_1} ${styles.even}`}>
+      {/* <div className={`${styles.row_1} ${styles.even}`}>
         <div className={`${styles.col} ${styles.col_1}`}>6</div>
         <div className={styles.col}>Master of Business Administration</div>
 
         <div>
-          {MBA.map((branch) => (
+          {MBABranches.map((branch) => (
             <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>
@@ -253,7 +196,27 @@ export default function EligibleBatches({
         <div className={styles.col}>M. Sc(2-year course)</div>
 
         <div>
-          {MSc.map((branch) => (
+          {MScBranches.map((branch) => (
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
+          ))}
+        </div> */}
+      {/* </div> */}
+
+      <div className={`${styles.row_1} ${styles.even}`}>
+        <div className={`${styles.col} ${styles.col_1}`}>6</div>
+        <div className={styles.col}>MSc</div>
+        <div className={`${styles.col_3}`}>
+          {MScBranches.map((branch) => (
+            <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
+          ))}
+        </div>
+      </div>
+
+      <div className={`${styles.row_1} ${styles.odd}`}>
+        <div className={`${styles.col} ${styles.col_1}`}>7</div>
+        <div className={styles.col}>Master of Business Administration</div>
+        <div className={`${styles.col_3}`}>
+          {MBABranches.map((branch) => (
             <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
         </div>

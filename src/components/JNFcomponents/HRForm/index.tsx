@@ -16,8 +16,14 @@ const hrTypes = [
   { id: 1, value: 'secondary' },
 ]
 
-export default function HRForm({ parentState, setParentState }) {
-  const [hrList, setHRList] = useState<Array<HR>>({})
+export default function HRForm({
+  parentState,
+  setParentState,
+}: {
+  parentState: any
+  setParentState: React.Dispatch<any>
+}) {
+  // const [hrList, setHRList] = useState<Array<HR>>({})
 
   const formik = useFormik({
     initialValues: {
@@ -36,7 +42,7 @@ export default function HRForm({ parentState, setParentState }) {
     }),
     onSubmit: () => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      addHR()
+      // addHR()
     },
   })
 
@@ -97,19 +103,26 @@ export default function HRForm({ parentState, setParentState }) {
           <div className={styles.field} />
           <div className={styles.field}>
             <Input
+              type="text"
+              name="name"
               placeholder="Name"
+              isDisabled={false}
               onChange={(e) => {
                 setParentState({
                   ...parentState,
                   HrName: e.target.value,
                 })
               }}
+              value={parentState.HrName}
               onBlur={formik.handleBlur}
             />
           </div>
           <div className={styles.field}>
             <Input
               type="number"
+              name="mobileNumber"
+              isDisabled={false}
+              value={parentState.HrMobile}
               placeholder="Mobile Number"
               onChange={(e) => {
                 setParentState({
@@ -123,6 +136,10 @@ export default function HRForm({ parentState, setParentState }) {
           <div className={styles.field}>
             <Input
               placeholder="Email"
+              type="email"
+              name="email"
+              isDisabled={false}
+              value={parentState.HrEmail}
               onChange={(e) => {
                 setParentState({
                   ...parentState,
@@ -134,7 +151,7 @@ export default function HRForm({ parentState, setParentState }) {
           </div>
         </form>
         <div className={styles.checkbox}>
-          <Checkbox name="consent" onChange={formik.handleChange}>
+          <Checkbox name="consent" onChange={formik.handleChange} className={styles.label}>
             I provide my consent to share my data with TPO for future oppurtunites. I also confirm
             that the information entered by me is accurate and best of my knowledge.
           </Checkbox>

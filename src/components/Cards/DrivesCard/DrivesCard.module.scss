@@ -228,8 +228,24 @@
 }
 
 .dropdown {
-  // position: relative;
-  // display: block;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  .gap {
+    margin-left: 5px;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 1px;
+  top: 3px;
+  right: 19px;
+  font-size: 20px;
+  color: #333;
+}
+
+.editBtn {
+  margin: 2px;
 }

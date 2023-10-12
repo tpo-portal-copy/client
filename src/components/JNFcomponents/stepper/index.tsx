@@ -84,20 +84,40 @@ export default function StepperComponent({
     if (currStep === steps.length - 1) {
       return null
     }
-    setCurrStep(currStep + 1)
+    if (steps[currStep + 1].isValid === false) {
+      setCurrStep(currStep + 2)
+    } else {
+      setCurrStep(currStep + 1)
+    }
+    console.log(currStep)
+    // return Active
   }
-
   function Back() {
     if (currStep === 0) {
       return null
     }
-    setCurrStep(currStep - 1)
+    if (steps[currStep - 1].isValid === false) {
+      setCurrStep(currStep - 2)
+    } else setCurrStep(currStep - 1)
+    // return Active
+  }
+
+  const getActiveStep = () => {
+    if (currStep === 0) return 0
+    if (currStep === 1) return 1
+    if (currStep === 2) return 2
+    if (currStep === 3) {
+      if (offeredDrive.offerPlacement) return 3
+      return 2
+    }
+    if (currStep === 4) return 4
+    return 0
   }
 
   return (
     <>
       <NavbarJNF Title="Job Notification Form/Internship Form" />
-      <Stepper activeStep={currStep} alternativeLabel>
+      <Stepper activeStep={getActiveStep()}>
         {steps.map(
           (step) =>
             step.isValid && (
