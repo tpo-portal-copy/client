@@ -162,6 +162,7 @@ export interface DrivesCardProps {
   id: number
   companyName: string
   driveID: number
+  isAptitudeTest: boolean
   // imgUrl: string
   ctcOffered: number
   startingDate: string

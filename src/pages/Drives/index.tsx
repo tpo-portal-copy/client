@@ -82,7 +82,6 @@ function Drives() {
   //   setClusters(arr)
   //   extractCluster(arr)
   // }
-  console.log(data)
 
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [modelData, setModalData] = useState<ModelProps>({ title: '', description: '' })
@@ -169,6 +168,7 @@ function Drives() {
                 driveID={drive.id}
                 companyName={drive.company}
                 id={drive.id}
+                isAptitudeTest={drive.isAptitudeTest}
                 // imgUrl={drive.image_url}
                 ctcOffered={drive.ctc}
                 startingDate={drive.starting_date}

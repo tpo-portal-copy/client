@@ -17,8 +17,13 @@ const hrTypes = [
   { id: 1, value: 'secondary' },
 ]
 
-export default function HRForm({ parentState, setParentState }) {
-  const [hrList, setHRList] = useState<Array<HR>>({})
+export default function HRForm({
+  parentState,
+  setParentState,
+}: {
+  parentState: any
+  setParentState: React.Dispatch<any>
+}) {
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
@@ -37,7 +42,7 @@ export default function HRForm({ parentState, setParentState }) {
     }),
     onSubmit: () => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      addHR()
+      console.log('submit hr')
     },
   })
 
@@ -86,7 +91,9 @@ export default function HRForm({ parentState, setParentState }) {
           },
         })
           .then((res) => res.json())
-          .then(navigate('/home'))
+          .then(() => {
+            navigate('/home')
+          })
       })
   }
 
@@ -97,7 +104,7 @@ export default function HRForm({ parentState, setParentState }) {
           <h2 className={styles.title}>HR Details</h2>
           <div className={styles.field} />
           <div className={styles.field}>
-            <Input
+            <input
               placeholder="Name"
               onChange={(e) => {
                 setParentState({
@@ -109,7 +116,7 @@ export default function HRForm({ parentState, setParentState }) {
             />
           </div>
           <div className={styles.field}>
-            <Input
+            <input
               type="number"
               placeholder="Mobile Number"
               onChange={(e) => {
@@ -122,7 +129,7 @@ export default function HRForm({ parentState, setParentState }) {
             />
           </div>
           <div className={styles.field}>
-            <Input
+            <input
               placeholder="Email"
               onChange={(e) => {
                 setParentState({

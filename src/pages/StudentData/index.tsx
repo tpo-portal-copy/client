@@ -33,11 +33,21 @@ import useCourses from '../../hooks/useCourses'
 import useBranches from '../../hooks/useBranches'
 
 function StudentData() {
+  const btechData = useBranches(1).data
+  const [branchData, setbranchData] = useState<Array<any>>([
+    { id: 1, branchName: 'cse', branchFullname: 'computer science and engineering' },
+    { id: 4, branchName: 'ce', branchFullname: 'Civil Engineering' },
+    { id: 5, branchName: 'che', branchFullname: 'Chemical Engineering' },
+    { id: 6, branchName: 'Mnc', branchFullname: 'Mathematics & Computing' },
+    { id: 7, branchName: 'ee', branchFullname: 'Electrical Engineering' },
+    { id: 8, branchName: 'ece', branchFullname: 'Electronics & Communication Engineering' },
+    { id: 9, branchName: 'ep', branchFullname: 'Engineering Physics' },
+    { id: 10, branchName: 'material', branchFullname: 'Mathematics & Computing' },
+    { id: 11, branchName: 'mechanical', branchFullname: 'Mechanical Engineering' },
+  ])
   const [page, setPage] = useState(1)
   const { data: courseData, isSuccess: courseIsSuccess } = useCourses()
   const [selectedCourse, setSelectedCourse] = useState('')
-  const [branchData, setbranchData] = useState<Array<BranchData>>(useBranches(1).data)
-  const btechData = useBranches(1).data
   const mtechData = useBranches(2).data
   const DualData = useBranches(3).data
   const barchData = useBranches(4).data
@@ -72,7 +82,7 @@ function StudentData() {
 
   useEffect(() => {
     if (branchData) {
-      setBranchDetails({ id: branchData[0].id, name: branchData[0].branchName })
+      setBranchDetails({ id: Number(branchData[0].id), name: branchData[0].branchName })
     }
   }, [branchData])
 
@@ -110,31 +120,31 @@ function StudentData() {
       return
     }
     setSelectedCourse(e.target.value)
-    const id = Number(e.target.selectedOptions[0].getAttribute('altValue'))
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const id = e.target.selectedOptions[0].getAttribute('value')
     switch (id) {
-      case 1:
+      case 'B.Tech':
         setbranchData(btechData)
         break
-      case 2:
+      case 'M.Tech':
         setbranchData(mtechData)
         break
-      case 3:
+      case 'Dual Degree':
         setbranchData(DualData)
         break
-      case 4:
+      case 'B.Arch':
         setbranchData(barchData)
         break
-      case 5:
+      case 'M.Arch':
         setbranchData(marchData)
         break
-      case 6:
+      case 'MBA':
         setbranchData(MBAData)
         break
-      case 7:
+      case 'M.Sc':
         setbranchData(mscData)
         break
       default:
+        setbranchData(btechData)
     }
   }
 
@@ -170,7 +180,7 @@ function StudentData() {
     setSelectedBranch(e.target.value)
   }
 
-  const [courseOptions, setCourseOptions] = useState<Array<MultiSelectDropDownData>>([])
+  const [courseOptions, setCourseOptions] = useState<Array<any>>([])
   // course chosen
   const [coursesChose, setCoursesChose] = useState<Array<any>>([])
 
@@ -211,7 +221,7 @@ function StudentData() {
       // OR you can save/write file locally.
       fs.writeFileSync(outputFilename, response.data)
     } catch (err: any) {
-      throw new Error(err)
+      console.log(err)
     }
   }
 
@@ -294,7 +304,6 @@ function StudentData() {
   }
 
   const studentData = data
-
   return (
     <>
       <div className={styles.container}>
@@ -333,7 +342,7 @@ function StudentData() {
               value={selectedBranch}
               backgroundColor="white"
             >
-              {branchData.map((clust: BranchData) => (
+              {branchData.map((clust: any) => (
                 <option key={clust.id} value={clust.branchName}>
                   {clust.branchName}
                 </option>
