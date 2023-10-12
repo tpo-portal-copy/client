@@ -7,6 +7,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
+import ReactHtmlParser from 'html-react-parser'
 import styles from './Dashboard.module.scss'
 import { DashboardPostCard } from '../../components/Cards'
 import useRecentNotifications from '../../hooks/useRecentNotifications'
@@ -86,7 +87,9 @@ function Dashboard() {
                       <ModalContent className={styles.model_content}>
                         <ModalHeader className={styles.modal_title}>{modelData.title}</ModalHeader>
                         <ModalCloseButton className={styles.modal_close} />
-                        <ModalBody className={styles.modal_desc}>{modelData.description}</ModalBody>
+                        <ModalBody className={styles.modal_desc}>
+                          {ReactHtmlParser(modelData.description)}
+                        </ModalBody>
                       </ModalContent>
                     </Modal>
                   </>
