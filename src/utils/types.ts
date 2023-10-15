@@ -12,7 +12,6 @@ export type NavItem = {
 export type Steps = {
   label: string
   id: number
-  isValid: boolean
 }
 
 export interface OfferedDrive {

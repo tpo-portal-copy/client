@@ -28,11 +28,9 @@ const validationSchema = Yup.object().shape({
 })
 
 function App({
-  setOfferedDrive,
   parentState,
   setParentState,
 }: {
-  setOfferedDrive: (offeredDrive: OfferedDrive) => void
   parentState: any
   setParentState: React.Dispatch<any>
 }) {
@@ -48,23 +46,23 @@ function App({
   // }
 
   /// ////
-  const [JobType, setJobType] = React.useState('')
-  useEffect(() => {
-    if (JobType) {
-      console.log('JobType:', JobType)
-      if (JobType === 'Placement') {
-        setOfferedDrive({ offerPlacement: true, offerInternship: false })
-      } else if (JobType === 'Internship') {
-        setOfferedDrive({ offerPlacement: false, offerInternship: true })
-      } else {
-        setOfferedDrive({ offerPlacement: true, offerInternship: true })
-      }
-    }
-  }, [JobType, setOfferedDrive])
+  // const [JobType, setJobType] = React.useState('')
+  // useEffect(() => {
+  //   if (JobType) {
+  //     console.log('JobType:', JobType)
+  //     if (JobType === 'Placement') {
+  //       setOfferedDrive({ offerPlacement: true, offerInternship: false })
+  //     } else if (JobType === 'Internship') {
+  //       setOfferedDrive({ offerPlacement: false, offerInternship: true })
+  //     } else {
+  //       setOfferedDrive({ offerPlacement: true, offerInternship: true })
+  //     }
+  //   }
+  // }, [JobType, setOfferedDrive])
 
-  const handleType = (e: any) => {
-    setJobType(e.target.value)
-  }
+  // const handleType = (e: any) => {
+  //   setJobType(e.target.value)
+  // }
 
   return (
     <div className="root">
@@ -73,6 +71,10 @@ function App({
           <h1> Organization details </h1>
         </div>
 
+        <label className="label" htmlFor="session">
+          Session
+          <input type="text" disabled className="form-control rigid" id="session" value="2023-24" />
+        </label>
         <label className="label" htmlFor="companyName">
           Company Name
           <input
@@ -92,7 +94,7 @@ function App({
         </label>
         {/*  {errors.companyName && <Error errorMessage={errors.companyName.message as string} />} */}
 
-        <label className="label" htmlFor="offeredDrive">
+        {/* <label className="label" htmlFor="offeredDrive">
           Job Type
           <select className="form-control" id="offeredDrive" onChange={handleType}>
             <option value="">Select Job Type</option>
@@ -102,7 +104,7 @@ function App({
               </option>
             ))}
           </select>
-        </label>
+        </label> */}
       </form>
     </div>
   )

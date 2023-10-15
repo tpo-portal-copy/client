@@ -1,13 +1,17 @@
-export const BTechBranches = [
+export const BTechBranchesCircuital = [
   { fullName: 'Computer Science & Engineering', shortName: 'cse' },
   { fullName: 'Electronics & Communication Engineering', shortName: 'ece' },
   { fullName: 'Electrical Engineering', shortName: 'ee' },
+]
+
+export const BTechBranchesNonCircuital = [
+  { fullName: 'Mathematics and Scientific Computing', shortName: 'mnc' },
   { fullName: 'Mechanical Engineering', shortName: 'me' },
   { fullName: 'Civil Engineering', shortName: 'ce' },
   { fullName: 'Chemical Engineering', shortName: 'che' },
   { fullName: 'Engineering Physics', shortName: 'ep' },
-  { fullName: 'Engineering Chemistry', shortName: 'ec' },
-  { fullName: 'Engineering Mathematics', shortName: 'em' },
+  // { fullName: 'Engineering Chemistry', shortName: 'ec' },
+  // { fullName: 'Engineering Mathematics', shortName: 'em' },
 ]
 
 export const DualDegreeBranches = [
@@ -62,4 +66,5 @@ export const MBABranches = [
 export const MScBranches = [
   { fullName: 'Mathematics & Computing', shortName: 'math-comp' },
   { fullName: 'Physics & Photonics Science', shortName: 'phy-photonics' },
+  { fullName: 'Chemistry', shortName: 'chem' },
 ]
