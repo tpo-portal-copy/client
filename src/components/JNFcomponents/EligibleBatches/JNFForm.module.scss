@@ -29,11 +29,21 @@
 }
 .dept_heading {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   width: 350px;
   margin: 20px 0px;
   font-weight: 600;
+  font-size: large;
+  text-decoration: underline;
+}
+.branch_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  margin: 20px 0px;
+  font-weight: 700;
   font-size: large;
   text-decoration: underline;
 }
