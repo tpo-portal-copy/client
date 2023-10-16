@@ -1,16 +1,18 @@
-import { Button, Checkbox, Thead, Table, Th, Tr, Td, Tbody } from '@chakra-ui/react'
+// import { Button, Checkbox, Thead, Table, Th, Tr, Td, Tbody } from '@chakra-ui/react'
 import { useFormik } from 'formik'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { background } from '@chakra-ui/react'
 import { JNFFormFiveProps, HR } from '../../../utils/types'
+// import { JNFFormFiveProps, HR } from '../../../utils/types'
 import styles from './HRForm.module.scss'
 import Input from '../../Input'
-import Select from '../../Select'
-import Error from '../../Error'
-import { jobType } from '../../../utils/Data/statisticsData'
+// import Select from '../../Select'
+// import Error from '../../Error'
+// import { jobType } from '../../../utils/Data/statisticsData'
 
 const hrTypes = [
   { id: 0, value: 'primary' },
@@ -97,6 +99,12 @@ export default function HRForm({
       })
   }
 
+  const [checked, setChecked] = useState(false)
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked)
+  }
+
   return (
     <div className={styles.HRForm}>
       <div className={styles.container}>
@@ -104,20 +112,27 @@ export default function HRForm({
           <h2 className={styles.title}>HR Details</h2>
           <div className={styles.field} />
           <div className={styles.field}>
-            <input
+            <Input
+              type="text"
+              name="name"
               placeholder="Name"
+              isDisabled={false}
               onChange={(e) => {
                 setParentState({
                   ...parentState,
                   HrName: e.target.value,
                 })
               }}
+              value={parentState.HrName}
               onBlur={formik.handleBlur}
             />
           </div>
           <div className={styles.field}>
-            <input
+            <Input
               type="number"
+              name="mobileNumber"
+              isDisabled={false}
+              value={parentState.HrMobile}
               placeholder="Mobile Number"
               onChange={(e) => {
                 setParentState({
@@ -129,8 +144,12 @@ export default function HRForm({
             />
           </div>
           <div className={styles.field}>
-            <input
+            <Input
               placeholder="Email"
+              type="email"
+              name="email"
+              isDisabled={false}
+              value={parentState.HrEmail}
               onChange={(e) => {
                 setParentState({
                   ...parentState,
@@ -140,17 +159,23 @@ export default function HRForm({
               onBlur={formik.handleBlur}
             />
           </div>
-        </form>
-        <div className={styles.checkbox}>
-          <Checkbox name="consent" onChange={formik.handleChange}>
-            I provide my consent to share my data with TPO for future oppurtunites. I also confirm
-            that the information entered by me is accurate and best of my knowledge.
-          </Checkbox>
-        </div>
+          <div className={styles.consent_container}>
+            <label className={styles.consent_label} htmlFor="consent-checkbox">
+              <input
+                type="checkbox"
+                id="consent-checkbox"
+                className={styles.consent_checkbox}
+                checked={checked}
+                onChange={handleCheckboxChange}
+              />
+              I agree to share my data to training and Placement Office NIT Hamirpur.
+            </label>
 
-        <button type="button" className="btn" onClick={handleSubmit}>
-          Submit
-        </button>
+            <button type="button" className={styles.btn} onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )

@@ -50,7 +50,7 @@ export default function TPOLoginForm() {
       try {
         const res = await studentLoginAPI.post('/', { ...values })
         const { access, refresh } = res.data
-
+        setDataToLocalStorage('type', 'tpo')
         setDataToLocalStorage('access_token', access)
         setDataToLocalStorage('refresh_token', refresh)
 

@@ -55,7 +55,7 @@ export default function StudentLoginForm() {
       try {
         const res = await studentLoginAPI.post('/', { ...values })
         const { access, refresh } = res.data
-
+        setDataToLocalStorage('type', 'student')
         setDataToLocalStorage('access_token', access)
         setDataToLocalStorage('refresh_token', refresh)
 

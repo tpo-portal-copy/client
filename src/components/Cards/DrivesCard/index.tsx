@@ -1,9 +1,10 @@
 import { Tag, Button } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faCircleXmark, faEllipsisH, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { faPen, faCircleXmark, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect, useRef } from 'react'
 import { DrivesCardProps } from '../../../utils/types'
 import styles from './DrivesCard.module.scss'
+import { getDataFromLocalStorage } from '../../../utils/functions'
 
 const logo = '/nithLogo.png'
 
@@ -26,6 +27,7 @@ function DrivesCard({
   const toggleEditBar = () => {
     setIsEditOpen(!isEditOpen)
   }
+
   const handleStatusChange = async () => {
     const fData = {
       drive_status: driveStatus === 'Approved' ? 'Pending' : 'Approved',
@@ -45,6 +47,7 @@ function DrivesCard({
       },
     }).then((data) => console.log(data))
   }
+
   return (
     <div className={styles.card}>
       <div className={styles.container}>
@@ -67,25 +70,31 @@ function DrivesCard({
           </div>
         </div>
         <div className={styles.link}>
-          <button className={styles.upcoming} onClick={handleStatusChange}>
-            <span> {driveStatus === 'Pending' ? 'Approve' : 'Approved'}</span>
-          </button>
+          {getDataFromLocalStorage('type') === 'tpo' && (
+            <button className={styles.upcoming} onClick={handleStatusChange}>
+              <span> {driveStatus === 'Pending' ? 'Approve' : 'Approved'}</span>
+            </button>
+          )}
         </div>
 
         <div className={styles.dropdown}>
-          <button type="button" onClick={toggleEditBar}>
-            <FontAwesomeIcon cursor="pointer" icon={isEditOpen ? faEllipsisH : faEllipsisV} />
-          </button>
-          {isEditOpen ? (
-            <div className={styles.buttonArea}>
-              <Button background="blue.500">
-                <FontAwesomeIcon cursor="pointer" icon={faPen} />
-              </Button>
-              <Button background="red.500">
-                <FontAwesomeIcon cursor="pointer" icon={faCircleXmark} />
-              </Button>
-            </div>
-          ) : null}
+          <div className={styles.ellipsis}>
+            {getDataFromLocalStorage('type') === 'tpo' && (
+              <button type="button" className={styles.gap} onClick={toggleEditBar}>
+                <FontAwesomeIcon cursor="pointer" icon={faEllipsisH} />
+              </button>
+            )}
+            {isEditOpen ? (
+              <>
+                <Button background="blue.500" size="xs" className={styles.editBtn}>
+                  <FontAwesomeIcon cursor="pointer" icon={faPen} />
+                </Button>
+                <Button background="red.500" size="xs" className={styles.editBtn}>
+                  <FontAwesomeIcon cursor="pointer" icon={faCircleXmark} />
+                </Button>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
       {/* <div className={styles.separator} /> */}

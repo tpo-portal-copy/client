@@ -32,6 +32,7 @@ import Page500 from '../Page500'
 import { Paginator } from '../../components'
 import { ClusterChosen, ModelProps } from '../../utils/types'
 import PageLoader from '../../components/PageLoader'
+import DriveDetails from '../../components/DriveDetails'
 // const logo = '/nithLogo.png'
 
 function Drives() {
@@ -84,7 +85,7 @@ function Drives() {
   // }
 
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [modelData, setModalData] = useState<ModelProps>({ title: '', description: '' })
+  const [modelData, setModalData] = useState<any>(null)
 
   if (isLoading || !isSuccess) {
     return <PageLoader />
@@ -106,40 +107,7 @@ function Drives() {
       <div className={styles.container}>
         <h1 className={styles.page_name}>Drives</h1>
         <div className={styles.filter_container}>
-          <div className={styles.dropdown}>
-            {/* <Select
-              name="cluster"
-              placeholder="Choose Clusters"
-              onChange={handleClusterChange}
-              value={selectedCluster}
-              backgroundColor="white"
-            >
-              {clusterOptions.map((clust) => (
-                <option key={clust.value} value={clust.value}>
-                  {clust.label}
-                </option>
-              ))}
-            </Select>
-            <div className={styles.selected_clusters}>
-              {clusters.map((cluster: ClusterChosen, idx: number) => (
-                <Tag
-                  size="sm"
-                  key={cluster.value}
-                  borderRadius="full"
-                  variant="solid"
-                  justifySelf="center"
-                  colorScheme="gray"
-                >
-                  <TagLabel>Cluster {cluster.value}</TagLabel>
-                  <TagCloseButton onClick={() => handleMultiDelete(idx)} />
-                </Tag>
-              ))}
-            </div> 
-            
-            <Button onClick={addCluster}>
-              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
-            </Button> */}
-          </div>
+          <div className={styles.dropdown} />
           <div className={styles.search_box}>
             <InputGroup>
               <Input value={search} onChange={handleSearch} placeholder="Company" type="input" />
@@ -190,10 +158,10 @@ function Drives() {
                 isCentered
               >
                 <ModalOverlay backgroundColor="blackAlpha.300" />
-                <ModalContent className={styles.model_content}>
-                  <ModalHeader className={styles.modal_title}>{modelData.title}</ModalHeader>
-                  <ModalCloseButton className={styles.modal_close} />
-                  <ModalBody className={styles.modal_desc}>{modelData.description}</ModalBody>
+                <ModalContent className={styles.model_content} maxWidth={700}>
+                  <ModalBody className={styles.modal_desc}>
+                    <DriveDetails {...modelData} />
+                  </ModalBody>
                 </ModalContent>
               </Modal>
             </>
@@ -216,3 +184,36 @@ function Drives() {
 }
 
 export default Drives
+
+// <div className={styles.company_info_1}>
+// <Tag className={styles.tag}>starting Date : {drive.starting_date}</Tag>
+// <Tag className={styles.tag}>{drive.jobProfile}</Tag>
+// <Tag className={styles.tag}>{drive.ctc} LPA</Tag>
+// <Tag className={styles.tag}>Job Type: {drive.job_type}</Tag>
+// <Tag className={styles.tag}>Mode of Hiring: {drive.modeOfHiring}</Tag>
+// </div>
+// <div className={styles.company_info_2}>
+// <Tag className={styles.tag}>Job Location: {drive.jobLocation}</Tag>
+// </div>
+// <div className={styles.company_info_2}>
+// {drive.pre_placement_talk && <Tag className={styles.tag}>PPT</Tag>}
+// {drive.aptitudeTest && <Tag className={styles.tag}>Aptitude Test</Tag>}
+// {drive.technicalTest && <Tag className={styles.tag}>Technical Test</Tag>}
+// {drive.groupDiscussion && (
+//   <Tag className={styles.tag}>Group Discussion</Tag>
+// )}
+// {drive.PersonalInterview && (
+//   <Tag className={styles.tag}>personal Interview</Tag>
+// )}
+// </div>
+// <Tag className={styles.tag}>Drive status: {drive.drive_status}</Tag>
+// <div className={styles.company_info_2}>
+// <Tag className={styles.heading}>Eligible Branches:</Tag>
+// <span className={styles.branches}>
+//   {drive.branches.map((branch: string) => (
+//     <Tag className={styles.tag} key={branch}>
+//       {branch}
+//     </Tag>
+//   ))}
+// </span>
+// </div>
