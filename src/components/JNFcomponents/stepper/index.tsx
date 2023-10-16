@@ -18,9 +18,9 @@ export default function StepperComponent({
   currStep: number
 }) {
   const steps: Steps[] = [
-    { label: 'Company details', id: 1 },
-    { label: 'Streams offered', id: 2 },
-    { label: 'Placements', id: 3 },
+    { label: 'Organisation details', id: 1 },
+    { label: 'Eligible Branches', id: 2 },
+    { label: 'Recruitment', id: 3 },
     { label: 'HR Form', id: 5 },
   ]
 
@@ -41,7 +41,8 @@ export default function StepperComponent({
     noOfPersonVisiting: 0,
     jobLocation: '',
     internJobLocation: '',
-    tentativeDriveDate: '',
+    fromDriveDate: '',
+    toDriveDate: '',
     tentativeInternDate: '',
     jobProfilePlacement: '',
     jobProfileIntern: '',

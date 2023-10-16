@@ -165,7 +165,8 @@ export default function HRForm({
                 checked={checked}
                 onChange={handleCheckboxChange}
               />
-              I agree to share my data to training and Placement Office NIT Hamirpur.
+              I agree to share my data to training and Placement Office NIT Hamirpur.I also agree
+              that information shared by me is accurate and best of my Knowledge
             </label>
 
             <button type="button" className={styles.btn} onClick={handleSubmit}>

@@ -22,7 +22,7 @@ export default function EligibleBatches({
 }) {
   return (
     <div className={styles.form_comp}>
-      <div className={styles.center}>Select Eligible Branches for Recruitment</div>
+      <div className={`${styles.center}`}>Select Eligible Branches for Recruitment</div>
       <div className={`${styles.row_1} ${styles.main_heading}`}>
         <div className={`${styles.col} ${styles.col_1}`}>Sr No.</div>
         <div className={`${styles.col} ${styles.width}`}>Programs offered</div>
