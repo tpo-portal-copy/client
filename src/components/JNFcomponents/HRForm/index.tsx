@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { background } from '@chakra-ui/react'
 import styles from './HRForm.module.scss'
 import Input from '../../Input'
+import ContactPage from '../Contact'
 // import Select from '../../Select'
 // import Error from '../../Error'
 // import { jobType } from '../../../utils/Data/statisticsData'
@@ -103,77 +104,80 @@ export default function HRForm({
   }
 
   return (
-    <div className={styles.HRForm}>
-      <div className={styles.container}>
-        <form className={styles.form}>
-          <h2 className={styles.title}>HR Details</h2>
-          <div className={styles.field} />
-          <div className={styles.field}>
-            <Input
-              type="text"
-              name="name"
-              placeholder="Name"
-              isDisabled={false}
-              onChange={(e) => {
-                setParentState({
-                  ...parentState,
-                  HrName: e.target.value,
-                })
-              }}
-              value={parentState.HrName}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          <div className={styles.field}>
-            <Input
-              type="number"
-              name="mobileNumber"
-              isDisabled={false}
-              value={parentState.HrMobile}
-              placeholder="Mobile Number"
-              onChange={(e) => {
-                setParentState({
-                  ...parentState,
-                  HrMobile: e.target.value,
-                })
-              }}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          <div className={styles.field}>
-            <Input
-              placeholder="Email"
-              type="email"
-              name="email"
-              isDisabled={false}
-              value={parentState.HrEmail}
-              onChange={(e) => {
-                setParentState({
-                  ...parentState,
-                  HrEmail: e.target.value,
-                })
-              }}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          <div className={styles.consent_container}>
-            <label className={styles.consent_label} htmlFor="consent-checkbox">
-              <input
-                type="checkbox"
-                id="consent-checkbox"
-                className={styles.consent_checkbox}
-                checked={checked}
-                onChange={handleCheckboxChange}
+    <div className={styles.grid_1_2}>
+      <ContactPage />
+      <div className={styles.HRForm}>
+        <div className={styles.container}>
+          <form className={styles.form}>
+            <h2 className={styles.title}>HR Details</h2>
+            <div className={styles.field} />
+            <div className={styles.field}>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Name"
+                isDisabled={false}
+                onChange={(e) => {
+                  setParentState({
+                    ...parentState,
+                    HrName: e.target.value,
+                  })
+                }}
+                value={parentState.HrName}
+                onBlur={formik.handleBlur}
               />
-              I agree to share my data to training and Placement Office NIT Hamirpur.I also agree
-              that information shared by me is accurate and best of my Knowledge
-            </label>
+            </div>
+            <div className={styles.field}>
+              <Input
+                type="number"
+                name="mobileNumber"
+                isDisabled={false}
+                value={parentState.HrMobile}
+                placeholder="Mobile Number"
+                onChange={(e) => {
+                  setParentState({
+                    ...parentState,
+                    HrMobile: e.target.value,
+                  })
+                }}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            <div className={styles.field}>
+              <Input
+                placeholder="Email"
+                type="email"
+                name="email"
+                isDisabled={false}
+                value={parentState.HrEmail}
+                onChange={(e) => {
+                  setParentState({
+                    ...parentState,
+                    HrEmail: e.target.value,
+                  })
+                }}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            <div className={styles.consent_container}>
+              <label className={styles.consent_label} htmlFor="consent-checkbox">
+                <input
+                  type="checkbox"
+                  id="consent-checkbox"
+                  className={styles.consent_checkbox}
+                  checked={checked}
+                  onChange={handleCheckboxChange}
+                />
+                I agree to share my data to training and Placement Office NIT Hamirpur.I also agree
+                that information shared by me is accurate and best of my Knowledge
+              </label>
 
-            <button type="button" className={styles.btn} onClick={handleSubmit}>
-              Submit
-            </button>
-          </div>
-        </form>
+              <button type="button" className={styles.btn} onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
