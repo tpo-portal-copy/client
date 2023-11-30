@@ -4,6 +4,7 @@
   padding: 0.5rem 0 1.2rem 0;
   background-color: #fff;
   border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 525px) {
     padding: 1rem;
@@ -89,8 +90,9 @@
 
 .HRForm {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
+  gap: 31px;
   margin-top: 50px;
 }
 
@@ -109,7 +111,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 16px;
+  font-size: small;
+  color: rgb(96, 96, 96);
+  // font-variant:initial;
 }
 
 .consent_checkbox {
@@ -133,4 +137,10 @@
 }
 .disabled-submit {
   background-color: #4683fdd6;
+}
+
+.grid_1_2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 1 part and 3 parts */
+  gap: 10px; /* Adjust the gap between columns as needed */
 }

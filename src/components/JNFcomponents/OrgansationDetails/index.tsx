@@ -47,6 +47,7 @@ function App({
 
   /// ////
   const [JobType, setJobType] = React.useState('')
+
   useEffect(() => {
     if (JobType) {
       console.log('JobType:', JobType)
@@ -60,9 +61,22 @@ function App({
     }
   }, [JobType, parentState, setParentState])
 
-  // const handleType = (e: any) => {
-  //   setJobType(e.target.value)
-  // }
+  // useEffect(() => {
+  //   if (JobType) {
+  //     console.log('JobType:', JobType)
+  //     if (JobType === 'Placement') {
+  //       setOfferedDrive({ offerPlacement: true, offerInternship: false })
+  //     } else if (JobType === 'Internship') {
+  //       setOfferedDrive({ offerPlacement: false, offerInternship: true })
+  //     } else {
+  //       setOfferedDrive({ offerPlacement: true, offerInternship: true })
+  //     }
+  //   }
+  // }, [JobType, setOfferedDrive])
+
+  const handleType = (e: any) => {
+    setJobType(e.target.value)
+  }
 
   return (
     <div className="root">
@@ -92,9 +106,25 @@ function App({
             onChange={(e) => setParentState({ ...parentState, companyName: e.target.value })}
           />
         </label>
+
+        <label className="label" htmlFor="jobProfile">
+          Job Profile
+          <input
+            type="text"
+            className="form-control"
+            id="jobProfile"
+            onChange={(e) => {
+              setParentState({
+                ...parentState,
+                jobProfileIntern: e.target.value,
+                jobProfilePlacement: e.target.value,
+              })
+            }}
+          />
+        </label>
         {/*  {errors.companyName && <Error errorMessage={errors.companyName.message as string} />} */}
 
-        {/* <label className="label" htmlFor="offeredDrive">
+        <label className="label" htmlFor="offeredDrive">
           Job Type
           <select className="form-control" id="offeredDrive" onChange={handleType}>
             <option value="">Select Job Type</option>
@@ -104,7 +134,7 @@ function App({
               </option>
             ))}
           </select>
-        </label> */}
+        </label>
       </form>
     </div>
   )

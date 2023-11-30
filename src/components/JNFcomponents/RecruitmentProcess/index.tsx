@@ -107,36 +107,9 @@ function Placement({
     <div className="root">
       <form noValidate className="form-group">
         <div className="title">
-          <h1> Placement/Internship Drive Form</h1>
+          <h1> Recruitment/Internship Drive Form</h1>
         </div>
-        <label className="label" htmlFor="jobProfilePlacements">
-          Placement Job Profile
-          <input
-            type="text"
-            className="form-control"
-            id="jobProfilePlacements"
-            onChange={(e) => {
-              handleParentStateChange({
-                ...parentState,
-                jobProfilePlacement: e.target.value,
-              })
-            }}
-          />
-        </label>
-        <label className="label" htmlFor="jobProfileIntern">
-          Internship Job Profile
-          <input
-            type="text"
-            className="form-control"
-            id="jobProfileIntern"
-            onChange={(e) => {
-              handleParentStateChange({
-                ...parentState,
-                jobProfileIntern: e.target.value,
-              })
-            }}
-          />
-        </label>
+
         {/* {errors.companyName && <Error errorMessage={errors.companyName.message as string} />} */}
 
         <label className="label" htmlFor="modeOfHiring">
@@ -300,7 +273,39 @@ function Placement({
             </div>
 
             <div>
-              <label className="label" htmlFor="jobLocation">
+              <div className="label">Expected Date of Drive</div>
+              <div className="date-container">
+                <label className="label size-reduce" htmlFor="fromDriveDate">
+                  <p className="small-text">From</p>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="fromDriveDate"
+                    placeholder="from"
+                    onChange={(e) => {
+                      handleParentStateChange({
+                        ...parentState,
+                        fromDriveDate: e.target.value,
+                      })
+                    }}
+                  />
+                </label>
+                <label className="label size-reduce" htmlFor="toDriveDate">
+                  <p className="small-text">To</p>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="toDriveDate"
+                    onChange={(e) => {
+                      handleParentStateChange({
+                        ...parentState,
+                        toDriveDate: e.target.value,
+                      })
+                    }}
+                  />
+                </label>
+              </div>
+              <label className="label " htmlFor="jobLocation">
                 Tentative Job Location
                 <input
                   type="text"
@@ -315,21 +320,6 @@ function Placement({
                 />
               </label>
               {/* {errors.jobLocation && <Error errorMessage={errors.jobLocation.message as string} />} */}
-
-              <label className="label" htmlFor="tentativeDriveDate">
-                Tentative Drive Date
-                <input
-                  type="date"
-                  className="form-control"
-                  id="tentativeDriveDate"
-                  onChange={(e) => {
-                    handleParentStateChange({
-                      ...parentState,
-                      tentativeDriveDate: e.target.value,
-                    })
-                  }}
-                />
-              </label>
             </div>
           </div>
         </div>
@@ -340,13 +330,15 @@ function Placement({
               className="form-control"
               id="other"
               onChange={() => null}
-              placeholder="Other required procedures ....."
+              placeholder="write other procedures..."
             />
           </label>
         )}
         <div className="disect">
           <label className="label flex" htmlFor="placementPackage">
-            <p>Package/CTC Offered (in LPA)</p>
+            <p>
+              Package/CTC Offered <span className="bracket">(in LPA)</span>
+            </p>
             <input
               type="text"
               className="form-control"
@@ -360,7 +352,9 @@ function Placement({
             />
           </label>
           <label className="label flex" htmlFor="internstipend">
-            <p>Monthly Stipend Offered</p>
+            <p>
+              Stipend Offered <span className="bracket">(per month)</span>
+            </p>
             <input
               type="text"
               className="form-control"

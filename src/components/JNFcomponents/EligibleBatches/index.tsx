@@ -9,7 +9,8 @@ import {
   MArchBranches,
   MBABranches,
   MScBranches,
-  MTechBranches,
+  MTechBranchesCircuital,
+  MTechBranchesNonCircuital,
 } from '../../../utils/Data/eligibleBranchData'
 
 export default function EligibleBatches({
@@ -21,7 +22,7 @@ export default function EligibleBatches({
 }) {
   return (
     <div className={styles.form_comp}>
-      <div className={styles.center}>Select Eligible Branches for Recruitment</div>
+      <div className={`${styles.center}`}>Select Eligible Branches for Recruitment</div>
       <div className={`${styles.row_1} ${styles.main_heading}`}>
         <div className={`${styles.col} ${styles.col_1}`}>Sr No.</div>
         <div className={`${styles.col} ${styles.width}`}>Programs offered</div>
@@ -41,20 +42,18 @@ export default function EligibleBatches({
         <div className={styles.col}>B.Tech. / B.Arch</div>
         <div className={`${styles.col_3}`}>
           <div className={`${styles.row}`}>
-            <div className={`${styles.dept_heading}`}>Circuital Branches</div>
+            <div className={`${styles.branch_heading}`}>Circuital Branches</div>
           </div>
           {BTechBranchesCircuital.map((branch) => (
             <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
           <div className={`${styles.row}`}>
-            <div className={`${styles.dept_heading}`}>Non-Circuital Branches</div>
+            <div className={`${styles.branch_heading}`}>Non-Circuital Branches</div>
           </div>
           {BTechBranchesNonCircuital.map((branch) => (
             <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
-          <div className={`${styles.row}`}>
-            <div className={`${styles.dept_heading}`}>Architecture</div>
-          </div>
+
           {BArchBranches.map((branch) => (
             <Util key={branch.fullName} branchName={branch.fullName} shortName={branch.shortName} />
           ))}
@@ -76,10 +75,13 @@ export default function EligibleBatches({
         <div className={styles.col}>M.Tech/M.Arch (2-year course)</div>
         <div className={`${styles.col_3}`}>
           <div className={`${styles.row}`}>
+            <div className={`${styles.branch_heading}`}>Circuital Branches</div>
+          </div>
+          <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Computer Science & Engineering</div>
           </div>
           <div>
-            {MTechBranches.ComputerScienceEngineering.map((branch) => (
+            {MTechBranchesCircuital.ComputerScienceEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -92,7 +94,7 @@ export default function EligibleBatches({
             <div className={`${styles.dept_heading}`}>Electronics & Communication Engineering</div>
           </div>
           <div>
-            {MTechBranches.ElectronicsCommunicationEngineering.map((branch) => (
+            {MTechBranchesCircuital.ElectronicsCommunicationEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -105,7 +107,7 @@ export default function EligibleBatches({
             <div className={`${styles.dept_heading}`}>Electrical Engineering</div>
           </div>
           <div>
-            {MTechBranches.ElectricalEngineering.map((branch) => (
+            {MTechBranchesCircuital.ElectricalEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -115,10 +117,14 @@ export default function EligibleBatches({
           </div>
 
           <div className={`${styles.row}`}>
+            <div className={`${styles.branch_heading}`}>Non-Circuital Branches</div>
+          </div>
+
+          <div className={`${styles.row}`}>
             <div className={`${styles.dept_heading}`}>Civil Engineering</div>
           </div>
           <div>
-            {MTechBranches.CivilEngineering.map((branch) => (
+            {MTechBranchesNonCircuital.CivilEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -131,7 +137,7 @@ export default function EligibleBatches({
             <div className={`${styles.dept_heading}`}>Chemical Engineering</div>
           </div>
           <div>
-            {MTechBranches.ChemicalEngineering.map((branch) => (
+            {MTechBranchesNonCircuital.ChemicalEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -144,7 +150,7 @@ export default function EligibleBatches({
             <div className={`${styles.dept_heading}`}>Material Science & Engineering</div>
           </div>
           <div>
-            {MTechBranches.MaterialScienceEngineering.map((branch) => (
+            {MTechBranchesNonCircuital.MaterialScienceEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -157,7 +163,7 @@ export default function EligibleBatches({
           </div>
 
           <div>
-            {MTechBranches.MechanicalEngineering.map((branch) => (
+            {MTechBranchesNonCircuital.MechanicalEngineering.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
@@ -170,7 +176,7 @@ export default function EligibleBatches({
             <div className={`${styles.dept_heading}`}>Center for Energy Studies</div>
           </div>
           <div>
-            {MTechBranches.CenterforEnergyStudies.map((branch) => (
+            {MTechBranchesNonCircuital.CenterforEnergyStudies.map((branch) => (
               <Util
                 key={branch.fullName}
                 branchName={branch.fullName}
