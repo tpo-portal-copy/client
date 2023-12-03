@@ -27,7 +27,7 @@ import { CourseData, CourseChosen, BranchChosen, BranchData } from '../../utils/
 
 import Page500 from '../Page500'
 import PageLoader from '../../components/PageLoader'
-import useStudentData from '../../hooks/useStudentData'
+import { useStudentData } from '../../hooks/useStudentData'
 import { branchesAPI } from '../../utils/apis'
 import useCourses from '../../hooks/useCourses'
 import useBranches from '../../hooks/useBranches'

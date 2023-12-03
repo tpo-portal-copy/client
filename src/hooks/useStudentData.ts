@@ -14,7 +14,7 @@ const getStudentData = async (
   return response.data
 }
 
-export default function useStudentData(
+export function useStudentData(
   course?: string,
   branch?: string,
   cgpi?: number,
@@ -24,4 +24,13 @@ export default function useStudentData(
   return useQuery([`students${course}${branch}${cgpi}${page}${gender}`], () =>
     getStudentData(course, branch, cgpi, page, gender),
   )
+}
+
+const getStudentDataWithRoll = async (roll?: string, firstName?: string) => {
+  const response = await studentAPI.get(`/?student=${roll}&firstName=${firstName}`)
+  return response.data
+}
+export function useStudentDataWithRoll(roll?: string, firstName?: string) {
+  console.log(firstName)
+  return useQuery([`students${roll}${firstName}`], () => getStudentDataWithRoll(roll, firstName))
 }
