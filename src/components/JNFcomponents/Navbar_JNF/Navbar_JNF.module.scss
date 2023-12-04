@@ -44,3 +44,21 @@
   color: gray;
   font-weight: 500;
 }
+
+@media (max-width: 600px) {
+  .logo {
+    display: none;
+  }
+  .dash {
+    display: none;
+  }
+  .heading3 {
+    font-size: 13px;
+  }
+  .heading {
+    font-size: 10px;
+  }
+  .navbar {
+    padding-top: 20px;
+  }
+}
