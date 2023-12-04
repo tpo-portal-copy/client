@@ -18,20 +18,17 @@
   // margin: 20px 20px;
   padding: 20px 20px;
   border-left: 2px solid black;
-  min-width: 515px;
+  min-width: 475px;
 }
 .col {
-  margin: 0px 0px;
   width: 310px;
   display: block;
-}
-.width {
 }
 .dept_heading {
   display: flex;
   // justify-content: center;
   align-items: center;
-  width: 350px;
+  width: 100%;
   margin: 20px 0px;
   font-weight: 600;
   font-size: large;
@@ -41,17 +38,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 350px;
+  width: 100%;
   margin: 20px 0px;
   font-weight: 700;
   font-size: large;
   text-decoration: underline;
-}
-.form_comp {
-  margin: 10px 300px;
-
-  align-items: center;
-  justify-content: center;
 }
 
 .radio {
@@ -93,4 +84,46 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+.width {
+  display: flex;
+}
+.center_class {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 50px;
+}
+
+@media (max-width: 600px) {
+  .center_class {
+    margin: 0px 10px;
+  }
+  .col_1 {
+    display: none;
+  }
+  .col_3_1 {
+    min-width: 190px;
+    font-size: 10px;
+  }
+  .odd,
+  .even {
+    font-size: 10px;
+  }
+  .dept_heading,
+  .main_heading,
+  .branch_heading {
+    font-size: 10px;
+  }
+  .col_3 {
+    min-width: 50px !important;
+    max-width: 250px;
+  }
+  .center {
+    font-size: 10px;
+  }
+  .col {
+    min-width: 40px;
+    max-width: 50px;
+  }
 }
