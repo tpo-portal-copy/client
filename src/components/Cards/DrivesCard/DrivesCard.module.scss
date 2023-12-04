@@ -227,10 +227,11 @@
   margin-bottom: 1rem;
   gap: 1rem;
 }
-
+.dropdown_button {
+  min-width: 120px;
+}
 .dropdown {
-  // position: relative;
-  // display: block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  position: fixed;
+  top: 5px;
+  right: 30px;
 }

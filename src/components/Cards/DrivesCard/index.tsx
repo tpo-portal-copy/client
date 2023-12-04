@@ -60,10 +60,12 @@ function DrivesCard({
           )}
         </div>
 
-        <div className={styles.dropdown}>
-          <button type="button" onClick={toggleEditBar}>
-            <FontAwesomeIcon cursor="pointer" icon={isEditOpen ? faEllipsisH : faEllipsisV} />
-          </button>
+        <div className={styles.dropdown_button}>
+          <div className={styles.dropdown}>
+            <button type="button" onClick={toggleEditBar}>
+              <FontAwesomeIcon cursor="pointer" icon={faEllipsisV} />
+            </button>
+          </div>
           {isEditOpen ? (
             <div className={styles.buttonArea}>
               <Button background="blue.500">
