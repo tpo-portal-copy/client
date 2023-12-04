@@ -56,3 +56,12 @@
     border: #2b57d1f2 1px solid;
   }
 }
+
+@media (max-width: 600px) {
+  .MuiStepper-root {
+    padding: 10px 0px !important;
+  }
+  .MuiStepLabel-label {
+    font-size: 10px !important;
+  }
+}
