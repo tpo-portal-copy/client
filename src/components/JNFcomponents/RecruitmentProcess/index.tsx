@@ -176,21 +176,20 @@ function Placement({
 
                 <label className="label flex1" htmlFor="aptitude">
                   <div className="Recruitment-process-item-heading">Aptitude test</div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      value="Yes"
-                      id="aptitude"
-                      onChange={() => {
-                        handleParentStateChange({
-                          ...parentState,
-                          aptitudeTest: !parentState.aptitudeTest,
-                        })
-                      }}
-                    />
 
-                    {/**/}
-                  </div>
+                  <input
+                    type="checkbox"
+                    value="Yes"
+                    id="aptitude"
+                    onChange={() => {
+                      handleParentStateChange({
+                        ...parentState,
+                        aptitudeTest: !parentState.aptitudeTest,
+                      })
+                    }}
+                  />
+
+                  {/**/}
                 </label>
 
                 <label className="label flex1" htmlFor="technical-test">

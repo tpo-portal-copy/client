@@ -108,7 +108,6 @@ export default function HRForm({
 
   return (
     <div className={styles.grid_1_2}>
-      <ContactPage />
       <div className={styles.HRForm}>
         <div className={styles.container}>
           <form className={styles.form}>
@@ -182,6 +181,7 @@ export default function HRForm({
           </form>
         </div>
       </div>
+      <ContactPage />
     </div>
   )
 }

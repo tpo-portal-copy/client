@@ -260,3 +260,12 @@
     text-align: center;
   }
 }
+
+@media (max-width: 600px) {
+  .label {
+    max-width: 240px;
+  }
+  .date-container {
+    display: block;
+  }
+}
