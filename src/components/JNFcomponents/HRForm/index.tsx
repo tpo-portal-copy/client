@@ -4,8 +4,10 @@ import { useFormik } from 'formik'
 // import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import * as Yup from 'yup'
 import { useState } from 'react'
-// import { JNFFormFiveProps, HR } from '../../../utils/types'
+import { useNavigate } from 'react-router-dom'
 import { background } from '@chakra-ui/react'
+import { JNFFormFiveProps, HR } from '../../../utils/types'
+// import { JNFFormFiveProps, HR } from '../../../utils/types'
 import styles from './HRForm.module.scss'
 import Input from '../../Input'
 import ContactPage from '../Contact'
@@ -25,8 +27,7 @@ export default function HRForm({
   parentState: any
   setParentState: React.Dispatch<any>
 }) {
-  // const [hrList, setHRList] = useState<Array<HR>>({})
-
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       type: '',
@@ -44,7 +45,7 @@ export default function HRForm({
     }),
     onSubmit: () => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      // addHR()
+      console.log('submit hr')
     },
   })
 
@@ -52,7 +53,7 @@ export default function HRForm({
     const cData = {
       name: parentState.companyName,
     }
-    await fetch(`http://localhost:8000/companies/`, {
+    await fetch(`http://127.0.0.1:8000/companies/`, {
       method: 'POST',
       body: JSON.stringify(cData),
       headers: {
@@ -77,7 +78,7 @@ export default function HRForm({
           cgpi: 7,
           allowStudents: true,
           jobProfile: parentState.jobProfile,
-          drive_status: 'Upcoming',
+          drive_status: 'Pending',
           created_at: Date.now(),
           updated_at: Date.now(),
           ctc: parentState.placementPackage,
@@ -93,7 +94,9 @@ export default function HRForm({
           },
         })
           .then((res) => res.json())
-          .then()
+          .then(() => {
+            navigate('/home')
+          })
       })
   }
 

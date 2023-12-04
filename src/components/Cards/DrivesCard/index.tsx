@@ -1,9 +1,10 @@
 import { Tag, Button } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faCircleXmark, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faCircleXmark, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useRef } from 'react'
 import { DrivesCardProps } from '../../../utils/types'
 import styles from './DrivesCard.module.scss'
+import { getDataFromLocalStorage } from '../../../utils/functions'
 
 const logo = '/nithLogo.png'
 
@@ -12,10 +13,11 @@ function DrivesCard({
   companyName,
   // imgUrl,
   ctcOffered,
-  // startingDate,
+  startingDate,
   modeOfHiring,
+  driveID,
   isPpt,
-  jobLocation,
+  JobLocation,
   type,
   // eligibleBatches = [],
   jobProfile,
@@ -24,6 +26,26 @@ function DrivesCard({
   const [isEditOpen, setIsEditOpen] = useState(false)
   const toggleEditBar = () => {
     setIsEditOpen(!isEditOpen)
+  }
+
+  const handleStatusChange = async () => {
+    const fData = {
+      drive_status: driveStatus === 'Approved' ? 'Pending' : 'Approved',
+      company: companyName,
+      courses: ['B.Tech'],
+      branches: ['cse'],
+      jobLocation: JobLocation,
+      starting_date: startingDate,
+      session: '2023-24',
+      job_type: type,
+    }
+    await fetch(`http://localhost:8000/drives/${driveID}`, {
+      method: 'PUT',
+      body: JSON.stringify(fData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((data) => console.log(data))
   }
 
   return (
@@ -42,41 +64,35 @@ function DrivesCard({
               </div>
               <div className={styles.company_info_2}>
                 {isPpt && <Tag className={styles.tag}>PPT</Tag>}
-                <Tag className={styles.tag}>Job Location: {jobLocation}</Tag>
+                <Tag className={styles.tag}>Job Location: {JobLocation}</Tag>
               </div>
             </div>
           </div>
         </div>
         <div className={styles.link}>
-          {driveStatus === 'Upcoming' ? (
-            <button className={styles.upcoming}>
-              <span> Approve</span>
+          {getDataFromLocalStorage('type') === 'tpo' && (
+            <button className={styles.upcoming} onClick={handleStatusChange}>
+              <span> {driveStatus === 'Pending' ? 'Approve' : 'Approved'}</span>
             </button>
-          ) : (
-            driveStatus === 'Ongoing' && (
-              <div className={styles.ongoing}>
-                <span>Approved</span>
-              </div>
-            )
           )}
         </div>
 
-        <div className={styles.dropdown_button}>
-          <div className={styles.dropdown}>
-            <button type="button" onClick={toggleEditBar}>
-              <FontAwesomeIcon cursor="pointer" icon={faEllipsisV} />
+        <div className={styles.dropdown}>
+          <div className={styles.ellipsis}>
+            <button type="button" className={styles.gap} onClick={toggleEditBar}>
+              <FontAwesomeIcon cursor="pointer" icon={faEllipsisH} />
             </button>
+            {isEditOpen ? (
+              <>
+                <Button background="blue.500" size="xs" className={styles.editBtn}>
+                  <FontAwesomeIcon cursor="pointer" icon={faPen} />
+                </Button>
+                <Button background="red.500" size="xs" className={styles.editBtn}>
+                  <FontAwesomeIcon cursor="pointer" icon={faCircleXmark} />
+                </Button>
+              </>
+            ) : null}
           </div>
-          {isEditOpen ? (
-            <div className={styles.buttonArea}>
-              <Button background="blue.500">
-                <FontAwesomeIcon cursor="pointer" icon={faPen} />
-              </Button>
-              <Button background="red.500">
-                <FontAwesomeIcon cursor="pointer" icon={faCircleXmark} />
-              </Button>
-            </div>
-          ) : null}
         </div>
       </div>
       {/* <div className={styles.separator} /> */}

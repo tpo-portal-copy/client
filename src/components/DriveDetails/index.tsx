@@ -8,6 +8,7 @@ import {
   faCircleChevronUp,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { getDataFromLocalStorage } from '../../utils/functions'
 
 interface DriveDetailsProps {
   allowStudentsWithBacklogs: boolean
@@ -140,20 +141,22 @@ function DriveDetails(props: DriveDetailsProps) {
           </tr>
         </tbody>
       </table>
-      <div className="header">
-        <h2 className="title">HR Details</h2>
-        <button
-          className="button"
-          title={isOpenHR ? 'Hide HR Details' : 'Show HR Details'}
-          onClick={() => setIsOpenHR(!isOpenHR)}
-        >
-          <FontAwesomeIcon
-            cursor="pointer"
-            icon={isOpenHR ? faCircleChevronUp : faCircleChevronDown}
-            color="black"
-          />
-        </button>
-      </div>
+      {getDataFromLocalStorage('type') === 'tpo' && (
+        <div className="header">
+          <h2 className="title">HR Details</h2>
+          <button
+            className="button"
+            title={isOpenHR ? 'Hide HR Details' : 'Show HR Details'}
+            onClick={() => setIsOpenHR(!isOpenHR)}
+          >
+            <FontAwesomeIcon
+              cursor="pointer"
+              icon={isOpenHR ? faCircleChevronUp : faCircleChevronDown}
+              color="black"
+            />
+          </button>
+        </div>
+      )}
       {isOpenHR ? (
         <table className="hr-table">
           <tbody>
@@ -174,7 +177,7 @@ function DriveDetails(props: DriveDetailsProps) {
       ) : null}
 
       <div className="header">
-        <h2 className="title">Announcemens</h2>
+        <h2 className="title">Announcements</h2>
         <button
           className="button"
           title={isOpenAnnouncement ? 'Hide Announcements' : 'Show Announcements'}

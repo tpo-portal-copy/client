@@ -47,6 +47,20 @@ function App({
 
   /// ////
   const [JobType, setJobType] = React.useState('')
+
+  useEffect(() => {
+    if (JobType) {
+      console.log('JobType:', JobType)
+      if (JobType === 'Placement') {
+        setParentState({ ...parentState, job_type: 'Placement' })
+      } else if (JobType === 'Internship') {
+        setParentState({ ...parentState, job_type: 'Internship' })
+      } else {
+        setParentState({ ...parentState, job_type: 'Internship+Placement' })
+      }
+    }
+  }, [JobType, parentState, setParentState])
+
   // useEffect(() => {
   //   if (JobType) {
   //     console.log('JobType:', JobType)
@@ -89,7 +103,7 @@ function App({
             // <label className="label" htmlFor="offeredDrive">
             //   Job Type
             //   <select className="form-control" id="offeredDrive" {...form.register('offeredDrive')}>
-            //     onChange={(e) => setParentState({ ...parentState, companyName: e.target.value })}
+            onChange={(e) => setParentState({ ...parentState, companyName: e.target.value })}
           />
         </label>
 

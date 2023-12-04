@@ -21,6 +21,7 @@ import {
   Home,
   JNFForm,
   StudentData,
+  StudentResume,
   CreateDriveForm,
   TprDrives,
   Register,
@@ -117,6 +118,7 @@ function App() {
       <Route path="/eligibility-percentage" element={<NextPlacementEligibilityPercentage />} />
       <Route path="/update-clusters" element={<UpdateClusters />} />
       <Route path="/upload_jd" element={<UploadJD />} />
+      <Route path="/student-resume" element={<StudentResume />} />
       <Route
         path="/home"
         element={

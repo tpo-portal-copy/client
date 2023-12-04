@@ -11,25 +11,34 @@ import 'react-quill/dist/quill.snow.css'
 import { Error, Input, Select } from '../../components'
 import styles from './AnnouncementForm.module.scss'
 import { dashboardAPI } from '../../utils/apis'
-import useCompanies from '../../hooks/useCompanyList'
-// const { data, isSuccess, isError, isLoading } = useCompanies() // hook call for company details
+import useDrives from '../../hooks/useDrives'
+
 const typeData = [
   { id: 16, value: 'General' },
-  // { id: 17, value: 'Company' },
+  { id: 17, value: 'Company' },
 ]
 
 export default function AnnouncementForm() {
+  const [page, setPage] = useState(1)
+  const [comp, setComp] = useState('')
+  const [clusterStr, setClusterStr] = useState('')
+  const [DriveId, setDriveId] = useState(1)
+  const { data, isSuccess, isError, isLoading } = useDrives(
+    { page, comp, cluster: clusterStr },
+    page,
+    comp,
+    clusterStr,
+  )
   const [value, setValue] = useState('')
   const [showAnimation, setShowAnimation] = useState(false)
   const date = new Date()
-  // const { data, isSuccess, isError, isLoading } = useCompanies() // hook call for company details
   const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
       title: '',
       type: '',
-      // company: '',
+      company: '',
       session:
         date.getMonth() <= 5
           ? `${(date.getFullYear() - 1).toString()}-${date.getFullYear().toString().slice(2)}`
@@ -38,7 +47,7 @@ export default function AnnouncementForm() {
     validationSchema: Yup.object().shape({
       title: Yup.string().required('Title is required'),
       type: Yup.string().required('Type is required'),
-      // company: Yup.string().required('Company is required'),
+      company: Yup.string(),
     }),
     onSubmit: async (values) => {
       try {
@@ -47,7 +56,7 @@ export default function AnnouncementForm() {
           session: values.session,
           type: values.type.toLowerCase(),
           description: value,
-          // company: values.company,
+          drive: DriveId,
         }
         await dashboardAPI.post('/', objToSend)
 
@@ -60,8 +69,9 @@ export default function AnnouncementForm() {
       }
     },
   })
-
-  // console.log(companyData)
+  const handleCompanyChange = (e: any) => {
+    setDriveId(e.target.value)
+  }
 
   return (
     <div className={styles.container}>
@@ -130,20 +140,27 @@ export default function AnnouncementForm() {
                     <Error errorMessage={formik.errors.type} />
                   ) : null}
 
-                  {/* <Select
+                  <Select
                     value={formik.values.company}
                     onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
+                    onChange={(e) => {
+                      formik.handleChange(e)
+                      handleCompanyChange(e)
+                    }}
                     name="company"
                     placeholder="Company"
                   >
-                    {data?.map((company: { id: Key | number; name: string; logo: string }) => (
-                      <option key={company.id}>{company.name}</option>
-                    ))}
+                    {data?.results.map(
+                      (company: { id: Key | number; company: string; logo: string }) => (
+                        <option value={company.id} key={company.id}>
+                          {company.company}
+                        </option>
+                      ),
+                    )}
                   </Select>
                   {formik.touched.company && formik.errors.company ? (
                     <Error errorMessage={formik.errors.company} />
-                  ) : null} */}
+                  ) : null}
 
                   <ReactQuill
                     theme="snow"
