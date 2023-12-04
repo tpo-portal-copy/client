@@ -1,7 +1,7 @@
 import { Tag, Button } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faCircleXmark, faEllipsisH, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { faPen, faCircleXmark, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect, useRef } from 'react'
 import { DrivesCardProps } from '../../../utils/types'
 import styles from './DrivesCard.module.scss'
 
@@ -12,12 +12,12 @@ function DrivesCard({
   companyName,
   // imgUrl,
   ctcOffered,
-  startingDate,
+  // startingDate,
   modeOfHiring,
   isPpt,
   jobLocation,
   type,
-  eligibleBatches = [],
+  // eligibleBatches = [],
   jobProfile,
   driveStatus,
 }: DrivesCardProps) {
@@ -25,6 +25,7 @@ function DrivesCard({
   const toggleEditBar = () => {
     setIsEditOpen(!isEditOpen)
   }
+
   return (
     <div className={styles.card}>
       <div className={styles.container}>

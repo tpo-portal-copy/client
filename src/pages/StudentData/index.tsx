@@ -1,4 +1,6 @@
 import { useFormik, ErrorMessage } from 'formik'
+import axios, { AxiosRequestConfig } from 'axios'
+import fs from 'fs'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import {
@@ -156,6 +158,49 @@ function StudentData() {
   // const [branchOptions, setBranchOptions] = useState<Array<MultiSelectDropDownData>>([])
   // // branch chosen
   // const [branchesChose, setBranchesChose] = useState<Array<any>>([])
+
+  // const handleExportToExcel = () => {
+  //   fetch('http://127.0.0.1:8000/student/excel/', {
+  //     method: 'GET',
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       // Trigger the download
+  //       const url = window.URL.createObjectURL(new Blob([response.data]))
+  //       const link = document.createElement('a')
+  //       link.href = url
+  //       link.setAttribute('download', `${Date.now()}.xlsx`)
+  //       document.body.appendChild(link)
+  //       link.click();
+  //     })
+  //     .catch((error) => console.error('Error exporting to Excel:', error))
+  // }
+
+  const downloadXLSFile = async () => {
+    // Its important to set the 'Content-Type': 'blob' and responseType:'arraybuffer'.
+    const headers = { 'Content-Type': 'blob' }
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: 'http://127.0.0.1:8000/student/excel',
+      responseType: 'arraybuffer',
+      headers,
+    }
+    try {
+      const response = await axios(config)
+      const outputFilename = `${Date.now()}.xlsx`
+      // If you want to download file automatically using link attribute.
+      const url = URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', outputFilename)
+      document.body.appendChild(link)
+      link.click()
+      // OR you can save/write file locally.
+      fs.writeFileSync(outputFilename, response.data)
+    } catch (err: any) {
+      throw new Error(err)
+    }
+  }
 
   const {
     data,
@@ -411,7 +456,9 @@ function StudentData() {
             <Button
               className={styles.apply_btn}
               type="button"
-              onClick={() => {}}
+              onClick={() => {
+                downloadXLSFile()
+              }}
               background="#808080"
               color="white"
               _hover={{ background: 'linear-gradient(90deg, #ffffff, #333333)' }}
