@@ -4,8 +4,7 @@
   padding: 1rem 1rem 0.5rem 1rem;
   margin-bottom: 2rem;
   border-radius: 8px;
-  width: 100%;
-  max-width: 65em;
+  width: 70em !important;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.561);
 
@@ -84,11 +83,11 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
-  .card {
-    max-width: 45em;
-  }
-}
+// @media screen and (max-width: 1024px) {
+//   .card {
+//     max-width: 45em;
+//   }
+// }
 
 @media screen and (max-width: 767px) {
   .card {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Tag, Button } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faCircleXmark, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
@@ -54,7 +55,10 @@ function DrivesCard({
         <div className={styles.main_container} onClick={onClick}>
           <img className={styles.company_image} src={logo} alt="company Logo" />
           <div className={styles.content}>
-            <h2 className={styles.company_name}>{companyName}</h2>
+            <p className={styles.header}>
+              <img className={styles.company_image_mobile} src={logo} alt="company Logo" />
+              <h2 className={styles.company_name}>{companyName}</h2>
+            </p>
             <div className={styles.company_details}>
               <div className={styles.company_info_1}>
                 <Tag className={styles.tag}>{jobProfile}</Tag>
@@ -62,8 +66,7 @@ function DrivesCard({
                 <Tag className={styles.tag}>Job Type: {type}</Tag>
                 <Tag className={styles.tag}>Mode of Hiring: {modeOfHiring}</Tag>
               </div>
-              <div className={styles.company_info_2}>
-                {isPpt && <Tag className={styles.tag}>PPT</Tag>}
+              <div className={styles.company_info_1}>
                 <Tag className={styles.tag}>Job Location: {JobLocation}</Tag>
               </div>
             </div>
@@ -79,9 +82,6 @@ function DrivesCard({
 
         <div className={styles.dropdown}>
           <div className={styles.ellipsis}>
-            <button type="button" className={styles.gap} onClick={toggleEditBar}>
-              <FontAwesomeIcon cursor="pointer" icon={faEllipsisH} />
-            </button>
             {isEditOpen ? (
               <>
                 <Button background="blue.500" size="xs" className={styles.editBtn}>
@@ -92,6 +92,9 @@ function DrivesCard({
                 </Button>
               </>
             ) : null}
+            <button type="button" className={styles.gap} onClick={toggleEditBar}>
+              <FontAwesomeIcon cursor="pointer" icon={faEllipsisH} />
+            </button>
           </div>
         </div>
       </div>

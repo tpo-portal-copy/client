@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState } from 'react'
@@ -144,6 +145,7 @@ function DriveDetails(props: DriveDetailsProps) {
       {getDataFromLocalStorage('type') === 'tpo' && (
         <div className="header">
           <h2 className="title">HR Details</h2>
+
           <button
             className="button"
             title={isOpenHR ? 'Hide HR Details' : 'Show HR Details'}

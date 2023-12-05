@@ -151,7 +151,6 @@ function Drives() {
                 scrollBehavior="inside"
                 isOpen={isOpenModal}
                 onClose={closeModal}
-                isCentered
               >
                 <ModalOverlay backgroundColor="blackAlpha.300" />
                 <ModalContent className={styles.model_content} maxWidth={700}>
