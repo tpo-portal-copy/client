@@ -28,13 +28,8 @@ function Home() {
             </p>
             <div className={styles.button}>
               <Button variant="solid" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
-                <Link to="/jnf-form">JNF FORM</Link>
+                <Link to="/student-resume">Student Lookup</Link>
               </Button>
-              <Link to="/upload_jd">
-                <Button variant="outline" rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
-                  UPLOAD JD
-                </Button>
-              </Link>
             </div>
           </div>
         </div>
