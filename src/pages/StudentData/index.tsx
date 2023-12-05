@@ -314,44 +314,48 @@ function StudentData() {
           <h2 className={styles.title}>Filters</h2>
           {/* course component started */}
           <div className={styles.filters}>
-            <Select
-              name="Course"
-              placeholder="Choose Courses"
-              onChange={HandleCourseChange}
-              value={selectedCourse}
-              backgroundColor="white"
-            >
-              {courseIsSuccess &&
-                courseData.map((clust: CourseData) => (
-                  <option key={clust.id} value={clust.name}>
-                    {clust.name}
-                  </option>
-                ))}
-            </Select>
+            <div className={styles.filter_mobile}>
+              <Select
+                name="Course"
+                placeholder="Choose Courses"
+                onChange={HandleCourseChange}
+                value={selectedCourse}
+                backgroundColor="white"
+              >
+                {courseIsSuccess &&
+                  courseData.map((clust: CourseData) => (
+                    <option key={clust.id} value={clust.name}>
+                      {clust.name}
+                    </option>
+                  ))}
+              </Select>
 
-            <Button onClick={addCourse} title="Select and Add multiple Courses">
-              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
-            </Button>
+              <Button onClick={addCourse} title="Select and Add multiple Courses">
+                <FontAwesomeIcon cursor="pointer" icon={faPlus} />
+              </Button>
+            </div>
 
             {/* course component ended */}
             {/* branch component started */}
-            <Select
-              name="Branch"
-              placeholder="Choose Branch"
-              onChange={handleBranchChange}
-              value={selectedBranch}
-              backgroundColor="white"
-            >
-              {branchData.map((clust: any) => (
-                <option key={clust.id} value={clust.branchName}>
-                  {clust.branchName}
-                </option>
-              ))}
-            </Select>
+            <div className={styles.filter_mobile}>
+              <Select
+                name="Branch"
+                placeholder="Choose Branch"
+                onChange={handleBranchChange}
+                value={selectedBranch}
+                backgroundColor="white"
+              >
+                {branchData.map((clust: any) => (
+                  <option key={clust.id} value={clust.branchName}>
+                    {clust.branchName}
+                  </option>
+                ))}
+              </Select>
 
-            <Button onClick={addBranch} title="Select and Add multiple Branches">
-              <FontAwesomeIcon cursor="pointer" icon={faPlus} />
-            </Button>
+              <Button onClick={addBranch} title="Select and Add multiple Branches">
+                <FontAwesomeIcon cursor="pointer" icon={faPlus} />
+              </Button>
+            </div>
             {/* branch component ended */}
             {/* select gender */}
 

@@ -173,3 +173,16 @@
     }
   }
 }
+.filter_mobile {
+  display: flex;
+  width: 100%;
+}
+button {
+  margin-left: 5px;
+}
+
+@media (max-width: 600px) {
+  .filter_mobile {
+    margin-bottom: 10px;
+  }
+}
