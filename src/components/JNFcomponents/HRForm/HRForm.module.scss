@@ -93,8 +93,9 @@
   // justify-content: center;
   align-items: center;
   gap: 31px;
-  margin-top: 50px;
-  margin-left: 100px;
+  max-width: 25rem;
+  margin: 50px;
+  margin-bottom: 0px;
 }
 
 .label {
@@ -144,15 +145,19 @@
   display: flex;
   grid-template-columns: 1fr 2fr; /* 1 part and 3 parts */
   gap: 10px; /* Adjust the gap between columns as needed */
-  justify-content: space-between;
+  justify-content: center;
+  margin: 50px;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 1000px) {
   .grid_1_2 {
     display: block;
+    margin: 15px 10px;
   }
   .HRForm {
     justify-content: center;
-    margin-left: 0px;
+    max-width: none;
+    margin: 0px;
   }
 }

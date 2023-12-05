@@ -25,17 +25,19 @@ function ContactPage() {
   ]
 
   return (
-    <div className="contact-page">
-      <h2 className="title">POINT OF CONTACT</h2>
-      <div className="contact-list">
-        {contacts.map((contact) => (
-          <div className="contact" key={contact.email}>
-            <h3 className="contact_name">{contact.name}</h3>
-            <p className="contact_desc">{contact.desc}</p>
-            <p className="contact_phone">Phone: {contact.phoneNumber}</p>
-            <p className="contact_email">Email: {contact.email}</p>
-          </div>
-        ))}
+    <div className="center">
+      <div className="contact-page">
+        <h2 className="title">POINT OF CONTACT</h2>
+        <div className="contact-list">
+          {contacts.map((contact) => (
+            <div className="contact" key={contact.email}>
+              <h3 className="contact_name">{contact.name}</h3>
+              <p className="contact_desc">{contact.desc}</p>
+              <p className="contact_phone">Phone: {contact.phoneNumber}</p>
+              <p className="contact_email">Email: {contact.email}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

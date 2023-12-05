@@ -197,13 +197,12 @@
   max-width: 25em;
   width: 100%;
   border: solid 1px #d0cfcf;
-
+  margin: 50px;
   padding: 0.5rem 0 1.2rem 0;
   background-color: #ffffff;
   border-radius: 0.5rem;
   gap: 10px;
-  margin: auto;
-  margin-top: 50px;
+  margin-bottom: 0px;
 
   @media screen and (max-width: 525px) {
     padding: 1rem;
@@ -267,5 +266,18 @@
   }
   .date-container {
     display: block;
+  }
+}
+
+@media (max-width: 1000px) {
+  .contact-page {
+    margin: 0px;
+    max-width: 36rem;
+    margin-top: 20px;
+  }
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
