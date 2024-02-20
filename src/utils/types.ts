@@ -584,3 +584,12 @@ export interface JNFFormFiveProps {
   onBack: (values: Array<HR>) => void
   data: Array<HR>
 }
+
+export interface Slot {
+  id: string
+  title: string
+  description: string
+  date: string // Date property as string
+  startTime: string
+  endTime: string
+}

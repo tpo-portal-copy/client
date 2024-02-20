@@ -29,6 +29,8 @@ import {
   CompanyWiseDetails,
   NextPlacementEligibilityPercentage,
   UpdateClusters,
+  SlotPostForm,
+  AllSlots,
 } from '../pages'
 import {
   clearDataFromLocalStorage,
@@ -112,6 +114,7 @@ function App() {
       <Route path="/student-details-form" element={<StudentDetailsForm />} />
       <Route path="/experience-form" element={<ExperienceForm />} />
       <Route path="/announcement-form" element={<AnnouncementForm />} />
+      <Route path="/slot-post-form" element={<SlotPostForm />} />
       <Route path="/result-announcement" element={<ResultAnnouncement />} />
       <Route path="/create-drive" element={<CreateDriveForm />} />
       <Route path="/jnf-form" element={<JNFForm />} />
@@ -119,6 +122,7 @@ function App() {
       <Route path="/update-clusters" element={<UpdateClusters />} />
       <Route path="/upload_jd" element={<UploadJD />} />
       <Route path="/student-resume" element={<StudentResume />} />
+      <Route path="/all-Slots" element={<AllSlots />} />
       <Route
         path="/home"
         element={
