@@ -64,7 +64,7 @@ function AllSlots() {
 
   const handleBookSlot = (selectedSlot: any) => {
     // Implement logic to book the selected slot
-    console.log('Slot booked:', selectedSlot)
+    // console.log('Slot booked:', selectedSlot)
   }
 
   return (
