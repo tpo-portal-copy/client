@@ -20,6 +20,7 @@ import styles from './AllSlots.module.scss'
 import Page500 from '../Page500'
 import { Paginator } from '../../components'
 import PageLoader from '../../components/PageLoader'
+import SlotDetails from '../../components/SlotDetails'
 
 function AllSlots() {
   const [slots, setSlots] = useState([
@@ -30,47 +31,72 @@ function AllSlots() {
       startTime: '10:00 AM',
       endTime: '12:00 PM',
       date: '2022-12-12',
+      created_at: '2022-12-12',
+      createdBy: 'Admin',
+      contact_email: 'exampleEmail.com',
+      contact_number: '1234567890',
     },
     {
       id: nanoid(),
-      title: 'Slot 2',
-      description: 'This is slot 2',
-      startTime: '01:00 PM',
-      endTime: '03:00 PM',
+      title: 'Slot 1',
+      description: 'This is slot 1',
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
       date: '2022-12-12',
+      created_at: '2022-12-12',
+      createdBy: 'Admin',
+      contact_email: 'exampleEmail.com',
+      contact_number: '1234567890',
     },
     {
       id: nanoid(),
-      title: 'Slot 2',
-      description: 'This is slot 2',
-      startTime: '01:00 PM',
-      endTime: '03:00 PM',
+      title: 'Slot 1',
+      description: 'This is slot 1',
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
       date: '2022-12-12',
+      created_at: '2022-12-12',
+      createdBy: 'Admin',
+      contact_email: 'exampleEmail.com',
+      contact_number: '1234567890',
     },
     {
       id: nanoid(),
-      title: 'Slot 2',
-      description: 'This is slot 2',
-      startTime: '01:00 PM',
-      endTime: '03:00 PM',
+      title: 'Slot 1',
+      description: 'This is slot 1',
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
       date: '2022-12-12',
+      created_at: '2022-12-12',
+      createdBy: 'Admin',
+      contact_email: 'exampleEmail.com',
+      contact_number: '1234567890',
     },
     {
       id: nanoid(),
-      title: 'Slot 2',
-      description: 'This is slot 2',
-      startTime: '01:00 PM',
-      endTime: '03:00 PM',
+      title: 'Slot 1',
+      description: 'This is slot 1',
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
       date: '2022-12-12',
+      created_at: '2022-12-12',
+      createdBy: 'Admin',
+      contact_email: 'exampleEmail.com',
+      contact_number: '1234567890',
     },
     {
       id: nanoid(),
-      title: 'Slot 2',
-      description: 'This is slot 2',
-      startTime: '01:00 PM',
-      endTime: '03:00 PM',
+      title: 'Slot 1',
+      description: 'This is slot 1',
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
       date: '2022-12-12',
+      created_at: '2022-12-12',
+      createdBy: 'Admin',
+      contact_email: 'exampleEmail.com',
+      contact_number: '1234567890',
     },
+
     // Add more slots as needed
   ])
 
@@ -121,11 +147,7 @@ function AllSlots() {
                     <ModalOverlay backgroundColor="blackAlpha.300" />
                     <ModalContent className={styles.model_content} maxWidth={700}>
                       <ModalBody className={styles.modal_desc}>
-                        <SlotDetailsCard
-                          slot={modelData}
-                          onBookSlot={handleBookSlot}
-                          onClick={closeModal}
-                        />
+                        <SlotDetails {...slot} />
                       </ModalBody>
                     </ModalContent>
                   </Modal>
