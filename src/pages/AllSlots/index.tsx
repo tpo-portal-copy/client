@@ -1,6 +1,18 @@
 import { useState } from 'react'
 import { nanoid } from 'nanoid'
-import { Text } from '@chakra-ui/react'
+import {
+  Text,
+  Input,
+  InputGroup,
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  background,
+} from '@chakra-ui/react'
 import Lottie from 'lottie-react'
 import NotFound from '../../assets/animations/94729-not-found.json'
 import { SlotDetailsCard } from '../../components/Cards'
@@ -62,9 +74,18 @@ function AllSlots() {
     // Add more slots as needed
   ])
 
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [modelData, setModalData] = useState<any>(null)
   const handleBookSlot = (selectedSlot: any) => {
     // Implement logic to book the selected slot
     // console.log('Slot booked:', selectedSlot)
+  }
+  const openModal = (slotData: any) => {
+    setIsOpenModal(true)
+    setModalData(slotData)
+  }
+  const closeModal = () => {
+    setIsOpenModal(false)
   }
 
   return (
@@ -82,7 +103,33 @@ function AllSlots() {
           ) : (
             <div className={styles.slot_list}>
               {slots.map((slot) => (
-                <SlotDetailsCard key={slot.id} slot={slot} onBookSlot={handleBookSlot} />
+                <>
+                  <SlotDetailsCard
+                    key={slot.id}
+                    slot={slot}
+                    onBookSlot={handleBookSlot}
+                    onClick={() => openModal(slot)}
+                  />
+
+                  <Modal
+                    key={nanoid()}
+                    id={nanoid()}
+                    scrollBehavior="inside"
+                    isOpen={isOpenModal}
+                    onClose={closeModal}
+                  >
+                    <ModalOverlay backgroundColor="blackAlpha.300" />
+                    <ModalContent className={styles.model_content} maxWidth={700}>
+                      <ModalBody className={styles.modal_desc}>
+                        <SlotDetailsCard
+                          slot={modelData}
+                          onBookSlot={handleBookSlot}
+                          onClick={closeModal}
+                        />
+                      </ModalBody>
+                    </ModalContent>
+                  </Modal>
+                </>
               ))}
             </div>
           )}

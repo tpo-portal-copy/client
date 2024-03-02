@@ -592,4 +592,8 @@ export interface Slot {
   date: string // Date property as string
   startTime: string
   endTime: string
+  created_at: string
+  createdBy: string
+  contact_email: string
+  contact_number: string
 }

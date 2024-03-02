@@ -153,7 +153,7 @@ function Drives() {
                 onClose={closeModal}
               >
                 <ModalOverlay backgroundColor="blackAlpha.300" />
-                <ModalContent className={styles.model_content} maxWidth={700}>
+                <ModalContent className={styles.modal_content} maxWidth={700}>
                   <ModalBody className={styles.modal_desc}>
                     <DriveDetails {...modelData} />
                   </ModalBody>

@@ -82,3 +82,27 @@
     align-items: center;
   }
 }
+
+.modal_content {
+  display: flex;
+  justify-content: center;
+  .modal_title {
+    font-size: var(--md-heading);
+    font-weight: 600;
+    color: var(--text-color-primary);
+    margin-bottom: 0.2rem;
+  }
+  .modal_desc {
+    font-size: var(--sm-heading);
+    font-weight: 400;
+    color: var(--text-color-primary);
+    margin-bottom: 1rem;
+  }
+  .modal_close {
+    border-radius: 100%;
+    border: 1px var(--text-color-primary);
+    :hover {
+      scale: 1.01;
+    }
+  }
+}
