@@ -1,0 +1,115 @@
+.link {
+  text-decoration: none;
+
+  .card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--custom-white-v1);
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: 0.5s ease-in-out;
+    color: var(--text-color-primary);
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.7) 40%,
+        #fff 70%
+      );
+      right: 1rem;
+      bottom: 1rem;
+    }
+
+    .main_container {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+
+      .info_container {
+        .title {
+          font-size: 18px;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+
+          @media screen and (max-width: 525px) {
+            font-size: 18px;
+          }
+        }
+
+        .role {
+          font-size: 15px;
+          padding-bottom: 10px;
+          align-content: flex-start;
+          font-weight: 600;
+          text-align: start;
+
+          @media screen and (max-width: 525px) {
+            padding-bottom: 5px;
+          }
+        }
+
+        @media screen and (max-width: 525px) {
+          padding-left: 0;
+          align-self: stretch;
+        }
+      }
+
+      @media screen and (max-width: 525px) {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    .separator {
+      height: 1px;
+      background-color: #cfd2cf;
+      border-radius: 5px;
+
+      @media screen and (max-width: 525px) {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .tags_container {
+      display: flex;
+      justify-content: flex-start;
+      overflow-x: scroll;
+      gap: 0.5rem;
+      padding-right: 1.5rem;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tag {
+        margin: 10px 0;
+        width: max-content;
+
+        span {
+          padding: 2px 15px;
+          border-radius: 20px;
+          background-color: lightblue;
+          font-size: small;
+          white-space: nowrap;
+        }
+      }
+
+      @media screen and (max-width: 525px) {
+        font-size: 14px;
+      }
+    }
+
+    @media screen and (max-width: 525px) {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

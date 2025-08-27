@@ -1,0 +1,71 @@
+.container {
+  width: 100%;
+  max-width: 582px;
+  padding: 1.5rem 0;
+
+  @media screen and (max-width: 525px) {
+    padding: 0;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 1rem 1rem 6px 1rem;
+    color: #282828;
+
+    @media screen and (max-width: 525px) {
+      padding: 0;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .form {
+    max-width: 600px;
+    margin: auto;
+
+    .field {
+      padding: 0 1rem;
+
+      input,
+      select {
+        background-color: #f9f9f9;
+      }
+
+      @media screen and (max-width: 525px) {
+        padding: 0;
+      }
+    }
+
+    .file_uploader {
+      padding: 1rem;
+
+      @media screen and (max-width: 525px) {
+        padding: 1rem 0;
+      }
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .btn_container {
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+      width: 100%;
+    }
+
+    .is_disabled {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: flex-start;
+      padding: 1.2rem 1rem 0rem 1rem;
+
+      @media screen and (max-width: 525px) {
+        padding: 1.2rem 0 0 0;
+      }
+    }
+  }
+}

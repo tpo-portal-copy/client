@@ -1,0 +1,28 @@
+.content {
+  max-width: 600px !important;
+  width: 90% !important;
+
+  .search_box {
+    background-color: white;
+    border-radius: 6px;
+    height: fit-content;
+  }
+
+  .grid_container {
+    display: grid;
+    gap: 0.8rem;
+
+    .grid_item {
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+
+  .companies {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .roles {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}

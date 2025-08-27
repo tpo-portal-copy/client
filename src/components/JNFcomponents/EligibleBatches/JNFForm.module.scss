@@ -1,0 +1,132 @@
+.row_1,
+.row_2,
+.row_3,
+.row_4,
+.row_5,
+.row_6,
+.row_7 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col_1 {
+  // max-width: 100px;
+  padding-left: 20px;
+}
+.col_3 {
+  display: block;
+  // margin: 20px 20px;
+  padding: 20px 20px;
+  border-left: 2px solid black;
+  min-width: 475px;
+}
+.col {
+  width: 310px;
+  display: block;
+}
+.dept_heading {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0px;
+  font-weight: 600;
+  font-size: large;
+  text-decoration: underline;
+}
+.branch_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0px;
+  font-weight: 700;
+  font-size: large;
+  text-decoration: underline;
+}
+
+.radio {
+  display: block;
+}
+.col_3_1,
+.col_3_2 {
+  display: block;
+}
+.col_3_1 {
+  min-width: 400px;
+}
+.row {
+  display: flex;
+}
+.main_heading {
+  background-color: #333333;
+  color: white;
+  border-top: 4px solid black;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+}
+.odd {
+  background-color: #f2f2f2;
+  border: 2px solid black;
+}
+.even {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  background-color: #ffffff;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.center {
+  display: flex;
+  text-align: center;
+  font-size: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.width {
+  display: flex;
+}
+.center_class {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 50px;
+}
+
+@media (max-width: 600px) {
+  .center_class {
+    margin: 0px 10px;
+  }
+  .col_1 {
+    display: none;
+  }
+  .col_3_1 {
+    min-width: 190px;
+    font-size: 10px;
+  }
+  .odd,
+  .even {
+    font-size: 10px;
+  }
+  .dept_heading,
+  .main_heading,
+  .branch_heading {
+    font-size: 10px;
+  }
+  .col_3 {
+    min-width: 50px !important;
+    max-width: 250px;
+  }
+  .center {
+    font-size: 10px;
+  }
+  .col {
+    min-width: 40px;
+    max-width: 50px;
+  }
+  .heading {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,24 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  padding: 1.5rem 0;
+
+  .table_container {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .resume_link {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .btn_container {
+    padding-top: 40px;
+    width: 100%;
+  }
+}

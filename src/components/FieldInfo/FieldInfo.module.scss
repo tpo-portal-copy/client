@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  padding: 2px;
+  font-size: 16px;
+  flex-wrap: wrap;
+
+  .label {
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .value {
+    padding-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 1225px) {
+  .container p {
+    font-size: 12px;
+  }
+}

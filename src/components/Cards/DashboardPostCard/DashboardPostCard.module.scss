@@ -1,0 +1,130 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 0.5rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  width: 70em !important;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.561);
+
+  box-shadow: 0 2px 30px 0 rgba(31, 38, 135, 0.07);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(124, 121, 121, 0.18);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: transform 0.3s ease;
+
+  .main_container {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    .post_image {
+      width: 4em;
+      height: 4em;
+      border-radius: 8px;
+    }
+
+    .content {
+      display: flex;
+      width: fit-content;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      height: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.5rem;
+
+      .title {
+        font-size: var(--md-heading);
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color-primary);
+        letter-spacing: -0.02em;
+        padding-top: 0.6rem;
+        padding-bottom: 0.4rem;
+      }
+
+      .description {
+        font-size: 16px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        white-space: pre-wrap;
+      }
+    }
+  }
+
+  .separator {
+    height: 1px;
+    background-color: #cfd2cf;
+    border-radius: 5px;
+    margin-top: 0.8rem;
+  }
+
+  .time_stamp {
+    font-size: 14px;
+    padding-top: 8px;
+    text-align: end;
+  }
+
+  &:hover {
+    // background: linear-gradient(45deg, #d4a299, #dab87a);
+    background: rgba(250, 250, 250, 0.972);
+    box-shadow: 0 300px 300px 0 rgba(31, 38, 135, 0.07);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(110, 108, 108, 0.434);
+    transform: translateX(-10px);
+  }
+}
+
+// @media screen and (max-width: 1024px) {
+//   .card {
+//     max-width: 45em;
+//   }
+// }
+
+@media screen and (max-width: 767px) {
+  .card {
+    max-width: 38em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    max-width: 20em;
+  }
+
+  .main_container {
+    flex-direction: row;
+    gap: 0.5rem;
+
+    .post_image {
+      height: 1em;
+      width: 1em;
+      border-radius: 50%;
+    }
+
+    .content {
+      display: block;
+
+      .title {
+        font-size: 18px;
+        width: 95%;
+      }
+
+      .description {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .time_stamp {
+    font-size: 13px;
+  }
+}

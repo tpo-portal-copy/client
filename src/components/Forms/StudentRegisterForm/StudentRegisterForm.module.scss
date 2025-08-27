@@ -1,0 +1,37 @@
+.form_container {
+  width: 100%;
+  max-width: 700px;
+
+  .resend_button {
+    cursor: pointer;
+    color: #1976d2;
+  }
+
+  .resend_container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .resending {
+    color: #ccc;
+    width: 100%;
+    text-align: end;
+  }
+
+  .link_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+
+    .link {
+      color: #1976d2;
+      text-decoration: underline;
+      padding-left: 2px;
+    }
+  }
+  .btn {
+    margin-top: 20px;
+  }
+}
